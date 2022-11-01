@@ -1,0 +1,43 @@
+type: edu
+custom_name: Task 10
+files:
+- name: test/CommonOperatorsTask10Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.assertj.core.api.Assertions;\nimport\
+    \ org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\npublic class\
+    \ CommonOperatorsTask10Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    Long value = Task.transformToImperative(Flux.interval(Duration.ofMillis(5))\n\t\
+    \t                                            .take(10));\n\n\t\tAssertions.assertThat(value).isEqualTo(9);\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте асинхронный функцилнальный `Flux` в императивный код и добуд\
+    ьте последний елемент \n   \n<div class=\"hint\">\n  Используйте <code>Flux#blockLast</code>\n\
+    </div>"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 128
+    length: 5
+    placeholder_text: null;
+    initial_state:
+      length: 5
+      offset: 128
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: flux.blockLast();
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Long transformToImperative(Flux<Long> flux) {\n\t\treturn null;\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

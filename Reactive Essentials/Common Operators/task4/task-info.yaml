@@ -1,0 +1,45 @@
+type: edu
+custom_name: Task 4
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 140
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 140
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: stringFlux.takeLast(2);
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<String> transformSequence(Flux<String> stringFlux) {\n\t\treturn Flux.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask4Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ CommonOperatorsTask4Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    Flux<String> sequence =\n\t\t\t\tTask.transformSequence(Flux.just(\"ABC\", \"\
+    dEf\", \"gfh\", \"j\"));\n\n\t\tStepVerifier.create(sequence)\n\t\t          \
+    \  .expectNext(\"gfh\", \"j\")\n\t\t            .expectComplete()\n\t\t      \
+    \      .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте `Flux` в `Flux` в котором есть только 2 последних елемента и\
+    з придыдущего\n   \n<div class=\"hint\">\n  Используйте <code>Flux#takeLast</code>\n\
+    </div>"
+  learner_created: false
+status: Failed
+record: -1

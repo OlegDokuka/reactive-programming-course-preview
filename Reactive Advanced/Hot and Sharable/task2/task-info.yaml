@@ -1,0 +1,95 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 373
+    length: 49
+    placeholder_text: Flux.error(new ToDoException()); // With Operator
+    initial_state:
+      length: 49
+      offset: 373
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "coldSource.replay(3)\n\t\t                 .autoConnect();"
+  - offset: 593
+    length: 50
+    placeholder_text: Flux.error(new ToDoException()); // With Processor
+    initial_state:
+      length: 50
+      offset: 593
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "\t\tfinal Disposable subscribe = coldSource.subscribe(\n\
+      \t\t\t\tnextElement -> replaySink.emitNext(nextElement, EmitFailureHandler.FAIL_FAST),\n\
+      \t\t\t\terror -> replaySink.emitError(error, EmitFailureHandler.FAIL_FAST),\n\
+      \t\t\t\t() -> replaySink.emitComplete(EmitFailureHandler.FAIL_FAST)\n\t\t);\n\
+      \n\t\tAtomicInteger subscribersCount = new AtomicInteger();\n\t\treturn replaySink.asFlux()\n\
+      \t\t\t\t.doOnSubscribe(__ -> subscribersCount.getAndIncrement())\n\t\t\t\t.doFinally(__\
+      \ -> {\n\t\t\t\t\tif (subscribersCount.decrementAndGet() == 0) {\n\t\t\t\t\t\
+      \tsubscribe.dispose();\n\t\t\t\t\t}\n\t\t\t\t});"
+  text: "import java.util.concurrent.atomic.AtomicInteger;\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.Disposable;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Sinks;\n\
+    import reactor.core.publisher.Sinks.EmitFailureHandler;\n\npublic class Task {\n\
+    \n\tpublic static Publisher<String> replayLast3ElementsInHotFashion1(Flux<String>\
+    \ coldSource) {\n\t\treturn Flux.error(new ToDoException()); // With Operator\n\
+    \t}\n\n\tpublic static Publisher<String> replayLast3ElementsInHotFashion2(Flux<String>\
+    \ coldSource) {\n\t\tfinal Sinks.Many<String> replaySink = Sinks.many().replay().limit(3);\n\
+    \nFlux.error(new ToDoException()); // With Processor\n\t}\n}"
+  learner_created: false
+- name: test/HnSTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Hooks;\nimport reactor.core.publisher.ReplayProcessor;\n\
+    import reactor.core.publisher.UnicastProcessor;\nimport reactor.test.StepVerifier;\n\
+    \npublic class HnSTask2Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    ArrayList<Publisher> operators = new ArrayList<>();\n\t\tHooks.onEachOperator(e\
+    \ -> {\n\t\t\toperators.add(e);\n\t\t\treturn e;\n\t\t});\n\n\t\ttry {\n\n\t\t\
+    \tUnicastProcessor<String> source = UnicastProcessor.create();\n\t\t\tReplayProcessor<String>\
+    \ consumer1 = ReplayProcessor.create(10);\n\t\t\tReplayProcessor<String> consumer2\
+    \ = ReplayProcessor.create(10);\n\n\t\t\tPublisher<String> publisher = Task.replayLast3ElementsInHotFashion1(source);\n\
+    \n\t\t\tsource.onNext(\"A\");\n\t\t\tsource.onNext(\"B\");\n\t\t\tsource.onNext(\"\
+    C\");\n\n\t\t\tpublisher.subscribe(consumer1);\n\n\t\t\tsource.onNext(\"D\");\n\
+    \t\t\tsource.onNext(\"E\");\n\t\t\tsource.onNext(\"F\");\n\n\t\t\tpublisher.subscribe(consumer2);\n\
+    \n\t\t\tsource.onNext(\"G\");\n\n\t\t\tsource.onComplete();\n\n\t\t\tStepVerifier.create(consumer1)\n\
+    \t\t\t            .expectSubscription()\n\t\t\t            .expectNext(\"A\",\
+    \ \"B\", \"C\", \"D\", \"E\", \"F\", \"G\")\n\t\t\t            .expectComplete()\n\
+    \t\t\t            .verify(Duration.ofMillis(1000));\n\n\t\t\tStepVerifier.create(consumer2)\n\
+    \t\t\t            .expectSubscription()\n\t\t\t            .expectNext(\"D\",\
+    \ \"E\", \"F\", \"G\")\n\t\t\t            .expectComplete()\n\t\t\t          \
+    \  .verify(Duration.ofMillis(1000));\n\t\t} finally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\n\t\tAssertions.assertThat(operators)\n\t\t          .as(\"Expected usage\
+    \ of built-in operator\")\n\t\t          .anyMatch(p -> p.getClass().equals(Flux.just(1).hide().replay().getClass()));\n\
+    \t}\n\n\n\t@Test\n\tpublic void testSolution2() {\n\t\tArrayList<Publisher> operators\
+    \ = new ArrayList<>();\n\t\tHooks.onEachOperator(e -> {\n\t\t\toperators.add(e);\n\
+    \t\t\treturn e;\n\t\t});\n\n\t\ttry {\n\n\t\t\tUnicastProcessor<String> source\
+    \ = UnicastProcessor.create();\n\t\t\tReplayProcessor<String> consumer1 = ReplayProcessor.create(10);\n\
+    \t\t\tReplayProcessor<String> consumer2 = ReplayProcessor.create(10);\n\n\t\t\t\
+    Publisher<String> publisher = Task.replayLast3ElementsInHotFashion2(source);\n\
+    \n\t\t\tsource.onNext(\"A\");\n\t\t\tsource.onNext(\"B\");\n\t\t\tsource.onNext(\"\
+    C\");\n\n\t\t\tpublisher.subscribe(consumer1);\n\n\t\t\tsource.onNext(\"D\");\n\
+    \t\t\tsource.onNext(\"E\");\n\t\t\tsource.onNext(\"F\");\n\n\t\t\tpublisher.subscribe(consumer2);\n\
+    \n\t\t\tsource.onNext(\"G\");\n\n\t\t\tsource.onComplete();\n\n\t\t\tStepVerifier.create(consumer1)\n\
+    \t\t\t            .expectSubscription()\n\t\t\t            .expectNext(\"A\",\
+    \ \"B\", \"C\", \"D\", \"E\", \"F\", \"G\")\n\t\t\t            .expectComplete()\n\
+    \t\t\t            .verify(Duration.ofMillis(1000));\n\n\t\t\tStepVerifier.create(consumer2)\n\
+    \t\t\t            .expectSubscription()\n\t\t\t            .expectNext(\"D\",\
+    \ \"E\", \"F\", \"G\")\n\t\t\t            .expectComplete()\n\t\t\t          \
+    \  .verify(Duration.ofMillis(1000));\n\t\t} finally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\n\t\tAssertions.assertThat(operators)\n\t\t          .as(\"Expected usage\
+    \ of a processor\")\n\t\t          .noneMatch(p -> p.getClass().equals(Flux.just(1).hide().replay().getClass()));\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

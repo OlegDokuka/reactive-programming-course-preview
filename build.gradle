@@ -1,0 +1,132 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "io.spring.dependency-management" version "1.0.11.RELEASE" apply false
+}
+
+def printOutput(def output) {
+    return tasks.create("printOutput") {
+        for (line in output.toString().readLines()) {
+            println "#educational_plugin" + line
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'application'
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    ext {
+        junitBomVersion='5.7.1'
+        reactorBomVersion='2020.0.24'
+        r2dbcBomVersion='Arabba-SR10'
+        micrometerBomVersion='1.6.6'
+
+        logbackVersion='1.2.3'
+        assertjVersion='3.19.0'
+        mockitoVersion='3.9.0'
+        jacksonVersion='2.12.3'
+
+        mongoReactiveDriverVersion='1.13.1'
+        socketIOVersion='1.0.0'
+        embeddedMongoVersion='3.0.0'
+
+        dropwizardVersion='4.1.21'
+    }
+
+    dependencyManagement {
+        dependencies {
+            dependency 'io.socket:socket.io-client:' + socketIOVersion
+
+            dependency 'org.mongodb:mongodb-driver-reactivestreams:' + mongoReactiveDriverVersion
+            dependency 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:' + embeddedMongoVersion
+
+            dependency 'com.fasterxml.jackson.core:jackson-databind:' + jacksonVersion
+
+            dependency 'io.dropwizard.metrics:metrics-core:' + dropwizardVersion
+
+            dependency 'io.r2dbc:r2dbc-client:0.8.0.RC2'
+            dependency 'io.projectreactor.tools:blockhound:1.0.6.RELEASE'
+        }
+    }
+
+    dependencies {
+        // BOMs defenition
+        implementation platform('io.projectreactor:reactor-bom:' + reactorBomVersion)
+        implementation platform('io.r2dbc:r2dbc-bom:' + r2dbcBomVersion)
+        implementation platform('io.micrometer:micrometer-bom:' + micrometerBomVersion)
+
+        implementation 'ch.qos.logback:logback-core:' + logbackVersion
+        implementation 'ch.qos.logback:logback-classic:' + logbackVersion
+
+        testImplementation platform('org.junit:junit-bom:' + junitBomVersion)
+        testImplementation platform('io.projectreactor:reactor-bom:' + reactorBomVersion)
+        testImplementation platform('io.r2dbc:r2dbc-bom:' + r2dbcBomVersion)
+
+        // general dependencies for every project
+        implementation "io.projectreactor:reactor-core"
+
+        testImplementation 'ch.qos.logback:logback-core:' + logbackVersion
+        testImplementation 'ch.qos.logback:logback-classic:' + logbackVersion
+        testImplementation 'org.assertj:assertj-core:' + assertjVersion
+        testImplementation 'org.mockito:mockito-core:' + mockitoVersion
+        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
+
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    }
+
+    sourceSets {
+        main {
+            java.srcDir 'src'
+            resources.srcDirs 'resources'
+        }
+        test {
+            java.srcDir 'test'
+            resources.srcDirs 'resources'
+        }
+        resources
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    mainClassName = project.hasProperty("mainClass") ? project.getProperty("mainClass") : ""
+
+    def runOutput = new ByteArrayOutputStream()
+    tasks.run.setStandardOutput(runOutput)
+    tasks.run.doLast { printOutput(runOutput) }
+
+    task cleanBuildDir(type: Delete) {
+        delete "${projectDir}/out"
+    }
+    tasks.clean.dependsOn(cleanBuildDir)
+}
+
+project(':util') {
+    dependencies {
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    }
+}
+
+configure(subprojects.findAll {it.name != 'util'}) {
+  dependencies {
+    implementation project(':util').sourceSets.main.output
+    testImplementation project(':util').sourceSets.test.output
+  }
+}

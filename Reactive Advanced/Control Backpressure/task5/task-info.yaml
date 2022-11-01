@@ -1,0 +1,53 @@
+type: edu
+custom_name: Task 5
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 328
+    length: 32
+    placeholder_text: new BaseSubscriber<String>() {};
+    initial_state:
+      length: 32
+      offset: 328
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "source.subscribe(new BaseSubscriber<String>() {\n\n\
+      \t\t\tlong requested = 1;\n\t\t\tlong counter = 0;\n\n\t\t\t@Override\n\t\t\t\
+      protected void hookOnSubscribe(Subscription subscription) {\n\t\t\t\trequest(requested);\n\
+      \t\t\t}\n\n\t\t\t@Override\n\t\t\tprotected void hookOnNext(String value) {\n\
+      \t\t\t\tcounter++;\n\n\t\t\t\tif (counter == requested) {\n\t\t\t\t\tcounter\
+      \ = 0;\n\t\t\t\t\trequested *= 2;\n\t\t\t\t\trequest(requested);\n\t\t\t\t}\n\
+      \t\t\t}\n\n\t\t\t@Override\n\t\t\tprotected void hookFinally(SignalType type)\
+      \ {\n\t\t\t\tcountDownOnComplete.countDown();\n\t\t\t}\n\t\t});"
+  text: "import java.util.concurrent.CountDownLatch;\n\nimport org.reactivestreams.Subscription;\n\
+    import reactor.core.publisher.BaseSubscriber;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.SignalType;\n\npublic class Task {\n\n\tpublic static\
+    \ void dynamicDemand(Flux<String> source, CountDownLatch countDownOnComplete)\
+    \ {\n\n\t\tnew BaseSubscriber<String>() {};\n\t}\n}"
+  learner_created: false
+- name: test/BackpressureTask5Tests.java
+  visible: false
+  text: "import java.util.concurrent.CountDownLatch;\nimport java.util.concurrent.TimeUnit;\n\
+    import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.core.scheduler.Schedulers;\n\npublic class BackpressureTask5Tests {\n\
+    \n\t@Test\n\tpublic void testSolution() throws InterruptedException {\n\t\tint\
+    \ size = 100000;\n\t\tlong requests = (long) Math.ceil((Math.log(size) / Math.log(2)\
+    \ + 1e-10));\n\t\tCountDownLatch latch = new CountDownLatch(1);\n\t\tAtomicInteger\
+    \ iterations = new AtomicInteger();\n\n\t\tTask.dynamicDemand(Flux.range(0, size)\n\
+    \t\t                       .map(String::valueOf)\n\t\t                       .publishOn(Schedulers.single())\n\
+    \t\t                       .doOnRequest(r -> iterations.incrementAndGet()), latch);\n\
+    \n\t\tlatch.await(5, TimeUnit.SECONDS);\n\n\t\tAssertions.assertThat(requests)\n\
+    \t\t          .isEqualTo(iterations.get());\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

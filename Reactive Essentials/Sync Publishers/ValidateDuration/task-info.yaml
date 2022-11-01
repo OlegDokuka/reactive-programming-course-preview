@@ -1,0 +1,57 @@
+type: edu
+custom_name: Task 6
+files:
+- name: test/CommonPublishersTask6Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class CommonPublishersTask6Tests {\n\n\t\
+    @Test\n\tpublic void testValid() {\n\t\tStepVerifier.withVirtualTime(() -> ValidationTask.validate(Duration.ofMillis(10)))\n\
+    \t\t            .expectSubscription()\n\t\t\t\t\t.expectComplete()\n\t\t     \
+    \       .verify(Duration.ofMillis(100));\n\t}\n\n\t@Test\n\tpublic void testInvalid()\
+    \ {\n\t\tStepVerifier.withVirtualTime(() -> ValidationTask.validate(Duration.ofMillis(-10)))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectError()\n\t\t\t\t.verify(Duration.ofMillis(100));\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Flux` с интервалом отправки элементов\n   \n<div class=\"hint\"\
+    >\n  Используйте <code>Flux.interval()</code>\n</div>"
+  learner_created: false
+- name: src/ValidationTask.java
+  visible: true
+  placeholders:
+  - offset: 111
+    length: 7
+    placeholder_text: boolean
+    initial_state:
+      length: 7
+      offset: 111
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: Mono<Void>
+  - offset: 151
+    length: 52
+    placeholder_text: return !duration.isNegative() && !duration.isZero();
+    initial_state:
+      length: 52
+      offset: 151
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: "if (duration.isNegative() || duration.isZero()) {\n\
+      \t\t\treturn Mono.error(new IllegalArgumentException(\"Negative or zero duration\"\
+      ));\n\t\t} else {\n\t\t\treturn Mono.empty();\n\t\t}"
+  text: "import java.time.Duration;\n\nimport reactor.core.publisher.Mono;\n\npublic\
+    \ class ValidationTask {\n\n\tpublic static boolean validate(Duration duration)\
+    \ {\n\t\treturn !duration.isNegative() && !duration.isZero();\n\t}\n}"
+  learner_created: false
+status: Failed
+record: -1

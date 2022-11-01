@@ -1,0 +1,167 @@
+type: edu
+custom_name: Math in the Store
+files:
+- name: test/CPTask1Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.Arrays;\nimport java.util.List;\n\
+    \nimport org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class CPTask1Tests {\n\n\t@Test\n\tpublic void retrievingTotalPriceTest() {\n\
+    \t\tProductsCatalog productsCatalog = Mockito.mock(ProductsCatalog.class);\n\t\
+    \tMockito.when(productsCatalog.findById(Mockito.anyString()))\n\t\t       .then(a\
+    \ -> new Product(a.getArgument(0), a.getArgument(0), 100));\n\t\tList<String>\
+    \ productsIds = Arrays.asList(\"123\", \"321\", \"1235\", \"1312\");\n\n\t\tMono<Long>\
+    \ totalPrice =\n\t\t\t\tnew Order(\"test\", \"test\", productsIds, productsCatalog).getTotalPrice();\n\
+    \n\t\tStepVerifier.create(totalPrice)\n\t\t            .expectSubscription()\n\
+    \t\t            .expectNext(400L)\n\t\t            .expectComplete()\n\t\t   \
+    \         .verify(Duration.ofMillis(100));\n\t}\n\n\t@Test\n\tpublic void findUsersMostExpensivePurchaseTest()\
+    \ {\n\t\tProductsCatalog productsCatalog = Mockito.mock(ProductsCatalog.class);\n\
+    \t\tMockito.when(productsCatalog.findById(Mockito.anyString()))\n\t\t       .then(a\
+    \ -> new Product(a.getArgument(0),\n\t\t\t\t       a.getArgument(0),\n\t\t\t\t\
+    \       Long.parseLong(a.getArgument(0))));\n\n\t\tMono<Product> mostExpansivePurchase\
+    \ =\n\t\t\t\tUserActivityUtils.findMostExpansivePurchase(Flux.just(new Order(\"\
+    1\",\n\t\t\t\t\t\t\t\t\"test\",\n\t\t\t\t\t\t\t\tArrays.asList(\"1\", \"2\", \"\
+    3\"),\n\t\t\t\t\t\t\t\tproductsCatalog),\n\t\t\t\t\t\tnew Order(\"2\", \"test\"\
+    , Arrays.asList(\"4\", \"5\"), productsCatalog),\n\t\t\t\t\t\tnew Order(\"3\"\
+    , \"test\", Arrays.asList(\"6\"), productsCatalog)),\n\t\t\t\t\t\tproductsCatalog);\n\
+    \t\tStepVerifier.create(mostExpansivePurchase)\n\t\t            .expectNext(new\
+    \ Product(\"6\", \"6\", 6))\n\t\t            .expectComplete()\n\t\t         \
+    \   .verify(Duration.ofMillis(1000));\n\t}\n}"
+  learner_created: false
+- name: src/UserActivityUtils.java
+  visible: true
+  placeholders:
+  - offset: 237
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 237
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "ordersHistory.flatMapIterable(Order::getProductsIds)\n\
+      \t\t                    .map(productsCatalog::findById)\n\t\t              \
+      \      .reduce((product, product2) -> {\n\t\t\t                    if (product.getPrice()\
+      \ > product2.getPrice()) {\n\t\t\t\t                    return product;\n\t\t\
+      \t                    }\n\t\t\t                    else {\n\t\t\t\t        \
+      \            return product2;\n\t\t\t                    }\n\t\t           \
+      \         });"
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class UserActivityUtils {\n\n\tpublic static Mono<Product> findMostExpansivePurchase(Flux<Order>\
+    \ ordersHistory,\n\t\t\tProductsCatalog productsCatalog) {\n\n\t\treturn Mono.error(new\
+    \ ToDoException());\n\t}\n}\n"
+  learner_created: false
+- name: src/Product.java
+  visible: true
+  text: |
+    import java.util.Objects;
+
+    public class Product {
+        private final String id;
+        private final String name;
+        private final long price;
+
+        public Product(String id, String name, long price) {
+            this.id = Objects.requireNonNull(id);
+            this.name = Objects.requireNonNull(name);
+            this.price = Objects.requireNonNull(price);
+        }
+
+        public String getId() {
+            return this.id;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public long getPrice() {
+            return this.price;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Product product = (Product) o;
+
+            if (price != product.price) return false;
+            if (id != null ? !id.equals(product.id) : product.id != null) return false;
+            return name != null ? name.equals(product.name) : product.name == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = id != null ? id.hashCode() : 0;
+            result = 31 * result + (name != null ? name.hashCode() : 0);
+            result = 31 * result + (int) (price ^ (price >>> 32));
+            return result;
+        }
+    }
+  learner_created: false
+- name: src/Order.java
+  visible: true
+  placeholders:
+  - offset: 659
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 659
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.fromIterable(productsIds)\n\t\t           .map(productsCatalog::findById)\n\
+      \t\t           .reduce(0L, (summ, product2) -> summ + product2.getPrice());"
+  text: "import java.util.Objects;\n\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.core.publisher.Mono;\n\npublic class Order {\n\n\tprivate final String\
+    \           id;\n\tprivate final String           userId;\n\tprivate final Iterable<String>\
+    \ productsIds;\n\tprivate final ProductsCatalog productsCatalog;\n\n\tpublic Order(String\
+    \ id, String userId, Iterable<String> productsIds, ProductsCatalog productsCatalog)\
+    \ {\n\t\tthis.id = Objects.requireNonNull(id);\n\t\tthis.userId = Objects.requireNonNull(userId);\n\
+    \t\tthis.productsIds = Objects.requireNonNull(productsIds);\n\t\tthis.productsCatalog\
+    \ = Objects.requireNonNull(productsCatalog);\n\t}\n\n\tpublic Mono<Long> getTotalPrice()\
+    \ {\n\t\treturn Mono.error(new ToDoException());\n\t}\n\n\tpublic String getId()\
+    \ {\n\t\treturn this.id;\n\t}\n\n\tpublic String getUserId() {\n\t\treturn this.userId;\n\
+    \t}\n\n\tpublic Iterable<String> getProductsIds() {\n\t\treturn this.productsIds;\n\
+    \t}\n}\n"
+  learner_created: false
+- name: src/ProductsCatalog.java
+  visible: true
+  text: |
+    import java.util.Arrays;
+    import java.util.List;
+    import java.util.Random;
+
+    public class ProductsCatalog {
+        private static Random random = new Random();
+        private static List<String> PRODUCTS_NAMES = Arrays.asList(
+                "Phone",
+                "TV",
+                "SonyPlayStation",
+                "XBox",
+                "Battery",
+                "Lamp",
+                "Toaster"
+        );
+
+        public Product findById(String id) {
+            return new Product(
+                    id,
+                    PRODUCTS_NAMES.get(random.nextInt(PRODUCTS_NAMES.size())),
+                    random.nextInt(10000)
+            );
+        }
+    }
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

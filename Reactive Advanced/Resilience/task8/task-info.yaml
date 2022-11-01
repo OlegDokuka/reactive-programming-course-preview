@@ -1,0 +1,70 @@
+type: edu
+custom_name: Task 8
+files:
+- name: test/ResilienceTask8Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.Arrays;\nimport java.util.LinkedList;\n\
+    import java.util.Queue;\n\nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.Exceptions;\nimport reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\
+    \npublic class ResilienceTask8Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tStepVerifier\n\t\t\t\t.create(Task.retryWithBackoffOnError(Flux.error(new\
+    \ RuntimeException())))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectErrorMatches(e\
+    \ -> e.getClass().equals(RuntimeException.class))\n\t\t\t\t.verify(Duration.ofMillis(50));\n\
+    \t}\n\n\t@Test\n\tpublic void testSolution1() {\n\t\tStepVerifier\n\t\t\t\t.create(Task.retryWithBackoffOnError(Flux.just(\"\
+    123\")))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"123\")\n\t\t\t\t\
+    .verifyComplete();\n\t}\n\n\n\t@Test\n\tpublic void testSolution2() {\n\t\tQueue<Flux<String>>\
+    \ fluxesQueue = new LinkedList<>(Arrays.asList(\n\t\t\tFlux.error(new RuntimeException(\"\
+    [Retry] Error 0\")),\n\t\t\tFlux.error(new RuntimeException(\"[Retry] Error 1\"\
+    )),\n\t\t\tFlux.error(new RuntimeException(\"[Retry] Error 2\")),\n\t\t\tFlux.error(new\
+    \ RuntimeException(\"[Retry] Error 3\")),\n\t\t\tFlux.error(new RuntimeException(\"\
+    [Nope ] Error 4\")),\n\t\t\tFlux.just(\"Should not happen\")\n\t\t));\n\t\tStepVerifier\n\
+    \t\t\t\t.withVirtualTime(() -> Task.retryWithBackoffOnError(Flux.defer(fluxesQueue::poll)))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t    .expectNoEvent(Duration.ofMillis(1000))\n\
+    \t\t\t\t.thenAwait(Duration.ofMillis(2000))\n\t\t\t\t.expectErrorMessage(\"[Nope\
+    \ ] Error 4\")\n\t\t\t\t.verify();\n\t}\n\n\n\n\t@Test\n\tpublic void testSolution3()\
+    \ {\n\t\tQueue<Flux<String>> fluxesQueue = new LinkedList<>(Arrays.asList(\n\t\
+    \t\t\tFlux.error(new RuntimeException(\"[Retry] Error 0\")),\n\t\t\t\tFlux.error(new\
+    \ RuntimeException(\"[Retry] Error 1\")),\n\t\t\t\tFlux.error(new RuntimeException(\"\
+    [Retry] Error 2\")),\n\t\t\t\tFlux.error(new RuntimeException(\"[Retry] Error\
+    \ 3\")),\n\t\t\t\tFlux.error(new RuntimeException(\"[Retry] Error 4\")),\n\t\t\
+    \t\tFlux.error(new RuntimeException(\"[Retry] Error 5\"))\n\t\t));\n\t\tStepVerifier\n\
+    \t\t\t\t.withVirtualTime(() -> Task.retryWithBackoffOnError(Flux.defer(fluxesQueue::poll)))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectNoEvent(Duration.ofMillis(2000))\n\
+    \t\t\t\t.thenAwait(Duration.ofMillis(2000))\n\t\t\t\t.consumeErrorWith(e ->\n\t\
+    \t\t\t\tAssertions.assertThat(e)\n\t\t\t\t\t          .hasCause(new RuntimeException(\"\
+    [Retry] Error 5\"))\n\t\t\t\t\t          .matches(Exceptions::isRetryExhausted)\n\
+    \t\t\t\t)\n\t\t\t\t.verify();\n\t}\n}"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 343
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 343
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "publisher\n\t\t\t.retryWhen(\n\t\t\t\tRetry.backoff(RETRY_COUNT,\
+      \ Duration.ofMillis(100))\n\t\t\t\t     .filter(exception -> {\n\t\t\t\t\t \
+      \    String message = exception.getMessage();\n\t\t\t\t\t     return message\
+      \ != null && message.startsWith(IF_MESSAGE_STARTS_WITH);\n\t\t\t\t     })\n\t\
+      \t\t\t     .maxBackoff(Duration.ofMillis(1600))\n\t\t\t);"
+  text: "import java.time.Duration;\n\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.util.retry.Retry;\n\npublic class\
+    \ Task {\n\n\tstatic final int RETRY_COUNT = 5;\n\tstatic final String IF_MESSAGE_STARTS_WITH\
+    \ = \"[Retry]\";\n\n\n\tpublic static Publisher<String> retryWithBackoffOnError(Flux<String>\
+    \ publisher) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor.addons:reactor-extra'
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

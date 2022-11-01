@@ -1,0 +1,40 @@
+<html>
+<ul>
+    <li>Group all the words by first letter</li>
+    <li>Count how many times the first letter appears in the grouped words</li>
+    <li>Summarize the counts and combine them with character that represents a group</li>
+</ul>
+
+For instance:
+<p>
+    <code>Flux("ABCA", "BCD", "ABC") -></code><br>
+    <code>Flux(Group-'A'("ABCA", "ABC"), Group-'B'("BCD")) -></code><br>
+    <code>Flux(Tuple2('A', 3), Tuple2('B', 1))</code><br>
+</p>
+
+<b>Because</b>:
+<p>
+    We have 2 words that starts with 'A' and every word in that group has in total 3 'A' appearance.
+    <br>
+    For the second group, 'B' happens only once in a single word so total is 1.
+</p>
+
+<!--<br>-->
+<!--<table>-->
+<!--        <tr>-->
+<!--            <td><b><code>Flux<<i>String</i>> ->        </code></b></td>-->
+<!--            <td><b><code>Flux<<i>GropedFlux</i>> ->        </code></b></td>-->
+<!--            <td><b><code>Flux<<i>Tuple2</i>></code></b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><code>onNext("ABCA") + onNext("ABC") | </code></td>-->
+<!--            <td><code>key('A') with onNext("ABCA") + onNext("ABC") | </code></td>-->
+<!--            <td><code>key('A') with onNext(3) </code></td>-->
+<!--        </tr>-->
+<!--</table>-->
+<div class="hint">
+    Use <code>Flux#groupBy</code>
+    Use <code>GroupedFlux#key</code>
+    Use <code>Flux#collect</code> to calculate sum
+</div>
+</html>

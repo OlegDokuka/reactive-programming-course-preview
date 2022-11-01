@@ -1,0 +1,48 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 293
+    length: 38
+    placeholder_text: Flux.from(sourceA).mergeWith(sourceB);
+    initial_state:
+      length: 38
+      offset: 293
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.from(sourceA)\n\t\t           .contextWrite(contextA)\n\
+      \t\t           .mergeWith(Flux.from(sourceB)\n\t\t                         \
+      \ .contextWrite(contextB));"
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.util.context.Context;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<String> provideCorrectContext(Publisher<String> sourceA,\n\t\t\tContext\
+    \ contextA,\n\t\t\tPublisher<String> sourceB,\n\t\t\tContext contextB) {\n\t\t\
+    return Flux.from(sourceA).mergeWith(sourceB);\n\t}\n}"
+  learner_created: false
+- name: test/ContextTask3Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport\
+    \ reactor.util.context.Context;\n\npublic class ContextTask3Tests {\n\n\t@Test\n\
+    \tpublic void testSolution() {\n\t\tMono<String> a = Mono.subscriberContext()\n\
+    \t\t                     .filter(context -> context.hasKey(\"a\") && !context.hasKey(\"\
+    b\"))\n\t\t                     .map(context -> context.get(\"a\"));\n\t\tMono<String>\
+    \ b = Mono.subscriberContext()\n\t\t                     .filter(context -> context.hasKey(\"\
+    b\") && !context.hasKey(\"a\"))\n\t\t                     .map(context -> context.get(\"\
+    b\"));\n\t\tFlux<String> flux = Task.provideCorrectContext(a,\n\t\t\t\tContext.of(\"\
+    a\", \"a\"),\n\t\t\t\tb,\n\t\t\t\tContext.of(\"b\", \"b\"));\n\n\t\tStepVerifier.create(flux)\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNext(\"a\")\n\t\t\
+    \            .expectNext(\"b\")\n\t\t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

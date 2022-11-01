@@ -1,0 +1,68 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 198
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 198
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux.concat(sources);
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> concatSeveralSourcesOrdered(Publisher<String>...\
+    \ sources) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask3Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport reactor.test.publisher.PublisherProbe;\n\
+    \npublic class MultipleSourcesTask3Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tPublisherProbe[] probes = new PublisherProbe[2];\n\n\t\tStepVerifier\n\
+    \t\t\t\t.withVirtualTime(() -> {\n\t\t\t\t\tPublisherProbe<String> probeA = PublisherProbe.of(Mono.fromCallable(()\
+    \ -> \"VANILLA\").delaySubscription(\n\t\t\t\t\t\t\tDuration.ofSeconds(1)));\n\
+    \t\t\t\t\tPublisherProbe<String> probeB = PublisherProbe.of(Mono.fromCallable(()\
+    \ -> \"CHOCOLATE\"));\n\n\t\t\t\t\tprobes[0] = probeA;\n\t\t\t\t\tprobes[1] =\
+    \ probeB;\n\n\t\t\t\t\treturn Task.concatSeveralSourcesOrdered(\n\t\t\t\t\t\t\t\
+    probeA.mono(),\n\t\t\t\t\t\t\tprobeB.mono()\n\t\t\t\t\t);\n\t\t\t\t}, 0)\n\t\t\
+    \t\t.expectSubscription()\n\t\t\t\t.then(() -> probes[0].assertWasSubscribed())\n\
+    \t\t\t\t.then(() -> probes[1].assertWasNotSubscribed())\n\t\t\t\t.thenRequest(1)\n\
+    \t\t\t\t.then(() -> probes[0].assertWasRequested())\n\t\t\t\t.then(() -> probes[1].assertWasNotSubscribed())\n\
+    \t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"VANILLA\"\
+    )\n\t\t\t\t.thenRequest(1)\n\t\t\t\t.then(() -> probes[1].assertWasSubscribed())\n\
+    \t\t\t\t.then(() -> probes[1].assertWasRequested())\n\t\t\t\t.expectNext(\"CHOCOLATE\"\
+    )\n\t\t\t\t.verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.html
+  visible: false
+  text: |-
+    <html>
+    Объедените несколько источников елементов (<code>Publisher</code>) в один общий
+    <code>Flux</code> таким образом что бы все элементы из под-<code>Flux</code> пришли в том
+    же порядке что и при генерации под-<code>Flux</code>. Это задание похожу с предыдущим,
+    но в дополнение вам необходимо обеспечить подписку только на один под-<code>Flux</code>
+    в один момент времени:
+    К примеру:
+
+    <!--TODO: вставить marble диаграму-->
+
+    <div class="hint">
+        Используйте <code>Flux.concat</code>. Обратите внимание, <code>Flux.concat</code>
+        работает идентично с <code>Flux#concatMap</code>
+    </div>
+    </html>
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,41 @@
+<html>
+***Concat*** all streams (<code>Publisher</code>) into a single
+<code>Flux</code> in the way the order of all elements are corresponding to the order
+in which <code>Flux</code>es' are merged.
+
+<!--TODO: вставить marble диаграму-->
+
+<div class="hint">
+    Use <code>Flux.concat</code>. Pay attention, <code>Flux.concat</code>
+    works identically to <code>Flux#concatMap</code>. The may difference between
+    <code>Flux.concat</code> and <code>Flux.mergeSequentially</code> is that <code>Flux.concat</code>
+    subscribes to inner sources sequentially when the previous source has completed:
+
+    <p>
+        <code>source-1#subscribed</code><br>
+        <code>source-1#onNext</code><br>
+        <code>source-1#onNext</code><br>
+        <code>source-1#onNext</code><br>
+        <code>source-2#subscribed</code><br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onComplete</code><br>
+    </p>
+
+    in contrast, <code>Flux.mergeSequentially</code> does it in the following way
+    <p>
+        <code>source-1#subscribed</code>(source starts producing elements)<br>
+        <code>source-2#subscribed</code>(source starts producing elements)<br>
+        <code>source-1#onNext</code><br>
+        <code>source-1#onNext</code><br>
+        <code>source-1#onNext</code><br>
+        <code>source-1#onComplete</code>(elements from the first are always coming first)<br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onNext</code><br>
+        <code>source-2#onComplete</code><br>
+    </p>
+
+</div>
+</html>

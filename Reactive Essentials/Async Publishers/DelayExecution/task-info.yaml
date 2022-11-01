@@ -1,0 +1,64 @@
+type: edu
+custom_name: Task 1
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Создайте `Flux` от `[0..20)`\n   \n<div class=\"hint\">\n  Используйте Flux.range\n\
+    </div>"
+  learner_created: false
+- name: src/DelayExecutionTask.java
+  visible: true
+  placeholders:
+  - offset: 201
+    length: 4
+    placeholder_text: Void
+    initial_state:
+      length: 4
+      offset: 201
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono<Long>
+  - offset: 253
+    length: 135
+    placeholder_text: "try {\n\t\t\tThread.sleep(pauseDurationInMillis);\n\t\t} catch\
+      \ (InterruptedException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\
+      \treturn null;"
+    initial_state:
+      length: 135
+      offset: 253
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: return Mono.delay(Duration.ofMillis(pauseDurationInMillis));
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.List;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\npublic\
+    \ class DelayExecutionTask {\n\n\tpublic static Void pauseExecution(long pauseDurationInMillis)\
+    \ {\n\t\ttry {\n\t\t\tThread.sleep(pauseDurationInMillis);\n\t\t} catch (InterruptedException\
+    \ e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\treturn null;\n\t}\n}"
+  learner_created: false
+- name: test/DelayExecutionTaskTests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.core.publisher.Hooks;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
+    import reactor.test.scheduler.VirtualTimeScheduler;\n\npublic class DelayExecutionTaskTests\
+    \ {\n\n\t@Test\n\tpublic void testResultIsCorrect() {\n\t\tVirtualTimeScheduler\
+    \ virtualTimeScheduler = VirtualTimeScheduler.getOrSet();\n\t\ttry {\n\n\t\t\t\
+    Object sequence = DelayExecutionTask.pauseExecution(1000);\n\n\t\t\tif (sequence\
+    \ instanceof Mono) {\n\t\t\t\tStepVerifier.withVirtualTime(() -> ((Mono<Long>)\
+    \ sequence))\n\t\t\t\t\t\t.expectSubscription()\n\t\t\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\
+    \t\t\t\t\t\t.expectNextCount(1)\n\t\t\t\t\t\t.expectComplete()\n\t\t\t\t\t\t.verify(Duration.ofMillis(100));\n\
+    \t\t\t} else {\n\t\t\t\tAssertions.fail(\"Unexpected implementation\");\n\t\t\t\
+    }\n\t\t} finally {\n\t\t\tVirtualTimeScheduler.reset();\n\t\t}\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

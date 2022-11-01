@@ -1,0 +1,46 @@
+type: edu
+custom_name: Task 6
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 274
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 274
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: values.onErrorContinue(consumer);
+  text: "import java.util.function.BiConsumer;\n\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Publisher<Integer> provideSupportOfContinuation(Flux<Integer> values,\n\t\t\t\
+    BiConsumer<Throwable, Object> consumer) {\n\t\treturn Flux.error(new ToDoException());\n\
+    \t}\n}"
+  learner_created: false
+- name: test/ResilienceTask6Tests.java
+  visible: false
+  text: "import java.util.function.BiConsumer;\n\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class ResilienceTask6Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    BiConsumer<Throwable, Object> consumer = (t, element) -> {\n\t\t\tSystem.err.println(\"\
+    Thrown an error [\" + t.toString() + \"] on the following element [\" + element\
+    \ + \"]\");\n\t\t};\n\t\tFlux<Integer> range = Flux.range(0, 6)\n\t\t        \
+    \                  .map(i -> 10 / i);\n\n\t\tStepVerifier.create(Task.provideSupportOfContinuation(range,\
+    \ consumer))\n\t\t            .expectSubscription()\n\t\t            .expectNextCount(5)\n\
+    \t\t            .expectAccessibleContext()\n\t\t            .hasKey(\"reactor.onNextError.localStrategy\"\
+    )\n\t\t            .then()\n\t\t            .expectComplete()\n\t\t          \
+    \  .verify();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor.addons:reactor-extra'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

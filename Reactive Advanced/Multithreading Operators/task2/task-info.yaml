@@ -1,0 +1,43 @@
+type: edu
+custom_name: Task 2
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 285
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 285
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono.fromCallable(blockingCall)\n\t\t           .subscribeOn(Schedulers.boundedElastic());"
+  text: "import java.util.concurrent.Callable;\n\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.core.scheduler.Schedulers;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> subscribeOnSingleThreadScheduler(Callable<String>\
+    \ blockingCall) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultithreadingOperatorsTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.assertj.core.api.Assertions;\nimport\
+    \ org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultithreadingOperatorsTask2Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tThread[] threads = new Thread[1];\n\t\tStepVerifier.create(Task.subscribeOnSingleThreadScheduler(()\
+    \ -> {\n\t\t\tSystem.out.println(\"Threads:\" + Thread.currentThread()\n\t\t\t\
+    \                                      .getName());\n\t\t\tthreads[0] = Thread.currentThread();\n\
+    \t\t\treturn \"Hello\";\n\t\t}))\n\t\t            .expectSubscription()\n\t\t\
+    \            .expectNext(\"Hello\")\n\t\t            .expectComplete()\n\t\t \
+    \           .verify(Duration.ofMillis(5000));\n\n\t\tAssertions.assertThat(threads[0])\n\
+    \t\t          .isNotEqualTo(Thread.currentThread());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

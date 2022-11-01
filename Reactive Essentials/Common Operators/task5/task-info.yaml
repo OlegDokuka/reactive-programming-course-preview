@@ -1,0 +1,52 @@
+type: edu
+custom_name: Task 5
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 133
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 133
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "input.transform(Task::validate)\n\t\t            .transform(Task::doBusinessLogic);"
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<Long> transformSequence(Flux<String> input) {\n\t\treturn Flux.error(new\
+    \ ToDoException());\n\t}\n\n\tprivate static Flux<Long> doBusinessLogic(Flux<String>\
+    \ flux) {\n\t\treturn flux.map(s -> s.replace(\"0x\", \"\"))\n\t\t           .map(s\
+    \ -> Long.parseLong(s, 16));\n\t}\n\n\tprivate static Flux<String> validate(Flux<String>\
+    \ flux) {\n\t\treturn flux.filter(s -> s.length() > 0)\n\t\t           .filter(s\
+    \ -> s.startsWith(\"0x\"));\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask5Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ CommonOperatorsTask5Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    Flux<Long> sequence = Task.transformSequence(Flux.just(\"0xFF\",\n\t\t\t\t\"00FF\"\
+    ,\n\t\t\t\t\"asdas\",\n\t\t\t\t\"0xFFFFFF\",\n\t\t\t\t\"0x00000000\"));\n\n\t\t\
+    StepVerifier.create(sequence)\n\t\t            .expectNext(Long.parseLong(\"FF\"\
+    , 16),\n\t\t\t\t            Long.parseLong(\"FFFFFF\", 16),\n\t\t\t\t        \
+    \    Long.parseLong(\"00000000\", 16))\n\t\t            .expectComplete()\n\t\t\
+    \            .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте `Flux` используя данные функии `validate` и `doBusinessLogic`\
+    \ в следующей последовательности:\n\n    - `validate`\n    - `doBusinessLogic`\n\
+    \   \n<div class=\"hint\">\n  Используйте <code>Flux#transform</code> оператор\
+    \ высшего порядка для преобразований над <code>Flux</code> \n</div>"
+  learner_created: false
+status: Unchecked
+record: -1

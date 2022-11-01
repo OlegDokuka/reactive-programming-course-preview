@@ -1,0 +1,39 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 137
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 137
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono.deferContextual(contextView ->\n\t\t\tcontextView.hasKey(key)\n\
+      \t\t\t\t? Mono.just(contextView.get(key))\n\t\t\t\t: Mono.empty()\n\t\t);"
+  text: "import reactor.core.publisher.Mono;\n\npublic class Task {\n\n\tpublic static\
+    \ Mono<String> grabDataFromTheGivenContext(Object key) {\n\t\treturn Mono.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/ContextTask1Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\nimport\
+    \ reactor.util.context.Context;\n\npublic class ContextTask1Tests {\n\n\t@Test\n\
+    \tpublic void testSolution() {\n\t\tStepVerifier.create(Task.grabDataFromTheGivenContext(\"\
+    Test\")\n\t\t                        .contextWrite(Context.of(\"Test\", \"Test\"\
+    )))\n\t\t            .expectSubscription()\n\t\t            .expectNext(\"Test\"\
+    )\n\t\t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

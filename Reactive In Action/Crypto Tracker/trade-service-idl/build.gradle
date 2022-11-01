@@ -1,0 +1,3 @@
+dependencies {
+  implementation project(":Reactive_In_Action-Crypto_Tracker-common")
+}

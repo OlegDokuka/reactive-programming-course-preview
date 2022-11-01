@@ -1,0 +1,129 @@
+type: edu
+custom_name: Blocking Payment Service
+files:
+- name: test/CPTask3Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.test.StepVerifier;\n\npublic class CPTask3Tests {\n\n\t@Test\n\t\
+    public void findVideoTest() {\n\t\t// TODO add more tests\n\t\tPaymentService\
+    \ service = new PaymentService();\n\n\t\tStepVerifier.create(service.findPayments(Flux.range(1,\
+    \ 100)\n\t\t                                             .map(String::valueOf))\n\
+    \t\t                           .then())\n\t\t            .expectSubscription()\n\
+    \t\t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/PaymentService.java
+  visible: true
+  text: "import reactor.core.publisher.Flux;\n\n/**\n * Description: You have got\
+    \ a task to integrate our Reactive Application with JDBC. The\n * problem with\
+    \ JDBC is that it is blocking one and as we might remember blocking I/O is\n *\
+    \ pure evil. Fortunately, there is a hack here. We may rely on Cached ThreadPool\
+    \ and\n * execute each blocking operation in the separate Thread. It might help\
+    \ us when the\n * number of queries is small. However, when the number of queries\
+    \ become higher than\n * usual, we may get into the troubles. As we might remember,\
+    \ most of the Database has\n * connections-pool. That connections-pool is limited\
+    \ to prevent Database overwhelming. In\n * that case, if our application creates\
+    \ more Threads than available connections in the\n * connection-pool, then the\
+    \ application will be overwhelmed by redundant Thread. Hence\n * additional memory\
+    \ will be used.\n * <p>\n * As great developers, we have to tackle that noisy\
+    \ issue. To avoid that insufficient\n * wasting we have to provide adaptation\
+    \ of {@link BlockingPaymentsHistoryJpaRepository}\n * using {@link ReactivePaymentsHistoryJpaRepositoryAdapter}\
+    \ and custom Scheduler service.\n * In turn, you have to care about connections-pool\
+    \ limitations so your application will\n * not overwhelm it by redundant calls.\n\
+    \ */\npublic class PaymentService {\n\n\tprivate final PaymentsHistoryReactiveJpaRepository\
+    \ repository;\n\n\tpublic PaymentService() {\n\t\tthis.repository =\n\t\t\t\t\
+    new ReactivePaymentsHistoryJpaRepositoryAdapter(new BlockingPaymentsHistoryJpaRepository());\
+    \ // REPLACE\n\t}\n\n\tpublic Flux<Payment> findPayments(Flux<String> userIds)\
+    \ {\n\t\treturn userIds.flatMap(repository::findAllByUserId);\n\t}\n}\n"
+  learner_created: false
+- name: src/ConnectionsPool.java
+  visible: true
+  text: "import java.util.concurrent.atomic.AtomicInteger;\n\npublic class ConnectionsPool\
+    \ {\n\n\tpublic static ConnectionsPool instance() {\n\t\treturn connectionsPool;\n\
+    \t}\n\n\tprivate final int           size;\n\tprivate final AtomicInteger connectionsCounter\
+    \ = new AtomicInteger();\n\n\tpublic ConnectionsPool(int size) {\n\t\tthis.size\
+    \ = size;\n\t}\n\n\tpublic void release() {\n\t\tconnectionsCounter.decrementAndGet();\n\
+    \t}\n\n\tpublic int size() {\n\t\treturn size;\n\t}\n\n\tpublic void tryAcquire()\
+    \ {\n\t\tconnectionsCounter.accumulateAndGet(1, (current, plus) -> {\n\t\t\tif\
+    \ (current >= size) {\n\t\t\t\tthrow new IllegalStateException(\"No available\
+    \ connections in the pool\");\n\t\t\t}\n\t\t\treturn current + plus;\n\t\t});\n\
+    \t}\n\n\tprivate static final ConnectionsPool connectionsPool = new ConnectionsPool(20);\n\
+    }\n"
+  learner_created: false
+- name: src/Payment.java
+  visible: true
+  text: |
+    public class Payment {
+
+    }
+  learner_created: false
+- name: src/BlockingPaymentsHistoryJpaRepository.java
+  visible: true
+  text: "import java.time.Duration;\nimport java.util.List;\nimport java.util.concurrent.ThreadLocalRandom;\n\
+    import java.util.stream.Stream;\n\nimport reactor.core.publisher.Flux;\n\npublic\
+    \ class BlockingPaymentsHistoryJpaRepository\n\t\timplements PaymentsHistoryJpaRepository\
+    \ {\n\n\t@Override\n\tpublic List<Payment> findAllByUserId(String userId) {\n\t\
+    \ttry {\n\t\t\tConnectionsPool.instance()\n\t\t\t               .tryAcquire();\n\
+    \t\t\tThreadLocalRandom random = ThreadLocalRandom.current();\n\n\t\t\treturn\
+    \ Flux.fromStream(Stream.generate(Payment::new))\n\t\t\t           .take(random.nextLong(50))\n\
+    \t\t\t           .delayElements(Duration.ofMillis(random.nextLong(5, 50)))\n\t\
+    \t\t           .collectList()\n\t\t\t           .block();\n\t\t}\n\t\tfinally\
+    \ {\n\t\t\tConnectionsPool.instance()\n\t\t\t               .release();\n\t\t\
+    }\n\t}\n}\n"
+  learner_created: false
+- name: src/PaymentsHistoryReactiveJpaRepository.java
+  visible: true
+  text: "import reactor.core.publisher.Flux;\n\npublic interface PaymentsHistoryReactiveJpaRepository\
+    \ {\n\n\tFlux<Payment> findAllByUserId(String userId);\n}\n"
+  learner_created: false
+- name: src/PaymentsHistoryJpaRepository.java
+  visible: true
+  text: "import java.util.List;\n\npublic interface PaymentsHistoryJpaRepository {\n\
+    \n\tList<Payment> findAllByUserId(String userId);\n}\n"
+  learner_created: false
+- name: src/ReactivePaymentsHistoryJpaRepositoryAdapter.java
+  visible: true
+  placeholders:
+  - offset: 279
+    length: 61
+    placeholder_text: // use ExecutorService or Scheduler to offload blocking calls
+    initial_state:
+      length: 61
+      offset: 279
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "final Scheduler                    blockingTasksScheduler\
+      \ =\n\t\t\tSchedulers.newBoundedElastic(ConnectionsPool.instance()\n\t\t\t \
+      \                                           .size(),\n\t\t\t\t\tInteger.MAX_VALUE,\n\
+      \t\t\t\t\t\"DataBaseBlockingTasksScheduler\");"
+  - offset: 746
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 746
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.defer(() -> Flux.fromIterable(repository.findAllByUserId(userId)))\n\
+      \t\t           .subscribeOn(blockingTasksScheduler);\n"
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Scheduler;\n\
+    import reactor.core.scheduler.Schedulers;\n\npublic class ReactivePaymentsHistoryJpaRepositoryAdapter\n\
+    \t\timplements PaymentsHistoryReactiveJpaRepository {\n\n\tfinal PaymentsHistoryJpaRepository\
+    \ repository;\n\t// use ExecutorService or Scheduler to offload blocking calls\n\
+    \n\tpublic ReactivePaymentsHistoryJpaRepositoryAdapter(PaymentsHistoryJpaRepository\
+    \ repository) {\n\t\tthis.repository = repository;\n\t}\n\n\tpublic Flux<Payment>\
+    \ findAllByUserId(String userId) {\n\t\t// TODO: provide asynchronous wrapping\
+    \ around blocking JPARepository\n\t\t// HINT: Consider provide custom singleton\
+    \ thread-pool with limited amount of workers\n\t\t//       ThreadCount == ConnectionsPool.size()\n\
+    \n\t\treturn Flux.error(new ToDoException());\t}\n}\n"
+  learner_created: false
+status: Unchecked
+record: -1

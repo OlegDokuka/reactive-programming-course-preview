@@ -1,0 +1,47 @@
+type: edu
+custom_name: Task 5
+files:
+- name: test/ResilienceTask5Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.scheduler.Schedulers;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class ResilienceTask5Tests {\n\tstatic {\n\t\tSystem.setProperty(\"reactor.schedulers.defaultPoolSize\"\
+    , \"1\");\n\t}\n\n\t@Test\n\tpublic void testSolution() {\n\t\tStepVerifier\n\t\
+    \t\t.create(\n\t\t\t\tTask\n\t\t\t\t\t.timeoutBlockingOperation(() -> {\n\t\t\t\
+    \t\t\ttry {\n\t\t\t\t\t\t\tThread.sleep(1000000);\n\t\t\t\t\t\t}\n\t\t\t\t\t\t\
+    catch (InterruptedException e) {\n\t\t\t\t\t\t\treturn null;\n\t\t\t\t\t\t}\n\n\
+    \t\t\t\t\t\treturn \"Toooooo long\";\n\t\t\t\t\t}, Duration.ofSeconds(1), \"Hello\"\
+    )\n\t\t\t\t\t.subscribeOn(Schedulers.parallel())\n\t\t\t)\n            .expectSubscription()\n\
+    \            .expectNext(\"Hello\")\n            .expectComplete()\n         \
+    \   .verify(Duration.ofSeconds(2));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 306
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 306
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono.fromCallable(longRunningCall)\n\t\t         \
+      \  .subscribeOn(Schedulers.boundedElastic())\n\t\t           .timeout(duration,\
+      \ Mono.just(fallback));"
+  text: "import java.time.Duration;\nimport java.util.concurrent.Callable;\n\nimport\
+    \ reactor.core.publisher.Mono;\nimport reactor.core.scheduler.Schedulers;\n\n\
+    public class Task {\n\n\tpublic static Mono<String> timeoutBlockingOperation(Callable<String>\
+    \ longRunningCall,\n\t\t\tDuration duration,\n\t\t\tString fallback) {\n\t\treturn\
+    \ Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

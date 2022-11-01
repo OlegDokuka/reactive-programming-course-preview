@@ -1,0 +1,346 @@
+type: edu
+custom_name: External Service Integration
+files:
+- name: src/service/external/utils/MessageUnpacker.java
+  visible: true
+  text: |
+    package service.external.utils;
+
+    import java.util.Map;
+
+    public interface MessageUnpacker {
+        boolean supports(String messageType);
+
+        Map<String, Object> unpack(String message);
+    }
+  learner_created: false
+- name: src/service/external/utils/PriceMessageUnpacker.java
+  visible: true
+  text: |
+    package service.external.utils;
+
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.stream.Stream;
+
+    import reactor.util.function.Tuple2;
+    import reactor.util.function.Tuples;
+
+    import static java.lang.Float.parseFloat;
+    import static java.lang.Integer.parseInt;
+
+    public class PriceMessageUnpacker implements MessageUnpacker {
+
+        @SuppressWarnings("unchecked")
+        private static final Tuple2<String, Integer>[] FIELDS = new Tuple2[]{
+                Tuples.of("TYPE", 0x0),       // hex for binary 0, it is a special case of fields that are always there
+                Tuples.of("MARKET", 0x0),      // hex for binary 0, it is a special case of fields that are always there
+                Tuples.of("FROMSYMBOL", 0x0),      // hex for binary 0, it is a special case of fields that are always there
+                Tuples.of("TOSYMBOL", 0x0),      // hex for binary 0, it is a special case of fields that are always there
+                Tuples.of("FLAGS", 0x0),    // hex for binary 0, it is a special case of fields that are always there
+                Tuples.of("PRICE", 0x1),     // hex for binary 1
+                Tuples.of("BID", 0x2),   // hex for binary 10
+                Tuples.of("OFFER", 0x4),     // hex for binary 100
+                Tuples.of("LASTUPDATE", 0x8),     // hex for binary 1000
+                Tuples.of("AVG", 0x10),   // hex for binary 10000
+                Tuples.of("LASTVOLUME", 0x20),     // hex for binary 100000
+                Tuples.of("LASTVOLUMETO", 0x40),    // hex for binary 1000000
+                Tuples.of("LASTTRADEID", 0x80),   // hex for binary 10000000
+                Tuples.of("VOLUMEHOUR", 0x100),   // hex for binary 100000000
+                Tuples.of("VOLUMEHOURTO", 0x200),    // hex for binary 1000000000
+                Tuples.of("VOLUME24HOUR", 0x400),   // hex for binary 10000000000
+                Tuples.of("VOLUME24HOURTO", 0x800),   // hex for binary 100000000000
+                Tuples.of("OPENHOUR", 0x1000),  // hex for binary 1000000000000
+                Tuples.of("HIGHHOUR", 0x2000),   // hex for binary 10000000000000
+                Tuples.of("LOWHOUR", 0x4000), // hex for binary 100000000000000
+                Tuples.of("OPEN24HOUR", 0x8000),  // hex for binary 1000000000000000
+                Tuples.of("HIGH24HOUR", 0x10000),  // hex for binary 10000000000000000
+                Tuples.of("LOW24HOUR", 0x20000),  // hex for binary 100000000000000000
+                Tuples.of("LASTMARKET", 0x40000)  // hex for binary 1000000000000000000, this is a special case and will only appear on CCCAGG messages
+        };
+
+        public boolean supports(String messageType) {
+            return messageType.equals("5");
+        }
+
+        public Map<String, Object> unpack(String message) {
+            String[] valuesArray = message.split("~");
+            int valuesArrayLenght = valuesArray.length;
+            String mask = valuesArray[valuesArrayLenght - 1];
+            int maskInt = parseInt(mask, 16);
+            Map<String, Object> unpackedCurrent = new HashMap<>();
+            final int[] currentField = {0};
+            Stream.of(FIELDS).forEach(t -> {
+                String k = t.getT1();
+                Integer v = t.getT2();
+                if (v == 0) {
+                    unpackedCurrent.put(k, valuesArray[currentField[0]]);
+                    currentField[0]++;
+                } else if ((maskInt & v) > 0) {
+                    //i know this is a hack, for cccagg, future code please don't hate me:(, i did this to avoid
+                    //subscribing to trades as well in order to show the last market
+                    if (k.equals("LASTMARKET") || k.equals("LASTTRADEID")) {
+                        unpackedCurrent.put(k, valuesArray[currentField[0]]);
+                    } else {
+                        unpackedCurrent.put(k, parseFloat(valuesArray[currentField[0]]));
+                    }
+                    currentField[0]++;
+                }
+            });
+
+            return unpackedCurrent;
+        }
+    }
+  learner_created: false
+- name: src/service/external/utils/TradeMessageUnpacker.java
+  visible: true
+  text: |
+    package service.external.utils;
+
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.stream.Stream;
+
+    import reactor.util.function.Tuple2;
+    import reactor.util.function.Tuples;
+
+    import static java.lang.Float.parseFloat;
+    import static java.lang.Integer.parseInt;
+
+    public class TradeMessageUnpacker implements MessageUnpacker {
+
+        @SuppressWarnings("unchecked")
+        private static final Tuple2<String, Integer>[] FIELDS = new Tuple2[]{
+                Tuples.of("TYPE", 0x0),  // hex for binary 0, it is a special case of fields that are always there          TYPE
+                Tuples.of("MARKET", 0x0),  // hex for binary 0, it is a special case of fields that are always there        MARKET
+                Tuples.of("FROMSYMBOL", 0x0), // hex for binary 0, it is a special case of fields that are always there     FROM SYMBOL
+                Tuples.of("TOSYMBOL", 0x0), // hex for binary 0, it is a special case of fields that are always there       TO SYMBOL
+                Tuples.of("FLAGS", 0x0), // hex for binary 0, it is a special case of fields that are always there          FLAGS
+                Tuples.of("ID", 0x1), // hex for binary 1                                                                   ID
+                Tuples.of("TIMESTAMP", 0x2), // hex for binary 10                                                           TIMESTAMP
+                Tuples.of("QUANTITY", 0x4), // hex for binary 100                                                           QUANTITY
+                Tuples.of("PRICE", 0x8),// hex for binary 1000                                                              PRICE
+                Tuples.of("TOTAL", 0x10) // hex for binary 10000                                                            TOTAL
+        };
+
+        public boolean supports(String messageType) {
+            return messageType.equals("0");
+        }
+
+        public Map<String, Object> unpack(String message) {
+            String[] valuesArray = message.split("~");
+            int valuesArrayLenght = valuesArray.length;
+            String mask = valuesArray[valuesArrayLenght - 1];
+            int maskInt = parseInt(mask, 16);
+            Map<String, Object> unpackedTrade = new HashMap<>();
+            final int[] currentField = {0};
+
+            Stream.of(FIELDS).forEach(t -> {
+                String k = t.getT1();
+                Integer v = t.getT2();
+                if (v == 0) {
+                    unpackedTrade.put(k, valuesArray[currentField[0]]);
+                    currentField[0]++;
+                } else if ((maskInt & v) > 0) {
+                    unpackedTrade.put(k, parseFloat(valuesArray[currentField[0]]));
+                    currentField[0]++;
+                }
+            });
+
+            return unpackedTrade;
+        }
+    }
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation project(":Reactive_In_Action-Crypto_Tracker-crypto-service-idl")
+
+      implementation 'io.socket:socket.io-client'
+    }
+  learner_created: false
+- name: test/service/external/CryptoServiceTests.java
+  visible: false
+  text: "package service.external;\n\nimport java.time.Duration;\nimport java.util.concurrent.atomic.AtomicInteger;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.DirectProcessor;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.ReplayProcessor;\n\
+    import reactor.core.publisher.UnicastProcessor;\nimport reactor.test.StepVerifier;\n\
+    \npublic class CryptoServiceTests {\n\n\t@Test\n\tpublic void verifyThatSupportMultiSubscribers()\
+    \ {\n\t\tAtomicInteger subscribtions = new AtomicInteger(0);\n\t\tFlux<Object>\
+    \ source = DirectProcessor\n\t\t\t\t.create()\n\t\t\t\t.doOnSubscribe(s -> subscribtions.incrementAndGet());\n\
+    \n\t\tFlux<Object> cachedFlux = CryptoCompareService.provideCaching(source);\n\
+    \n\t\tcachedFlux.subscribe(System.out::println);\n\t\tcachedFlux.subscribe(System.out::println);\n\
+    \n\t\tAssertions.assertThat(subscribtions.get()).isEqualTo(1);\n\t}\n\n\t@Test\n\
+    \tpublic void verifyThatSupportIsolationAndResilience() {\n\t\tFlux<String> source\
+    \ = Flux.defer(() -> Flux.just(\"1\", \"2\", \"3\")\n\t\t                    \
+    \                       .mergeWith(Flux.error(new RuntimeException())));\n\n\t\
+    \tStepVerifier.withVirtualTime(() ->\n\t\t\t\tCryptoCompareService.provideResilience(source)\n\
+    \t\t\t\t                    .take(6)\n\t\t)\n\t\t            .expectSubscription()\n\
+    \t\t            .thenAwait(Duration.ofDays(10))\n\t\t            .expectNext(\"\
+    1\", \"2\", \"3\")\n\t\t            .expectNext(\"1\", \"2\", \"3\")\n\t\t   \
+    \         .expectComplete()\n\t\t            .verify();\n\n\t}\n\n\t@Test\n\t\
+    public void verifyThatSupportReplayMode() {\n\t\tUnicastProcessor<String> source\
+    \ = UnicastProcessor.create();\n\t\tReplayProcessor<String> consumer1 = ReplayProcessor.create(10);\n\
+    \t\tReplayProcessor<String> consumer2 = ReplayProcessor.create(10);\n\n\t\tPublisher<String>\
+    \ publisher = CryptoCompareService.provideCaching(source);\n\n\t\tsource.onNext(\"\
+    A\");\n\t\tsource.onNext(\"B\");\n\t\tsource.onNext(\"C\");\n\n\t\tpublisher.subscribe(consumer1);\n\
+    \n\t\tsource.onNext(\"D\");\n\t\tsource.onNext(\"E\");\n\t\tsource.onNext(\"F\"\
+    );\n\n\t\tpublisher.subscribe(consumer2);\n\n\t\tsource.onNext(\"G\");\n\n\t\t\
+    source.onComplete();\n\n\t\tStepVerifier.create(consumer1)\n\t\t            .expectSubscription()\n\
+    \t\t            .expectNext(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\")\n\
+    \t\t            .verifyComplete();\n\n\t\tStepVerifier.create(consumer2)\n\t\t\
+    \            .expectSubscription()\n\t\t            .expectNext(\"D\", \"E\",\
+    \ \"F\", \"G\")\n\t\t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: src/service/external/CryptoCompareService.java
+  visible: true
+  placeholders:
+  - offset: 1327
+    length: 13
+    placeholder_text: Flux.never();
+    initial_state:
+      length: 13
+      offset: 1327
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: |-
+      input.retryWhen(
+                  Retry.backoff(100, Duration.ofMillis(500))
+                       .maxBackoff(Duration.ofMillis(2000))
+              );
+  - offset: 1504
+    length: 13
+    placeholder_text: Flux.never();
+    initial_state:
+      length: 13
+      offset: 1504
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: input.replay(CACHE_SIZE).autoConnect(0);
+  text: |
+    package service.external;
+
+    import java.time.Duration;
+    import java.util.Arrays;
+    import java.util.Map;
+
+    import reactor.core.publisher.Flux;
+    import reactor.util.retry.Retry;
+    import service.CryptoService;
+    import service.external.utils.PriceMessageUnpacker;
+    import service.external.utils.TradeMessageUnpacker;
+
+    //TODO turn to multi-subscriber with processor or another similar operator
+    //TODO add small history for each subscriber
+    //TODO add resilience
+
+    public class CryptoCompareService implements CryptoService {
+        public static final int CACHE_SIZE = 3;
+
+        private final Flux<Map<String, Object>> reactiveCryptoListener;
+
+        public CryptoCompareService() {
+            reactiveCryptoListener = CryptoCompareClient
+                    .connect(
+                            Flux.just("5~CCCAGG~BTC~USD", "0~Coinbase~BTC~USD", "0~Cexio~BTC~USD"),
+                            Arrays.asList(new PriceMessageUnpacker(), new TradeMessageUnpacker())
+                    )
+                    .transform(CryptoCompareService::provideResilience)
+                    .transform(CryptoCompareService::provideCaching);
+        }
+
+        public Flux<Map<String, Object>> eventsStream() {
+            return reactiveCryptoListener;
+        }
+
+        // TODO: implement resilience such as retry with delay
+        public static <T> Flux<T> provideResilience(Flux<T> input) {
+            return Flux.never();
+        }
+
+
+        // TODO: implement caching of 3 last elements & multi subscribers support
+        public static <T> Flux<T> provideCaching(Flux<T> input) {
+            return Flux.never();
+        }
+    }
+  learner_created: false
+- name: src/service/external/CryptoCompareClient.java
+  visible: true
+  text: |
+    package service.external;
+
+    import java.net.URISyntaxException;
+    import java.util.Collection;
+    import java.util.HashMap;
+    import java.util.Map;
+
+    import io.socket.client.IO;
+    import io.socket.client.Socket;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
+    import reactor.core.publisher.Flux;
+    import reactor.core.publisher.FluxSink;
+    import service.external.utils.MessageUnpacker;
+
+    class CryptoCompareClient {
+        private static final Logger logger = LoggerFactory.getLogger("external-trading-service");
+
+        static Flux<Map<String, Object>> connect(Flux<String> input, Collection<MessageUnpacker> unpackers) {
+            return Flux.defer(() -> Flux.create(sink -> {
+                Socket socket;
+
+                try {
+                    socket = IO.socket("https://streamer.cryptocompare.com");
+                    logger.info("[EXTERNAL-SERVICE] Connecting to CryptoCompare.com ...");
+                } catch (URISyntaxException e) {
+                    sink.error(e);
+                    return;
+                }
+
+                Runnable closeSocket = () -> {
+                    socket.close();
+                    logger.info("[EXTERNAL-SERVICE] Connection to CryptoCompare.com closed");
+                };
+
+                socket
+                        .on(Socket.EVENT_CONNECT, args -> input.subscribe(
+                                v -> {
+                                    String[] subscription = {v};
+                                    Map<String, Object> subs = new HashMap<>();
+                                    subs.put("subs", subscription);
+                                    socket.emit("SubAdd", subs);
+                                },
+                                sink::error
+                        ))
+                        .on("m", args -> {
+                            String message = args[0].toString();
+                            String messageType = message.substring(0, message.indexOf("~"));
+                            for (MessageUnpacker unpacker : unpackers) {
+                                if (unpacker.supports(messageType)) {
+                                    try {
+                                        sink.next(unpacker.unpack(message));
+                                    } catch (Throwable t) {
+                                        sink.error(t);
+                                        closeSocket.run();
+                                    }
+                                    break;
+                                }
+                            }
+                        })
+                        .on(Socket.EVENT_ERROR, args -> sink.error((Throwable) args[0]))
+                        .on(Socket.EVENT_DISCONNECT, args -> sink.complete());
+
+                sink.onCancel(closeSocket::run);
+                socket.connect();
+            }, FluxSink.OverflowStrategy.ERROR));
+        }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

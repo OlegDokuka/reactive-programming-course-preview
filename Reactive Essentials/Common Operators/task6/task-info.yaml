@@ -1,0 +1,45 @@
+type: edu
+custom_name: Task 6
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 163
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 163
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: flux.reduce(Long::sum);
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class Task {\n\n\tpublic static Mono<Long> createSequence(Flux<Long>\
+    \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask6Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
+    \npublic class CommonOperatorsTask6Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tMono<Long> sequence = Task.createSequence(Flux.range(0, 5)\n\t\t    \
+    \                                          .map(Integer::longValue));\n\n\t\t\
+    StepVerifier.create(sequence)\n\t\t            .expectNext(10L)\n\t\t        \
+    \    .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\t}\n\
+    }"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Просуммируйте все елементы в `Flux<Long>`\n   \n<div class=\"hint\">\n  И\
+    спользуйте <code>Flux#reduce</code>\n</div>"
+  learner_created: false
+status: Unchecked
+record: -1

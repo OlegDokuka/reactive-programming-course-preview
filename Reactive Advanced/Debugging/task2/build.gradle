@@ -1,0 +1,6 @@
+dependencies {
+  implementation 'io.projectreactor.tools:blockhound:1.0.2.RELEASE'
+  implementation 'io.projectreactor:reactor-tools'
+  implementation 'io.projectreactor:reactor-core'
+  implementation 'io.projectreactor:reactor-test'
+}

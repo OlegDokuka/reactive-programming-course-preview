@@ -1,0 +1,70 @@
+type: edu
+custom_name: Task 8
+files:
+- name: test/CommonPublishersTask10Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Schedulers;\n\
+    import reactor.test.StepVerifier;\n\npublic class CommonPublishersTask10Tests\
+    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tFlux<Long> sequence = Task.createSequence();\n\
+    \n\t\tStepVerifier.create(sequence)\n\t\t            .recordWith(ArrayList::new)\n\
+    \t\t            .expectNextCount(20)\n\t\t            .consumeRecordedWith(r ->\
+    \ {\n\t\t\t            Assertions.assertThat(r)\n\t\t\t                      .hasSize(20);\n\
+    \t\t\t            Iterator<Long> iterator = r.iterator();\n\t\t\t            for\
+    \ (int i = 0; i < 20; i++) {\n\t\t\t\t            Assertions.assertThat(iterator.next())\n\
+    \t\t\t\t                      .isEqualTo(SEQUENCE[i]);\n\t\t\t            }\n\t\
+    \t            })\n\t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\
+    \t}\n\n\t@Test\n\tpublic void testSolution1() {\n\t\tFlux<Long> sequence = Task.createSequence();\n\
+    \n\t\tStepVerifier.create(sequence.publishOn(Schedulers.parallel(), 2), 1)\n\t\
+    \t            .recordWith(ArrayList::new)\n\t\t            .expectNext(0L)\n\t\
+    \t            .thenRequest(4)\n\t\t            .expectNext(1L, 1L, 2L, 3L)\n\t\
+    \t            .thenRequest(15)\n\t\t            .expectNextCount(15)\n\t\t   \
+    \         .consumeRecordedWith(r -> {\n\t\t\t            Assertions.assertThat(r)\n\
+    \t\t\t                      .hasSize(20);\n\t\t\t            Iterator<Long> iterator\
+    \ = r.iterator();\n\t\t\t            for (int i = 0; i < 20; i++) {\n\t\t\t\t\
+    \            Assertions.assertThat(iterator.next())\n\t\t\t\t                \
+    \      .isEqualTo(SEQUENCE[i]);\n\t\t\t            }\n\t\t            })\n\t\t\
+    \            .expectComplete()\n\t\t            .verify(Duration.ofMillis(1000));\n\
+    \t}\n\n\tstatic final long[] SEQUENCE =\n\t\t\t{0, 1, 1, 2, 3, 5, 8, 13, 21, 34,\
+    \ 55, 89, 144, 233, 377, 610, 987, 1597, 2584,\n\t\t\t\t\t4181};\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 112
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 112
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.<Long, State>generate(() -> STATE_ONE, ((state,\
+      \ sink) -> {\n\t\t\tsink.next(state.value);\n\n\t\t\tif (state.iteration ==\
+      \ 19) {\n\t\t\t\tsink.complete();\n\t\t\t}\n\n\t\t\treturn new State(state.iteration\
+      \ + 1, state.value + state.previous.value, state);\n\t\t})).startWith(STATE_ZERO.value);"
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<Long> createSequence() {\n\t\treturn Flux.error(new ToDoException());\n\
+    \t}\n\n\tstatic class State {\n\n\t\tfinal State previous;\n\t\tfinal long  value;\n\
+    \t\tfinal long  iteration;\n\n\t\tState(long iteration, long value, State previous)\
+    \ {\n\t\t\tthis.iteration = iteration;\n\t\t\tthis.previous = previous;\n\t\t\t\
+    this.value = value;\n\t\t}\n\t}\n\n\tstatic final State STATE_ZERO  = new State(0,\
+    \ 0, null);\n\tstatic final State STATE_ONE = new State(1, 1, STATE_ZERO);\n}"
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Flux` последовательности фибоначи глубиной в 20\n   \n<div\
+    \ class=\"hint\">\n  Используйте Flux.generate(stateSupplier, (state, sink) ->\
+    \ state) и .startWith для передачи [0] последовательности\n</div>"
+  learner_created: false
+status: Unchecked
+record: -1

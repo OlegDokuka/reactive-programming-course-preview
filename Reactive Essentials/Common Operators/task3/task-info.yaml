@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 140
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 140
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: "stringFlux.concatMap(word -> Flux.fromArray(word.split(\"\
+      \")))\n\t\t                 .map(letter -> letter.charAt(0));"
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<Character> createSequence(Flux<String> stringFlux) {\n\t\treturn Flux.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask3Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ CommonOperatorsTask3Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    Flux<Character> sequence =\n\t\t\t\tTask.createSequence(Flux.just(\"ABC\", \"\
+    dEf\", \"gfh\", \"j\"));\n\n\t\tStepVerifier.create(sequence)\n\t\t          \
+    \  .expectNext('A', 'B', 'C', 'd', 'E', 'f', 'g', 'f', 'h', 'j')\n\t\t       \
+    \     .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\t\
+    }\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте `Flux<String>` слов в `Flux<Character>` букв\n   \n<div class=\"\
+    hint\">\n  Используйте <code>Flux#flatMap</code> или <code>Flux#concatMap</code>\n\
+    \  Используйте <code>String#split(\"\")</code> чтобы разделить слово по буквам\
+    \n  Используйте <code>String#charAt(0)</code> что бы получить единственную бук\
+    ву в <code>char</code>\n</div>"
+  learner_created: false
+status: Solved
+record: -1

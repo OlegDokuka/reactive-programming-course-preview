@@ -1,0 +1,41 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 197
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 197
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: publisher.defaultIfEmpty(fallback);
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> fallbackIfEmpty(Flux<String>\
+    \ publisher, String fallback) {\n\t\treturn Flux.error(new ToDoException());\n\
+    \t}\n}"
+  learner_created: false
+- name: test/ResilienceTask1Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.test.StepVerifier;\n\npublic class ResilienceTask1Tests {\n\n\t\
+    @Test\n\tpublic void test1() {\n\t\tStepVerifier\n\t\t\t\t.create(Task.fallbackIfEmpty(Flux.empty(),\
+    \ \"Hello\"))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"Hello\")\n\
+    \t\t\t\t.verifyComplete();\n\t}\n\n\n\t@Test\n\tpublic void test2() {\n\t\tStepVerifier\n\
+    \t\t\t\t.create(Task.fallbackIfEmpty(Flux.just(\"abc\"), \"Hello\"))\n\t\t\t\t\
+    .expectSubscription()\n\t\t\t\t.expectNext(\"abc\")\n\t\t\t\t.verifyComplete();\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

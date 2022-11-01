@@ -1,0 +1,80 @@
+type: edu
+custom_name: Task 5
+files:
+- name: resources/testfile.txt
+  visible: false
+  text: |-
+    handlers= java.util.logging.ConsoleHandler
+    .level= DEBUG
+    java.util.logging.ConsoleHandler.level = DEBUG
+    java.util.logging.ConsoleHandler.formatter = java.util.logging.SimpleFormatter
+    java.util.logging.SimpleFormatter.format=[%4$-5s] [%1$tT] %5$s %n
+  learner_created: false
+- name: test/MultipleSourcesTask9Tests.java
+  visible: false
+  text: "import java.net.URI;\nimport java.net.URISyntaxException;\nimport java.nio.file.Paths;\n\
+    \nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class MultipleSourcesTask9Tests {\n\n\t@Test\n\tpublic void testSolution() throws\
+    \ URISyntaxException {\n\t\tURI resourceUri = ClassLoader.getSystemResource(\"\
+    testfile.txt\").toURI();\n\t\tObject source = TextFileStreamTask.readFile(Paths.get(resourceUri).toAbsolutePath().toString());\n\
+    \n\t\tif (!(source instanceof Flux)) {\n\t\t\tAssertions.fail(\"Unexpected return\
+    \ type\");\n\t\t}\n\n\t\tStepVerifier.create(((Flux<String>) source))\n\t\t  \
+    \          .expectSubscription()\n\t\t            .expectNextCount(5)\n\t\t  \
+    \          .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+
+    sourceSets {
+      main {
+        java.srcDir 'src'
+        resources.srcDir 'resources'
+      }
+      test {
+        java.srcDir 'test'
+      }
+    }
+
+    processResources {
+      duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+  learner_created: false
+- name: src/TextFileStreamTask.java
+  visible: true
+  placeholders:
+  - offset: 240
+    length: 16
+    placeholder_text: Iterable<String>
+    initial_state:
+      length: 16
+      offset: 240
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux<String>
+  - offset: 287
+    length: 144
+    placeholder_text: "try {\n\t\t\treturn Files.lines(Paths.get(filename)).collect(Collectors.toList());\n\
+      \t\t} catch (IOException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}"
+    initial_state:
+      length: 144
+      offset: 287
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "return Flux.using(\n\t\t\t() -> Files.lines(Paths.get(filename)),\n\
+      \t\t\tFlux::fromStream,\n\t\t\tStream::close\n\t\t);"
+  text: "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\
+    import java.util.stream.Collectors;\nimport java.util.stream.Stream;\n\nimport\
+    \ reactor.core.publisher.Flux;\n\npublic class TextFileStreamTask {\n\n\tpublic\
+    \ static Iterable<String> readFile(String filename) {\n\t\ttry {\n\t\t\treturn\
+    \ Files.lines(Paths.get(filename)).collect(Collectors.toList());\n\t\t} catch\
+    \ (IOException e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

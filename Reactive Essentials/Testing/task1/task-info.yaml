@@ -1,0 +1,44 @@
+type: edu
+custom_name: Task 1
+files:
+- name: test/TestingTask1Tests.java
+  visible: false
+  text: "import java.util.Random;\n\nimport org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.test.publisher.TestPublisher;\n\npublic class TestingTask1Tests\
+    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tTestPublisher<Integer> cold\
+    \ = TestPublisher.createCold();\n\n\t\tFlux.fromStream(new Random().ints()\n\t\
+    \t                            .boxed())\n\t\t    .take(15)\n\t\t    .skip(5)\n\
+    \t\t    .subscribe(cold::next, cold::error, cold::complete);\n\n\t\tTask.verifyThat10ElementsEmitted(cold.flux());\n\
+    \n\t\tcold.assertWasSubscribed();\n\t\tcold.assertWasRequested();\n\t\tcold.assertWasNotCancelled();\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 192
+    length: 66
+    placeholder_text: throw new ToDoException()); // use StepVerifier to perform testing
+    initial_state:
+      length: 66
+      offset: 192
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "StepVerifier.create(flux)\n\t\t            .expectSubscription()\n\
+      \t\t            .expectNextCount(10)\n\t\t            .expectComplete()\n\t\t\
+      \            .verify(Duration.ofMillis(100));"
+  text: "import java.time.Duration;\n\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class Task {\n\n\tpublic static void verifyThat10ElementsEmitted(Flux<Integer>\
+    \ flux) {\n\t\tthrow new ToDoException()); // use StepVerifier to perform testing\n\
+    \t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

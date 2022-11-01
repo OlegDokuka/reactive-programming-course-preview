@@ -1,0 +1,120 @@
+type: edu
+custom_name: Tricky Network Interaction
+files:
+- name: test/CPTask4Tests.java
+  visible: false
+  text: "import java.nio.ByteBuffer;\nimport java.time.Duration;\nimport java.util.List;\n\
+    import java.util.function.Function;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class CPTask4Tests {\n\n\t@Test\n\tpublic\
+    \ void uploadTest() {\n\t\tTrickyHttpClient client = new TrickyHttpClient();\n\
+    \t\tDataUploaderService service = new DataUploaderService(client);\n\t\tStepVerifier.withVirtualTime(()\
+    \ -> service.upload(Flux.range(0, 1000)\n\t\t                                \
+    \                      .map(i -> new OrderedByteBuffer(\n\t\t\t\t            \
+    \                                          i,\n\t\t\t\t                      \
+    \                                ByteBuffer.allocate(\n\t\t\t\t\t\t          \
+    \                                            i)))\n\t\t                      \
+    \                                .window(100)\n\t\t                          \
+    \                            .delayElements(Duration.ofMillis(\n\t\t\t\t     \
+    \                                                 1500))\n\t\t               \
+    \                                       .flatMap(Function.identity())))\n\t\t\
+    \            .expectSubscription()\n\t\t            .thenAwait(Duration.ofSeconds(1000))\n\
+    \t\t            .verifyComplete();\n\n\t\tverifyOrdered(client);\n\t\tverifyTimeout(client);\n\
+    \t}\n\n\tvoid verifyOrdered(TrickyHttpClient client) {\n\t\tList<OrderedByteBuffer>\
+    \ recorded = client.getRecordedBuffers();\n\n\t\tfor (int i = 0; i < recorded.size();\
+    \ i++) {\n\t\t\tAssertions.assertThat(recorded.get(i)\n\t\t\t                \
+    \              .getWritePosition())\n\t\t\t          .as(\"Recorded elements are\
+    \ in the wrong order, \" + \"consider concatMap instead of flatMap\")\n\t\t\t\
+    \          .isEqualTo(i);\n\t\t}\n\t}\n\n\tvoid verifyTimeout(TrickyHttpClient\
+    \ client) {\n\t\tAssertions.assertThat(client.getRecords()\n\t\t             \
+    \               .stream()\n\t\t                            .anyMatch(l -> l.size()\
+    \ > 1))\n\t\t          .isTrue();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor.addons:reactor-extra'
+    }
+  learner_created: false
+- name: src/OrderedByteBuffer.java
+  visible: true
+  text: "import java.nio.ByteBuffer;\n\npublic class OrderedByteBuffer {\n\n\tprivate\
+    \ final int writePosition;\n\tprivate final ByteBuffer data;\n\n\tpublic OrderedByteBuffer(int\
+    \ position, ByteBuffer data) {\n\t\twritePosition = position;\n\t\tthis.data =\
+    \ data;\n\t}\n\n\tpublic ByteBuffer getData() {\n\t\treturn data;\n\t}\n\n\tpublic\
+    \ int getWritePosition() {\n\t\treturn writePosition;\n\t}\n}\n"
+  learner_created: false
+- name: src/DataUploaderService.java
+  visible: true
+  placeholders:
+  - offset: 896
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 896
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "input.windowTimeout(50, Duration.ofMillis(500))\n\t\
+      \t            .onBackpressureBuffer()\n\t\t            .concatMap(flux -> {\n\
+      \t\t\t            long startTime = System.currentTimeMillis();\n\n\t\t\t   \
+      \         return client.send(flux)\n\t\t\t                         .timeout(Duration.ofSeconds(1))\n\
+      \t\t\t                         .retryWhen(Retry.max(10).filter(t -> t instanceof\
+      \ TimeoutException))\n\t\t\t                         .retryWhen(Retry.fixedDelay(10,\
+      \ Duration.ofMillis(500)))\n\t\t\t                         .then(Mono.defer(()\
+      \ -> {\n\t\t\t\t                         long diffInTime =\n\t\t\t\t\t\t   \
+      \                      System.currentTimeMillis() - startTime;\n\n\t\t\t\t \
+      \                        if (diffInTime < 500) {\n\t\t\t\t\t               \
+      \          return Mono.delay(Duration.ofMillis(500 - diffInTime))\n\t\t\t\t\t\
+      \                                    .then();\n\t\t\t\t                    \
+      \     }\n\n\t\t\t\t                         return Mono.empty();\n\t\t\t   \
+      \                      }));\n\t\t            })\n\t\t            .then();"
+  text: "import java.time.Duration;\nimport java.util.concurrent.TimeoutException;\n\
+    \nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
+    \ reactor.util.retry.Retry;\n\npublic class DataUploaderService {\n\n\tprivate\
+    \ final HttpClient client;\n\n\tpublic DataUploaderService(HttpClient client)\
+    \ {\n\t\tthis.client = client;\n\t}\n\n\tpublic Mono<Void> upload(Flux<OrderedByteBuffer>\
+    \ input) {\n\t\t// TODO: send data to a server using the given client\n\t\t//\
+    \ TODO: MAX amount of sent buffers MUST be less or equals to 50 per request\n\t\
+    \t// TODO: frequency of client#send invocation MUST be not often than once per\
+    \ 500 Milliseconds\n\t\t// TODO: delivered results MUST be ordered\n\t\t// TODO:\
+    \ in case if send operation take more than 1 second it MUST be considered as hanged\
+    \ and be restarted\n\n\t\t// HINT: consider usage of .windowTimeout, onBackpressureBuffer,\
+    \ concatMap, timeout, retryWhen or retryBackoff\n\t\treturn Mono.error(new ToDoException());\n\
+    \t}\n}\n"
+  learner_created: false
+- name: src/HttpClient.java
+  visible: true
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic interface HttpClient {\n\n\tMono<Void> send(Flux<OrderedByteBuffer> value);\n\
+    }\n"
+  learner_created: false
+- name: test/TrickyHttpClient.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.List;\nimport java.util.concurrent.CopyOnWriteArrayList;\n\
+    import java.util.concurrent.ThreadLocalRandom;\n\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.core.scheduler.Schedulers;\n\
+    import reactor.util.function.Tuple2;\nimport reactor.util.function.Tuples;\n\n\
+    public class TrickyHttpClient implements HttpClient {\n\tprivate final List<OrderedByteBuffer>\
+    \ byteBuffers = new CopyOnWriteArrayList<>();\n\tprivate final List<List<Tuple2<List<OrderedByteBuffer>,\
+    \ Long>>> records = new CopyOnWriteArrayList<>();\n\n\t@Override\n\tpublic Mono<Void>\
+    \ send(Flux<OrderedByteBuffer> value) {\n\t\tList<Tuple2<List<OrderedByteBuffer>,\
+    \ Long>> record = new CopyOnWriteArrayList<>();\n\t\trecords.add(record);\n\t\t\
+    Mono<List<OrderedByteBuffer>> cache = value.collectList()\n\t\t              \
+    \                             .cache();\n\t\treturn cache\n\t\t            .flatMap(l\
+    \ -> {\n\t\t\t           long timeout = ThreadLocalRandom.current()\n\t\t\t  \
+    \                                         .nextLong(25) * l.size();\n\t\t    \
+    \           record.add(Tuples.of(l, timeout));\n\t\t\t           if(l.size() >\
+    \ 50) {\n\t\t\t\t           return Mono.error(IllegalArgumentException::new);\n\
+    \t\t\t           } else {\n\t\t\t               return Mono.just(l).delayElement(Duration.ofMillis(timeout),\n\
+    \t\t\t\t\t               Schedulers.single());\n\t\t\t           }\n\t\t     \
+    \       })\n\t\t            .doOnNext(byteBuffers::addAll)\n\t\t            .then();\n\
+    \n\t}\n\n\tpublic List<OrderedByteBuffer> getRecordedBuffers() {\n\t\treturn byteBuffers;\n\
+    \t}\n\tpublic List<List<Tuple2<List<OrderedByteBuffer>, Long>>> getRecords() {\n\
+    \t\treturn records;\n\t}\n}\n"
+  learner_created: false
+status: Unchecked
+record: -1

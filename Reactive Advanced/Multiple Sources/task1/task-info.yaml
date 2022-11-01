@@ -1,0 +1,52 @@
+type: edu
+custom_name: Task 1
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.html
+  visible: false
+  text: |-
+    <html>
+    Объедените несколько источников елементов (<code>Publisher</code>) в один общий
+    <code>Flux</code>
+    <div class="hint">
+        Используйте <code>Flux.merge</code>. Обратите внимание, <code>Flux.merge</code>
+        работает идентично с <code>Flux#flatMap</code>
+    </div>
+    </html>
+  learner_created: false
+- name: test/MultipleSourcesTask1Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultipleSourcesTask1Tests {\n\n\t@Test\n\tpublic void mergeSeveralSourcesTest()\
+    \ {\n\t\tStepVerifier\n\t\t\t\t.withVirtualTime(() -> Task.mergeSeveralSources(\n\
+    \t\t\t\t\t\tFlux.just(\"A\").delaySubscription(Duration.ofSeconds(1)),\n\t\t\t\
+    \t\t\tFlux.just(\"B\")\n\t\t\t\t))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"\
+    B\")\n\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"A\"\
+    )\n\t\t\t\t.verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 190
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 190
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux.merge(sources);
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> mergeSeveralSources(Publisher<String>...\
+    \ sources) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

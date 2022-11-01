@@ -1,0 +1,98 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 429
+    length: 22
+    placeholder_text: /*Add BlockHound fix*/
+    initial_state:
+      length: 22
+      offset: 429
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: new MyBlockHoundIntegration()
+  - offset: 456
+    length: 31
+    placeholder_text: // 1) Add Better error printing
+    initial_state:
+      length: 31
+      offset: 456
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Hooks.onOperatorDebug();
+  - offset: 506
+    length: 8
+    placeholder_text: // FIXME
+    initial_state:
+      length: 8
+      offset: 506
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: .filter(a -> a != 0)
+  - offset: 591
+    length: 8
+    placeholder_text: // FIXME
+    initial_state:
+      length: 8
+      offset: 591
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: .filter(a -> a != 0)
+  - offset: 831
+    length: 29
+    placeholder_text: // Add BlockHound Integration
+    initial_state:
+      length: 29
+      offset: 831
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "public static class MyBlockHoundIntegration implements\
+      \ BlockHoundIntegration {\n\n\t\t@Override\n\t\tpublic void applyTo(BlockHound.Builder\
+      \ builder) {\n\t\t\tbuilder.allowBlockingCallsInside(MyCallable.class.getName(),\
+      \ \"call\");\n\t\t}\n\t}"
+  text: "import java.util.concurrent.Callable;\n\nimport reactor.blockhound.BlockHound;\n\
+    import reactor.blockhound.integration.BlockHoundIntegration;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Hooks;\nimport reactor.core.publisher.Mono;\n\n\
+    @SuppressWarnings({\"ConstantConditions\", \"BlockingMethodInNonBlockingContext\"\
+    })\npublic class Task {\n\n\tpublic static Flux<Long> checkAndDebug(Flux<Long>\
+    \ flux) {\n\t\tBlockHound.install(/*Add BlockHound fix*/);\n\t\t// 1) Add Better\
+    \ error printing\n\t\treturn flux\n\t\t\t\t// FIXME\n\t\t\t\t.scan(0L, (aLong,\
+    \ aLong2) -> (aLong + aLong2 + 2 * aLong) / aLong2)\n\t\t\t\t// FIXME\n\t\t\t\t\
+    .flatMap(Task::doWork)\n\t\t\t\t.log()\n\t\t\t\t.retry(5);\n\t}\n\n\tprivate static\
+    \ Mono<Long> doWork(Long e) {\n\t\treturn Mono.fromCallable(new MyCallable())\n\
+    \t\t           .zipWith(Mono.just(e))\n\t\t\t\t   .map(t2 -> t2.getT1() / t2.getT2());\n\
+    \t}\n\n\t// Add BlockHound Integration\n\n\tpublic static class MyCallable implements\
+    \ Callable<Long> {\n\n\t\t@Override\n\t\tpublic Long call() throws Exception {\n\
+    \t\t\tThread.sleep(100);\n\t\t\treturn 1L;\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: test/DLMTask1Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Schedulers;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class DLMTask1Tests {\n\n\t@Test\n\tpublic\
+    \ void testSolution() {\n\t\tStepVerifier.create(Flux.interval(Duration.ofMillis(10))\n\
+    \t\t                        .publishOn(Schedulers.single())\n\t\t            \
+    \            .transform(Task::checkAndDebug)\n\t\t                        .take(10)\n\
+    \t\t                        .subscribeOn(Schedulers.single()))\n\t\t         \
+    \   .expectSubscription()\n\t\t            .expectNextCount(10)\n\t\t        \
+    \    .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor.tools:blockhound'
+      implementation 'io.projectreactor:reactor-tools'
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

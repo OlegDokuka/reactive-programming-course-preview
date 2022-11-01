@@ -1,0 +1,74 @@
+type: edu
+custom_name: Task 1
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Создайте `Flux` от `[0..20)`\n   \n<div class=\"hint\">\n  Используйте Flux.range\n\
+    </div>"
+  learner_created: false
+- name: test/CommonPublishersTask1Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.core.publisher.Hooks;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ CommonPublishersTask1Tests {\n\n\t@Test\n\tpublic void testCorrectFluxTypeUsed()\
+    \ {\n\t\tArrayList<Publisher<?>> publishers = new ArrayList<>();\n\t\tHooks.onEachOperator(p\
+    \ -> {\n\t\t\tpublishers.add(p);\n\t\t\treturn p;\n\t\t});\n\n\t\ttry {\n\t\t\t\
+    Object sequence = CreateSequenceTask.createSequence();\n\n\t\t\tif (sequence instanceof\
+    \ Flux) {\n\t\t\t\t((Flux<?>) sequence).subscribe();\n\t\t\t} else {\n\t\t\t\t\
+    Assertions.fail(\"Unexpected implementation\");\n\t\t\t}\n\t\t}\n\t\tfinally {\n\
+    \t\t\tHooks.resetOnEachOperator();\n\t\t}\n\n\t\tAssertions.assertThat(publishers)\n\
+    \t\t          .first()\n\t\t          .as(\"Used incorrect Flux type\")\n\t\t\
+    \          .hasSameClassAs(Flux.range(0, 20));\n\t}\n\n\t@Test\n\tpublic void\
+    \ testResultIsCorrect() {\n\t\tObject sequence = CreateSequenceTask.createSequence();\n\
+    \n\t\tif (sequence instanceof Flux) {\n\t\t\tStepVerifier.create(((Flux<Integer>)\
+    \ sequence))\n\t\t\t\t\t.recordWith(ArrayList::new)\n\t\t\t\t\t.expectNextCount(20)\n\
+    \t\t\t\t\t.consumeRecordedWith(r -> {\n\t\t\t\t\t\tAssertions.assertThat(r)\n\t\
+    \t\t\t\t\t\t\t.hasSize(20);\n\t\t\t\t\t\tIterator<Integer> iterator = r.iterator();\n\
+    \t\t\t\t\t\tfor (int i = 0; i < 20; i++) {\n\t\t\t\t\t\t\tInteger next = iterator.next();\n\
+    \t\t\t\t\t\t\tAssertions.assertThat(next)\n\t\t\t\t\t\t\t\t\t.as(\"Expected sequence\
+    \ of elements from 0 to 20 but got element [%d] out of order\",\n\t\t\t\t\t\t\t\
+    \t\t\t\tnext)\n\t\t\t\t\t\t\t\t\t.isEqualTo(i);\n\t\t\t\t\t\t}\n\t\t\t\t\t})\n\
+    \t\t\t\t\t.expectComplete()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t\
+    } else {\n\t\t\tAssertions.fail(\"Unexpected implementation\");\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: src/CreateSequenceTask.java
+  visible: true
+  placeholders:
+  - offset: 138
+    length: 17
+    placeholder_text: Iterable<Integer>
+    initial_state:
+      length: 17
+      offset: 138
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: Flux<Integer>
+  - offset: 177
+    length: 119
+    placeholder_text: "List<Integer> sequence = new ArrayList<>();\n\t\tfor (int i\
+      \ = 0; i < 20; i++) {\n\t\t\tsequence.add(i);\n\t\t}\n\t\treturn sequence;"
+    initial_state:
+      length: 119
+      offset: 177
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: return Flux.range(0, 20);
+  text: "import reactor.core.publisher.Flux;\nimport java.util.ArrayList;\nimport\
+    \ java.util.List;\n\npublic class CreateSequenceTask {\n\n\tpublic static Iterable<Integer>\
+    \ createSequence() {\n\t\tList<Integer> sequence = new ArrayList<>();\n\t\tfor\
+    \ (int i = 0; i < 20; i++) {\n\t\t\tsequence.add(i);\n\t\t}\n\t\treturn sequence;\n\
+    \t}\n}"
+  learner_created: false
+status: Solved
+record: -1

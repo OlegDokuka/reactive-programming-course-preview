@@ -1,0 +1,8 @@
+<html>
+There is a stream of blocking calls. Ensure every call is executed in non-blocking
+(means moving call on another <code>Thread</code>) way and will not block other executions. Ensure that pool is not going over 256 created
+<code>Threads</code>
+<div class="hint">
+    Use <code>Mono.fromCallable</code> + <code>Mono#subscribeOn(<i>elastic()</i>)</code>
+</div>
+</html>

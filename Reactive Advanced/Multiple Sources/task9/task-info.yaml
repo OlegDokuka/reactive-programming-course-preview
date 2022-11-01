@@ -1,0 +1,64 @@
+type: edu
+custom_name: Task 9
+files:
+- name: resources/testfile.txt
+  visible: false
+  text: |-
+    handlers= java.util.logging.ConsoleHandler
+    .level= DEBUG
+    java.util.logging.ConsoleHandler.level = DEBUG
+    java.util.logging.ConsoleHandler.formatter = java.util.logging.SimpleFormatter
+    java.util.logging.SimpleFormatter.format=[%4$-5s] [%1$tT] %5$s %n
+  learner_created: false
+- name: test/MultipleSourcesTask9Tests.java
+  visible: false
+  text: "import java.net.URI;\nimport java.net.URISyntaxException;\nimport java.nio.file.Paths;\n\
+    \nimport org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class MultipleSourcesTask9Tests {\n\n\t@Test\n\tpublic void testSolution() throws\
+    \ URISyntaxException {\n\t\tURI resourceUri = ClassLoader.getSystemResource(\"\
+    testfile.txt\").toURI();\n\n\t\tStepVerifier.create(Task.readFile(Paths.get(resourceUri).toAbsolutePath().toString()))\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNextCount(5)\n\t\
+    \t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+
+    sourceSets {
+      main {
+        java.srcDir 'src'
+        resources.srcDir 'resources'
+      }
+      test {
+        java.srcDir 'test'
+      }
+    }
+
+    processResources {
+      duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 255
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 255
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.using(\n\t\t\t() -> Files.lines(Paths.get(filename)),\n\
+      \t\t\tFlux::fromStream,\n\t\t\tStream::close\n\t\t);"
+  text: "import java.nio.file.Files;\nimport java.nio.file.Paths;\nimport java.util.stream.Stream;\n\
+    \nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> readFile(String filename)\
+    \ {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

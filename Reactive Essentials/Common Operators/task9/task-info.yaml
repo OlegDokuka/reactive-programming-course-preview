@@ -1,0 +1,51 @@
+type: edu
+custom_name: Task 9
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: test/CommonOperatorsTask9Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.atomic.AtomicBoolean;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class CommonOperatorsTask9Tests {\n\n\t\
+    @Test\n\tpublic void testSolution() {\n\t\tAtomicBoolean subscribed = new AtomicBoolean();\n\
+    \t\tMono<Void> sequence =\n\t\t\t\tTask.waitUntilFluxCompletion(Flux.interval(Duration.ofMillis(5))\n\
+    \t\t\t\t                                 .doOnSubscribe(__ -> {\n\t\t\t\t    \
+    \                             \tif(!subscribed.compareAndSet(false,\n\t\t\t\t\t\
+    \t\t                                 true)) {\n\t\t\t\t                      \
+    \           \t\tthrow new RuntimeException(\"doubleSubscription\");\n\t\t\t\t\
+    \                                    }\n\t\t\t\t                             \
+    \    })\n\t\t\t\t                                 .take(100));\n\n\t\tStepVerifier.create(sequence)\n\
+    \t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(10000));\n\
+    \n\t\tAssertions.assertThat(subscribed.get()).isTrue();\n\t}\n}"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 172
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 172
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: flux.then();
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class Task {\n\n\tpublic static Mono<Void> waitUntilFluxCompletion(Flux<Long>\
+    \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Проигнорируйте все елементы и дождитесь окончания `Flux` не блокируя пото\
+    к\n   \n<div class=\"hint\">\n  Используйте <code>Flux#then</code>\n</div>"
+  learner_created: false
+status: Unchecked
+record: -1

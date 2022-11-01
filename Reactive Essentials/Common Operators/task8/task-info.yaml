@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 8
+files:
+- name: test/CommonOperatorsTask8Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.Arrays;\nimport java.util.List;\n\
+    import java.util.Objects;\n\nimport org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class CommonOperatorsTask8Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\
+    \t\tMono<List<String>> sequence = Task.transformToList(Flux.range(0, 10)\n\t\t\
+    \                                                       .map(Objects::toString));\n\
+    \n\t\tStepVerifier.create(sequence)\n\t\t            .expectNext(Arrays.asList(\"\
+    0\",\n\t\t\t\t            \"1\",\n\t\t\t\t            \"2\",\n\t\t\t\t       \
+    \     \"3\",\n\t\t\t\t            \"4\",\n\t\t\t\t            \"5\",\n\t\t\t\t\
+    \            \"6\",\n\t\t\t\t            \"7\",\n\t\t\t\t            \"8\",\n\t\
+    \t\t\t            \"9\"))\n\t\t            .expectComplete()\n\t\t           \
+    \ .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Соберите все элементы из `Flux` в коллекцию\n   \n<div class=\"hint\">\n\
+    \  Используйте <code>Flux#collectList</code>\n</div>"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 198
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 198
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: flux.collectList();
+  text: "import java.util.List;\n\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class Task {\n\n\tpublic static Mono<List<String>> transformToList(Flux<String>\
+    \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

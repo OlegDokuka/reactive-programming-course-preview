@@ -1,0 +1,106 @@
+type: edu
+custom_name: Task 7
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Publisher` который возвращает данное значение `value\n` есл\
+    и `value` находиться в границах `[min, max]`.\nВ случае если `value` выходит з\
+    а границы приделов - верните `Publisher` с ошибкой\n   \n<div class=\"hint\">\n\
+    \  Используйте Flux.just в комбинации с Flux.error\n</div>"
+  learner_created: false
+- name: src/RequestEntity.java
+  visible: true
+  text: |
+    public class RequestEntity<T> {
+
+       final HttpMethod method;
+       final T data;
+
+       public RequestEntity(HttpMethod method, T data) {
+          this.method = method;
+          this.data = data;
+       }
+    }
+  learner_created: false
+- name: src/HttpMethod.java
+  visible: true
+  text: |
+    public enum HttpMethod {
+        GET, POST, PUT, DELETE, HEAD, PATCH, TRACE, OPTIONS, CONNECT
+    }
+  learner_created: false
+- name: src/ReactiveRandom.java
+  visible: true
+  text: |
+    import reactor.core.publisher.Mono;
+
+    import java.security.SecureRandom;
+
+    public class ReactiveRandom {
+        public Mono<Integer> nextInt() {
+            return Mono.fromCallable(() -> SecureRandom.getInstanceStrong().nextInt());
+        }
+    }
+  learner_created: false
+- name: src/HandleGetRequestTask.java
+  visible: true
+  placeholders:
+  - offset: 290
+    length: 3
+    placeholder_text: int
+    initial_state:
+      length: 3
+      offset: 290
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono<Integer>
+  - offset: 347
+    length: 122
+    placeholder_text: "if (request.method != HttpMethod.GET) {\n\t\t\tthrow UNSUPPORTED_HTTP_METHOD;\n\
+      \t\t }\n\n\t\treturn reactiveRandom.nextInt().block();"
+    initial_state:
+      length: 122
+      offset: 347
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "if (request.method != HttpMethod.GET) {\n\t\t\treturn\
+      \ Mono.error(UNSUPPORTED_HTTP_METHOD);\n\t\t}\n\n\t\treturn reactiveRandom.nextInt();"
+  text: "import reactor.core.publisher.Mono;\n\npublic class HandleGetRequestTask\
+    \ {\n\n\tpublic static final IllegalArgumentException UNSUPPORTED_HTTP_METHOD\
+    \ =\n\t\t\tnew IllegalArgumentException(\"Unsupported HTTP method. Expected method\
+    \ GET\");\n\n\tpublic static ReactiveRandom reactiveRandom;\n\n\tpublic static\
+    \ int getRandomNumberHandler(RequestEntity<?> request) {\n\t\tif (request.method\
+    \ != HttpMethod.GET) {\n\t\t\tthrow UNSUPPORTED_HTTP_METHOD;\n\t\t }\n\n\t\treturn\
+    \ reactiveRandom.nextInt().block();\n\t}\n}"
+  learner_created: false
+- name: test/HandleGetRequestTaskTests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.ThreadLocalRandom;\n\
+    \nimport org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class HandleGetRequestTaskTests {\n\n\t@Test\n\tpublic void testSolution1()\
+    \ {\n\t\tReactiveRandom reactiveRandom = Mockito.mock(ReactiveRandom.class);\n\
+    \t\tfor (int i = 0; i < 100; i++) {\n\t\t\tint expectedNumber = ThreadLocalRandom.current().nextInt();\n\
+    \t\t\tMockito.when(reactiveRandom.nextInt()).thenReturn(Mono.just(expectedNumber));\n\
+    \t\t\tHandleGetRequestTask.reactiveRandom = reactiveRandom;\n\t\t\tMono<Integer>\
+    \ outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET,\
+    \ null));\n\n\t\t\tStepVerifier.create(outcome)\n\t\t\t\t\t.expectNext(expectedNumber)\n\
+    \t\t\t\t\t.expectComplete()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t\
+    }\n\t}\n\n\t@Test\n\tpublic void testSolution2() {\n\t\tfor (HttpMethod method\
+    \ : HttpMethod.values()) {\n\t\t\tif (method == HttpMethod.GET) {\n\t\t\t\tcontinue;\n\
+    \t\t\t}\n\n\t\t\tPublisher<Integer> sequence = HandleGetRequestTask.getRandomNumberHandler(new\
+    \ RequestEntity<Void>(method, null));\n\n\t\t\tStepVerifier.create(sequence)\n\
+    \t\t\t\t\t.expectError()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t}\n\t\
+    }\n}"
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,178 @@
+type: edu
+custom_name: Price Service
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation project(":Reactive_In_Action-Crypto_Tracker-price-service-idl")
+      implementation project(":Reactive_In_Action-Crypto_Tracker-crypto-service-idl")
+      implementation project(":Reactive_In_Action-Crypto_Tracker-common")
+    }
+  learner_created: false
+- name: src/service/impl/DefaultPriceService.java
+  visible: true
+  placeholders:
+  - offset: 1825
+    length: 13
+    placeholder_text: Flux.never();
+    initial_state:
+      length: 13
+      offset: 1825
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: input.filter(m -> MessageMapper.isPriceMessageType(m)
+      && MessageMapper.isValidPriceMessage(m));
+  - offset: 2036
+    length: 13
+    placeholder_text: Flux.never();
+    initial_state:
+      length: 13
+      offset: 2036
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: input.map(MessageMapper::mapToPriceMessage);
+  - offset: 2760
+    length: 13
+    placeholder_text: Flux.never();
+    initial_state:
+      length: 13
+      offset: 2760
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "requestedInterval\n\t\t\t\t.startWith(DEFAULT_AVG_PRICE_INTERVAL)\n\
+      \t\t\t\t.switchMap(timeFrame ->\n\t\t\t\t\tpriceData.window(Duration.ofSeconds(timeFrame))\n\
+      \t\t\t\t\t         .flatMap(this::currencyGroupingLogic)\n\t\t\t\t);\n\n\n\t\
+      }\n\n\tprivate Flux<MessageDTO<Float>> currencyGroupingLogic(Flux<MessageDTO<Float>>\
+      \ flux) {\n        return flux.groupBy(MessageDTO::getCurrency)\n          \
+      \  .flatMap(gf -> averageProcessingLogic(gf, gf.key()));\n    }\n\n\tprivate\
+      \ Mono<MessageDTO<Float>> averageProcessingLogic(Flux<MessageDTO<Float>> flux,\n\
+      \            String currency) {\n\t\treturn flux.map(MessageDTO::getData)\n\t\
+      \t\t\t   .reduce(Sum.empty(), Sum::add)\n\t\t\t\t   .map(Sum::avg)\n\t\t\t\t\
+      \   .map(avg -> MessageDTO.avg(avg, currency, \"LocalMarketAvg\"));"
+  text: "package service.impl;\n\nimport java.time.Duration;\nimport java.util.Map;\n\
+    import java.util.logging.Level;\n\nimport dto.MessageDTO;\nimport org.slf4j.Logger;\n\
+    import org.slf4j.LoggerFactory;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    import service.CryptoService;\nimport service.PriceService;\nimport service.utils.MessageMapper;\n\
+    import service.utils.Sum;\n\npublic class DefaultPriceService implements PriceService\
+    \ {\n\n\tprivate static final Logger logger = LoggerFactory.getLogger(\"price-service\"\
+    );\n\n\tprivate static final long DEFAULT_AVG_PRICE_INTERVAL = 30L;\n\n\tprivate\
+    \ final Flux<MessageDTO<Float>> sharedStream;\n\n\tpublic DefaultPriceService(CryptoService\
+    \ cryptoService) {\n\t\tsharedStream = cryptoService.eventsStream()\n\t\t    \
+    \                        .log(\"Incoming event: {}\", Level.INFO)\n\t\t      \
+    \                      .transform(this::selectOnlyPriceUpdateEvents)\n\t\t   \
+    \                         .transform(this::tranformToPriceMessageDTO)\n\t\t  \
+    \                          .log(\"Price event: {}\", Level.INFO);\n\t}\n\n\tpublic\
+    \ Flux<MessageDTO<Float>> pricesStream(Flux<Long> intervalPreferencesStream) {\n\
+    \t\treturn sharedStream.publish(mainFlow -> Flux.merge(\n\t\t\tmainFlow,\n\t\t\
+    \taveragePrice(intervalPreferencesStream, mainFlow)\n\t\t));\n\t}\n\n\t// FIXME:\n\
+    \t// 1) JUST FOR WARM UP: .map() incoming Map<String, Object> to MessageDTO. For\
+    \ that purpose use MessageDTO.price()\n\t//    NOTE: Incoming Map<String, Object>\
+    \ contains keys PRICE_KEY and CURRENCY_KEY\n\t//    NOTE: Use MessageMapper utility\
+    \ class for message validation and transformation\n\t// Visible for testing\n\t\
+    Flux<Map<String, Object>> selectOnlyPriceUpdateEvents(Flux<Map<String, Object>>\
+    \ input) {\n\t\t// TODO: filter only Price messages\n\t\t// TODO: verify that\
+    \ price message are valid\n\t\t// HINT: Use MessageMapper methods to perform filtering\
+    \ and validation\n\n\t\treturn Flux.never();\n\t}\n\n\t// Visible for testing\n\
+    \tFlux<MessageDTO<Float>> tranformToPriceMessageDTO(Flux<Map<String, Object>>\
+    \ input) {\n\t\t// TODO map to Statistic message using MessageMapper.mapToPriceMessage\n\
+    \n\t\treturn Flux.never();\n\t}\n\n\t// 1.1)   TODO Collect crypto currency price\
+    \ during the interval of seconds\n\t//        HINT consider corner case when a\
+    \ client did not send any info about interval (add initial interval (mergeWith(...)))\n\
+    \t//        HINT use window + switchMap\n\t// 1.2)   TODO group collected MessageDTO\
+    \ results by currency\n\t//        HINT for reduce consider to reuse Sum.empty\
+    \ and Sum#add\n\t// 1.3.2) TODO calculate average for reduced Sum object using\
+    \ Sun#avg\n\t// 1.3.3) TODO map to Statistic message using MessageDTO#avg()\n\n\
+    \t// Visible for testing\n\t// TODO: Remove as should be implemented by trainees\n\
+    \tFlux<MessageDTO<Float>> averagePrice(Flux<Long> requestedInterval,\n\t\t\tFlux<MessageDTO<Float>>\
+    \ priceData) {\n\n\t\treturn Flux.never();\n\t}\n}\n"
+  learner_created: false
+- name: test/service/impl/PriceServiceTests.java
+  visible: false
+  text: "package service.impl;\n\nimport java.time.Duration;\nimport java.util.HashMap;\n\
+    import java.util.function.Predicate;\n\nimport dto.MessageDTO;\nimport org.junit.jupiter.api.BeforeEach;\n\
+    import org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.test.StepVerifier;\nimport service.CryptoService;\n\nimport static\
+    \ service.utils.MessageMapper.*;\n\npublic class PriceServiceTests {\n    private\
+    \ final CryptoService\n\t\t    cryptoService = Mockito.mock(CryptoService.class);\n\
+    \n    @BeforeEach\n    public void setUp() {\n        Mockito.when(cryptoService.eventsStream()).thenReturn(Flux.empty());\n\
+    \    }\n\n    @Test\n    public void verifyBuildingCurrentPriceEvents() {\n  \
+    \      StepVerifier.create(\n                new DefaultPriceService(cryptoService).selectOnlyPriceUpdateEvents(\n\
+    \                        Flux.just(\n                                new HashMap<String,\
+    \ Object>() {{ put(\"Invalid\", \"A\"); }},\n                                new\
+    \ HashMap<String, Object>() {{ put(TYPE_KEY, \"1\"); }},\n                   \
+    \             new HashMap<String, Object>() {{ put(TYPE_KEY, \"5\"); }},\n   \
+    \                             new HashMap<String, Object>() {\n              \
+    \                      {\n                                        put(TYPE_KEY,\
+    \ \"5\");\n                                        put(PRICE_KEY, 0.1F);\n   \
+    \                                     put(CURRENCY_KEY, \"USD\");\n          \
+    \                              put(MARKET_KEY, \"External\");\n              \
+    \                      }\n                                }\n                \
+    \        )\n                )\n        )\n                .expectNext(\n     \
+    \                   new HashMap<String, Object>() {\n                        \
+    \    {\n                                put(TYPE_KEY, \"5\");\n\n            \
+    \                    put(PRICE_KEY, 0.1F);\n                                put(CURRENCY_KEY,\
+    \ \"USD\");\n                                put(MARKET_KEY, \"External\");\n\
+    \                            }\n                        }\n                )\n\
+    \                .expectComplete()\n                .verify(Duration.ofSeconds(2));\n\
+    \    }\n\n    // HINT: This is for reference implementation, your implementation\
+    \ may produce different average values\n    @Test\n    public void verifyBuildingAveragePriceEvents()\
+    \ {\n        try {\n            System.out.println(\"Checking case when flatMap\
+    \ is out of switch\");\n            StepVerifier.withVirtualTime(() ->\n     \
+    \               new DefaultPriceService(cryptoService).averagePrice(\n       \
+    \                     Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(5))\n\
+    \                                    .map(i -> i + 1)\n                      \
+    \              .doOnNext(i -> System.out.println(\"Interval: \" + i)),\n     \
+    \                       Flux.interval(Duration.ofMillis(500), Duration.ofSeconds(1))\n\
+    \                                    .map(p -> p + 100)\n                    \
+    \                .map(tick -> MessageDTO.price((float) tick, \"U\", \"M\"))\n\
+    \                                    .take(20)\n                             \
+    \       .doOnNext(p -> System.out.println(\"Price: \" + p.getData()))\n      \
+    \                              .replay(1000)\n                               \
+    \     .autoConnect()\n                            )\n                        \
+    \                           .take(10)\n                                      \
+    \             .take(Duration.ofHours(1))\n                                   \
+    \                .map(MessageDTO::getData)\n                                 \
+    \                  .doOnNext(a -> System.out.println(\"AVG: \" + a))\n       \
+    \     )\n                    .expectSubscription()\n                    .thenAwait(Duration.ofDays(1))\n\
+    \                    .expectNextMatches(expectedPrice(100.0F))\n             \
+    \       .expectNextMatches(expectedPrice(101.0F))\n                    .expectNextMatches(expectedPrice(102.0F))\n\
+    \                    .expectNextMatches(expectedPrice(103.0F))\n             \
+    \       .expectNextMatches(expectedPrice(104.0F))\n                    .expectNextMatches(expectedPrice(103.0F))\n\
+    \                    .expectNextMatches(expectedPrice(107.5F))\n             \
+    \       .expectNextMatches(expectedPrice(109.5F))\n                    .expectNextMatches(expectedPrice(106.0F))\n\
+    \                    .expectNextMatches(expectedPrice(114.0F))\n             \
+    \       .verifyComplete();\n        } catch (Throwable e) {\n            System.out.println(\"\
+    Checking case when flatMap is inside the switch\");\n            StepVerifier.withVirtualTime(()\
+    \ ->\n                    new DefaultPriceService(cryptoService).averagePrice(\n\
+    \                            Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(5))\n\
+    \                                .map(i -> i + 1)\n                          \
+    \      .doOnNext(i -> System.out.println(\"Interval: \" + i)),\n             \
+    \               Flux.interval(Duration.ofMillis(500), Duration.ofSeconds(1))\n\
+    \                                .map(p -> p + 100)\n                        \
+    \        .map(tick -> MessageDTO.price((float) tick, \"U\", \"M\"))\n        \
+    \                        .take(20)\n                                .doOnNext(p\
+    \ -> System.out.println(\"Price: \" + p.getData()))\n                        \
+    \        .replay(1000)\n                                .autoConnect()\n     \
+    \               )\n                                                          .take(10)\n\
+    \                                                          .take(Duration.ofHours(1))\n\
+    \                                                          .map(MessageDTO::getData)\n\
+    \                                                          .doOnNext(a -> System.out.println(\"\
+    AVG: \" + a))\n            )\n                        .expectSubscription()\n\
+    \                        .thenAwait(Duration.ofDays(1))\n                    \
+    \    .expectNextMatches(expectedPrice(100.0F))\n                        .expectNextMatches(expectedPrice(101.0F))\n\
+    \                        .expectNextMatches(expectedPrice(102.0F))\n         \
+    \               .expectNextMatches(expectedPrice(103.0F))\n                  \
+    \      .expectNextMatches(expectedPrice(103.0F))\n                        .expectNextMatches(expectedPrice(107.5F))\n\
+    \                        .expectNextMatches(expectedPrice(106.0F))\n         \
+    \               .expectNextMatches(expectedPrice(109.0F))\n                  \
+    \      .expectNextMatches(expectedPrice(119.0F))\n                        .expectNextMatches(expectedPrice(109.5F))\n\
+    \                        .verifyComplete();\n        }\n    }\n\n    private Predicate<Float>\
+    \ expectedPrice(float v) {\n        return m -> (Math.abs(m - v) < 0.0001);\n\
+    \    }\n}"
+  learner_created: false
+status: Unchecked
+record: -1

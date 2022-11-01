@@ -1,0 +1,71 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 155
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 155
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: upstream.onBackpressureDrop(RefCounted::release);
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<RefCounted> dropElementsOnBackpressure(Flux<RefCounted> upstream) {\n\t\
+    \treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/BackpressureTask1Tests.java
+  visible: false
+  text: "import java.util.Objects;\nimport java.util.concurrent.atomic.AtomicLong;\n\
+    \nimport org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\nimport\
+    \ reactor.test.publisher.TestPublisher;\n\npublic class BackpressureTask1Tests\
+    \ {\n\n\t@Test\n\tpublic void mergeSeveralSourcesTest() {\n\t\tTestPublisher<RefCounted>\
+    \ processor = TestPublisher.create();\n\t\tStepVerifier\n\t\t\t\t.create(Task.dropElementsOnBackpressure(processor.flux()),\
+    \ 0)\n\t\t\t\t.expectSubscription()\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"\
+    \")))\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"\")))\n\t\t\t\t\
+    .thenRequest(1)\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"0\")))\n\
+    \t\t\t\t.expectNext(new TestRefCounted(\"0\"))\n\t\t\t\t.then(() -> processor.next(new\
+    \ TestRefCounted(\"0\")))\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"\
+    0\")))\n\t\t\t\t.thenRequest(1)\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"\
+    10\")))\n\t\t\t\t.expectNext(new TestRefCounted(\"10\"))\n\t\t\t\t.thenRequest(1)\n\
+    \t\t\t\t.then(() -> processor.next(new TestRefCounted(\"20\")))\n\t\t\t\t.expectNext(new\
+    \ TestRefCounted(\"20\"))\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"\
+    40\")))\n\t\t\t\t.then(() -> processor.next(new TestRefCounted(\"30\")))\n\t\t\
+    \t\t.then(processor::complete)\n\t\t\t\t.expectComplete()\n\t\t\t\t.verifyThenAssertThat()\n\
+    \t\t\t\t.hasDiscarded(\n\t\t\t\t\tnew TestRefCounted(\"\", 0),\n\t\t\t\t\tnew\
+    \ TestRefCounted(\"\", 0),\n\t\t\t\t\tnew TestRefCounted(\"0\", 0),\n\t\t\t\t\t\
+    new TestRefCounted(\"0\", 0),\n\t\t\t\t\tnew TestRefCounted(\"40\", 0),\n\t\t\t\
+    \t\tnew TestRefCounted(\"30\", 0)\n\t\t\t\t);\n\t}\n\n\tstatic class TestRefCounted\
+    \ extends AtomicLong implements RefCounted {\n\n\t\tfinal String value;\n\n\t\t\
+    public TestRefCounted(String value) {\n\t\t\tsuper(1);\n\t\t\tthis.value = value;\n\
+    \t\t}\n\n\t\tpublic TestRefCounted(String value, long refCnt) {\n\t\t\tsuper(refCnt);\n\
+    \t\t\tthis.value = value;\n\t\t}\n\n\t\t@Override\n\t\tpublic boolean equals(Object\
+    \ o) {\n\t\t\tif (this == o) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t\tif (o ==\
+    \ null || getClass() != o.getClass()) {\n\t\t\t\treturn false;\n\t\t\t}\n\n\t\t\
+    \tTestRefCounted counted = (TestRefCounted) o;\n\n\t\t\treturn value.equals(counted.value)\
+    \ && Objects.equals(get(), counted.get());\n\t\t}\n\n\t\t@Override\n\t\tpublic\
+    \ int hashCode() {\n\t\t\treturn value.hashCode();\n\t\t}\n\n\t\t@Override\n\t\
+    \tpublic long refCount() {\n\t\t\treturn get();\n\t\t}\n\n\t\t@Override\n\t\t\
+    public void release() {\n\t\t\tlong l = decrementAndGet();\n\n\t\t\tif (l < 0)\
+    \ {\n\t\t\t\tthrow new IllegalArgumentException();\n\t\t\t}\n\t\t}\n\n\t\t@Override\n\
+    \t\tpublic String toString() {\n\t\t\treturn \"TestRefCounted{\" + \"value='\"\
+    \ + value + '\\'' + \", refCnt=\" + get() + '}';\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/RefCounted.java
+  visible: true
+  text: "public interface RefCounted {\n\n\tlong refCount();\n\n\tvoid release();\n\
+    }"
+  learner_created: false
+status: Unchecked
+record: -1

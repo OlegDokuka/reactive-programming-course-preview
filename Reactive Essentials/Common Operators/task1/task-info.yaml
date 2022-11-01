@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 213
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 213
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: "Flux.from(publisher)\n\t\t           .map(Objects::toString);"
+  text: "import java.util.Objects;\n\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static <T> Publisher<String>\
+    \ transformSequence(Publisher<T> publisher) {\n\t\treturn Flux.error(new ToDoException());\n\
+    \t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask1Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class CommonOperatorsTask1Tests {\n\n\t\
+    @Test\n\tpublic void testResultIsCorrect() {\n\t\tPublisher<String> sequence =\n\
+    \t\t\t\tTask.transformSequence(Flux.fromArray(new Object[]{new Object() {\n\t\t\
+    \t\t\t@Override\n\t\t\t\t\tpublic String toString() {\n\t\t\t\t\t\treturn \"test\"\
+    ;\n\t\t\t\t\t}\n\t\t\t\t}, 1, \"test2\"}));\n\n\t\tStepVerifier.create(sequence)\n\
+    \t\t            .expectNext(\"test\", \"1\", \"test2\")\n\t\t            .expectComplete()\n\
+    \t\t            .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте данный `Publisher<T>` в `Publisher<String>` \n   \n<div class=\"\
+    hint\">\n  Используйте <code>Flux.from</code> для того что бы преобразовать <code>Publisher</code>\
+    \ в <code>Flux</code>\n  Используйте <code>Flux#map</code> для преобразований\n\
+    </div>"
+  learner_created: false
+status: Solved
+record: -1

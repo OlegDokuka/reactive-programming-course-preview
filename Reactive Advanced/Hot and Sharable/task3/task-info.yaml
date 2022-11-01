@@ -1,0 +1,47 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 241
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 241
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: coldSource.subscribeWith(DirectProcessor.create());
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.DirectProcessor;\n\
+    import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Publisher<String> transformToHotUsingProcessor(Flux<String> coldSource) {\n\t\
+    \treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/HnSTask3Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.ReplayProcessor;\nimport reactor.core.publisher.UnicastProcessor;\n\
+    import reactor.test.StepVerifier;\n\npublic class HnSTask3Tests {\n\n\t@Test\n\
+    \tpublic void testSolution() {\n\t\tUnicastProcessor<String> source = UnicastProcessor.create();\n\
+    \t\tReplayProcessor<String> consumer1 = ReplayProcessor.create(10);\n\t\tReplayProcessor<String>\
+    \ consumer2 = ReplayProcessor.create(10);\n\n\t\tPublisher<String> publisher =\
+    \ Task.transformToHotUsingProcessor(source);\n\n\t\tpublisher.subscribe(consumer1);\n\
+    \n\t\tsource.onNext(\"A\");\n\t\tsource.onNext(\"B\");\n\t\tsource.onNext(\"C\"\
+    );\n\n\t\tpublisher.subscribe(consumer2);\n\n\t\tsource.onNext(\"D\");\n\t\tsource.onNext(\"\
+    E\");\n\t\tsource.onNext(\"F\");\n\n\t\tsource.onComplete();\n\n\t\tStepVerifier.create(consumer1)\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNext(\"A\", \"B\"\
+    , \"C\", \"D\", \"E\", \"F\")\n\t\t            .verifyComplete();\n\n\t\tStepVerifier.create(consumer2)\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNext(\"D\", \"E\"\
+    , \"F\")\n\t\t            .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

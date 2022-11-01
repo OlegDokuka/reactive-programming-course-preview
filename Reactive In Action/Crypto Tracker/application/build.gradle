@@ -1,0 +1,17 @@
+dependencies {
+  implementation 'io.projectreactor.netty:reactor-netty'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+  implementation 'io.r2dbc:r2dbc-h2'
+  implementation 'io.micrometer:micrometer-core'
+  implementation 'io.dropwizard.metrics:metrics-core'
+  implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+  implementation 'org.mongodb:mongodb-driver-reactivestreams'
+
+  implementation project(':Reactive_In_Action-Crypto_Tracker-price-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-price-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-trade-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-trade-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-crypto-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-crypto-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-common')
+}

@@ -1,0 +1,68 @@
+type: edu
+custom_name: Task 4
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 305
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 305
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "queryFlux\n\t\t\t\t.onBackpressureLatest()\n\t\t\t\
+      \t.concatMap(calculateStatistic, 1);"
+  text: "import java.util.function.Function;\n\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<StatisticSnapshot> keepBackpressureForLongRunningOps(Flux<String> queryFlux,\n\
+    \t\t\tFunction<String, Mono<StatisticSnapshot>> calculateStatistic) {\n\n\t\t\
+    return Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/BackpressureTask4Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Sinks;\n\
+    import reactor.test.StepVerifier;\nimport reactor.test.publisher.TestPublisher;\n\
+    \npublic class BackpressureTask4Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tTestPublisher<String> publisher = TestPublisher.create();\n\n\t\tStepVerifier\n\
+    \t\t\t.withVirtualTime(() -> Task.keepBackpressureForLongRunningOps(\n\t\t\t\t\
+    publisher.flux(), q -> {\n\t\t\t\t\t\tSinks.One<StatisticSnapshot> sProducer3\
+    \ = Sinks\n\t\t\t\t\t\t\t.unsafe()\n\t\t\t\t\t\t\t.one();\n\n\t\t\t\t\t\treturn\
+    \ sProducer3\n\t\t\t\t\t\t\t.asMono()\n\t\t\t\t\t\t\t.doOnRequest(r -> sProducer3.emitValue(new\
+    \ TestStatistic(q), Sinks.EmitFailureHandler.FAIL_FAST));\n\t\t\t\t\t}), 0)\n\t\
+    \t\t.expectSubscription()\n\t\t\t.then(() -> {\n\t\t\t\tpublisher.next(\"test0\"\
+    );\n\t\t\t\tpublisher.next(\"test1\");\n\t\t\t\tpublisher.next(\"test2\");\n\t\
+    \t\t\tpublisher.next(\"test3\");\n\t\t\t\tpublisher.next(\"test4\");\n\t\t\t})\n\
+    \t\t\t.thenRequest(1)\n\t\t\t.expectNext(new TestStatistic(\"test0\"))\n\t\t\t\
+    .thenRequest(1)\n\t\t\t.expectNext(new TestStatistic(\"test1\"))\n\t\t\t.then(()\
+    \ -> publisher.next(\"test5\"))\n\t\t\t.then(() -> publisher.next(\"test6\"))\n\
+    \t\t\t.thenRequest(1)\n\t\t\t.expectNext(new TestStatistic(\"test4\"))\n\t\t\t\
+    .thenRequest(1)\n\t\t\t.expectNext(new TestStatistic(\"test5\"))\n\t\t\t.thenCancel()\n\
+    \t\t\t.verify();\n\t}\n\n\tstatic class TestStatistic implements StatisticSnapshot\
+    \ {\n\n\t\tfinal String query;\n\n\t\tTestStatistic(String query) {\n\t\t\tthis.query\
+    \ = query;\n\t\t}\n\n\t\t@Override\n\t\tpublic int hashCode() {\n\t\t\treturn\
+    \ query.hashCode();\n\t\t}\n\n\t\t@Override\n\t\tpublic boolean equals(Object\
+    \ o) {\n\t\t\tif (this == o) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t\tif (o ==\
+    \ null || getClass() != o.getClass()) {\n\t\t\t\treturn false;\n\t\t\t}\n\n\t\t\
+    \tTestStatistic statistic = (TestStatistic) o;\n\n\t\t\treturn query.equals(statistic.query);\n\
+    \t\t}\n\n\t\t@Override\n\t\tpublic String toString() {\n\t\t\treturn \"TestStatistic{\"\
+    \ + \"query='\" + query + '\\'' + '}';\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/StatisticSnapshot.java
+  visible: true
+  text: |
+    public interface StatisticSnapshot {
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

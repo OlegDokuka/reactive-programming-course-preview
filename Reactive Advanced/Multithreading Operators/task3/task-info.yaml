@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 248
+    length: 51
+    placeholder_text: ParallelFlux.from(Flux.error(new ToDoException()));
+    initial_state:
+      length: 51
+      offset: 248
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "source.parallel()\n\t\t             .runOn(Schedulers.parallel());"
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.ParallelFlux;\n\
+    import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\tpublic static\
+    \ ParallelFlux<Integer> paralellizeWorkOnDifferentThreads(Flux<Integer> source)\
+    \ {\n\t\treturn ParallelFlux.from(Flux.error(new ToDoException()));\n\t}\n}"
+  learner_created: false
+- name: test/MultithreadingOperatorsTask3Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.ConcurrentHashMap;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class MultithreadingOperatorsTask3Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tint availableProcessors = Runtime.getRuntime()\n\t\t                \
+    \                 .availableProcessors();\n\t\tConcurrentHashMap<Thread, Integer>\
+    \ concurrentHashMap = new ConcurrentHashMap<>();\n\t\tStepVerifier.create(Task.paralellizeWorkOnDifferentThreads(Flux.range(0,\n\
+    \t\t\t\tavailableProcessors))\n\t\t                        .doOnNext(s -> {\n\t\
+    \t                        \tconcurrentHashMap.put(Thread.currentThread(), s);\n\
+    \t\t\t                        try {\n\t\t\t\t                        Thread.sleep(500);\n\
+    \t\t\t                        }\n\t\t\t                        catch (InterruptedException\
+    \ e) {\n\t\t\t\t                        e.printStackTrace();\n\t\t\t         \
+    \               }\n\t\t                        }))\n\t\t            .expectSubscription()\n\
+    \t\t            .expectNextCount(availableProcessors)\n\t\t            .expectComplete()\n\
+    \t\t            .verify(Duration.ofMillis(2000));\n\n\t\tAssertions.assertThat(concurrentHashMap)\n\
+    \t\t          .hasSize(availableProcessors);\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

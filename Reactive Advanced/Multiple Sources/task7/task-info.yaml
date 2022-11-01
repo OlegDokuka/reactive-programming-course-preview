@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 7
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 272
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 272
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.combineLatest((args) -> \"\" + args[0] + args[1]\
+      \ + args[2],\n\t\t\t\tprefixPublisher,\n\t\t\t\twordPublisher,\n\t\t\t\tsuffixPublisher);"
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> combineSeveralSources(Publisher<String>\
+    \ prefixPublisher,\n\t\t\tPublisher<String> wordPublisher,\n\t\t\tPublisher<String>\
+    \ suffixPublisher) {\n\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask7Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultipleSourcesTask7Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    StepVerifier.withVirtualTime(() -> Flux.from(Task.combineSeveralSources(Flux.interval(\n\
+    \t\t\t\tDuration.ofMillis(10))\n\t\t                                         \
+    \                                   .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(5))\n\
+    \t\t\t\t    .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(1))\n\
+    \t\t\t\t    .map(Object::toString)))\n\t\t                                   \
+    \    .take(16))\n\t\t            .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
+    \t\t            .expectNext(\"008\", \"018\", \"019\")\n\t\t            .expectNoEvent(Duration.ofMillis(1))\n\
+    \t\t            .expectNext(\"0110\")\n\t\t            .thenAwait(Duration.ofMillis(4))\n\
+    \t\t            .expectNext(\"0111\", \"0112\", \"0113\", \"0213\", \"0214\")\n\
+    \t\t            .thenAwait(Duration.ofMillis(5))\n\t\t            .expectNext(\"\
+    0215\", \"0216\", \"0217\", \"0218\", \"1218\", \"1318\", \"1319\")\n\t\t    \
+    \        .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

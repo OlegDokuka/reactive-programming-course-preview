@@ -1,0 +1,63 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 200
+    length: 20
+    placeholder_text: Flux.merge(sources);
+    initial_state:
+      length: 20
+      offset: 200
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux.mergeSequential(sources);
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> mergeSeveralSourcesSequential(Publisher<String>...\
+    \ sources) {\n\t\treturn Flux.merge(sources);\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport reactor.test.publisher.PublisherProbe;\n\
+    \npublic class MultipleSourcesTask2Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tPublisherProbe[] probes = new PublisherProbe[2];\n\n\t\tStepVerifier\n\
+    \t\t\t\t.withVirtualTime(() -> {\n\t\t\t\t\tPublisherProbe<String> probeA = PublisherProbe.of(Mono.fromCallable(()\
+    \ -> \"VANILLA\").delaySubscription(\n\t\t\t\t\t\t\tDuration.ofSeconds(1)));\n\
+    \t\t\t\t\tPublisherProbe<String> probeB = PublisherProbe.of(Mono.fromCallable(()\
+    \ -> \"CHOCOLATE\"));\n\n\t\t\t\t\tprobes[0] = probeA;\n\t\t\t\t\tprobes[1] =\
+    \ probeB;\n\n\t\t\t\t\treturn Task.mergeSeveralSourcesSequential(\n\t\t\t\t\t\t\
+    \tprobeA.mono(),\n\t\t\t\t\t\t\tprobeB.mono()\n\t\t\t\t\t);\n\t\t\t\t}, 0)\n\t\
+    \t\t\t.expectSubscription()\n\t\t\t\t.then(() -> probes[0].assertWasSubscribed())\n\
+    \t\t\t\t.then(() -> probes[1].assertWasSubscribed())\n\t\t\t\t.thenRequest(2)\n\
+    \t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"VANILLA\"\
+    )\n\t\t\t\t.expectNext(\"CHOCOLATE\")\n\t\t\t\t.verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.html
+  visible: false
+  text: |-
+    <html>
+    Объедените несколько источников елементов (<code>Publisher</code>) в один общий
+    <code>Flux</code> таким образом что бы все элементы из под-<code>Flux</code> пришли в том
+    же порядке что и при генерации под-<code>Flux</code>:
+    К примеру:
+
+    <!--TODO: вставить marble диаграму-->
+
+    <div class="hint">
+        Используйте <code>Flux.mergeSequential</code>. Обратите внимание, <code>Flux.mergeSequential</code>
+        работает идентично с <code>Flux#flatMapSequential</code>
+    </div>
+    </html>
+  learner_created: false
+status: Unchecked
+record: -1

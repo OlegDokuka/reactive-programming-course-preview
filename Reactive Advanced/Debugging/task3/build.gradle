@@ -1,0 +1,7 @@
+dependencies {
+  implementation 'io.projectreactor.tools:blockhound'
+  implementation 'io.projectreactor:reactor-tools'
+  implementation 'io.projectreactor:reactor-core'
+  implementation 'io.projectreactor:reactor-test'
+  implementation 'io.micrometer:micrometer-core'
+}

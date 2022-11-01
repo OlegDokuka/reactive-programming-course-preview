@@ -1,0 +1,124 @@
+type: edu
+custom_name: Task 4
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Flux` из `Stream`\n   \n<div class=\"hint\">\n  Используйте\
+    \ Flux.fromStream\n</div>"
+  learner_created: false
+- name: src/ListenableFuture.java
+  visible: true
+  text: |
+    import java.util.function.BiConsumer;
+
+    public interface ListenableFuture<T> {
+        void handle(BiConsumer<T, Throwable> handler);
+        void cancel();
+    }
+  learner_created: false
+- name: src/AsyncHttpClient.java
+  visible: true
+  text: |
+    import java.util.concurrent.CompletableFuture;
+
+    public interface AsyncHttpClient {
+
+        <T> ListenableFuture<T> getForObject(String uri, Class<T> clazz);
+    }
+  learner_created: false
+- name: src/ListenableHttpGetRequestTask.java
+  visible: true
+  placeholders:
+  - offset: 208
+    length: 24
+    placeholder_text: ListenableFuture<String>
+    initial_state:
+      length: 24
+      offset: 208
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono<String>
+  - offset: 255
+    length: 95
+    placeholder_text: asyncHttpClient.getForObject("https://baconipsum.com/api/?type=meat-and-filler",
+      String.class);
+    initial_state:
+      length: 95
+      offset: 255
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono.create(sink -> {\n\t\t\tListenableFuture<String>\
+      \ future = asyncHttpClient.getForObject(\"https://baconipsum.com/api/?type=meat-and-filler\"\
+      , String.class);\n\t\t\tfuture.handle((value, error) -> {\n\t\t\t\tif (error\
+      \ != null) {\n\t\t\t\t\tsink.error(error);\n\t\t\t\t\treturn;\n\t\t\t\t}\n\n\
+      \t\t\t\tsink.success(value);\n\t\t\t});\n\t\t\tsink.onCancel(() -> future.cancel());\n\
+      \t\t});"
+  text: "import java.util.stream.Stream;\n\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\n\npublic class ListenableHttpGetRequestTask\
+    \ {\n\n\tstatic AsyncHttpClient asyncHttpClient;\n\n\tpublic static ListenableFuture<String>\
+    \ getLorem() {\n\t\treturn asyncHttpClient.getForObject(\"https://baconipsum.com/api/?type=meat-and-filler\"\
+    , String.class);\n\t}\n}"
+  learner_created: false
+- name: test/ListenableHttpGetRequestTaskTests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.Objects;\nimport java.util.concurrent.atomic.AtomicReference;\n\
+    import java.util.function.BiConsumer;\nimport java.util.stream.Stream;\n\nimport\
+    \ org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport\
+    \ org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    import reactor.test.StepVerifier;\n\npublic class ListenableHttpGetRequestTaskTests\
+    \ {\n\tstatic final BiConsumer CANCELLED = new BiConsumer() {\n\t\t@Override\n\
+    \t\tpublic void accept(Object o, Object o2) {\n\n\t\t}\n\t};\n\n\t@Test\n\tpublic\
+    \ void testSolution() {\n\t\tAsyncHttpClient mock = Mockito.mock(AsyncHttpClient.class);\n\
+    \t\tfinal AtomicReference<BiConsumer> handlerSetter = new AtomicReference();\n\
+    \t\tListenableFuture<String> future = new ListenableFuture<String>() {\n\n\t\t\
+    \t@Override\n\t\t\tpublic void handle(BiConsumer<String, Throwable> handler) {\n\
+    \t\t\t\tObjects.requireNonNull(handler);\n\t\t\t\tif (!handlerSetter.compareAndSet(null,\
+    \ handler)) {\n\t\t\t\t\tAssertions.fail(\"can not be set twice\");\n\t\t\t\t\
+    }\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic void cancel() {\n\t\t\t\tAssertions.assertThat(handlerSetter.getAndSet(CANCELLED)).isNotNull();\n\
+    \t\t\t}\n\t\t};\n\t\tMockito.when(mock.<String>getForObject(Mockito.anyString(),\
+    \ Mockito.any())).thenReturn(future);\n\t\tListenableHttpGetRequestTask.asyncHttpClient\
+    \ = mock;\n\t\tObject sequence = ListenableHttpGetRequestTask.getLorem();\n\n\t\
+    \tif (sequence instanceof Mono) {\n\t\t\tStepVerifier.create(((Mono<String>) sequence))\n\
+    \t\t\t\t\t.expectSubscription()\n\t\t\t\t\t.then(() -> handlerSetter.get().accept(\"\
+    lorem\", null))\n\t\t\t\t\t.expectNext(\"lorem\")\n\t\t\t\t\t.expectComplete()\n\
+    \t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t}\n\t}\n\n\t@Test\n\tpublic void\
+    \ testSolution2() {\n\t\tAsyncHttpClient mock = Mockito.mock(AsyncHttpClient.class);\n\
+    \t\tfinal AtomicReference<BiConsumer> handlerSetter = new AtomicReference();\n\
+    \t\tListenableFuture<String> future = new ListenableFuture<String>() {\n\n\t\t\
+    \t@Override\n\t\t\tpublic void handle(BiConsumer<String, Throwable> handler) {\n\
+    \t\t\t\tObjects.requireNonNull(handler);\n\t\t\t\tif (!handlerSetter.compareAndSet(null,\
+    \ handler)) {\n\t\t\t\t\tAssertions.fail(\"can not be set twice\");\n\t\t\t\t\
+    }\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic void cancel() {\n\t\t\t\tAssertions.assertThat(handlerSetter.getAndSet(CANCELLED)).isNotNull();\n\
+    \t\t\t}\n\t\t};\n\t\tMockito.when(mock.<String>getForObject(Mockito.anyString(),\
+    \ Mockito.any())).thenReturn(future);\n\t\tListenableHttpGetRequestTask.asyncHttpClient\
+    \ = mock;\n\t\tObject sequence = ListenableHttpGetRequestTask.getLorem();\n\n\t\
+    \tif (sequence instanceof Mono) {\n\t\t\tStepVerifier.create(((Mono<String>) sequence))\n\
+    \t\t\t\t\t.expectSubscription()\n\t\t\t\t\t.then(() -> handlerSetter.get().accept(null,\
+    \ new RuntimeException(\"boo\")))\n\t\t\t\t\t.expectErrorMessage(\"boo\")\n\t\t\
+    \t\t\t.verify(Duration.ofMillis(100));\n\t\t}\n\t}\n\n\t@Test\n\tpublic void testSolution3()\
+    \ {\n\t\tAsyncHttpClient mock = Mockito.mock(AsyncHttpClient.class);\n\t\tfinal\
+    \ AtomicReference<BiConsumer> handlerSetter = new AtomicReference();\n\t\tListenableFuture<String>\
+    \ future = new ListenableFuture<String>() {\n\n\t\t\t@Override\n\t\t\tpublic void\
+    \ handle(BiConsumer<String, Throwable> handler) {\n\t\t\t\tObjects.requireNonNull(handler);\n\
+    \t\t\t\tif (!handlerSetter.compareAndSet(null, handler)) {\n\t\t\t\t\tAssertions.fail(\"\
+    can not be set twice\");\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic\
+    \ void cancel() {\n\t\t\t\tAssertions.assertThat(handlerSetter.getAndSet(CANCELLED)).isNotNull();\n\
+    \t\t\t}\n\t\t};\n\t\tMockito.when(mock.<String>getForObject(Mockito.anyString(),\
+    \ Mockito.any())).thenReturn(future);\n\t\tListenableHttpGetRequestTask.asyncHttpClient\
+    \ = mock;\n\t\tObject sequence = ListenableHttpGetRequestTask.getLorem();\n\n\t\
+    \tif (sequence instanceof Mono) {\n\t\t\tStepVerifier.create(((Mono<String>) sequence))\n\
+    \t\t\t\t\t.expectSubscription()\n\t\t\t\t\t.thenCancel()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\
+    \t\t}\n\n\t\tAssertions.assertThat(handlerSetter.get()).isEqualTo(CANCELLED);\n\
+    \t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

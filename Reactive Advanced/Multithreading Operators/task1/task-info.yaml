@@ -1,0 +1,43 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 236
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 236
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: source.publishOn(Schedulers.parallel());
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\tpublic static\
+    \ Publisher<String> publishOnParallelThreadScheduler(Flux<String> source) {\n\t\
+    \treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultithreadingOperatorsTask1Tests.java
+  visible: false
+  text: "import org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class MultithreadingOperatorsTask1Tests {\n\n\t@Test\n\tpublic void mergeSeveralSourcesTest()\
+    \ {\n\t\tThread[] threads = new Thread[2];\n\t\tStepVerifier\n\t\t\t\t.create(Flux.from(Task.publishOnParallelThreadScheduler(Flux.defer(()\
+    \ -> {\n\t\t\t\t\tthreads[0] = Thread.currentThread();\n\t\t\t\t\treturn Flux.just(\"\
+    Hello\");\n\t\t\t\t}))).doFinally(__ -> threads[1] = Thread.currentThread()))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"Hello\")\n\t\t\t\t.verifyComplete();\n\
+    \n\t\tAssertions.assertThat(threads[0])\n\t\t          .isNotNull()\n\t\t    \
+    \      .isNotEqualTo(threads[1]);\n\t\tAssertions.assertThat(threads[1])\n\t\t\
+    \          .isNotNull();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

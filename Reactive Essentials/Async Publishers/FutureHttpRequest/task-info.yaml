@@ -1,0 +1,72 @@
+type: edu
+custom_name: Task 3
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: true
+  text: "Сгенерируйте `Flux` из масива елементов\n   \n<div class=\"hint\">\n  Исп\
+    ользуйте Flux.fromArray\n</div>"
+  learner_created: false
+- name: src/AsyncRestTemplate.java
+  visible: true
+  text: |
+    import java.util.concurrent.CompletableFuture;
+
+    public interface AsyncRestTemplate {
+
+        <T> CompletableFuture<T> getForObject(String uri, Class<T> clazz);
+    }
+  learner_created: false
+- name: test/AsyncHttpGetRequestTaskTests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    import reactor.test.StepVerifier;\n\npublic class AsyncHttpGetRequestTaskTests\
+    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tAsyncRestTemplate mock = Mockito.mock(AsyncRestTemplate.class);\n\
+    \t\tMockito.when(mock.getForObject(Mockito.anyString(), Mockito.any())).thenReturn(CompletableFuture.supplyAsync(()\
+    \ -> \"Lorem ipsum dolor\"));\n\t\tFutureHttpGetRequestTask.asyncRestTemplate\
+    \ = mock;\n\t\tObject sequence = FutureHttpGetRequestTask.getLorem();\n\n\t\t\
+    if (sequence instanceof Mono) {\n\n\t\t\tStepVerifier.create(((Mono<String>) sequence))\n\
+    \t\t\t\t\t.expectNext(\"Lorem ipsum dolor\")\n\t\t\t\t\t.expectComplete()\n\t\t\
+    \t\t\t.verify();\n\t\t} else {\n\t\t\tAssertions.fail(\"Refactor given code using\
+    \ Mono api\");\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: src/FutureHttpGetRequestTask.java
+  visible: true
+  placeholders:
+  - offset: 186
+    length: 25
+    placeholder_text: CompletableFuture<String>
+    initial_state:
+      length: 25
+      offset: 186
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono<String>
+  - offset: 234
+    length: 97
+    placeholder_text: asyncRestTemplate.getForObject("https://baconipsum.com/api/?type=meat-and-filler",
+      String.class);
+    initial_state:
+      length: 97
+      offset: 234
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono.fromFuture(asyncRestTemplate.getForObject("https://baconipsum.com/api/?type=meat-and-filler",
+      String.class));
+  text: "import reactor.core.publisher.Mono;\nimport java.util.concurrent.CompletableFuture;\n\
+    \npublic class FutureHttpGetRequestTask {\n\n\tstatic AsyncRestTemplate asyncRestTemplate;\n\
+    \n\tpublic static CompletableFuture<String> getLorem() {\n\t\treturn asyncRestTemplate.getForObject(\"\
+    https://baconipsum.com/api/?type=meat-and-filler\", String.class);\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

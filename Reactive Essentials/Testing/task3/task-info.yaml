@@ -1,0 +1,75 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 477
+    length: 55
+    placeholder_text: throw new ToDoException()); // TODO Check Success Case;
+    initial_state:
+      length: 55
+      offset: 477
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
+      \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
+      \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
+      \t\t            .then(() -> testPublisher.next(\"1\", \"2\", \"100\"))\n\t\t\
+      \            .expectNext(1L, 2L, 100L)\n\t\t            .then(testPublisher::complete)\n\
+      \t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(1000));"
+  - offset: 696
+    length: 55
+    placeholder_text: throw new ToDoException()); // TODO Check Failure Case;
+    initial_state:
+      length: 55
+      offset: 696
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
+      \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
+      \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
+      \t\t            .then(() -> testPublisher.next(\"asdas\"))\n\t\t           \
+      \ .expectError(NumberFormatException.class)\n\t\t            .verify(Duration.ofMillis(1000));"
+  text: "import java.time.Duration;\nimport java.util.function.Function;\n\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\nimport reactor.test.publisher.TestPublisher;\n\
+    \npublic class Task {\n\n\tpublic static void unitTestAFunction(Function<Flux<String>,\
+    \ Flux<Long>> functionToTest) {\n\t\ttestSuccessCase(functionToTest);\n\t\ttestFailureCase(functionToTest);\n\
+    \t}\n\n\tstatic void testSuccessCase(Function<Flux<String>, Flux<Long>> functionToTest)\
+    \ {\n\t\t// produce \"1\" \"2\" \"100\"\n\t\tthrow new ToDoException()); // TODO\
+    \ Check Success Case;\n\t}\n\n\tstatic void testFailureCase(Function<Flux<String>,\
+    \ Flux<Long>> functionToTest) {\n\t\t// produce non number string and check NumberFormatException\
+    \ is produced\n\t\tthrow new ToDoException()); // TODO Check Failure Case;\n\t\
+    }\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+    }
+  learner_created: false
+- name: test/TestingTask3Tests.java
+  visible: false
+  text: "import java.util.concurrent.ArrayBlockingQueue;\nimport java.util.concurrent.BlockingQueue;\n\
+    import java.util.concurrent.atomic.AtomicLong;\nimport java.util.function.Function;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\n\npublic class TestingTask3Tests {\n\n\t\
+    @Test\n\tpublic void testSolution() throws InterruptedException {\n\t\tAtomicLong\
+    \ calls = new AtomicLong();\n\t\tBlockingQueue<Exception> exceptionBlockingQueue\
+    \ = new ArrayBlockingQueue<>(100);\n\t\tFunction<Flux<String>, Flux<Long>> testFunction\
+    \ = f -> {\n\t\t\tcalls.incrementAndGet();\n\t\t\treturn f.map(s -> {\n\t\t\t\t\
+    try {\n\t\t\t\t\treturn Long.parseLong(s);\n\t\t\t\t} catch (NumberFormatException\
+    \ e) {\n\t\t\t\t\texceptionBlockingQueue.add(e);\n\t\t\t\t\tthrow e;\n\t\t\t\t\
+    }\n\t\t\t});\n\t\t};\n\t\tTask.unitTestAFunction(testFunction);\n\n\t\tAssertions.assertThat(calls.get())\n\
+    \t\t          .as(\"Make sure all cases are covered. At least should be a successful\"\
+    \ +\n\t\t\t\t          \" case and a failure case\")\n\t\t          .isGreaterThanOrEqualTo(2);\n\
+    \n\t\tAssertions.assertThat(exceptionBlockingQueue)\n\t\t          .as(\"Make\
+    \ sure failure case is tested\")\n\t\t          .hasAtLeastOneElementOfType(NumberFormatException.class);\n\
+    \t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

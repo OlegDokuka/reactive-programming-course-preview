@@ -1,0 +1,88 @@
+type: edu
+custom_name: Distributed Media Service
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/Server.java
+  visible: true
+  text: "import java.time.Duration;\nimport java.util.concurrent.ThreadLocalRandom;\n\
+    \nimport reactor.core.publisher.Mono;\n\npublic class Server {\n\n\tprivate final\
+    \ String address;\n\n\tpublic Server(String address) {\n\t\tthis.address = address;\n\
+    \t}\n\n\tpublic Mono<Video> searchOne(String name) {\n\t\tThreadLocalRandom random\
+    \ = ThreadLocalRandom.current();\n\t\tboolean doubled = random.nextBoolean();\n\
+    \t\treturn Mono.just(new Video(name, address, \"Some fake description\"))\n\t\t\
+    \           .delaySubscription(Duration.ofMillis(random.nextLong(200,\n\t\t\t\t\
+    \           doubled ? 6000 : 3000)));\n\t}\n}\n"
+  learner_created: false
+- name: src/Video.java
+  visible: true
+  text: "public class Video {\n\n\tprivate final String name;\n\tprivate final String\
+    \ location;\n\tprivate final String description;\n\n\tpublic Video(String name,\
+    \ String location, String description) {\n\t\tthis.name = name;\n\t\tthis.location\
+    \ = location;\n\t\tthis.description = description;\n\t}\n\n\tpublic String getDescription()\
+    \ {\n\t\treturn description;\n\t}\n\n\tpublic String getLocation() {\n\t\treturn\
+    \ location;\n\t}\n\n\tpublic String getName() {\n\t\treturn name;\n\t}\n}\n"
+  learner_created: false
+- name: src/ServersCatalogue.java
+  visible: true
+  text: "import java.util.Arrays;\nimport java.util.List;\n\npublic class ServersCatalogue\
+    \ {\n\n\tpublic List<Server> list() {\n\t\treturn servers;\n\t}\n\tprivate final\
+    \ static List<Server> servers =\n\t\t\tArrays.asList(new Server(\"http://a.servers.com\"\
+    ),\n\t\t\t\t\tnew Server(\"http://b.servers.com\"),\n\t\t\t\t\tnew Server(\"http://c.servers.com\"\
+    ),\n\t\t\t\t\tnew Server(\"http://d.servers.com\"),\n\t\t\t\t\tnew Server(\"http://e.servers.com\"\
+    ),\n\t\t\t\t\tnew Server(\"http://f.servers.com\"));\n\n}\n"
+  learner_created: false
+- name: src/MediaService.java
+  visible: true
+  placeholders:
+  - offset: 281
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 281
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "\t\treturn Flux.fromIterable(catalogue.list())\n\t\
+      \t           .map(s -> s.searchOne(videoName))\n\t\t           .collectList()\n\
+      \t\t           .flatMap(Mono::firstWithSignal);"
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class MediaService {\n\n\tprivate final ServersCatalogue catalogue;\n\
+    \n\tpublic MediaService(ServersCatalogue catalogue) {\n\t\tthis.catalogue = catalogue;\n\
+    \t}\n\n\tpublic Mono<Video> findVideo(String videoName) {\nMono.error(new ToDoException());\n\
+    \t}\n}\n"
+  learner_created: false
+- name: test/CPTask2Tests.java
+  visible: false
+  text: "import java.util.List;\nimport java.util.stream.Collectors;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport reactor.core.publisher.Mono;\n\
+    import reactor.test.StepVerifier;\nimport reactor.test.publisher.PublisherProbe;\n\
+    \npublic class CPTask2Tests {\n\n\t@Test\n\t@SuppressWarnings(\"unchecked\")\n\
+    \tpublic void findVideoTest() {\n\t\tList<Server> servers = new ServersCatalogue().list()\n\
+    \t\t                                             .stream()\n\t\t             \
+    \                                .map(MockableServer::new)\n\t\t             \
+    \                                .collect(Collectors.toList());\n\t\tServersCatalogue\
+    \ serversCatalogue = Mockito.mock(ServersCatalogue.class);\n\t\tMockito.when(serversCatalogue.list())\n\
+    \t\t       .thenReturn(servers);\n\n\t\tMediaService service = new MediaService(serversCatalogue);\n\
+    \t\tStepVerifier.create(service.findVideo(\"test\"))\n\t\t            .expectSubscription()\n\
+    \t\t            .expectNextCount(1)\n\t\t            .verifyComplete();\n\n\t\t\
+    long count = servers.stream()\n\t\t                    .map(MockableServer.class::cast)\n\
+    \t\t                    .map(MockableServer::getProbe)\n\t\t                 \
+    \   .filter(PublisherProbe::wasCancelled)\n\t\t                    .count();\n\
+    \n\t\tAssertions.assertThat(count)\n\t\t          .isBetween(servers.size() -\
+    \ 1L, ((long) servers.size()));\n\t}\n\n\tstatic final class MockableServer extends\
+    \ Server {\n\n\t\tprivate final Server                delegate;\n\t\tprivate \
+    \      PublisherProbe<Video> probe;\n\n\t\tpublic MockableServer(Server delegate)\
+    \ {\n\t\t\tsuper(\"\");\n\t\t\tthis.delegate = delegate;\n\t\t}\n\n\t\tpublic\
+    \ PublisherProbe<Video> getProbe() {\n\t\t\treturn probe;\n\t\t}\n\n\t\t@Override\n\
+    \t\tpublic Mono<Video> searchOne(String name) {\n\t\t\treturn (probe = PublisherProbe.of(delegate.searchOne(name))).mono();\n\
+    \t\t}\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

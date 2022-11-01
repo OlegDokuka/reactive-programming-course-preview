@@ -1,0 +1,51 @@
+type: edu
+custom_name: Task 9
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 274
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 274
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "flux\n\t\t\t\t.timeout(Mono.delay(duration))\n\t\t\
+      \t\t.onErrorReturn(fallback);"
+  text: "import java.time.Duration;\n\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\npublic\
+    \ class Task {\n\n\tpublic static Publisher<String> timeoutOnce(Flux<String> flux,\n\
+    \t\t\tDuration duration, String fallback) {\n\t\treturn Mono.error(new ToDoException());\n\
+    \t}\n}"
+  learner_created: false
+- name: test/ResilienceTask9Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
+    \npublic class ResilienceTask9Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tStepVerifier\n\t\t\t.withVirtualTime(() -> Task.timeoutOnce(\n\t\t\t\t\
+    Flux.interval(Duration.ofDays(1))\n\t\t\t\t    .mergeWith(Mono.delay(Duration.ofMillis(900)).thenReturn(-1L))\n\
+    \t\t\t\t    .map(Object::toString),\n\t\t\t\tDuration.ofMillis(1000),\n\t\t\t\t\
+    \"Hello\"\n\t\t\t))\n\t\t\t.expectSubscription()\n\t\t\t.expectNoEvent(Duration.ofMillis(900))\n\
+    \t\t\t.expectNext(\"-1\")\n\t\t\t.expectNoEvent(Duration.ofDays(1).minus(Duration.ofMillis(900)))\n\
+    \t\t\t.expectNext(\"0\")\n\t\t\t.expectNoEvent(Duration.ofDays(1))\n\t\t\t.expectNext(\"\
+    1\")\n\t\t\t.thenCancel()\n\t\t\t.verify(Duration.ofSeconds(1));\n\t}\n\n\t@Test\n\
+    \tpublic void testSolution1() {\n\t\tStepVerifier\n\t\t\t\t.withVirtualTime(()\
+    \ -> Task.timeoutOnce(\n\t\t\t\t\t\tFlux.interval(Duration.ofDays(1))\n\t\t\t\t\
+    \t\t    .map(Object::toString),\n\t\t\t\t\t\tDuration.ofMillis(1000),\n\t\t\t\t\
+    \t\t\"Hello\"\n\t\t\t\t))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\
+    \t\t\t\t.expectNext(\"Hello\")\n\t\t\t\t.expectComplete()\n\t\t\t\t.verify(Duration.ofSeconds(1));\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,61 @@
+type: edu
+custom_name: Task 2
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor.tools:blockhound:1.0.2.RELEASE'
+      implementation 'io.projectreactor:reactor-tools'
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 249
+    length: 39
+    placeholder_text: // TODO add log here. Log only requests
+    initial_state:
+      length: 39
+      offset: 249
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: .log("Before PublishOn", Level.INFO, SignalType.REQUEST)
+  - offset: 364
+    length: 27
+    placeholder_text: ";\n\t\t\t\t// TODO add log here."
+    initial_state:
+      length: 27
+      offset: 364
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "\n\t\t\t\t.log(\"After PublisherOn\");"
+  text: "import java.util.logging.Level;\n\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.SignalType;\nimport reactor.core.scheduler.Schedulers;\n\
+    \npublic class Task {\n\n\tpublic static Flux<Long> loggerTask(Flux<Long> flux)\
+    \ {\n\t\treturn flux\n\t\t\t\t// TODO add log here. Log only requests\n\t\t\t\t\
+    .subscribeOn(Schedulers.parallel())\n\t\t\t\t.publishOn(Schedulers.single());\n\
+    \t\t\t\t// TODO add log here.\n\t}\n}"
+  learner_created: false
+- name: test/DLMTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Hooks;\nimport reactor.test.StepVerifier;\n\
+    \npublic class DLMTask2Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    ArrayList<Publisher<?>> publishers = new ArrayList<>();\n\t\tHooks.onEachOperator(p\
+    \ -> {\n\t\t\tpublishers.add(p);\n\t\t\treturn p;\n\t\t});\n\n\t\ttry {\n\t\t\t\
+    StepVerifier.create(Flux.interval(Duration.ofMillis(10))\n\t\t\t             \
+    \           .transform(Task::loggerTask))\n\t\t\t            .expectSubscription()\n\
+    \t\t\t            .expectNextCount(10)\n\t\t\t            .thenCancel()\n\t\t\t\
+    \            .verify();\n\n\t\t\tAssertions.assertThat(publishers)\n\t\t\t   \
+    \       .anyMatch(p -> {\n\t\t\t          \treturn p.getClass().getSimpleName().startsWith(\"\
+    FluxLog\");\n\t\t\t          });\n\t\t} finally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

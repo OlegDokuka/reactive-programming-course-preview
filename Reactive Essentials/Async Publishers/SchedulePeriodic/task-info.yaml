@@ -1,0 +1,69 @@
+type: edu
+custom_name: Task 2
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Flux` из одного елемента\n   \n<div class=\"hint\">\n  Испо\
+    льзуйте Flux.just\n</div>"
+  learner_created: false
+- name: src/SchedulePeriodicTask.java
+  visible: true
+  placeholders:
+  - offset: 117
+    length: 4
+    placeholder_text: Void
+    initial_state:
+      length: 4
+      offset: 117
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux<Long>
+  - offset: 186
+    length: 150
+    placeholder_text: "for (;;) {\n\t\t\ttask.run();\n\t\t\ttry {\n\t\t\t\tThread.sleep(periodInMillis);\n\
+      \t\t\t} catch (InterruptedException e) {\n\t\t\t\tthrow new RuntimeException(e);\n\
+      \t\t\t}\n\t\t}"
+    initial_state:
+      length: 150
+      offset: 186
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "return Flux.interval(Duration.ofMillis(periodInMillis))\n\
+      \t\t\t\t.doOnNext(tick -> task.run());"
+  text: "import reactor.core.publisher.Flux;\n\nimport java.time.Duration;\n\npublic\
+    \ class SchedulePeriodicTask {\n\n\tpublic static Void executeTaskPeriodically(Runnable\
+    \ task, long periodInMillis) {\n\t\tfor (;;) {\n\t\t\ttask.run();\n\t\t\ttry {\n\
+    \t\t\t\tThread.sleep(periodInMillis);\n\t\t\t} catch (InterruptedException e)\
+    \ {\n\t\t\t\tthrow new RuntimeException(e);\n\t\t\t}\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: test/SchedulePeriodicTaskTests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.UUID;\nimport java.util.concurrent.TimeUnit;\n\
+    import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.junit.jupiter.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Timeout;\nimport\
+    \ org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport\
+    \ reactor.test.scheduler.VirtualTimeScheduler;\n\npublic class SchedulePeriodicTaskTests\
+    \ {\n\n\t@Test\n\t@Timeout(value = 5, unit = TimeUnit.SECONDS)\n\tpublic void\
+    \ testSolution() {\n\t\tVirtualTimeScheduler virtualTimeScheduler = VirtualTimeScheduler.getOrSet();\n\
+    \t\ttry {\n\t\t\tAtomicInteger called = new AtomicInteger();\n\n\t\t\tObject result\
+    \ = Assertions.assertTimeout(Duration.ofSeconds(1), () -> SchedulePeriodicTask.executeTaskPeriodically(()\
+    \ -> called.incrementAndGet(), 1000));\n\n\t\t\tif (result instanceof Flux) {\n\
+    \t\t\t\tStepVerifier.withVirtualTime(() -> ((Flux<Long>) result))\n\t\t\t\t\t\t\
+    .expectSubscription()\n\t\t\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\
+    \t\t\t\t.expectNextCount(1)\n\t\t\t\t\t\t.thenAwait(Duration.ofSeconds(3))\n\t\
+    \t\t\t\t\t.expectNextCount(3)\n\t\t\t\t\t\t.thenCancel()\n\t\t\t\t\t\t.verify();\n\
+    \t\t\t}\n\n\t\t\torg.assertj.core.api.Assertions.assertThat(called.get()).isEqualTo(4);\n\
+    \t\t} finally {\n\t\t\tVirtualTimeScheduler.reset();\n\t\t}\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

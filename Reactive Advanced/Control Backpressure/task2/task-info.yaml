@@ -1,0 +1,42 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 218
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 218
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: upstream.buffer(duration);
+  text: "import java.time.Duration;\nimport java.util.List;\n\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Flux<List<Long>> backpressureByBatching(Flux<Long>\
+    \ upstream,\n\t\t\tDuration duration) {\n\t\treturn Flux.error(new ToDoException());\n\
+    \t}\n}"
+  learner_created: false
+- name: test/BackpressureTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ BackpressureTask2Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tStepVerifier.withVirtualTime(()\
+    \ -> Task.backpressureByBatching(Flux.interval(\n\t\t\t\tDuration.ofMillis(1)),\
+    \ Duration.ofMillis(1000)), 0)\n\t\t            .expectSubscription()\n\t\t  \
+    \          .thenRequest(1)\n\t\t            .expectNoEvent(Duration.ofSeconds(1))\n\
+    \t\t            .expectNextCount(1)\n\t\t            .thenRequest(1)\n\t\t   \
+    \         .expectNoEvent(Duration.ofSeconds(1))\n\t\t            .expectNextCount(1)\n\
+    \t\t            .thenCancel()\n\t\t            .verify();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

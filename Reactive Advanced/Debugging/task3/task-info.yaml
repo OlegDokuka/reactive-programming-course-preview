@@ -1,0 +1,65 @@
+type: edu
+custom_name: Task 3
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 159
+    length: 25
+    placeholder_text: // TODO scheduler metrics
+    initial_state:
+      length: 25
+      offset: 159
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Schedulers.enableMetrics();
+  - offset: 203
+    length: 59
+    placeholder_text: // TODO add metrics for flux and name your flux as "MyFlux"
+    initial_state:
+      length: 59
+      offset: 203
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: ".name(\"myFlux\")\n\t\t\t\t.metrics()"
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Schedulers;\n\
+    \npublic class Task {\n\n\tpublic static Flux<Long> metricsTask(Flux<Long> flux)\
+    \ {\n\t\t// TODO scheduler metrics\n\t\treturn flux\n\t\t\t\t// TODO add metrics\
+    \ for flux and name your flux as \"MyFlux\"\n\t\t\t\t.subscribeOn(Schedulers.parallel())\n\
+    \t\t\t\t.publishOn(Schedulers.single())\n\t\t\t\t.log(\"After PublisherOn\");\n\
+    \t}\n}"
+  learner_created: false
+- name: test/DLMTask3Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\n\nimport io.micrometer.core.instrument.Metrics;\n\
+    import io.micrometer.core.instrument.simple.SimpleMeterRegistry;\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Hooks;\nimport reactor.test.StepVerifier;\n\
+    \npublic class DLMTask3Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    SimpleMeterRegistry registry = new SimpleMeterRegistry();\n\t\tMetrics.globalRegistry.add(registry);\n\
+    \t\tArrayList<Publisher<?>> publishers = new ArrayList<>();\n\t\tHooks.onEachOperator(p\
+    \ -> {\n\t\t\tpublishers.add(p);\n\t\t\treturn p;\n\t\t});\n\n\t\ttry {\n\t\t\t\
+    StepVerifier.create(Flux.interval(Duration.ofMillis(10))\n\t\t\t             \
+    \           .transform(Task::metricsTask))\n\t\t\t            .expectSubscription()\n\
+    \t\t\t            .expectNextCount(10)\n\t\t\t            .thenCancel()\n\t\t\t\
+    \            .verify();\n\n\t\t\tAssertions.assertThat(publishers)\n\t\t\t   \
+    \       .anyMatch(p -> {\n\t\t\t          \treturn p.getClass().getSimpleName().startsWith(\"\
+    FluxMetrics\");\n\t\t\t          });\n\n\t\t\tAssertions.assertThat(registry.getMeters())\n\
+    \t\t\t          .isNotEmpty();\n\t\t} finally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor.tools:blockhound'
+      implementation 'io.projectreactor:reactor-tools'
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+      implementation 'io.micrometer:micrometer-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

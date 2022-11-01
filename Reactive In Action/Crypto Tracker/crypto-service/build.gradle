@@ -1,0 +1,5 @@
+dependencies {
+  implementation project(":Reactive_In_Action-Crypto_Tracker-crypto-service-idl")
+
+  implementation 'io.socket:socket.io-client'
+}

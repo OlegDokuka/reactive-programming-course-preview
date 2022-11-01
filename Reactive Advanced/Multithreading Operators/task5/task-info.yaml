@@ -1,0 +1,67 @@
+type: edu
+custom_name: Task 5
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 398
+    length: 39
+    placeholder_text: return Flux.error(new ToDoException());
+    initial_state:
+      length: 39
+      offset: 398
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Scheduler boundedElastic = Schedulers.newBoundedElastic(256,\n\
+      \t\t\t\tInteger.MAX_VALUE,\n\t\t\t\t\"LocalBoundedElastic\");\n\t\treturn streamOfLongRunningSources.flatMap(call\
+      \ -> Mono.fromCallable(call)\n\t\t                                         \
+      \             .subscribeOn(boundedElastic));"
+  text: "import java.util.concurrent.Callable;\n\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
+    \ reactor.core.scheduler.Scheduler;\nimport reactor.core.scheduler.Schedulers;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> paralellizeLongRunningWorkOnUnboundedAmountOfThread(\n\
+    \t\t\tFlux<Callable<String>> streamOfLongRunningSources) {\n\t\treturn Flux.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultithreadingOperatorsTask5Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.Callable;\nimport\
+    \ java.util.concurrent.ConcurrentHashMap;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class MultithreadingOperatorsTask5Tests\
+    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tThread[] threads = new Thread[3];\n\
+    \t\tStepVerifier.create(Task.paralellizeLongRunningWorkOnUnboundedAmountOfThread(Flux.<Callable<String>>just(\n\
+    \t\t\t\t() -> {\n\t\t\t\t\tthreads[0] = Thread.currentThread();\n\t\t\t\t\tThread.sleep(300);\n\
+    \t\t\t\t\treturn \"Hello\";\n\t\t\t\t},\n\t\t\t\t() -> {\n\t\t\t\t\tthreads[1]\
+    \ = Thread.currentThread();\n\t\t\t\t\tThread.sleep(300);\n\t\t\t\t\treturn \"\
+    Hello\";\n\t\t\t\t},\n\t\t\t\t() -> {\n\t\t\t\t\tthreads[2] = Thread.currentThread();\n\
+    \t\t\t\t\tThread.sleep(300);\n\t\t\t\t\treturn \"Hello\";\n\t\t\t\t}).repeat(20)))\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNext(\"Hello\",\
+    \ \"Hello\", \"Hello\")\n\t\t            .expectNextCount(60)\n\t\t          \
+    \  .expectComplete()\n\t\t            .verify(Duration.ofMillis(600));\n\n\t\t\
+    Assertions.assertThat(threads[0])\n\t\t          .as(\"Expected execution on different\
+    \ Threads\")\n\t\t          .isNotNull()\n\t\t          .isNotEqualTo(threads[1]);\n\
+    \t\tAssertions.assertThat(threads[1])\n\t\t          .as(\"Expected execution\
+    \ on different Threads\")\n\t\t          .isNotEqualTo(threads[2]);\n\t\tAssertions.assertThat(threads[0])\n\
+    \t\t          .as(\"Expected execution on different Threads\")\n\t\t         \
+    \ .isNotEqualTo(threads[2]);\n\t}\n\t@Test\n\tpublic void testSolution1() {\n\t\
+    \tConcurrentHashMap<Thread, Object> threads = new ConcurrentHashMap<>();\n\t\t\
+    StepVerifier.create(Task.paralellizeLongRunningWorkOnUnboundedAmountOfThread(Flux.<Callable<String>>just(\n\
+    \t\t\t\t() -> {\n\t\t\t\t\tthreads.put(Thread.currentThread(), 1);\n\t\t\t\t\t\
+    Thread.sleep(500);\n\t\t\t\t\treturn \"Hello\";\n\t\t\t\t}).repeat(256)))\n\t\t\
+    \            .expectSubscription()\n\t\t            .expectNext(\"Hello\", \"\
+    Hello\", \"Hello\")\n\t\t            .expectNextCount(254)\n\t\t            .expectComplete()\n\
+    \t\t            .verify(Duration.ofMillis(10000));\n\n\t\tAssertions.assertThat(threads)\n\
+    \t\t          .as(\"Expected execution on different Threads\")\n\t\t         \
+    \ .isNotNull()\n\t\t          .hasSizeLessThanOrEqualTo(257);\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

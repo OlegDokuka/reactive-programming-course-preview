@@ -1,0 +1,89 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 192
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 192
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "coldSource\n\t\t\t\t.publish()\n\t\t\t\t.refCount(3);"
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> transformToHotWithOperator(Flux<String>\
+    \ coldSource) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/HnSTask1Tests.java
+  visible: false
+  text: "import java.util.ArrayList;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.BaseSubscriber;\nimport reactor.core.publisher.EmitterProcessor;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Hooks;\nimport\
+    \ reactor.core.publisher.ReplayProcessor;\nimport reactor.core.publisher.Sinks;\n\
+    import reactor.core.publisher.UnicastProcessor;\nimport reactor.test.StepVerifier;\n\
+    \npublic class HnSTask1Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    ArrayList<Publisher> operators = new ArrayList<>();\n\t\tHooks.onEachOperator(e\
+    \ -> {\n\t\t\toperators.add(e);\n\t\t\treturn e;\n\t\t});\n\n\t\ttry {\n\t\t\t\
+    Sinks.Many<String> source = Sinks\n\t\t\t\t\t.unsafe()\n\t\t\t\t\t.many()\n\t\t\
+    \t\t\t.unicast()\n\t\t\t\t\t.onBackpressureBuffer();\n\t\t\tReplayProcessor<String>\
+    \ consumer1 = ReplayProcessor.create(10);\n\t\t\tReplayProcessor<String> consumer2\
+    \ = ReplayProcessor.create(10);\n\t\t\tReplayProcessor<String> consumer3 = ReplayProcessor.create(10);\n\
+    \n\t\t\tPublisher<String> publisher = Task.transformToHotWithOperator(source.asFlux());\n\
+    \n\t\t\tpublisher.subscribe(consumer1);\n\n\t\t\tsource.emitNext(\"A\", Sinks.EmitFailureHandler.FAIL_FAST);\n\
+    \t\t\tsource.emitNext(\"B\", Sinks.EmitFailureHandler.FAIL_FAST);\n\t\t\tsource.emitNext(\"\
+    C\", Sinks.EmitFailureHandler.FAIL_FAST);\n\n\t\t\tpublisher.subscribe(consumer2);\n\
+    \n\t\t\tsource.emitNext(\"D\", Sinks.EmitFailureHandler.FAIL_FAST);\n\t\t\tsource.emitNext(\"\
+    E\", Sinks.EmitFailureHandler.FAIL_FAST);\n\t\t\tsource.emitNext(\"F\", Sinks.EmitFailureHandler.FAIL_FAST);\n\
+    \n\t\t\tsource.emitComplete(Sinks.EmitFailureHandler.FAIL_FAST);\n\n\t\t\tpublisher.subscribe(consumer3);\n\
+    \n\t\t\tStepVerifier.create(consumer1)\n\t\t\t            .expectSubscription()\n\
+    \t\t\t            .expectNext(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\")\n\t\t\t\
+    \            .verifyComplete();\n\n\t\t\tStepVerifier.create(consumer2)\n\t\t\t\
+    \            .expectSubscription()\n\t\t\t            .expectNext(\"A\", \"B\"\
+    , \"C\", \"D\", \"E\", \"F\")\n\t\t\t            .verifyComplete();\n\n\t\t\t\
+    StepVerifier.create(consumer3)\n\t\t\t            .expectSubscription()\n\t\t\t\
+    \            .expectNext(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\")\n\t\t\t   \
+    \         .verifyComplete();\n\t\t}\n\t\tfinally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\n\t\tAssertions.assertThat(operators)\n\t\t          .as(\"Expected usage\
+    \ of built-in operator\")\n\t\t          .anyMatch(p -> p.getClass()\n\t\t   \
+    \                       .equals(Flux.just(1)\n\t\t                           \
+    \           .hide()\n\t\t                                      .publish()\n\t\t\
+    \                                      .getClass()));\n\t}\n\n\t@Test\n\tpublic\
+    \ void testSolution2() {\n\t\tArrayList<Publisher> operators = new ArrayList<>();\n\
+    \t\tHooks.onEachOperator(e -> {\n\t\t\toperators.add(e);\n\t\t\treturn e;\n\t\t\
+    });\n\n\t\ttry {\n\t\t\tUnicastProcessor<String> source = UnicastProcessor.create();\n\
+    \t\t\tEmitterProcessor<String> consumer1 = EmitterProcessor.create(true);\n\t\t\
+    \tEmitterProcessor<String> consumer2 = EmitterProcessor.create(true);\n\t\t\t\
+    BaseSubscriber<String> consumer3 = new BaseSubscriber<String>() {\n\t\t\t};\n\n\
+    \t\t\tPublisher<String> publisher = Task.transformToHotWithOperator(source);\n\
+    \n\t\t\tpublisher.subscribe(consumer1);\n\n\t\t\tsource.onNext(\"A\");\n\t\t\t\
+    source.onNext(\"B\");\n\t\t\tsource.onNext(\"C\");\n\n\t\t\tpublisher.subscribe(consumer2);\n\
+    \n\t\t\tsource.onNext(\"D\");\n\t\t\tsource.onNext(\"E\");\n\t\t\tsource.onNext(\"\
+    F\");\n\n\t\t\tpublisher.subscribe(consumer3);\n\n\t\t\tconsumer3.dispose();\n\
+    \n\t\t\tStepVerifier.create(consumer1)\n\t\t\t            .expectSubscription()\n\
+    \t\t\t            .expectNext(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\")\n\t\t\t\
+    \            .thenCancel()\n\t\t\t.verify();\n\n\t\t\tStepVerifier.create(consumer2)\n\
+    \t\t\t            .expectSubscription()\n\t\t\t            .expectNext(\"A\",\
+    \ \"B\", \"C\", \"D\", \"E\", \"F\")\n\t\t\t            .thenCancel()\n\t\t\t\
+    .verify();\n\n\t\t\tAssertions.assertThat(consumer3.isDisposed())\n\t\t\t    \
+    \      .isTrue();\n\n\t\t\tAssertions.assertThat(source.isDisposed())\n\t\t\t\
+    \          .isTrue();\n\t\t}\n\t\tfinally {\n\t\t\tHooks.resetOnEachOperator();\n\
+    \t\t}\n\n\t\tAssertions.assertThat(operators)\n\t\t          .as(\"Expected usage\
+    \ of built-in operator\")\n\t\t          .anyMatch(p -> p.getClass()\n\t\t   \
+    \                       .equals(Flux.just(1)\n\t\t                           \
+    \           .hide()\n\t\t                                      .publish()\n\t\t\
+    \                                      .getClass()));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

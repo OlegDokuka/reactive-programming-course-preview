@@ -1,0 +1,83 @@
+type: edu
+custom_name: Task 5
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.html
+  visible: false
+  text: |-
+    <html>
+    Сгрупируйте все елементы в <code>Flux</code> по первой букве
+    <div class="hint">
+        Используйте <code>Flux#groupBy</code>
+    </div>
+    </html>
+  learner_created: false
+- name: test/MultipleSourcesTask5Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.test.StepVerifier;\nimport reactor.util.function.Tuples;\n\npublic\
+    \ class MultipleSourcesTask5Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\
+    \t\tStepVerifier\n\t\t\t.create(Flux.from(Task.groupWordsByFirstLatter(Flux.just(\n\
+    \t\t\t\t\"ABCA\",\n\t\t\t\t\"BCDBB\",\n\t\t\t\t\"CDE\",\n\t\t\t\t\"BEF\",\n\t\t\
+    \t\t\"ADE\",\n\t\t\t\t\"CFG\")))\n\t\t\t)\n            .expectSubscription()\n\
+    \            .expectNext(Tuples.of('A', 3))\n            .expectNext(Tuples.of('B',\
+    \ 4))\n            .expectNext(Tuples.of('C', 2))\n            .verifyComplete();\n\
+    \t}\n}"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 358
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 358
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "words\n\t\t\t\t.transform(Task::groupByFirstLetter)\n\
+      \t\t\t\t.transform(Task::countLettersInWordsInGroup);"
+  - offset: 497
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 497
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: words.groupBy(s -> s.charAt(0));
+  - offset: 674
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 674
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "groupedWords\n\t\t\t\t.flatMap(wordsFlux-> wordsFlux\n\
+      \t\t\t\t\t\t.map(s -> {\n\t\t\t\t\t\t\tint cnt = 0;\n\n\t\t\t\t\t\t\tfor (char\
+      \ c: s.toCharArray()) {\n\t\t\t\t\t\t\t\tif (c == wordsFlux.key()) {\n\t\t\t\
+      \t\t\t\t\t\tcnt++;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\treturn\
+      \ cnt;\n\t\t\t\t\t\t})\n\t\t\t\t\t\t.collect(Collectors.summingInt(Integer::intValue))\n\
+      \t\t\t\t\t\t.map(cnt -> Tuples.of(wordsFlux.key(), cnt))\n\t\t\t\t);"
+  text: "import java.util.stream.Collectors;\n\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.GroupedFlux;\n\
+    import reactor.util.function.Tuple2;\nimport reactor.util.function.Tuples;\n\n\
+    public class Task {\n\n\tpublic static Publisher<Tuple2<Character, Integer>> groupWordsByFirstLatter(Flux<String>\
+    \ words) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n\n\tpublic static\
+    \ Flux<GroupedFlux<Character, String>> groupByFirstLetter(Flux<String> words)\
+    \ {\n\t\treturn Flux.error(new ToDoException());\n\t}\n\n\tpublic static Flux<Tuple2<Character,\
+    \ Integer>> countLettersInWordsInGroup(Flux<GroupedFlux<Character,\n\t\t\tString>>\
+    \ groupedWords) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

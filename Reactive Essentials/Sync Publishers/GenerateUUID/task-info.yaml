@@ -1,0 +1,66 @@
+type: edu
+custom_name: Task 2
+files:
+- name: test/CommonPublishersTask2Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.UUID;\n\nimport org.junit.jupiter.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
+    \ reactor.test.StepVerifier;\n\npublic class CommonPublishersTask2Tests {\n\n\t\
+    @Test\n\tpublic void testSolution() {\n\t\tGenerateUUIDTask.uuidGenerator = Mockito.mock(UUIDGenerator.class);\n\
+    \t\tMockito.when(GenerateUUIDTask.uuidGenerator.secureUUID()).thenReturn(\"test-uuid\"\
+    );\n\n\t\tObject sequence = GenerateUUIDTask.generateRandomUUID();\n\n\t\tMockito.verify(GenerateUUIDTask.uuidGenerator,\
+    \ Mockito.times(0)).secureUUID();\n\n\t\tif (!(sequence instanceof Mono)) {\n\t\
+    \t\tAssertions.fail(\"You need to refactor API so it uses Reactive API properly\"\
+    );\n\t\t}\n\n\t\tStepVerifier.create(((Mono<String>) sequence))\n\t\t\t\t\t.expectNext(\"\
+    test-uuid\")\n\t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Flux` из одного елемента\n   \n<div class=\"hint\">\n  Испо\
+    льзуйте Flux.just\n</div>"
+  learner_created: false
+- name: src/UUIDGenerator.java
+  visible: true
+  text: |
+    public interface UUIDGenerator {
+        String secureUUID();
+    }
+  learner_created: false
+- name: src/GenerateUUIDTask.java
+  visible: true
+  placeholders:
+  - offset: 123
+    length: 6
+    placeholder_text: String
+    initial_state:
+      length: 6
+      offset: 123
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: Mono<String>
+  - offset: 162
+    length: 27
+    placeholder_text: uuidGenerator.secureUUID();
+    initial_state:
+      length: 27
+      offset: 162
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: Mono.defer(() -> Mono.just(uuidGenerator.secureUUID()));
+  text: "import reactor.core.publisher.Mono;\n\npublic class GenerateUUIDTask {\n\n\
+    \tstatic UUIDGenerator uuidGenerator;\n\n\tpublic static String generateRandomUUID()\
+    \ {\n\t\treturn uuidGenerator.secureUUID();\n\t}\n}"
+  learner_created: false
+status: Failed
+record: -1

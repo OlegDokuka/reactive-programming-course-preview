@@ -1,0 +1,49 @@
+type: edu
+custom_name: Task 7
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 356
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 356
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "values\n\t\t\t\t.handle(new BiConsumer<Integer, SynchronousSink<Integer>>()\
+      \ {\n\t\t\t\t\t@Override\n\t\t\t\t\tpublic void accept(Integer integer, SynchronousSink<Integer>\
+      \ integerSynchronousSink) {\n\t\t\t\t\t\ttry {\n\t\t\t\t\t\t\tfinal Integer\
+      \ mappingResult = mapping.apply(integer);\n\t\t\t\t\t\t\tintegerSynchronousSink.next(mappingResult);\n\
+      \t\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\t\t// ignore\n\t\t\t\t\t\t}\n\
+      \t\t\t\t\t}\n\t\t\t\t});"
+  text: "import java.util.function.BiConsumer;\nimport java.util.function.Function;\n\
+    \nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.publisher.SynchronousSink;\n\npublic class Task {\n\n\tpublic\
+    \ static Publisher<Integer> provideHandmadeContinuation(Flux<Integer> values,\n\
+    \t\t\tFunction<Integer,\n\t\t\tInteger> mapping) {\n\n\t\treturn Flux.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/ResilienceTask7Tests.java
+  visible: false
+  text: "import java.util.function.Function;\n\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class ResilienceTask7Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    Function<Integer, Integer> mapping = i -> 10 / i;\n\t\tFlux<Integer> range = Flux.range(0,\
+    \ 6);\n\n\t\tStepVerifier.create(Task.provideHandmadeContinuation(range, mapping))\n\
+    \t\t            .expectSubscription()\n\t\t            .expectNextCount(5)\n\t\
+    \t            .expectAccessibleContext()\n\t\t            .hasSize(0)\n\t\t  \
+    \          .then()\n\t\t            .expectComplete()\n\t\t            .verify();\n\
+    \t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

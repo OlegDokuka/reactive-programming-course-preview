@@ -1,0 +1,53 @@
+type: edu
+custom_name: Task 4
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 187
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 187
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux.firstWithSignal(sources);
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> fromFirstEmitted(Publisher<String>...\
+    \ sources) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask4Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultipleSourcesTask4Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    StepVerifier\n\t\t\t.withVirtualTime(() -> Task.fromFirstEmitted(\n\t\t\t\tFlux.just(\"\
+    a\").delaySubscription(Duration.ofSeconds(1)),\n\t\t\t\tFlux.just(\"b\", \"c\"\
+    ).delaySubscription(Duration.ofMillis(100)),\n\t\t\t\tFlux.just(\"D\", \"Z\").delaySubscription(Duration.ofMillis(10)))\n\
+    \t\t\t)\n            .expectSubscription()\n            .expectNoEvent(Duration.ofMillis(10))\n\
+    \            .expectNext(\"D\", \"Z\")\n            .expectComplete()\n      \
+    \      .verify(Duration.ofMillis(4000));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.html
+  visible: false
+  text: |-
+    <html>
+    У вас есть несколько источников (a.k.a <code>Publisher</code>) информации. Вам
+    необходимо подписаться на все практически одновременно и работать только с наиболее
+    быстрым
+    <div class="hint">
+        Используйте <code>Flux.first</code>
+    </div>
+    </html>
+  learner_created: false
+status: Unchecked
+record: -1

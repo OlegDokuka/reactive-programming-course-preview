@@ -1,0 +1,45 @@
+type: edu
+custom_name: Task 4
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: test/ResilienceTask4Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
+    \nimport org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class ResilienceTask4Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    StepVerifier.withVirtualTime(() -> Task.timeoutLongOperation(CompletableFuture.supplyAsync(\n\
+    \t\t\t\t() -> {\n\t\t\t\t\ttry {\n\t\t\t\t\t\tThread.sleep(1000000);\n\t\t\t\t\
+    \t}\n\t\t\t\t\tcatch (InterruptedException e) {\n\t\t\t\t\t\treturn null;\n\t\t\
+    \t\t\t}\n\n\t\t\t\t\treturn \"Toooooo long\";\n\t\t\t\t}), Duration.ofMillis(1000),\
+    \ \"Hello\"))\n\t\t            .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofSeconds(1))\n\
+    \t\t            .expectNext(\"Hello\")\n\t\t            .expectComplete()\n\t\t\
+    \            .verify(Duration.ofSeconds(1));\n\t}\n}"
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 318
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 318
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono.fromFuture(longRunningCall)\n\t\t           .timeout(duration,\
+      \ Mono.just(fallback));"
+  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
+    \nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class Task {\n\n\tpublic static Publisher<String> timeoutLongOperation(CompletableFuture<String>\
+    \ longRunningCall,\n\t\t\tDuration duration, String fallback) {\n\t\treturn Mono.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,61 @@
+type: edu
+custom_name: Task 4
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Сгенерируйте `Mono` из `Callable`\n   \n<div class=\"hint\">\n  Используй\
+    те Mono.fromCallback\n</div>"
+  learner_created: false
+- name: test/CommonPublishersTask5Tests.java
+  visible: false
+  text: "import java.io.File;\nimport java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class CommonPublishersTask5Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tObject file = CreateTempFileTask.createTempFile(\"test\", null);\n\n\t\
+    \tif (!(file instanceof Mono)) {\n\t\t\t((File) file).deleteOnExit();\n\t\t}\n\
+    \n\t\tStepVerifier.create(((Mono<File>) file))\n\t\t            .expectNextMatches(f\
+    \ -> {\n\t\t\t\t\t\tboolean exists = f.exists();\n\t\t\t\t\t\tf.deleteOnExit();\n\
+    \t\t\t\t\t\treturn exists;\n\t\t\t\t\t})\n\t\t            .expectComplete()\n\t\
+    \t            .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: src/CreateTempFileTask.java
+  visible: true
+  placeholders:
+  - offset: 174
+    length: 4
+    placeholder_text: File
+    initial_state:
+      length: 4
+      offset: 174
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Mono<File>
+  - offset: 228
+    length: 131
+    placeholder_text: "try { \n \t\t\t return File.createTempFile(prefix, suffix);\n\
+      \ \t\t} catch(IOException e) { \n \t\t\t throw new UncheckedIOException(e);\
+      \ \n \t\t} "
+    initial_state:
+      length: 131
+      offset: 228
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: return Mono.fromCallable(() -> File.createTempFile(prefix,
+      suffix));
+  text: "import java.io.File;\nimport java.io.IOException;\nimport java.io.UncheckedIOException;\n\
+    \nimport reactor.core.publisher.Mono;\n\npublic class CreateTempFileTask {\n\n\
+    \tpublic static File createTempFile(String prefix, String suffix) {\n\t\ttry {\
+    \ \n \t\t\t return File.createTempFile(prefix, suffix);\n \t\t} catch(IOException\
+    \ e) { \n \t\t\t throw new UncheckedIOException(e); \n \t\t} \n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

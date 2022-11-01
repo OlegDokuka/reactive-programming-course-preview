@@ -1,0 +1,48 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 403
+    length: 27
+    placeholder_text: throw new ToDoException());
+    initial_state:
+      length: 27
+      offset: 403
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "StepVerifier.withVirtualTime(toVerify)\n\t\t     \
+      \       .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofDays(5))\n\
+      \t\t            .thenAwait(Duration.ofDays(1))\n\t\t            .expectNext(5L)\n\
+      \t\t            .thenAwait(Duration.ofDays(10))\n\t\t            .expectNext(6L,\
+      \ 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L)\n\t\t            .expectComplete()\n\t\
+      \t            .verify(Duration.ofMillis(1000));"
+  text: "import java.time.Duration;\nimport java.util.function.Supplier;\n\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ Task {\n\n\tpublic static void verifyEmissionWithVirtualTimeScheduler() {\n\t\
+    \tSupplier<Flux<Long>> toVerify = () -> Flux.interval(Duration.ofDays(1))\n\t\t\
+    \                                          .take(15)\n\t\t                   \
+    \                       .skip(5);\n\t\tthrow new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor:reactor-test'
+    }
+  learner_created: false
+- name: test/TestingTask2Tests.java
+  visible: false
+  text: "import java.util.concurrent.CountDownLatch;\nimport java.util.concurrent.TimeUnit;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    \npublic class TestingTask2Tests {\n\n\t@Test\n\tpublic void testSolution() throws\
+    \ InterruptedException {\n\t\tCountDownLatch latch = new CountDownLatch(1);\n\t\
+    \tnew Thread(() -> {\n\t\t\tTask.verifyEmissionWithVirtualTimeScheduler();\n\t\
+    \t\tlatch.countDown();\n\t\t}).start();\n\n\t\tAssertions.assertThat(latch.await(10,\
+    \ TimeUnit.SECONDS))\n\t\t          .isTrue();\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

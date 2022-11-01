@@ -1,0 +1,206 @@
+type: edu
+custom_name: Distributed Transactions
+files:
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor.addons:reactor-extra'
+    }
+  learner_created: false
+- name: src/Result.java
+  visible: true
+  text: "public interface Result {\n\n\tstatic Result error(Throwable t) {\n\t\treturn\
+    \ new ErrorResult(t);\n\t}\n\n\tstatic Result ok(long transactionId) {\n\t\treturn\
+    \ new SuccessResult(transactionId);\n\t}\n\n\tThrowable error();\n\n\tlong transactionId();\n\
+    }\n"
+  learner_created: false
+- name: src/DatabaseApi.java
+  visible: true
+  text: "import reactor.core.publisher.Mono;\n\npublic interface DatabaseApi {\n\n\
+    \tpublic <T> Mono<Connection<T>> open();\n\n\tpublic Mono<Void> rollbackTransaction(long\
+    \ id);\n}\n"
+  learner_created: false
+- name: test/CPTask5Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.function.Consumer;\nimport java.util.function.Supplier;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    import reactor.core.publisher.MonoProcessor;\nimport reactor.core.publisher.UnicastProcessor;\n\
+    import reactor.test.StepVerifier;\n\npublic class CPTask5Tests {\n\n\t@Test\n\t\
+    public void ensureItWorksInCaseOfConnectionOpenIssue() {\n\t\tUnicastProcessor<Integer>\
+    \ holder1 = UnicastProcessor.create();\n\t\tUnicastProcessor<Integer> holder2\
+    \ = UnicastProcessor.create();\n\t\tDatabaseApi mockOracleDb = Mockito.mock(DatabaseApi.class);\n\
+    \t\tDatabaseApi mockFileDb = Mockito.mock(DatabaseApi.class);\n\t\tDatabasesIntegration\
+    \ integration =\n\t\t\t\tnew DatabasesIntegration(mockOracleDb, mockFileDb);\n\
+    \t\tTestConnection testConnection1 = new TestConnection();\n\t\tTestConnection\
+    \ testConnection2 = new TestConnection();\n\n\t\ttestConnection1.dataHandler =\n\
+    \t\t\t\t(f) -> f.concatMap(i -> Mono.delay(Duration.ofMillis(1))\n\t\t\t\t   \
+    \                         .thenReturn(i))\n\t\t\t\t        .doAfterTerminate(()\
+    \ -> testConnection1.writeDone.onNext(1L))\n\t\t\t\t        .subscribe(holder1);\n\
+    \t\ttestConnection2.dataHandler =\n\t\t\t\t(f) -> f.doAfterTerminate(() -> testConnection2.writeDone.onNext(2L))\n\
+    \t\t\t\t        .subscribe(holder2);\n\n\t\tMockito.when(mockFileDb.<Integer>open())\n\
+    \t\t       .thenReturn(Mono.defer(new Supplier<Mono<? extends Connection<Integer>>>()\
+    \ {\n\t\t\t       boolean once = false;\n\n\t\t\t       @Override\n\t\t\t    \
+    \   public Mono<? extends Connection<Integer>> get() {\n\t\t\t       \tif(!once)\
+    \ {\n\t\t\t       \t\tonce = true;\n\t\t\t\t        return Mono.error(IllegalAccessError::new);\n\
+    \t\t\t        }\n\n\t\t\t       \treturn Mono.just(testConnection1);\n\t\t\t \
+    \      }\n\t\t       }));\n\t\tMockito.when(mockOracleDb.<Integer>open())\n\t\t\
+    \       .thenReturn(Mono.just(testConnection2));\n\n\t\tMockito.when(mockFileDb.rollbackTransaction(Mockito.anyLong()))\n\
+    \t\t       .thenReturn(Mono.empty());\n\t\tMockito.when(mockOracleDb.rollbackTransaction(Mockito.anyLong()))\n\
+    \t\t       .thenReturn(Mono.empty());\n\n\t\tStepVerifier.create(integration.storeToDatabases(Flux.range(0,\
+    \ 102)\n\t\t                                                     .subscribeWith(\n\
+    \t\t\t\t                                                     UnicastProcessor.create())))\n\
+    \t\t            .expectSubscription()\n\t\t            .expectComplete()\n\t\t\
+    \            .verify(Duration.ofMillis(10000));\n\n\t\tAssertions.assertThat(holder1.isTerminated())\n\
+    \t\t          .isTrue();\n\t\tAssertions.assertThat(holder2.isTerminated())\n\t\
+    \t          .isTrue();\n\n\t\tStepVerifier.create(holder1)\n\t\t            .expectNext(0)\n\
+    \t\t            .expectNextCount(100)\n\t\t            .expectNext(101)\n\t\t\
+    \            .verifyComplete();\n\n\t\tStepVerifier.create(holder2)\n\t\t    \
+    \        .expectNext(0)\n\t\t            .expectNextCount(100)\n\t\t         \
+    \   .expectNext(101)\n\t\t            .verifyComplete();\n\t}\n\n\t@Test\n\tpublic\
+    \ void ensureItRollbacksEverythingInCaseOfErrorInOne()\n\t\t\tthrows InterruptedException\
+    \ {\n\t\tUnicastProcessor<Integer> holder1 = UnicastProcessor.create();\n\t\t\
+    UnicastProcessor<Integer> holder2 = UnicastProcessor.create();\n\t\tDatabaseApi\
+    \ mockOracleDb = Mockito.mock(DatabaseApi.class);\n\t\tDatabaseApi mockFileDb\
+    \ = Mockito.mock(DatabaseApi.class);\n\t\tDatabasesIntegration integration =\n\
+    \t\t\t\tnew DatabasesIntegration(mockOracleDb, mockFileDb);\n\t\tTestConnection\
+    \ testConnection1 = new TestConnection();\n\t\tTestConnection testConnection2\
+    \ = new TestConnection();\n\n\t\ttestConnection1.dataHandler =\n\t\t\t\t(f) ->\
+    \ f.concatMap(i -> Mono.delay(Duration.ofMillis(1))\n\t\t\t\t                \
+    \            .thenReturn(i))\n\t\t\t\t        .doAfterTerminate(() -> testConnection1.writeDone.onError(new\
+    \ RuntimeException()))\n\t\t\t\t        .subscribe(holder1);\n\t\ttestConnection2.dataHandler\
+    \ =\n\t\t\t\t(f) -> f.doAfterTerminate(() -> testConnection2.writeDone.onNext(1L))\n\
+    \t\t\t\t        .subscribe(holder2);\n\n\t\tMockito.when(mockFileDb.<Integer>open())\n\
+    \t\t       .thenReturn(Mono.just(testConnection1));\n\t\tMockito.when(mockOracleDb.<Integer>open())\n\
+    \t\t       .thenReturn(Mono.just(testConnection2));\n\n\t\tMockito.when(mockOracleDb.rollbackTransaction(Mockito.eq(1L)))\n\
+    \t\t       .thenReturn(Mono.empty());\n\n\t\tStepVerifier.create(integration.storeToDatabases(Flux.range(0,\
+    \ 100)\n\t\t                                                     .subscribeWith(\n\
+    \t\t\t\t                                                     UnicastProcessor.create())))\n\
+    \t\t            .expectSubscription()\n\t\t            .verifyError();\n\n\t\t\
+    Thread.sleep(1000);\n\n\t\tAssertions.assertThat(testConnection1.rolledBack)\n\
+    \t\t          .isTrue();\n\t\tMockito.verify(mockOracleDb)\n\t\t       .rollbackTransaction(Mockito.eq(1L));\n\
+    \t}\n\n\t@Test\n\tpublic void checkTimeoutWorked() throws InterruptedException\
+    \ {\n\t\tUnicastProcessor<Integer> holder1 = UnicastProcessor.create();\n\t\t\
+    UnicastProcessor<Integer> holder2 = UnicastProcessor.create();\n\t\tDatabaseApi\
+    \ mockOracleDb = Mockito.mock(DatabaseApi.class);\n\t\tDatabaseApi mockFileDb\
+    \ = Mockito.mock(DatabaseApi.class);\n\t\tDatabasesIntegration integration =\n\
+    \t\t\t\tnew DatabasesIntegration(mockOracleDb, mockFileDb);\n\t\tTestConnection\
+    \ testConnection1 = new TestConnection();\n\t\tTestConnection testConnection2\
+    \ = new TestConnection();\n\n\t\ttestConnection1.dataHandler =\n\t\t\t\t(f) ->\
+    \ f.concatMap(i -> Mono.delay(Duration.ofMillis(1))\n\t\t\t\t                \
+    \            .thenReturn(i))\n\t\t\t\t        .doAfterTerminate(() -> testConnection1.writeDone.onError(new\
+    \ RuntimeException()))\n\t\t\t\t        .subscribe(holder1);\n\t\ttestConnection2.dataHandler\
+    \ =\n\t\t\t\t(f) -> f.concatMap(i -> Mono.delay(Duration.ofMillis(1))\n\t\t\t\t\
+    \                            .thenReturn(i))\n\t\t\t\t        .doAfterTerminate(()\
+    \ -> testConnection1.writeDone.onError(new RuntimeException()))\n\t\t\t\t    \
+    \    .subscribe(holder2);\n\n\t\tMockito.when(mockFileDb.<Integer>open())\n\t\t\
+    \       .thenReturn(Mono.just(testConnection1));\n\t\tMockito.when(mockOracleDb.<Integer>open())\n\
+    \t\t       .thenReturn(Mono.just(testConnection2));\n\n\t\tStepVerifier.create(integration.storeToDatabases(Flux.range(0,\
+    \ 1000)\n\t\t                                                     .subscribeWith(\n\
+    \t\t\t\t                                                     UnicastProcessor.create())))\n\
+    \t\t            .expectSubscription()\n\t\t            .verifyError();\n\n\t\t\
+    Thread.sleep(1000);\n\n\t\tAssertions.assertThat(testConnection1.rolledBack)\n\
+    \t\t          .isTrue();\n\t\tAssertions.assertThat(testConnection2.rolledBack)\n\
+    \t\t          .isTrue();\n\t}\n\n\tclass TestConnection implements Connection<Integer>\
+    \ {\n\n\t\tConsumer<Flux<Integer>> dataHandler;\n\t\tfinal    MonoProcessor<Long>\
+    \ writeDone = MonoProcessor.create();\n\t\tvolatile boolean             rolledBack;\n\
+    \t\tvolatile boolean             closed;\n\n\t\t@Override\n\t\tpublic Mono<Long>\
+    \ write(Flux<Integer> data) {\n\t\t\tdataHandler.accept(data);\n\t\t\treturn writeDone;\n\
+    \t\t}\n\n\t\t@Override\n\t\tpublic Mono<Void> rollback() {\n\t\t\trolledBack =\
+    \ true;\n\t\t\treturn Mono.empty();\n\t\t}\n\n\t\t@Override\n\t\tpublic Mono<Void>\
+    \ close() {\n\t\t\tclosed = true;\n\t\t\treturn Mono.empty();\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: src/Connection.java
+  visible: true
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic interface Connection<T> {\n\n\tMono<Void> close();\n\n\tMono<Void> rollback();\n\
+    \n\tMono<Long> write(Flux<T> data);\n}\n"
+  learner_created: false
+- name: src/DatabasesIntegration.java
+  visible: true
+  placeholders:
+  - offset: 709
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 709
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "integerFlux\n\t\t\t.publish(sharedFlux -> {\n\n\t\t\
+      \t\tMono<Result> oracleDbResultTransactionId =\n\t\t\t\t\t\tdbWriteInTransaction(oracleDb,\
+      \ sharedFlux);\n\t\t\t\tMono<Result> fileDbResultTransactionId = dbWriteInTransaction(fileDb,\
+      \ sharedFlux);\n\n\t\t\t\tMono<Void> result = fileDbResultTransactionId\n\t\t\
+      \                .zipWith(oracleDbResultTransactionId)\n\t\t               \
+      \ .flatMap((tuple) -> {\n\t\t                    Result fileDbResult = tuple.getT1();\n\
+      \t\t                    Result oracleDbResult = tuple.getT2();\n\n\t\t     \
+      \               if (fileDbResult.error() == null && oracleDbResult.error() ==\
+      \ null) {\n\t\t                        return Mono.empty();\n\t\t          \
+      \          }\n\t\t                    else {\n\t\t                        if\
+      \ (fileDbResult.error() != null && oracleDbResult.error() != null) {\n\t\t \
+      \                           Throwable error = fileDbResult.error();\n\t\t  \
+      \                          error.addSuppressed(oracleDbResult.error());\n\n\t\
+      \t                            return Mono.error(error);\n\t\t              \
+      \          }\n\t\t                        else if (fileDbResult.error() != null)\
+      \ {\n\t\t                            long transactionId = oracleDbResult.transactionId();\n\
+      \n\t\t                            Mono<Void> voidMono =\n\t\t              \
+      \                      oracleDb.rollbackTransaction(transactionId);\n\n\t\t\
+      \                            return voidMono.then(Mono.error(fileDbResult.error()));\n\
+      \t\t                        }\n\t\t                        else {\n\t\t    \
+      \                        long transactionId = fileDbResult.transactionId();\n\
+      \n\t\t                            Mono<Void> voidMono =\n\t\t              \
+      \                      fileDb.rollbackTransaction(transactionId);\n\n\t\t  \
+      \                          return voidMono.then(Mono.error(oracleDbResult.error()));\n\
+      \t\t                        }\n\t\t                    }\n\t\t             \
+      \   });\n\n\t\t\t\treturn result;\n\t\t\t})\n\t\t\t.then();"
+  - offset: 850
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 850
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Mono\n\t\t        .usingWhen(\n\t\t              \
+      \  db.<Integer>open().retryWhen(Retry.max(10).filter(t -> t instanceof IllegalAccessError)),\n\
+      \t\t                objectConnection -> objectConnection.write(dataSource),\n\
+      \t\t                objectConnection -> objectConnection.close(),\n\t\t    \
+      \            (connection, t) -> connection.rollback()\n\t\t                \
+      \                             .then(connection.close()),\n\t\t             \
+      \   (connection) -> connection.rollback()\n\t\t                            \
+      \              .then(connection.close())\n\t\t        )\n                .map(id\
+      \ -> (Result) new SuccessResult(id))\n\t\t        .timeout(Duration.ofMillis(1000))\n\
+      \                .onErrorResume(throwable -> Mono.<Result>just(new ErrorResult(throwable)));"
+  text: "import java.time.Duration;\n\nimport reactor.core.publisher.Flux;\nimport\
+    \ reactor.core.publisher.Mono;\nimport reactor.util.retry.Retry;\n\npublic class\
+    \ DatabasesIntegration {\n\n\tprivate final DatabaseApi oracleDb;\n\tprivate final\
+    \ DatabaseApi fileDb;\n\n\tpublic DatabasesIntegration(DatabaseApi oracleDb, DatabaseApi\
+    \ fileDb) {\n\t\tthis.oracleDb = oracleDb;\n\t\tthis.fileDb = fileDb;\n\t}\n\n\
+    \tpublic Mono<Void> storeToDatabases(Flux<Integer> integerFlux) {\n\t\t// TODO:\
+    \ Main) Write data to both databases\n\t\t// TODO: 1) Ensure Transaction is rolled\
+    \ back in case of failure\n\t\t// TODO: 2) Ensure All transactions are rolled\
+    \ back ion case any of write operations fails\n\t\t// TODO: 3) Ensure Transaction\
+    \ lasts less than 1 sec\n\n\t\treturn Mono.error(new ToDoException());\n\t}\n\n\
+    \    static Mono<Result> dbWriteInTransaction(DatabaseApi db, Flux<Integer> dataSource)\
+    \ {\n        return Mono.error(new ToDoException());\n    }\n}\n"
+  learner_created: false
+- name: src/ErrorResult.java
+  visible: true
+  text: "public class ErrorResult implements Result {\n\n\tprivate final Throwable\
+    \ error;\n\n\tpublic ErrorResult(Throwable throwable) {\n\t\terror = throwable;\n\
+    \t}\n\n\t@Override\n\tpublic Throwable error() {\n\t\treturn error;\n\t}\n\n\t\
+    @Override\n\tpublic long transactionId() {\n\t\treturn -1;\n\t}\n}\n"
+  learner_created: false
+- name: src/SuccessResult.java
+  visible: true
+  text: "public class SuccessResult implements Result {\n\n\tprivate final long transactionId;\n\
+    \n\tpublic SuccessResult(long transactionId) {\n\n\t\tthis.transactionId = transactionId;\n\
+    \t}\n\n\t@Override\n\tpublic Throwable error() {\n\t\treturn null;\n\t}\n\n\t\
+    @Override\n\tpublic long transactionId() {\n\t\treturn transactionId;\n\t}\n}\n"
+  learner_created: false
+status: Unchecked
+record: -1

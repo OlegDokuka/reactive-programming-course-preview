@@ -1,0 +1,63 @@
+type: edu
+custom_name: Task 4
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 324
+    length: 8
+    placeholder_text: // fixme
+    initial_state:
+      length: 8
+      offset: 324
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: .subscribeOn(Schedulers.single())
+  - offset: 337
+    length: 8
+    placeholder_text: // fixme
+    initial_state:
+      length: 8
+      offset: 337
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: .publishOn(Schedulers.parallel())
+  text: "import java.util.function.Function;\n\nimport reactor.core.publisher.Flux;\n\
+    import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\n\t@SuppressWarnings({\"\
+    rawtypes\", \"unchecked\"})\n\tpublic static Flux<Long> modifyStreamExecution(\n\
+    \t\t\tFlux<Long> flux,\n\t\t\tFunction work1, Function work2) {\n\t\treturn flux\n\
+    \t\t\t\t.map(work1)\n\t\t\t\t// fixme\n\t\t\t\t// fixme\n\t\t\t\t.map(work2);\n\
+    \t}\n}"
+  learner_created: false
+- name: test/MultithreadingOperatorsTask4Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.LinkedList;\nimport java.util.Queue;\n\
+    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
+    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
+    \ class MultithreadingOperatorsTask4Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tQueue<Thread> threadsQueueOnGenerate = new LinkedList<>();\n\t\tQueue<Thread>\
+    \ threadsQueueOnWork1 = new LinkedList<>();\n\t\tQueue<Thread> threadsQueueOnWork2\
+    \ = new LinkedList<>();\n\t\tStepVerifier\n\t\t\t\t.create(Task.modifyStreamExecution(\n\
+    \t\t\t\t\tFlux.<Long, Long>generate(() -> 0L, (s, sink) -> {\n\t\t\t\t\t\tsink.next(s);\n\
+    \t\t\t\t\t\tthreadsQueueOnGenerate.add(Thread.currentThread());\n\t\t\t\t\t\t\
+    return s + 1;\n\t\t\t\t\t}).take(10000),\n\t\t\t\t\t(e) -> {\n\t\t\t\t\t\tthreadsQueueOnWork1.add(Thread.currentThread());\n\
+    \t\t\t\t\t\treturn e;\n\t\t\t\t\t},\n\t\t\t\t\t(e) -> {\n\t\t\t\t\t\tthreadsQueueOnWork2.add(Thread.currentThread());\n\
+    \t\t\t\t\t\treturn e;\n\t\t\t\t\t}\n\t\t\t\t).limitRate(32))\n\t            .expectSubscription()\n\
+    \t            .expectNextCount(10000)\n\t            .expectComplete()\n\t   \
+    \         .verify(Duration.ofMillis(2000));\n\n\t\tAssertions.assertThat(threadsQueueOnGenerate)\n\
+    \t\t          .hasSameSizeAs(threadsQueueOnWork1)\n\t\t          .containsExactlyElementsOf(threadsQueueOnWork1)\n\
+    \t\t\t\t  .allMatch(t -> t.getName().startsWith(\"single-\"));\n\n\t\tAssertions.assertThat(threadsQueueOnWork2)\n\
+    \t\t          .doesNotContainAnyElementsOf(threadsQueueOnGenerate)\n\t\t     \
+    \     .allMatch(t -> t.getName().startsWith(\"parallel-\"));\n\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,69 @@
+type: edu
+custom_name: Task 8
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 256
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 256
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "clientPreferences.switchMap(type -> {\n\t\t\tswitch\
+      \ (type) {\n\t\t\t\tcase VANILLA:\n\t\t\t\t\treturn vanillaIceCreamStream;\n\
+      \t\t\t\tcase CHOCOLATE:\n\t\t\t\t\treturn chocolateIceCreamStream;\n\t\t\t\t\
+      default:\n\t\t\t\t\treturn Flux.error(new IllegalArgumentException(\"Unsupported\
+      \ IceCream Type \" + type));\n\t\t\t}\n\t\t});"
+  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
+    \ Flux<IceCreamBall> fillIceCreamWaffleBowl(Flux<IceCreamType> clientPreferences,\n\
+    \t\t\tFlux<IceCreamBall> vanillaIceCreamStream,\n\t\t\tFlux<IceCreamBall> chocolateIceCreamStream)\
+    \ {\n\t\treturn Flux.error(new ToDoException());\n\t}\n\n\tstatic class IceCreamBall\
+    \ {\n\n\t\tprivate final String type;\n\n\t\tpublic IceCreamBall(String type)\
+    \ {\n\t\t\tthis.type = type;\n\t\t}\n\n\t\t@Override\n\t\tpublic boolean equals(Object\
+    \ o) {\n\t\t\tif (this == o) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t\tif (o ==\
+    \ null || getClass() != o.getClass()) {\n\t\t\t\treturn false;\n\t\t\t}\n\n\t\t\
+    \tIceCreamBall that = (IceCreamBall) o;\n\n\t\t\treturn type != null ? type.equals(that.type)\
+    \ : that.type == null;\n\t\t}\n\n\t\t@Override\n\t\tpublic int hashCode() {\n\t\
+    \t\treturn type != null ? type.hashCode() : 0;\n\t\t}\n\n\t\tpublic static IceCreamBall\
+    \ ball(String type) {\n\t\t\treturn new IceCreamBall(type);\n\t\t}\n\n\t\t@Override\n\
+    \t\tpublic String toString() {\n\t\t\treturn type;\n\t\t}\n\t}\n\n\tenum IceCreamType\
+    \ {\n\t\tVANILLA, CHOCOLATE\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask8Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultipleSourcesTask8Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    StepVerifier\n\t\t\t\t.withVirtualTime(() -> Task.fillIceCreamWaffleBowl(\n\t\t\
+    \t\t\t\tFlux.just(Task.IceCreamType.VANILLA, Task.IceCreamType.VANILLA, Task.IceCreamType.CHOCOLATE,\
+    \ Task.IceCreamType.VANILLA, Task.IceCreamType.CHOCOLATE, Task.IceCreamType.CHOCOLATE).delayElements(\n\
+    \t\t\t\t\t\t\t\tDuration.ofSeconds(1)),\n\t\t\t\t\t\tFlux.interval(Duration.ofMillis(500)).map(i\
+    \ -> Task.IceCreamBall.ball(\"A\" + i)).onBackpressureDrop().publish(1).autoConnect(0),\n\
+    \t\t\t\t\t\tFlux.interval(Duration.ofMillis(200)).map(i -> Task.IceCreamBall.ball(\"\
+    B\" + i)).onBackpressureDrop().publish(1).autoConnect(0)\n\t\t\t\t).map(Object::toString))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\
+    \t\t\t\t.thenAwait(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"A1\", \"A2\"\
+    )\n\t\t\t\t.thenAwait(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"A3\", \"A4\"\
+    )\n\t\t\t\t.thenAwait(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"B14\", \"\
+    B15\", \"B16\", \"B17\", \"B18\")\n\t\t\t\t.thenAwait(Duration.ofSeconds(1))\n\
+    \t\t\t\t.expectNext(\"A5\", \"A7\", \"A8\")\n\t\t\t\t.thenAwait(Duration.ofSeconds(1))\n\
+    \t\t\t\t.expectNext(\"B19\", \"B24\", \"B25\", \"B26\", \"B27\", \"B28\")\n\t\t\
+    \t\t.thenAwait(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"B29\", \"B30\", \"\
+    B31\", \"B32\", \"B33\")\n\t\t\t\t// Actually the last source is infinitive stream\n\
+    \t\t\t\t// and because of switchMap nature we required to cancel the upstream\n\
+    \t\t\t\t// instead of merely awaiting the completion signal from upstream\n\t\t\
+    \t\t.thenCancel()\n\t\t\t\t.verify();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,86 @@
+type: edu
+custom_name: Task 11
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 154
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 154
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "input.map(i -> i % 3 == 0 ? new IndexedWord(i, \"\
+      Fizz\") :\n\t\t\t\tnew IndexedWord(i, \"\"))\n\t\t            .map(iw -> iw.getIndex()\
+      \ % 5 == 0 ?\n\t\t\t\t            new IndexedWord(iw.getIndex(), iw.getWord()\
+      \ + \"Buzz\") : iw)\n\t\t            .map(iw -> iw.getWord()\n\t\t         \
+      \                .isEmpty() ? iw.getIndex() + \"\" : iw.getWord());"
+  text: "import java.util.Objects;\n\nimport reactor.core.publisher.Flux;\n\npublic\
+    \ class Task {\n\n\tpublic static Flux<String> fizzBuzz(Flux<Integer> input) {\n\
+    \t\treturn Flux.error(new ToDoException());\n\t}\n\n\tstatic class IndexedWord\
+    \ {\n\n\t\tprivate final int    index;\n\t\tprivate final String word;\n\n\t\t\
+    public IndexedWord(int index, String word) {\n\t\t\tthis.index = index;\n\t\t\t\
+    this.word = Objects.requireNonNull(word);\n\t\t}\n\n\t\tpublic boolean equals(Object\
+    \ o) {\n\t\t\tif (o == this) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t\tif (!(o instanceof\
+    \ IndexedWord)) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tfinal IndexedWord other\
+    \ = (IndexedWord) o;\n\t\t\tif (this.getIndex() != other.getIndex()) {\n\t\t\t\
+    \treturn false;\n\t\t\t}\n\t\t\tfinal Object this$word = this.getWord();\n\t\t\
+    \tfinal Object other$word = other.getWord();\n\t\t\tif (this$word == null ? other$word\
+    \ != null : !this$word.equals(other$word)) {\n\t\t\t\treturn false;\n\t\t\t}\n\
+    \t\t\treturn true;\n\t\t}\n\n\t\tpublic int getIndex() {\n\t\t\treturn this.index;\n\
+    \t\t}\n\n\t\tpublic String getWord() {\n\t\t\treturn this.word;\n\t\t}\n\n\t\t\
+    public int hashCode() {\n\t\t\tfinal int PRIME = 59;\n\t\t\tint result = 1;\n\t\
+    \t\tresult = result * PRIME + this.getIndex();\n\t\t\tfinal Object $word = this.getWord();\n\
+    \t\t\tresult = result * PRIME + ($word == null ? 43 : $word.hashCode());\n\t\t\
+    \treturn result;\n\t\t}\n\n\t\tpublic String toString() {\n\t\t\treturn \"IndexedWord(index=\"\
+    \ + this.getIndex() + \", word=\" + this.getWord() + \")\";\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask11Tests.java
+  visible: false
+  text: "import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.assertj.core.api.Assertions;\n\
+    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.BaseSubscriber;\n\
+    import reactor.core.publisher.Flux;\n\npublic class CommonOperatorsTask11Tests\
+    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tTask.fizzBuzz(Flux.range(1,\
+    \ 100))\n\t\t    .zipWith(Flux.range(1, 100),\n\t\t\t\t    (word, index) -> new\
+    \ Task.IndexedWord(index, word))\n\t\t    .subscribe(new FizzBuzzVerifier());\n\
+    \t}\n\n\tstatic class FizzBuzzVerifier extends BaseSubscriber<Task.IndexedWord>\
+    \ {\n\n\t\tprivate final AtomicInteger counter = new AtomicInteger();\n\n\t\t\
+    @Override\n\t\tpublic void hookOnComplete() {\n\t\t\tif (counter.get() < 100)\
+    \ {\n\t\t\t\tAssertions.fail(\"Unexpected termination, should be 100 elements\
+    \ emitted\");\n\t\t\t}\n\t\t}\n\n\t\t@Override\n\t\tpublic void hookOnError(Throwable\
+    \ e) {\n\t\t\tAssertions.fail(\"Unexpected throwable [\" + e + \"]\");\n\t\t}\n\
+    \n\t\t@Override\n\t\tpublic void hookOnNext(Task.IndexedWord indexedWord) {\n\t\
+    \t\tif (indexedWord.getIndex() % 5 == 0 && indexedWord.getIndex() % 3 == 0) {\n\
+    \t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\t\t\t\t          .as(\"\
+    Should equal to FizzBuzz, but was [\" + indexedWord.getWord() + \"] instead\"\
+    )\n\t\t\t\t          .isEqualTo(\"FizzBuzz\");\n\t\t\t}\n\t\t\telse if (indexedWord.getIndex()\
+    \ % 3 == 0) {\n\t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\t\t\t\t\
+    \          .as(\"Should equal to Fizz, but was [\" + indexedWord.getWord() + \"\
+    ] instead\")\n\t\t\t\t          .isEqualTo(\"Fizz\");\n\t\t\t}\n\t\t\telse if\
+    \ (indexedWord.getIndex() % 5 == 0) {\n\t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\
+    \t\t\t\t          .as(\"Should equal to Buzz, but was [\" + indexedWord.getWord()\
+    \ + \"] instead\")\n\t\t\t\t          .isEqualTo(\"Buzz\");\n\t\t\t}\n\t\t\telse\
+    \ {\n\t\t\t\ttry {\n\t\t\t\t\tInteger.valueOf(indexedWord.getWord())\n\t\t\t\t\
+    \t       .toString();\n\t\t\t\t}\n\t\t\t\tcatch (Exception e) {\n\t\t\t\t\tAssertions.fail(\"\
+    Should be mapped to Number, but was [\" + indexedWord.getWord() + \"] instead\"\
+    );\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tcounter.incrementAndGet();\n\t\t}\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Решите задачу [FizzBuzz](https://ru.wikipedia.org/wiki/Fizz_buzz) использ\
+    уя `Flux` API\n   \n<div class=\"hint\">\n  Используйте вспомогательный класс\
+    \ <code>IndexedWord</code>\n  Используйте последовательность <code>Flux#map</code>\n\
+    </div>"
+  learner_created: false
+status: Unchecked
+record: -1

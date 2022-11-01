@@ -1,0 +1,45 @@
+type: edu
+custom_name: Task 7
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 162
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 162
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: flux.next();
+  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
+    \npublic class Task {\n\n\tpublic static Mono<Long> firstFromFlux(Flux<Long> flux)\
+    \ {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/CommonOperatorsTask7Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
+    \npublic class CommonOperatorsTask7Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tMono<Long> sequence = Task.firstFromFlux(Flux.just(1L, 2L, 3L, 4L)\n\t\
+    \t                                             .hide());\n\n\t\tStepVerifier.create(sequence)\n\
+    \t\t            .expectNext(1L)\n\t\t            .expectComplete()\n\t\t     \
+    \       .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  text: "Преобразуйте `Flux` в `Mono` используя первый полученный елемент из `Flux`\n\
+    \   \n<div class=\"hint\">\n  Используйте <code>Flux#next</code> или <code>Flux#single</code>\n\
+    </div>"
+  learner_created: false
+status: Unchecked
+record: -1

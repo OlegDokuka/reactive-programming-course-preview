@@ -1,0 +1,11 @@
+dependencies {
+
+  implementation 'io.projectreactor.addons:reactor-extra'
+  implementation 'org.mongodb:mongodb-driver-reactivestreams'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+  implementation 'io.r2dbc:r2dbc-spi'
+  implementation 'io.r2dbc:r2dbc-client'
+  implementation project(':Reactive_In_Action-Crypto_Tracker-trade-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-crypto-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-common')
+}

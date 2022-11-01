@@ -1,0 +1,50 @@
+type: edu
+custom_name: Task 6
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 303
+    length: 32
+    placeholder_text: Flux.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 303
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "Flux.zip(prefixPublisher, wordPublisher, suffixPublisher)\n\
+      \t\t           .map(TupleUtils.function((prefix, word, suffix) -> prefix + word\
+      \ + suffix));"
+  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
+    import reactor.function.TupleUtils;\n\npublic class Task {\n\n\tpublic static\
+    \ Publisher<String> zipSeveralSources(Publisher<String> prefixPublisher,\n\t\t\
+    \tPublisher<String> wordPublisher,\n\t\t\tPublisher<String> suffixPublisher) {\n\
+    \t\treturn Flux.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/MultipleSourcesTask6Tests.java
+  visible: false
+  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
+    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
+    \ MultipleSourcesTask6Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
+    StepVerifier.withVirtualTime(() -> Flux.from(Task.zipSeveralSources(Flux.interval(\n\
+    \t\t\t\tDuration.ofMillis(10))\n\t\t                                         \
+    \                               .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(5))\n\
+    \t\t\t\t    .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(1))\n\
+    \t\t\t\t    .map(Object::toString)))\n\t\t                                   \
+    \    .take(3))\n\t\t            .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
+    \t\t            .expectNext(\"000\")\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
+    \t\t            .expectNext(\"111\")\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
+    \t\t            .expectNext(\"222\")\n\t\t            .verifyComplete();\n\t}\n\
+    }"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+      implementation 'io.projectreactor.addons:reactor-extra'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,40 @@
+type: edu
+custom_name: Task 2
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 209
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 209
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: source.contextWrite(Context.of(key, value));
+  text: "import reactor.core.publisher.Mono;\nimport reactor.util.context.Context;\n\
+    \npublic class Task {\n\n\tpublic static Mono<String> provideCorrectContext(Mono<String>\
+    \ source,\n\t\t\tObject key,\n\t\t\tObject value) {\n\t\treturn Mono.error(new\
+    \ ToDoException());\n\t}\n}"
+  learner_created: false
+- name: test/ContextTask2Tests.java
+  visible: false
+  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Mono;\n\
+    import reactor.test.StepVerifier;\n\npublic class ContextTask2Tests {\n\n\t@Test\n\
+    \tpublic void testSolution() {\n\t\tStepVerifier.create(Task.provideCorrectContext(Mono.just(\"\
+    Test\"), \"Key\", \"Value\"))\n\t\t            .expectSubscription()\n\t\t   \
+    \         .expectAccessibleContext()\n\t\t            .contains(\"Key\", \"Value\"\
+    )\n\t\t            .then()\n\t\t            .expectNext(\"Test\")\n\t\t      \
+    \      .verifyComplete();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+status: Unchecked
+record: -1

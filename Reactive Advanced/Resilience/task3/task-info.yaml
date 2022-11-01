@@ -1,0 +1,42 @@
+type: edu
+custom_name: Task 3
+files:
+- name: test/ResilienceTask3Tests.java
+  visible: false
+  text: "import java.util.concurrent.Callable;\n\nimport org.junit.jupiter.api.Test;\n\
+    import org.mockito.Mockito;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
+    \npublic class ResilienceTask3Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ throws Exception {\n\t\tCallable<String> callable = Mockito.mock(Callable.class);\n\
+    \t\tMockito.when(callable.call())\n\t\t       .thenThrow(new RuntimeException())\n\
+    \t\t       .thenReturn(\"Hello\");\n\n\t\tStepVerifier\n\t\t\t\t.create(Task.retryOnError(Mono.fromCallable(callable)))\n\
+    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"Hello\")\n\t\t\t\t.expectComplete()\n\
+    \t\t\t\t.verify();\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 238
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 238
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: "publisher.retryWhen(Retry.backoff(10, Duration.ofMillis(100))\n\
+      \t\t                                .maxBackoff(Duration.ofMillis(500)));"
+  text: "import java.time.Duration;\n\nimport org.reactivestreams.Publisher;\nimport\
+    \ reactor.core.publisher.Mono;\nimport reactor.util.retry.Retry;\n\npublic class\
+    \ Task {\n\n\tpublic static Publisher<String> retryOnError(Mono<String> publisher)\
+    \ {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1

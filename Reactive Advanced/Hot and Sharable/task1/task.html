@@ -1,0 +1,9 @@
+<html>
+Share <code>Flux</code> in such a way so backpressure will be controlled by all the
+subscribers. Also, it should <code>connect</code> to the main <code>Flux</code>
+when the total number of subscriber reach number 3. In case all the subscribers has
+been disconnected, it should cancel the subscription.
+<div class="hint">
+    Use <code>Flux#publish</code> + <code>Flux.autoConnect</code> in the first case
+</div>
+</html>

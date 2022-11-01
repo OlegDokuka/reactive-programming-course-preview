@@ -1,0 +1,83 @@
+type: edu
+custom_name: Task 3
+files:
+- name: test/CommonPublishersTask3Tests.java
+  visible: false
+  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Arrays;\n\
+    import java.util.stream.Collectors;\nimport java.util.stream.Stream;\n\nimport\
+    \ org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport\
+    \ org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\
+    \npublic class CommonPublishersTask3Tests {\n\n\t@Test\n\tpublic void testSolution()\
+    \ {\n\t\tPropertiesSourceTask.settings = Mockito.mock(Properties.class);\n\t\t\
+    Mockito.when(PropertiesSourceTask.settings.asList()).thenReturn(Stream.of(\"1\"\
+    , \"2\", \"3\").map(n -> new Property<String>() {\n\t\t\t@Override\n\t\t\tpublic\
+    \ String name() {\n\t\t\t\treturn n;\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic\
+    \ String value() {\n\t\t\t\treturn n + \"-v\";\n\t\t\t}\n\t\t}).collect(Collectors.toList()));\n\
+    \t\tObject sequence = PropertiesSourceTask.createSequence();\n\n\t\tif (!(sequence\
+    \ instanceof Flux)) {\n\t\t\tAssertions.fail(\"Unexpected sequence type\");\n\t\
+    \t}\n\n\t\tStepVerifier.create(((Flux<Property<?>>) sequence).map(Property::name))\n\
+    \t\t            .expectNext(\"1\", \"2\", \"3\")\n\t\t            .expectComplete()\n\
+    \t\t            .verify(Duration.ofMillis(100));\n\t}\n}"
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    dependencies {
+      implementation 'io.projectreactor:reactor-core'
+    }
+  learner_created: false
+- name: task.ru.md
+  visible: true
+  text: "Сгенерируйте `Flux` из масива елементов\n   \n<div class=\"hint\">\n  Исп\
+    ользуйте Flux.fromArray\n</div>"
+  learner_created: false
+- name: src/Properties.java
+  visible: true
+  text: |+
+    import java.util.List;
+
+    public interface Properties {
+        <T> Property<T> get(String key);
+
+        List<Property<?>> asList();
+    }
+
+  learner_created: false
+- name: src/Property.java
+  visible: true
+  text: |
+    public interface Property<T> {
+        String name();
+
+        T value();
+    }
+  learner_created: false
+- name: src/PropertiesSourceTask.java
+  visible: true
+  placeholders:
+  - offset: 119
+    length: 21
+    placeholder_text: Iterable<Property<?>>
+    initial_state:
+      length: 21
+      offset: 119
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux<Property<?>>
+  - offset: 169
+    length: 18
+    placeholder_text: settings.asList();
+    initial_state:
+      length: 18
+      offset: 169
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: Flux.defer(() -> Flux.fromIterable(settings.asList()));
+  text: "import reactor.core.publisher.Flux;\n\npublic class PropertiesSourceTask\
+    \ {\n\n\tstatic Properties settings;\n\n\tpublic static Iterable<Property<?>>\
+    \ createSequence() {\n\t\treturn settings.asList();\n\t}\n}"
+  learner_created: false
+status: Unchecked
+record: -1
