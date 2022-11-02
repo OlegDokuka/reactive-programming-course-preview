@@ -12,7 +12,7 @@ files:
       offset: 324
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: .subscribeOn(Schedulers.single())
   - offset: 337
     length: 8
@@ -22,7 +22,7 @@ files:
       offset: 337
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: .publishOn(Schedulers.parallel())
   text: "import java.util.function.Function;\n\nimport reactor.core.publisher.Flux;\n\
     import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\n\t@SuppressWarnings({\"\
@@ -59,5 +59,5 @@ files:
       implementation 'io.projectreactor:reactor-core'
     }
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

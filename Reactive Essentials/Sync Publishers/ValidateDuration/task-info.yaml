@@ -1,28 +1,13 @@
 type: edu
 custom_name: Task 6
 files:
-- name: test/CommonPublishersTask6Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.test.StepVerifier;\n\npublic class CommonPublishersTask6Tests {\n\n\t\
-    @Test\n\tpublic void testValid() {\n\t\tStepVerifier.withVirtualTime(() -> ValidationTask.validate(Duration.ofMillis(10)))\n\
-    \t\t            .expectSubscription()\n\t\t\t\t\t.expectComplete()\n\t\t     \
-    \       .verify(Duration.ofMillis(100));\n\t}\n\n\t@Test\n\tpublic void testInvalid()\
-    \ {\n\t\tStepVerifier.withVirtualTime(() -> ValidationTask.validate(Duration.ofMillis(-10)))\n\
-    \t\t\t\t.expectSubscription()\n\t\t\t\t.expectError()\n\t\t\t\t.verify(Duration.ofMillis(100));\n\
-    \t}\n}"
-  learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Flux` с интервалом отправки элементов\n   \n<div class=\"hint\"\
-    >\n  Используйте <code>Flux.interval()</code>\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2weLbQLHVQLg3uq6awfUmILl/siQDPnV/8OZO9KdK7LASoqlIi21QscE8ndIGVLk/aMgjmDyMD5RLo1bAVqRtAT2qiZtEFyjmK1SjqfmqnMM7jC4n06fF7pXSCgn8Y9d/dTSfW+9b7uhUpBDoEkYP8dDjxRmjnPxme9S+OYhSo4tARKR5YdTmxh3aT0ZJcQSqA=
   learner_created: false
 - name: src/ValidationTask.java
   visible: true
@@ -35,8 +20,8 @@ files:
       offset: 111
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Mono<Void>
+    status: Unchecked
+    encrypted_possible_answer: QeeUNU0f10Ro/Xtp4YFehQ==
   - offset: 151
     length: 52
     placeholder_text: return !duration.isNegative() && !duration.isZero();
@@ -45,13 +30,13 @@ files:
       offset: 151
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "if (duration.isNegative() || duration.isZero()) {\n\
-      \t\t\treturn Mono.error(new IllegalArgumentException(\"Negative or zero duration\"\
-      ));\n\t\t} else {\n\t\t\treturn Mono.empty();\n\t\t}"
-  text: "import java.time.Duration;\n\nimport reactor.core.publisher.Mono;\n\npublic\
-    \ class ValidationTask {\n\n\tpublic static boolean validate(Duration duration)\
-    \ {\n\t\treturn !duration.isNegative() && !duration.isZero();\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: HnBbNQPot2Dyg3+1sWMGhwwCsSyBOfbWDxx4HFijdms1DsEjv+4x4EdZENJ7BDxndKVMCM5wtjTXX7LVSl8QwDjH1d3skrQTrxZQn9M6JoiaBH+Z1HvHeOT/4TpTGitsGIUApmk20AKSrWIabuoaSr2f7Pm/aRyokcI4xwHcYoObN4ws4gWFee2VFsI2S4Evs+pWKpc+Z6mFbZKuoJnopD4Dc/OeMXWYe69CVcgdgVc=
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3knR9okvFLEh/N3xw/yugTqMVsDR3JZPPP0zWET6lA4dLdXlTCEx4N6cSQHkcuzQIkAnxzwiFFKoJn3sy7N+0Fb+2OJZA0B69YnR4DPqKsOdTeEO+1EDv8mBGwjnlSDYsT3538si2/v4d8MW5AKC52VuqNcYLDFSfbc7OzFwtJCt8dlc8JRlSRkSYwxEbHkTRgUgSe3WWLgvfv/yIBy1bKeCc7W+Hm777MhlS8oV8wr0oiiFr9sTFsnJbZR8qx18x14=
   learner_created: false
-status: Failed
+- name: test/CommonPublishersTask6Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXeUfLEmAL6+vYG0EYbRWcLiuYXcjUvujO3EWd9I5xyjXlAM4M7Ncn08xxzun3Tw+dKb9co9gMprNtplidVx9PRUACDhm6pAh+gRPxZKqES4w5yeJZXZ3ioudD3SgV1fVrPi+tZDWpfxcX6UFxHc7ZRm0DNL9CRn3WXFUhiELzGDsMugMG1bfMW45/BUy9AfaAgGrIw1RPaW8pMikMFnw839aYH+x6PotV+Zh12tRRY3hkmkgzbKvK6RACCD6+mo3Bjz8ptHO9OFdF9MFS3fd2qHnRh6zBVKNK+eLqmOWP6rdD0z/ZI2oi401AiCy7fsjl/pvQsFWKhlV4uqggsmV1l7pg0QuiXTcJdWy3FsIa95RqwYMPXW0M9EyMkVDLP+o8ulKvDgQjx69D5dVwOflSI7oXA7JtncRQ8My9pqHhQbOiKGgsAV2JISi0boL7dJw20i4ZVPImnKwCBIs58+SIhUTBWv07XEaSyxWC4BWTqF+Ki0/0qILhXPYaCODitAlAD5kGhQcXOjE10d33VqgzUbxkjO5hnArlkYL+1CqqD+BdKJVl1sqMDdwFBQt98QsbqyJUX9m+xGXeYUVknwTrm3UVvp9bBgUlumnuzT7IlsE7SozDRbmG1RCGxePblikzlRymBV9mVJRvIbFnojDCB34XpYMT2gjfkxbFi9XmSzHCmzYkRxoaMF2ZKLz6OUAw==
+  learner_created: false
+status: Unchecked
 record: -1

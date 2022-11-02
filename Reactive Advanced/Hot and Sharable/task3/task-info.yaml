@@ -13,35 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: coldSource.subscribeWith(DirectProcessor.create());
-  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.DirectProcessor;\n\
-    import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
-    \ Publisher<String> transformToHotUsingProcessor(Flux<String> coldSource) {\n\t\
-    \treturn Flux.error(new ToDoException());\n\t}\n}"
-  learner_created: false
-- name: test/HnSTask3Tests.java
-  visible: false
-  text: "import org.junit.jupiter.api.Test;\nimport org.reactivestreams.Publisher;\n\
-    import reactor.core.publisher.ReplayProcessor;\nimport reactor.core.publisher.UnicastProcessor;\n\
-    import reactor.test.StepVerifier;\n\npublic class HnSTask3Tests {\n\n\t@Test\n\
-    \tpublic void testSolution() {\n\t\tUnicastProcessor<String> source = UnicastProcessor.create();\n\
-    \t\tReplayProcessor<String> consumer1 = ReplayProcessor.create(10);\n\t\tReplayProcessor<String>\
-    \ consumer2 = ReplayProcessor.create(10);\n\n\t\tPublisher<String> publisher =\
-    \ Task.transformToHotUsingProcessor(source);\n\n\t\tpublisher.subscribe(consumer1);\n\
-    \n\t\tsource.onNext(\"A\");\n\t\tsource.onNext(\"B\");\n\t\tsource.onNext(\"C\"\
-    );\n\n\t\tpublisher.subscribe(consumer2);\n\n\t\tsource.onNext(\"D\");\n\t\tsource.onNext(\"\
-    E\");\n\t\tsource.onNext(\"F\");\n\n\t\tsource.onComplete();\n\n\t\tStepVerifier.create(consumer1)\n\
-    \t\t            .expectSubscription()\n\t\t            .expectNext(\"A\", \"B\"\
-    , \"C\", \"D\", \"E\", \"F\")\n\t\t            .verifyComplete();\n\n\t\tStepVerifier.create(consumer2)\n\
-    \t\t            .expectSubscription()\n\t\t            .expectNext(\"D\", \"E\"\
-    , \"F\")\n\t\t            .verifyComplete();\n\t}\n}"
+    encrypted_possible_answer: DvYFaIB62A5e6tPeqqfOOKiV5PlLcwPZYuC+KkhTts56ruyCOiERf5EQ3hoQyp2oyGINutFsir3kvwvY4cpAvg==
+  encrypted_text: 3h3NXCypBcxD/VAjZiA9ZjRXeUuWSD3Te6+g+iJPUjiTItSYmyZeU7OPGtfkViVKWdQNWJU6plv39PMvnQofBPJB3UJlbd0iLe0ksQqZQtXelkFK9VwQBw/Ldy024Yt6oMi/cmn+rYpNWobOlP4PHC90otYNHh6fzfWeMMKnV+UB12iGmnSjFCpeEEhyN9PO39P1bzRDMmm4AnQNhQUM/cfirBUegH8rCD0JRfNZtVp85kXnkUI1A0dBX5lbO4a/h+G+sXjFli7yZv4Qw+6kTBcfPhhFmdp3lc7hM96vTYM1blRWiYgIdfEh/XbczKhrlVkOmP/gBYdmzuYPcD0zyZ1OtjaqHWF9cNzmxKR43KyNFMar2ScqvosnugoXItwD
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/HnSTask3Tests.java
+  visible: false
+  encrypted_text: ITs8Nv8EH6QWJG5nufD7nJbQJMkIq6jNfe9FYz1aEl1wsoMiTbUDAAp5G15rBTxTJ/JQcS5WglAkxr6AMxAv/5FQX8BuMC7VmcMPifQzQsopy8lsVd7q1wy0Atw977Eyo7jiSS2uNO5hPqYnPe7na5SIwSxDDmbVF4x2koaefGOq44omUeR0bUKf49gYPmD8lIKjoOCpBT0mUB4ZC3JMeavz3uVt5tw6w7VQBr97Cz3UHsaDxlHCj9szf2psEL8NDi5PqrI8aww0AY11/uo3w+5dTD707EODPNh8OaSZxlIgWe3dYRrJ60ZvHzAj5sfICLYHBBFLqomHy4CWuPTi78vQiE5D2hnSXUplSblaYeQqNv8fpudGYb6f0/EVY0PWpuuUzhgwe7VB2ZgqCQIWiA78bGA+SQKV62jX+6EPUrTqKtt4AZaSMTySBm2yNpd49g3F2E8nabw4lY5I2JEaeKpHsLPgGTiO45yyM1y3TB0Gx3Tgrtjt9jJ1Hy7clyI1PdstxORy08HqihY7YA3yrMQ/fRteLuO4H5sqx4SPUMhCiCdS/0ODmcNqSoej2/nr3kV3tkPo9M31hAESUVJIlLEuT/5waokZMNlizhtKETm9vzYpuOY82vRqG+qqEKN3PBtmKt0trm+Fzd9uGr9pFFtAOq3Jq2SIXCUEItEq2gDjYnlexz+i1FoA8XMUhL75XYULn55TErqUQwlRNFQ4VB2Cmpm4WKcTy6Su/BVOnTnQQCoYCfxdvJGNU4rQe0M65rM6OZ4uryMXIKKK9waM87h6/QJlzsl1ZjKwavfGQ2VeSIJDuTU1teUfGNIBV1TzY1PDhTQha5I0yAS1q8gMzRlpxlbcCYVLCL2e1lDQOqkpW9FuATOnqwTQqwYOawLHR2fd96jEA4lygikUIGToUseGw/gtoPzWDJvX8Ik67NbwL+3jp+90xB5z2SoabFwKKUd2dozdJb/Qa0rDIqIzRE+UcYUpFKpnHKUpZU2F1z01rYxwuAzCe+wvIh2iMjkWKLsTtRWGTPh7QmVX9UJpemcqNecRsjdvPyqwzWu7gPXT/uatXsXhrcGcXI2L/o3SaSeJLSBb8TbwR7ZoMcuykI2xjAXrRjlZYq1/e4v7TAYggaD2EtxQVqS0WGqzogx6pxvWCTJohxbZiB41Ppf7fXhtIkHkLfNiKjPBbzNQKn0THcbdz4CWb1+Ay+w96yb1a03pTo25ju1bOX0OHraKBbldXo1QPcX+lxkevptBqnqIw8v0RWQmioEx7koItdmb1WofgU4YvXVaIYiPpq5KUetThSQwi8dQYeaWYF/uMzrys6fFex8vc+3JRdMk5cIreIkRtovTo/q/Hmsmv9ItwGsR/6/M4r1ZYLMpmIG6OUKXBBIJ7jkrwdGWUxjhV8JWuX8IsIZv2IXOxjGMbu0RVKEobx1UEvTAd7VO+i4nbDc=
   learner_created: false
 status: Unchecked
 record: -1

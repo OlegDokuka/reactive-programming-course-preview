@@ -13,41 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "source.subscribe(new BaseSubscriber<String>() {\n\n\
-      \t\t\tlong requested = 1;\n\t\t\tlong counter = 0;\n\n\t\t\t@Override\n\t\t\t\
-      protected void hookOnSubscribe(Subscription subscription) {\n\t\t\t\trequest(requested);\n\
-      \t\t\t}\n\n\t\t\t@Override\n\t\t\tprotected void hookOnNext(String value) {\n\
-      \t\t\t\tcounter++;\n\n\t\t\t\tif (counter == requested) {\n\t\t\t\t\tcounter\
-      \ = 0;\n\t\t\t\t\trequested *= 2;\n\t\t\t\t\trequest(requested);\n\t\t\t\t}\n\
-      \t\t\t}\n\n\t\t\t@Override\n\t\t\tprotected void hookFinally(SignalType type)\
-      \ {\n\t\t\t\tcountDownOnComplete.countDown();\n\t\t\t}\n\t\t});"
-  text: "import java.util.concurrent.CountDownLatch;\n\nimport org.reactivestreams.Subscription;\n\
-    import reactor.core.publisher.BaseSubscriber;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.SignalType;\n\npublic class Task {\n\n\tpublic static\
-    \ void dynamicDemand(Flux<String> source, CountDownLatch countDownOnComplete)\
-    \ {\n\n\t\tnew BaseSubscriber<String>() {};\n\t}\n}"
-  learner_created: false
-- name: test/BackpressureTask5Tests.java
-  visible: false
-  text: "import java.util.concurrent.CountDownLatch;\nimport java.util.concurrent.TimeUnit;\n\
-    import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.assertj.core.api.Assertions;\n\
-    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\nimport\
-    \ reactor.core.scheduler.Schedulers;\n\npublic class BackpressureTask5Tests {\n\
-    \n\t@Test\n\tpublic void testSolution() throws InterruptedException {\n\t\tint\
-    \ size = 100000;\n\t\tlong requests = (long) Math.ceil((Math.log(size) / Math.log(2)\
-    \ + 1e-10));\n\t\tCountDownLatch latch = new CountDownLatch(1);\n\t\tAtomicInteger\
-    \ iterations = new AtomicInteger();\n\n\t\tTask.dynamicDemand(Flux.range(0, size)\n\
-    \t\t                       .map(String::valueOf)\n\t\t                       .publishOn(Schedulers.single())\n\
-    \t\t                       .doOnRequest(r -> iterations.incrementAndGet()), latch);\n\
-    \n\t\tlatch.await(5, TimeUnit.SECONDS);\n\n\t\tAssertions.assertThat(requests)\n\
-    \t\t          .isEqualTo(iterations.get());\n\t}\n}"
+    encrypted_possible_answer: lQXP4+K+LnAZQ7H6azxct4WP2XYOcZnzCj2GDNgcTEDtIvWn6AsISEKgMv9gCsBylsN8DwUInKf/v/2qENoPZUHnU0wAF1wt8Jp2onUfgVALU6VqxU3eyp0mBfJGNhaSDmS+69x7hh0JK61fDxvQsIXr6rj48JJO1aLk/WxXSNjcgM4EsvepxAKVCWhejCx8P82GgnQa4Rg0fP9+kE7GPaKNPGnERlvgWgJJ88vE29ovtARRFuq9JkMLOwEe5P0Y0Ju32e8Ad2YKnaKTSE0XwiA0/u2jMZyUqQk7gsYwHSR1GAAZVvujRRadiDICuILoh0jF6c2JuKXNVi2HpyZrgiFihzbeGiZO7RrqQpk7FpJNxg+bX9qv73TwZAtjWY/nHBxcCQV/6ETVQz8ca4iIICfmtcZ/gknA5C2aRGcZcZvAu5KkvbO8a4EWekhYDrvCO9voDZkXK7GaHoVLHCrApuU7n4odNZ4ULkOsEeyDLW+uNw2rUHc42g4xep+nVZEWOHZx31KtkqbfLcAsnCDykwingSXpEoAO+o9djLvQD+QSdCNV0wSdSbjnSI4LOBnje1UrHsVYwjDHskfTH17FWMDWlZiGLlyhynNBladeq18WGDzXk5+8SN57jAtfBIbrg+VCdWq9FN07RGU3pvG10A==
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH2SfdDl+KCZsJq6DAZvmuZ8Ny6JyeSBAAe1Yr2loYkmaaR5mjLjHlYQvskAZowlKeGbXurBtpQD8mUmTNaJ4nJ9dMw3J2OxvN3Od/ModVac4nLqJEbLK1egruL0Ly5hJqNEhG7Sx9cgrrUVpwre1OHTo9JzHp7O9BLblKB/QJHBLHG8R73Vcb9wa2rkFQinrTuacBTA1bEyFNIi3qvMYPhQmi2Uc0e2naWRb8diuGEt5gotlGDJg4PqPeGgRhTWSJe7/+5mBl5opjjS26j4zkuUiWwE1PFQLB2ELVPuzFGPO7Hc7hjWaevMM+VxfSHHRcDb5Y7GW7VricQ/fZ5TrRlZYyFGtGny9chGDkHPl/OWXHgNzAalAnm4sJ9fPOV8ww2aHem6svDxFhjpftPEN9GFcIgSaKm12oboejUpgw9Zb+DMLLpJyQIAbrL15KDGdECKRkHZnH98UUXf/M9lTArs=
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/BackpressureTask5Tests.java
+  visible: false
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH2SfdDl+KCZsJq6DAZvmuZ/VwdEI0BSrSRtrJOKcTYs/zDyVAam9Qc071E5RuisOHfT53VGh4LsmGWYRX1h9JdqKuameIwAxVqalYjFSiR5N/VFsFERIeFTVzG9Nc5FcCwyaNobhdfuZtCk9ODUf8Q281EWqDHK1CrZ7pTj+4cxDJGXrw0XihlSjr/A/YnwTN4fxIyanMR8CCRyNmL3h/dOMrgwqLuLGvtTFv5pQvNjMwyHoDyH48gHLz0WSnA8qiTbeWHrfGoEYIKp+9LmUtMADzg6n5CcrdDaWoaRDs061wXPzAra9hA5b407DRidM2Zv2SB6ukcY8KlzFAG3Q1OZzhvbn257jBDkAcPik7gQ1aGK1YnxRZhzqCCJZfQz6r1K10DnVxB9Iko7a1ejnNW3x6YCHHmksB3W2MpOhO1qpAwOZUQxvM2veftSEhYANF29QWYbBDQoo5xifotkYZvDwyBP+Yh1RDMju8ybZd7govtmU29VBnY0DAAN6209Dmk37XhgDwWQILs/MQVHUr2Al4xWhsj4iECMrwKEUVHgBbE9QVaVH8f66jUsFWH1zjCcpTV878h0Hysc5FL3KXOAJQIITGVrGnCAuZwBYJ5rvVTS8Cga9bfPbsBF3K255dZ0glIGjT9rMiUayIcxBeb5YthlOQ1icsBgvqIloF9hoyRqXNmxmxLrq5SK2xHb2+7Ndb0U4ZiX1864JiWaF1maOWOY1Kn94vS4COZPdgDmTAoH72mjpDwj5I0qEFsBHg8EFp+08PG55EliIjS1u6760utiJKQchk8bv2v7cB/ljC7wkjb29WDsV7JWxNYBFv/cpLn8Du4PNznuTBy0jyIq3D+VbvPjrBYKbEBlCfgzTWekkNTkHA/1VR5DHe9WChJTxxIJvsGWJYNgwfsEYWp9II8Pi1G2EfZX8mdUzaj6FZY+dmBBEyg1Ppo0T7zT43zpBjLqiINQ8bCeT5isHU2SorQAYbqXJ3dtNiqvxf06zwlbwWUpqQPDZiQZ79E1CaG7GiK3Js73KcQHW5gPwheJqHjQl3Ln5pqNQYMSZqmNsFonfdLaHPbDAEcVxxSiulFQA1CR3oTNQF4Sgbf9GedTeMYbt8izwTQznPXdJoNmx4jLsRrP4apjFT8M0HJbYsjHHHtbGJIO7tkFQOl3EMSBWlS/DVFlkI3iCcxIS/HjzbO0J08U9pPyQNTf+3Psm9qS8gqA3Yf2wY5fW7mtV/C4=
   learner_created: false
 status: Unchecked
 record: -1

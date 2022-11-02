@@ -47,7 +47,7 @@ files:
       offset: 112
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "Flux.<Long, State>generate(() -> STATE_ONE, ((state,\
       \ sink) -> {\n\t\t\tsink.next(state.value);\n\n\t\t\tif (state.iteration ==\
       \ 19) {\n\t\t\t\tsink.complete();\n\t\t\t}\n\n\t\t\treturn new State(state.iteration\
@@ -66,5 +66,5 @@ files:
     \ class=\"hint\">\n  Используйте Flux.generate(stateSupplier, (state, sink) ->\
     \ state) и .startWith для передачи [0] последовательности\n</div>"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

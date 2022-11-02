@@ -1,6 +1,10 @@
 type: edu
 custom_name: Task 2
 files:
+- name: build.gradle
+  visible: false
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
 - name: src/Task.java
   visible: true
   placeholders:
@@ -13,30 +17,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: upstream.buffer(duration);
-  text: "import java.time.Duration;\nimport java.util.List;\n\nimport reactor.core.publisher.Flux;\n\
-    \npublic class Task {\n\n\tpublic static Flux<List<Long>> backpressureByBatching(Flux<Long>\
-    \ upstream,\n\t\t\tDuration duration) {\n\t\treturn Flux.error(new ToDoException());\n\
-    \t}\n}"
+    encrypted_possible_answer: w9+sXVPqy/l8WDwutTt/enKvpYbYGy2TkEcW4YcMFhQ=
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl5g3QvvACbcR3+4oeJTlaSJyz8tlp4/CxeRGUabNV98C3Lrla8NeOoVshhzJF29NzZkhx3UM8co7pjROcHRvVTj5mIGjhX3oF5edtR/Jazx1ndJCswRsGjDhgCaDiP89N2CRcGQqp8Gcbri7J0DaU8bM9RoaiAmRcRHJUFMv3IXK3xlVkB2TYn9ZpukwkzLRGZVSu0jcNxA7UbMZFwRGtuyEktvYyeC0lPQmO3qCyqDN03k4+GwDmNdMdeMwvQ/ijY5Otf104Dx/OuvHA4/JAbYCXueU/jYYSOc8k1NYRHK4g==
   learner_created: false
 - name: test/BackpressureTask2Tests.java
   visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ BackpressureTask2Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tStepVerifier.withVirtualTime(()\
-    \ -> Task.backpressureByBatching(Flux.interval(\n\t\t\t\tDuration.ofMillis(1)),\
-    \ Duration.ofMillis(1000)), 0)\n\t\t            .expectSubscription()\n\t\t  \
-    \          .thenRequest(1)\n\t\t            .expectNoEvent(Duration.ofSeconds(1))\n\
-    \t\t            .expectNextCount(1)\n\t\t            .thenRequest(1)\n\t\t   \
-    \         .expectNoEvent(Duration.ofSeconds(1))\n\t\t            .expectNextCount(1)\n\
-    \t\t            .thenCancel()\n\t\t            .verify();\n\t}\n}"
-  learner_created: false
-- name: build.gradle
-  visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzKcXd/K4teF8wsz2ES7phXKLQO01WZiMMCvz7qd0LvCzBHjNfICuj4syaTIeg+JvNfHedEpGL+ALVR1DQmX1AH9BSEUHwvs+FPBHbuPS+QncisLAIrdoggc4b25O9nwofmCv68/FMF01qvlbHlpu+DObQs8D/qwkdPgErDXUtx8DRR+Aj+dCTOsQp8lAM4j243hGCiSJzecXWpmoA0m2JsH0NS1SL3n0trHdX40YlyRSqqiDfPU1K/wZtBZLduxS/1tNyS0joco/7XpHoS+7KPaAD2jvZ9ERs+ezwktBE3Cs1aOLbRHjWXu3IaYqJYQoqVO5/KrfzPiZccHHxnxLEga4vPkQK1SNKF3JWkkwP++dgh5Gk063T9YDf6/D0lK6GyWoWlSUmurxsJnf8RviF5QuYBowQMUXY8D55wJAs0jLCJGN1zFNQUDLNwIL2bD5ODC7xlDotqqiZaXmH/YOFvy4oqC8igoHwBV9Wcytgj8Ai/M4XJr8yosS33WCElUzX5QNLGrFKSx7WHZe10RtaKZzLkYN80J06ErpYHSwx5aTvh4GXulozdRGVysIJdtDQVRJGZHR9NduhAwgoEgtrRqpmN3RsiILkmFhgVLiDberUaVku+Ug7/UVXerCQwS2sP74g/etlt4VWm6fceS0/d2N6bB2pEFgcuYibbXFEGBVWMSnpVonp0Su5Xni+81hVQK4yTSqsRF6EONBSsWYdNEai1/uwdS8irIcCmtjxgWg
   learner_created: false
 status: Unchecked
 record: -1

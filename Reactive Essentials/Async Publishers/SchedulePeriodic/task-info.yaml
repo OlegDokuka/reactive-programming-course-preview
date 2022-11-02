@@ -3,15 +3,11 @@ custom_name: Task 2
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Flux` из одного елемента\n   \n<div class=\"hint\">\n  Испо\
-    льзуйте Flux.just\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2zaV3ung4Wo5wCuykDXQ4Hfz98VRAYPbRDzma0lqvEjk6gpSs9Y5ozRxrEz7++DR6N4f4gRIN/CPi7rZ2KOJQSdpXk56cNJqx3g5EmFsWGPVj8JZ2IKnibGUf0DeZEq7iTGiz3ayKXRvN07Y5sw2QC0
   learner_created: false
 - name: src/SchedulePeriodicTask.java
   visible: true
@@ -25,7 +21,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Flux<Long>
+    encrypted_possible_answer: 1kXPNtmNWAQhlSPBzDZ56Q==
   - offset: 186
     length: 150
     placeholder_text: "for (;;) {\n\t\t\ttask.run();\n\t\t\ttry {\n\t\t\t\tThread.sleep(periodInMillis);\n\
@@ -37,33 +33,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "return Flux.interval(Duration.ofMillis(periodInMillis))\n\
-      \t\t\t\t.doOnNext(tick -> task.run());"
-  text: "import reactor.core.publisher.Flux;\n\nimport java.time.Duration;\n\npublic\
-    \ class SchedulePeriodicTask {\n\n\tpublic static Void executeTaskPeriodically(Runnable\
-    \ task, long periodInMillis) {\n\t\tfor (;;) {\n\t\t\ttask.run();\n\t\t\ttry {\n\
-    \t\t\t\tThread.sleep(periodInMillis);\n\t\t\t} catch (InterruptedException e)\
-    \ {\n\t\t\t\tthrow new RuntimeException(e);\n\t\t\t}\n\t\t}\n\t}\n}"
+    encrypted_possible_answer: FDJui1Wr1eFOVslH69LtWdxpajFv7ByabwNiHjcTky6LlUEdNO4D5lgV4gOtgLMxvI2Yxf9YBo6xIq+3P03ig9LEvmtIASOHAlQkeV/QW+QzD1C7G4Inb3xZvchb4WnZ
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrQ2BU2/jd2gbr8M9NxAnaH5czwNsHuz86PLVGS4KMKGCk3+0idmJ06evh+TaSSEDNzsRRQDYonmGwsIBaFeNKUmYjDUdPpzZGS0A/D1/Vz+KDaI4UNENo7M1Z+f8ztPgrg1TuNQgWuYO2hCWLPb6ACnHaLVG2+kLi9n/hXcHpKPNxFrDzmUMZzvrW6cy/4E28XcDG+gkkFnKguPZ6sdL0Hu60a4XeFGcfeAyzYIPNUsHvRIosQCyjVK6DsphcLyWFxeX9thwR4RIy0YtuKAWr9CHw6ZHcRjNU4tt9WyjWNGxJlVUZxCjKPfmlMIrFQIILqcJe5aPt1X7W4tsPZT24mD+g5xjwHevnmW/m7eavzZ4dQj19rGsouuunHUti7rD3WHf0EkFRuBX+wBBBc+PKVB0/JVSL9APkTxp0+j0s4nFA==
   learner_created: false
 - name: test/SchedulePeriodicTaskTests.java
   visible: false
-  text: "import java.time.Duration;\nimport java.util.UUID;\nimport java.util.concurrent.TimeUnit;\n\
-    import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.junit.jupiter.api.Assertions;\n\
-    import org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Timeout;\nimport\
-    \ org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport\
-    \ reactor.test.scheduler.VirtualTimeScheduler;\n\npublic class SchedulePeriodicTaskTests\
-    \ {\n\n\t@Test\n\t@Timeout(value = 5, unit = TimeUnit.SECONDS)\n\tpublic void\
-    \ testSolution() {\n\t\tVirtualTimeScheduler virtualTimeScheduler = VirtualTimeScheduler.getOrSet();\n\
-    \t\ttry {\n\t\t\tAtomicInteger called = new AtomicInteger();\n\n\t\t\tObject result\
-    \ = Assertions.assertTimeout(Duration.ofSeconds(1), () -> SchedulePeriodicTask.executeTaskPeriodically(()\
-    \ -> called.incrementAndGet(), 1000));\n\n\t\t\tif (result instanceof Flux) {\n\
-    \t\t\t\tStepVerifier.withVirtualTime(() -> ((Flux<Long>) result))\n\t\t\t\t\t\t\
-    .expectSubscription()\n\t\t\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\
-    \t\t\t\t.expectNextCount(1)\n\t\t\t\t\t\t.thenAwait(Duration.ofSeconds(3))\n\t\
-    \t\t\t\t\t.expectNextCount(3)\n\t\t\t\t\t\t.thenCancel()\n\t\t\t\t\t\t.verify();\n\
-    \t\t\t}\n\n\t\t\torg.assertj.core.api.Assertions.assertThat(called.get()).isEqualTo(4);\n\
-    \t\t} finally {\n\t\t\tVirtualTimeScheduler.reset();\n\t\t}\n\t}\n}"
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6tgO3AV0g8mNOCWIQLbDW/orAPU6MpSNMURtc8q5WmYQOKhlqAouaDxI6ka+pxwIozJK3nsMQpGbG0b1jsc7QWoIewz5ILtCSitgC2TZf7kiqVexr7o1OUeIxS13nwDAR4y/xxbJ2WdLGRULLa8N205fGACysHfULCi+kElbFrQEypcf49+DUUk+sUZT4jY1p9CNVXaOyD7NWK8qfPFsS5W+Xq9TnqIS/eWRKETNUVG6Dq8DvpcTIT4sX3C4VKy8xrNaAtzpZISf7zUu4iCvwrwNDjZlHImm/94z7tB7KF019AZJlgVmr4I1M5BWKoejKaPUP3ec15grapYVYCBTbZWbjHGGBWruYuyC9hWtpR1j6Tmp2aa3LJwMMT6RnZL9ftlhZiJ3FU50flg5VDbdPxro3jjtWDQVsLrpTfz1BYWBop711BidBIMi+rf+28vKE3lG6Kjz1r9XOnd4SxCmWNN3UjBCbNBx+B/i/s5/Soq47/0KNsOc/kdaREztj1gnir7OFrH20bn77KtBugqbZ5m039lPbxoUb2g5KKgyLGrJiSBLvn6rPwVm7ieDSdHecdV4Km5ZIILz5T69l+o1waaCzMHpNLLUK6yb7dNC4P8h/Ls+EOib+9CXJZ5sjs275qWdLvDw956/XeBLgwLpB0+faxCagMxQsdk1iiHNBkJfcNDXo9nOqF3D42EJ7wgANZcuiP55CnoK9zSliTLUlSrpq05IOf2P6izB7uSHnuZEAoZI2drtsXEQFArL6cOhTX1uJiuu3A49rqpGrPbT6dLZvJDzW2Wtj7PZsFuL3o4BQzZtD2pcmhbM2ZXWTqUGGIvsd6BLcVN0Odl+XTQxETmf4cL+yAfafdcPfvA1L3se8qZxHJ2gZPa7rZVR7ahaU/sDCbJ1IlcsxAyGtawcosqQI3B4U/yHlTH+mldtvZCRGW2RpZqkUgmPEbbFXSN+QC16t9uVpESQQkSkV6LEq99A7cDHBJyKAhsSwc+bLH+N5gxRtpDDSx78AYvp5c29KQYSjSizqSzkVWH92Mf+k1LNcVCUYKYbxEPNuKZ8LdzcMsX1npKUyYtRiMIx9MgLDbf1z5ydRPbz7d+uXUDH2fliFu0Za59ytYOl8kHSwaFHRZdokkR7p+bG4RRgUOBBgg1HUNH4UM9ydiR6LlzESSVGe6bCfHhd1VM3Svx9Du7ggq/BebqbI2thErRYRAfzQD5lmRIRV5w0kzQRboPZ6SBUfNR+1O23cA6ZFzfIUryMnJ211VOhyhVuXR/Q0a9rqfOEoSEYwfXUF73IyWpZfyRQZbaNtb5M4eS64WBwawkoENTiSxdAGF5lWXZlYnjHxgFhpfYM1UsScpVg3k7EiqScyKiur8ybNXMcymrPRj5oGLLXWZrHIDvEoOeEOH3oQPnpJFApzVhwOXsyJNMHEdFA2jt59aY2KtuCPOwCSMzKHwKIoLGYxEUCSSj6lX9kbybdd5QVwbfVvHQhSRCYU57FV/myn289txfpGf9pHtjcKXhQTz/p3pXHTlP5o1XCR++nC2CXlBj2muL2ejFeJ2YwJTLvy5jzeCq7fYnu+/mNu+SfckFu8StFQGKiKlZEGtNUqWiPh9AWeBcWiG9XQ07rQulEBO/qnxr2d1TNhNBxtzuzUTVeeUMPiEleL6hTDvLu7TkdolwGJh6al7y4dwIXJ+uJeMHlFJCtCaqf9Afp7wyLGoIB8GD5/Ib6ZqWtKSKbfkF+d6cWMMZ18Sd2rL
   learner_created: false
 status: Unchecked
 record: -1

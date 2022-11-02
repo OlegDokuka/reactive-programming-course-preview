@@ -33,8 +33,8 @@ subprojects {
     ext {
         junitBomVersion='5.7.1'
         reactorBomVersion='2020.0.24'
-        r2dbcBomVersion='Arabba-SR10'
-        micrometerBomVersion='1.6.6'
+        r2dbcBomVersion='Borca-RELEASE'
+        micrometerBomVersion='1.9.5'
 
         logbackVersion='1.2.3'
         assertjVersion='3.19.0'
@@ -42,7 +42,7 @@ subprojects {
         jacksonVersion='2.12.3'
 
         mongoReactiveDriverVersion='1.13.1'
-        socketIOVersion='1.0.0'
+        socketIOVersion='1.0.2'
         embeddedMongoVersion='3.0.0'
 
         dropwizardVersion='4.1.21'

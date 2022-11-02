@@ -3,51 +3,23 @@ custom_name: Task 7
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Publisher` который возвращает данное значение `value\n` есл\
-    и `value` находиться в границах `[min, max]`.\nВ случае если `value` выходит з\
-    а границы приделов - верните `Publisher` с ошибкой\n   \n<div class=\"hint\">\n\
-    \  Используйте Flux.just в комбинации с Flux.error\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1/UFfNYgUoXt0PCOY83fsKrcrSdgnY5v6aVKRb6Ox8PivWDMPCBhAuoiMVXOkvTqLECo+KA39fQgWiah9sH0hHTfDBqfXX/WUmr+neKdbHffPIqdVO4+zoEEA4NgiRVbuBPP3nhUNsLBXN0who20Wq3Wci2O3ElfQAhukjuz3+OAb+olhmHv+BzX9ZoZPyv2eW72T63b+Qu9v6c1I/V9Uscens1AzCa9eaT+8gyYSgFKMpnIvUkmwHBCcJtjK9SpdTomVWSSj+kc9k1p64HJvYjbN+aFOS46LCIFUHnjSPlKGtpdDgCCTCk3fl2y3RMPAzuRu9JFbZ3ZZPOdNrU7jSpRFPK2wZEafN2jUnQG3ewB9oHTAfI79XRwIV0uNK2Y/+w9kJ+2fIfgjWCXfzEeGRpw+z2PG9QXYKTAlz9J/OGjZhIrdNj9SDpIbKrGKtkmTxs2I+GP5MV4ZrDGF0SwqVyW8TMTUQPvntsGPgSlY1Ht+EBhjWAj/Fx0fwAP0cMun6WfZ6hjjl24gD+VgktiSYYvbtBnJQk6FuZHchYlBlq4
   learner_created: false
 - name: src/RequestEntity.java
   visible: true
-  text: |
-    public class RequestEntity<T> {
-
-       final HttpMethod method;
-       final T data;
-
-       public RequestEntity(HttpMethod method, T data) {
-          this.method = method;
-          this.data = data;
-       }
-    }
+  encrypted_text: V92dK5PyOATH/7F5yZGx9YgJ2zXmDyuGI4DVIte1UXKu+wnd7dHw2IpOzn35eOrB3KfC6FF9te0gfpCcxiiHeCZZipLtJhZgXY2Drk2H5XM5P1FId8660LieHQ26604+X1YHSLMA0aD4KCRJaLFelO3Y7+ImL8Pr2mxXqaILGrEj5xyffh9BCcWTB3WpkushJ1FeKwzlQt533DL/JJFakGi8cvl6nXUEjZPq5Le6+Z80w48yxyAZt0O/Hvcnr2bJ
   learner_created: false
 - name: src/HttpMethod.java
   visible: true
-  text: |
-    public enum HttpMethod {
-        GET, POST, PUT, DELETE, HEAD, PATCH, TRACE, OPTIONS, CONNECT
-    }
+  encrypted_text: bRS5O9FUdJ0weGIrrsZGvUYK92Lf2ANzRVYp4GHEbXFDaN8wxLR3CzU8k1h2hzvzhvS7VRHdFJuzzMSqcKXMcS8Kkcfv2+ZBFP8AOMNd1kZ6i0SzTkqhYMVeCjIDAT0g
   learner_created: false
 - name: src/ReactiveRandom.java
   visible: true
-  text: |
-    import reactor.core.publisher.Mono;
-
-    import java.security.SecureRandom;
-
-    public class ReactiveRandom {
-        public Mono<Integer> nextInt() {
-            return Mono.fromCallable(() -> SecureRandom.getInstanceStrong().nextInt());
-        }
-    }
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zyhdGng5mgy1sdFVEB+i12ii12VoqmDTgZgmbFdFJPlv+dknBUsF9gzAD7BAvGMiWcjbfxQuXEGWy3hAsWOG6unOQm6CS9WdnVTlHtG4kICf8Wp7gScarZ6eSqAk/9PS+6uqkcF/tnzHwCxuHJyq84RQuMsz6vl3VUrDccROUT/2+Qg9Syjlqp/PegeRWOPRa3dazS4PXJrmw7MMs+IRlnmfsm6RaUUcYwt641SpoL49+0atTorbNT6iBmAy7sIIkeUAC8i+VkvQz08VTwUzWoh
   learner_created: false
 - name: src/HandleGetRequestTask.java
   visible: true
@@ -61,7 +33,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Mono<Integer>
+    encrypted_possible_answer: sbGF8oxXPaKw++hbMXQsWg==
   - offset: 347
     length: 122
     placeholder_text: "if (request.method != HttpMethod.GET) {\n\t\t\tthrow UNSUPPORTED_HTTP_METHOD;\n\
@@ -72,35 +44,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "if (request.method != HttpMethod.GET) {\n\t\t\treturn\
-      \ Mono.error(UNSUPPORTED_HTTP_METHOD);\n\t\t}\n\n\t\treturn reactiveRandom.nextInt();"
-  text: "import reactor.core.publisher.Mono;\n\npublic class HandleGetRequestTask\
-    \ {\n\n\tpublic static final IllegalArgumentException UNSUPPORTED_HTTP_METHOD\
-    \ =\n\t\t\tnew IllegalArgumentException(\"Unsupported HTTP method. Expected method\
-    \ GET\");\n\n\tpublic static ReactiveRandom reactiveRandom;\n\n\tpublic static\
-    \ int getRandomNumberHandler(RequestEntity<?> request) {\n\t\tif (request.method\
-    \ != HttpMethod.GET) {\n\t\t\tthrow UNSUPPORTED_HTTP_METHOD;\n\t\t }\n\n\t\treturn\
-    \ reactiveRandom.nextInt().block();\n\t}\n}"
+    encrypted_possible_answer: c+uVOzi/ey6Uqlam/YAcLw4f+o2eef4kljOt0PFdG0fukGaHnd6gR8j/k1xpFW9tuehnFN0YE58d77xkQGfPYSj7NqUPrrYeG5dQVMyVczEWK8ePTiUBkiQIMc1b5Tek6ZlPKeQa8fjVGzKfHmBW4TL+drI9n3idghlAn0cAgTc=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zyWXeEeSyb66fl86WvKjVojuewPdQbS71K3Btl/bSAob/WrUzHPnoRfb7ySERmq4h2BczF83RVb/tXVBPnmSrNVb8LPaG6MB/kXyur1O2KA0I1m50ihjb7LwmgOVQrSb9/ctBSYkwK6r27XtAUx3RqN99WxdRib2t573drChGxB3pEKaLfsVu9491op5eeTFtof87LjgJ8FkC17tQiiOWZFHwOdF3zbCCPpqdiZd89wvmfnE9It1ggqUqimhD+v0zGchfAsaJkmFmCC8E4d4WfQTGajg6lHxnq+2Gx14VTWJmW5bVWT4bnKlZpoToNWAQukEpvSZ+uwAfl3DRQRsPnpdT45MJYvhVDmYaitZybjiCk3UIIZgmW7WXQ7hLJ+rnHm/BIFcrlLwrBjQuO38vNqAmANkuCclpOjdwHqoyMZ8BMBSN7h6OeFXoRRgwqI5QULWfaPBISAtOAKM8Ns3ESpyR/jiHxhCdl677RhCE/9DkzAr9qpZSKwOnzf88R7FGP7iudqWM5iS6Jfuobl/fVlpNrpoouhZeodvOoVOVOWI5mXYeXJeYc8xI0hETjv1s6zdlq9T018O+p/+lStUEJN
   learner_created: false
 - name: test/HandleGetRequestTaskTests.java
   visible: false
-  text: "import java.time.Duration;\nimport java.util.concurrent.ThreadLocalRandom;\n\
-    \nimport org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class HandleGetRequestTaskTests {\n\n\t@Test\n\tpublic void testSolution1()\
-    \ {\n\t\tReactiveRandom reactiveRandom = Mockito.mock(ReactiveRandom.class);\n\
-    \t\tfor (int i = 0; i < 100; i++) {\n\t\t\tint expectedNumber = ThreadLocalRandom.current().nextInt();\n\
-    \t\t\tMockito.when(reactiveRandom.nextInt()).thenReturn(Mono.just(expectedNumber));\n\
-    \t\t\tHandleGetRequestTask.reactiveRandom = reactiveRandom;\n\t\t\tMono<Integer>\
-    \ outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET,\
-    \ null));\n\n\t\t\tStepVerifier.create(outcome)\n\t\t\t\t\t.expectNext(expectedNumber)\n\
-    \t\t\t\t\t.expectComplete()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t\
-    }\n\t}\n\n\t@Test\n\tpublic void testSolution2() {\n\t\tfor (HttpMethod method\
-    \ : HttpMethod.values()) {\n\t\t\tif (method == HttpMethod.GET) {\n\t\t\t\tcontinue;\n\
-    \t\t\t}\n\n\t\t\tPublisher<Integer> sequence = HandleGetRequestTask.getRandomNumberHandler(new\
-    \ RequestEntity<Void>(method, null));\n\n\t\t\tStepVerifier.create(sequence)\n\
-    \t\t\t\t\t.expectError()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t}\n\t\
-    }\n}"
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPd9LCqFCIkIKaCbPFO5dIj52q+oyRXsBtE6S8mQf5y+AOeaal5YjFCECRWPt7XdfImx6D4AYEjGdvdCyvsfgTZ6Qks51l51PvwNmI2hTj0HNcI/rb/kdjjxtvp9EiPcAMCTWE9fNm2RT0rgeGFfGdeLql3VHgAGvwmX2vPjJ3RUNQEf7B9Xn4C+nz267R2gccH+ZhBE61HE/SVcek/Wg6t08XK1JGi9/TKVJvYE5AF9X5GHK7Hs9o9+Kksw9Q33t4NVAFDd1/HDcmNvrheYgS7LnxZ34IJ0u3eHnlhzG5iaRl9GZGYjfRev/kOoJcQGpBNsC+D9fI2ru38VESYYlh8v+Ocgu0Jxh8dwVSs8dIi+QEhFK/bJ64TVUOMQtHLHjrpNENQxkDjYdem4TUxF3h7iZYvg6xZatx5x51Tp8Jz7nKTpWhhU+FVY6GQfsofHEYXEl009k5tWqrJXLXtiQSRgn/XtFtg+onUIszQ03OBb/Zbst3eGXfQ9UTy4cz4MbO4YVKreO5NOxu8SIiUe9mO56L/mDbm2eXQctrUWws3n9AiTUezmUBvowDqE3606YGeIM6vH1jBhPbBbsFgEKbctpKCVPVbc5L8plUw8LiGghXaEFJwEKIAjqjqlOrIK0zblT3Lq7Mup9yYsBiNfD7euUCpNs2z0RtV0QCj5mgxjEXsRG2uQF4aWLvBKabOPTMC/cozqkAkxBHhU9v/Zp6gJC6UM3UpfDPztDXtx7XY84bXqhJ+n+nTwUaiXBeB7M1rp0fBqIrRqFj+RCAOp68+fvzHYeLB0rNGtV35UuoqWC2wNXpkAlUAT5kmiru6RIzBersIrjTLYBCwv/iJ/EaoSnSFYcZR6RRdpNW87pjAUJd4POB8+ADAOFYA1jQPm+fVm+LTC5hU/3lGIxx17oeCZPRYyOe5jp3e1iSEci5RwIq2Y+4iFfE3dsOyCvKllHmvPt1XDsPZZdJiIXqZD2libdY/MMmStaMRngvBqjSlYbbg4j+RJ+vsbeHQ3t0+F063vuNXsWMRCD2wMrDYyH4MkkMLk+MxPdUnnme51HDfL72xSZo3zkF1T+wcjsYQ0xgKVmpL2Nv6f/8RKU6v2DtIOiLvaczJIxhK7ccRfT8EbbVx1G6O05aq8gNctMhfloktzEugimqTHAxACDxQyV+l87pyP8SEhics87MKtZ9OmEo3pkcrXTpJwxcJ37DF+eQCL2B8sHat2HFEzKGUFHWEGPKNRCboLaomoCLZKsGCD0XQkgoYD2pmeV+6t99n1t+Q6IVPwbHBCDkoAQeb5Pv3waf8LqfyEWGaEeiSrsps2xr3yt5CvSa4vq+Ecx3rAuzO73FTIgxTmtrJDaqmETUXgyCtVbiUlGBMar8Mbbg4GAHv8mSFtQ4n9LTVMlZxrLFB8GV35+W34yiFl7Pj4wLs7gIL/sT8pHVnLfhi1IyJvHGbRfZynyt1cBpbzKeFtcgym0ZDIUZVaEhSOY8HDf8V1qSig7rPEdopcX7CAgeFtbU88BKwerDh0KWq3DxnpKUgNXcGV4gl9+/E/lUGctnFJIPfuVH6RHsSzEPbKNmqW/Ekw9hDnuPWqM9ajs2gue+O
   learner_created: false
 status: Unchecked
 record: -1

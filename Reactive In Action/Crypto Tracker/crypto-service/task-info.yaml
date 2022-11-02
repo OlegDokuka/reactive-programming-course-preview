@@ -3,196 +3,19 @@ custom_name: External Service Integration
 files:
 - name: src/service/external/utils/MessageUnpacker.java
   visible: true
-  text: |
-    package service.external.utils;
-
-    import java.util.Map;
-
-    public interface MessageUnpacker {
-        boolean supports(String messageType);
-
-        Map<String, Object> unpack(String message);
-    }
+  encrypted_text: aExR/497raopHjjAT7uyIsGDCMNEDIts2v3XAWMtyZpYGBvrKuBNbs2nCr9mKvoBteJcwLQ6y0sNTOcMWwiVKrScO0gkqCTSWZ+Laue7EfMzsq9Gui/6uAj2JhSRg5lxJekmDctKD4QXtWDeTFuW0a4xI6oG6Y+AFFbzaqV1nIrDywDYnw/TzKSNLnMoZ0qE4RwCq3R8Q0prSYk812OrOPc1M+1mlXZPn7uQL8KucNkQGFklY/u37dH+UzdVJ0dC
   learner_created: false
 - name: src/service/external/utils/PriceMessageUnpacker.java
   visible: true
-  text: |
-    package service.external.utils;
-
-    import java.util.HashMap;
-    import java.util.Map;
-    import java.util.stream.Stream;
-
-    import reactor.util.function.Tuple2;
-    import reactor.util.function.Tuples;
-
-    import static java.lang.Float.parseFloat;
-    import static java.lang.Integer.parseInt;
-
-    public class PriceMessageUnpacker implements MessageUnpacker {
-
-        @SuppressWarnings("unchecked")
-        private static final Tuple2<String, Integer>[] FIELDS = new Tuple2[]{
-                Tuples.of("TYPE", 0x0),       // hex for binary 0, it is a special case of fields that are always there
-                Tuples.of("MARKET", 0x0),      // hex for binary 0, it is a special case of fields that are always there
-                Tuples.of("FROMSYMBOL", 0x0),      // hex for binary 0, it is a special case of fields that are always there
-                Tuples.of("TOSYMBOL", 0x0),      // hex for binary 0, it is a special case of fields that are always there
-                Tuples.of("FLAGS", 0x0),    // hex for binary 0, it is a special case of fields that are always there
-                Tuples.of("PRICE", 0x1),     // hex for binary 1
-                Tuples.of("BID", 0x2),   // hex for binary 10
-                Tuples.of("OFFER", 0x4),     // hex for binary 100
-                Tuples.of("LASTUPDATE", 0x8),     // hex for binary 1000
-                Tuples.of("AVG", 0x10),   // hex for binary 10000
-                Tuples.of("LASTVOLUME", 0x20),     // hex for binary 100000
-                Tuples.of("LASTVOLUMETO", 0x40),    // hex for binary 1000000
-                Tuples.of("LASTTRADEID", 0x80),   // hex for binary 10000000
-                Tuples.of("VOLUMEHOUR", 0x100),   // hex for binary 100000000
-                Tuples.of("VOLUMEHOURTO", 0x200),    // hex for binary 1000000000
-                Tuples.of("VOLUME24HOUR", 0x400),   // hex for binary 10000000000
-                Tuples.of("VOLUME24HOURTO", 0x800),   // hex for binary 100000000000
-                Tuples.of("OPENHOUR", 0x1000),  // hex for binary 1000000000000
-                Tuples.of("HIGHHOUR", 0x2000),   // hex for binary 10000000000000
-                Tuples.of("LOWHOUR", 0x4000), // hex for binary 100000000000000
-                Tuples.of("OPEN24HOUR", 0x8000),  // hex for binary 1000000000000000
-                Tuples.of("HIGH24HOUR", 0x10000),  // hex for binary 10000000000000000
-                Tuples.of("LOW24HOUR", 0x20000),  // hex for binary 100000000000000000
-                Tuples.of("LASTMARKET", 0x40000)  // hex for binary 1000000000000000000, this is a special case and will only appear on CCCAGG messages
-        };
-
-        public boolean supports(String messageType) {
-            return messageType.equals("5");
-        }
-
-        public Map<String, Object> unpack(String message) {
-            String[] valuesArray = message.split("~");
-            int valuesArrayLenght = valuesArray.length;
-            String mask = valuesArray[valuesArrayLenght - 1];
-            int maskInt = parseInt(mask, 16);
-            Map<String, Object> unpackedCurrent = new HashMap<>();
-            final int[] currentField = {0};
-            Stream.of(FIELDS).forEach(t -> {
-                String k = t.getT1();
-                Integer v = t.getT2();
-                if (v == 0) {
-                    unpackedCurrent.put(k, valuesArray[currentField[0]]);
-                    currentField[0]++;
-                } else if ((maskInt & v) > 0) {
-                    //i know this is a hack, for cccagg, future code please don't hate me:(, i did this to avoid
-                    //subscribing to trades as well in order to show the last market
-                    if (k.equals("LASTMARKET") || k.equals("LASTTRADEID")) {
-                        unpackedCurrent.put(k, valuesArray[currentField[0]]);
-                    } else {
-                        unpackedCurrent.put(k, parseFloat(valuesArray[currentField[0]]));
-                    }
-                    currentField[0]++;
-                }
-            });
-
-            return unpackedCurrent;
-        }
-    }
+  encrypted_text: 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
   learner_created: false
 - name: src/service/external/utils/TradeMessageUnpacker.java
   visible: true
-  text: |
-    package service.external.utils;
-
-    import java.util.HashMap;
-    import java.util.Map;
-    import java.util.stream.Stream;
-
-    import reactor.util.function.Tuple2;
-    import reactor.util.function.Tuples;
-
-    import static java.lang.Float.parseFloat;
-    import static java.lang.Integer.parseInt;
-
-    public class TradeMessageUnpacker implements MessageUnpacker {
-
-        @SuppressWarnings("unchecked")
-        private static final Tuple2<String, Integer>[] FIELDS = new Tuple2[]{
-                Tuples.of("TYPE", 0x0),  // hex for binary 0, it is a special case of fields that are always there          TYPE
-                Tuples.of("MARKET", 0x0),  // hex for binary 0, it is a special case of fields that are always there        MARKET
-                Tuples.of("FROMSYMBOL", 0x0), // hex for binary 0, it is a special case of fields that are always there     FROM SYMBOL
-                Tuples.of("TOSYMBOL", 0x0), // hex for binary 0, it is a special case of fields that are always there       TO SYMBOL
-                Tuples.of("FLAGS", 0x0), // hex for binary 0, it is a special case of fields that are always there          FLAGS
-                Tuples.of("ID", 0x1), // hex for binary 1                                                                   ID
-                Tuples.of("TIMESTAMP", 0x2), // hex for binary 10                                                           TIMESTAMP
-                Tuples.of("QUANTITY", 0x4), // hex for binary 100                                                           QUANTITY
-                Tuples.of("PRICE", 0x8),// hex for binary 1000                                                              PRICE
-                Tuples.of("TOTAL", 0x10) // hex for binary 10000                                                            TOTAL
-        };
-
-        public boolean supports(String messageType) {
-            return messageType.equals("0");
-        }
-
-        public Map<String, Object> unpack(String message) {
-            String[] valuesArray = message.split("~");
-            int valuesArrayLenght = valuesArray.length;
-            String mask = valuesArray[valuesArrayLenght - 1];
-            int maskInt = parseInt(mask, 16);
-            Map<String, Object> unpackedTrade = new HashMap<>();
-            final int[] currentField = {0};
-
-            Stream.of(FIELDS).forEach(t -> {
-                String k = t.getT1();
-                Integer v = t.getT2();
-                if (v == 0) {
-                    unpackedTrade.put(k, valuesArray[currentField[0]]);
-                    currentField[0]++;
-                } else if ((maskInt & v) > 0) {
-                    unpackedTrade.put(k, parseFloat(valuesArray[currentField[0]]));
-                    currentField[0]++;
-                }
-            });
-
-            return unpackedTrade;
-        }
-    }
+  encrypted_text: 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
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation project(":Reactive_In_Action-Crypto_Tracker-crypto-service-idl")
-
-      implementation 'io.socket:socket.io-client'
-    }
-  learner_created: false
-- name: test/service/external/CryptoServiceTests.java
-  visible: false
-  text: "package service.external;\n\nimport java.time.Duration;\nimport java.util.concurrent.atomic.AtomicInteger;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.DirectProcessor;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.ReplayProcessor;\n\
-    import reactor.core.publisher.UnicastProcessor;\nimport reactor.test.StepVerifier;\n\
-    \npublic class CryptoServiceTests {\n\n\t@Test\n\tpublic void verifyThatSupportMultiSubscribers()\
-    \ {\n\t\tAtomicInteger subscribtions = new AtomicInteger(0);\n\t\tFlux<Object>\
-    \ source = DirectProcessor\n\t\t\t\t.create()\n\t\t\t\t.doOnSubscribe(s -> subscribtions.incrementAndGet());\n\
-    \n\t\tFlux<Object> cachedFlux = CryptoCompareService.provideCaching(source);\n\
-    \n\t\tcachedFlux.subscribe(System.out::println);\n\t\tcachedFlux.subscribe(System.out::println);\n\
-    \n\t\tAssertions.assertThat(subscribtions.get()).isEqualTo(1);\n\t}\n\n\t@Test\n\
-    \tpublic void verifyThatSupportIsolationAndResilience() {\n\t\tFlux<String> source\
-    \ = Flux.defer(() -> Flux.just(\"1\", \"2\", \"3\")\n\t\t                    \
-    \                       .mergeWith(Flux.error(new RuntimeException())));\n\n\t\
-    \tStepVerifier.withVirtualTime(() ->\n\t\t\t\tCryptoCompareService.provideResilience(source)\n\
-    \t\t\t\t                    .take(6)\n\t\t)\n\t\t            .expectSubscription()\n\
-    \t\t            .thenAwait(Duration.ofDays(10))\n\t\t            .expectNext(\"\
-    1\", \"2\", \"3\")\n\t\t            .expectNext(\"1\", \"2\", \"3\")\n\t\t   \
-    \         .expectComplete()\n\t\t            .verify();\n\n\t}\n\n\t@Test\n\t\
-    public void verifyThatSupportReplayMode() {\n\t\tUnicastProcessor<String> source\
-    \ = UnicastProcessor.create();\n\t\tReplayProcessor<String> consumer1 = ReplayProcessor.create(10);\n\
-    \t\tReplayProcessor<String> consumer2 = ReplayProcessor.create(10);\n\n\t\tPublisher<String>\
-    \ publisher = CryptoCompareService.provideCaching(source);\n\n\t\tsource.onNext(\"\
-    A\");\n\t\tsource.onNext(\"B\");\n\t\tsource.onNext(\"C\");\n\n\t\tpublisher.subscribe(consumer1);\n\
-    \n\t\tsource.onNext(\"D\");\n\t\tsource.onNext(\"E\");\n\t\tsource.onNext(\"F\"\
-    );\n\n\t\tpublisher.subscribe(consumer2);\n\n\t\tsource.onNext(\"G\");\n\n\t\t\
-    source.onComplete();\n\n\t\tStepVerifier.create(consumer1)\n\t\t            .expectSubscription()\n\
-    \t\t            .expectNext(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\")\n\
-    \t\t            .verifyComplete();\n\n\t\tStepVerifier.create(consumer2)\n\t\t\
-    \            .expectSubscription()\n\t\t            .expectNext(\"D\", \"E\",\
-    \ \"F\", \"G\")\n\t\t            .verifyComplete();\n\t}\n}"
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPDCzUQPKO7Js/DKm87dPMQVPnW34M05LjIAiAlk43p+MUIqkuI2pGLNgvSjWYPle9nGlqM8Cy6/cWe8MjYge/OFoQUaSZeqA4c8GJNlTGxMebkVFsyTtbXf3aFu2wv6rw/BR9vZuW6EVQPzbGfkFXtGqpZ5HjOmJZzBAwv8YWjSTg==
   learner_created: false
 - name: src/service/external/CryptoCompareService.java
   visible: true
@@ -206,11 +29,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: |-
-      input.retryWhen(
-                  Retry.backoff(100, Duration.ofMillis(500))
-                       .maxBackoff(Duration.ofMillis(2000))
-              );
+    encrypted_possible_answer: tn72mvRD/bHL7OGqBn728E9kle6EqRIGE27SRYtaw7C129s1G8Fpk3SP1DUCUa1DfuS7JmopRjygzGdLK+A3oj/1KC2IXYrw6nsBWc04frb7F8BZ6gsJ2tiuWnkKol5UxTmQTEgdJb0WDZYqKbW70dKOiup+QlhqSQuXMel/whQhskKaSTX2kaMbRGUju+5A
   - offset: 1504
     length: 13
     placeholder_text: Flux.never();
@@ -220,127 +39,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: input.replay(CACHE_SIZE).autoConnect(0);
-  text: |
-    package service.external;
-
-    import java.time.Duration;
-    import java.util.Arrays;
-    import java.util.Map;
-
-    import reactor.core.publisher.Flux;
-    import reactor.util.retry.Retry;
-    import service.CryptoService;
-    import service.external.utils.PriceMessageUnpacker;
-    import service.external.utils.TradeMessageUnpacker;
-
-    //TODO turn to multi-subscriber with processor or another similar operator
-    //TODO add small history for each subscriber
-    //TODO add resilience
-
-    public class CryptoCompareService implements CryptoService {
-        public static final int CACHE_SIZE = 3;
-
-        private final Flux<Map<String, Object>> reactiveCryptoListener;
-
-        public CryptoCompareService() {
-            reactiveCryptoListener = CryptoCompareClient
-                    .connect(
-                            Flux.just("5~CCCAGG~BTC~USD", "0~Coinbase~BTC~USD", "0~Cexio~BTC~USD"),
-                            Arrays.asList(new PriceMessageUnpacker(), new TradeMessageUnpacker())
-                    )
-                    .transform(CryptoCompareService::provideResilience)
-                    .transform(CryptoCompareService::provideCaching);
-        }
-
-        public Flux<Map<String, Object>> eventsStream() {
-            return reactiveCryptoListener;
-        }
-
-        // TODO: implement resilience such as retry with delay
-        public static <T> Flux<T> provideResilience(Flux<T> input) {
-            return Flux.never();
-        }
-
-
-        // TODO: implement caching of 3 last elements & multi subscribers support
-        public static <T> Flux<T> provideCaching(Flux<T> input) {
-            return Flux.never();
-        }
-    }
+    encrypted_possible_answer: bC5xah5CBQ0CKm4SInwyvyowofaDKYs6Ptl8y3w/rXpaol/8scoQm1tRHW6T58nk
+  encrypted_text: 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
   learner_created: false
 - name: src/service/external/CryptoCompareClient.java
   visible: true
-  text: |
-    package service.external;
-
-    import java.net.URISyntaxException;
-    import java.util.Collection;
-    import java.util.HashMap;
-    import java.util.Map;
-
-    import io.socket.client.IO;
-    import io.socket.client.Socket;
-    import org.slf4j.Logger;
-    import org.slf4j.LoggerFactory;
-    import reactor.core.publisher.Flux;
-    import reactor.core.publisher.FluxSink;
-    import service.external.utils.MessageUnpacker;
-
-    class CryptoCompareClient {
-        private static final Logger logger = LoggerFactory.getLogger("external-trading-service");
-
-        static Flux<Map<String, Object>> connect(Flux<String> input, Collection<MessageUnpacker> unpackers) {
-            return Flux.defer(() -> Flux.create(sink -> {
-                Socket socket;
-
-                try {
-                    socket = IO.socket("https://streamer.cryptocompare.com");
-                    logger.info("[EXTERNAL-SERVICE] Connecting to CryptoCompare.com ...");
-                } catch (URISyntaxException e) {
-                    sink.error(e);
-                    return;
-                }
-
-                Runnable closeSocket = () -> {
-                    socket.close();
-                    logger.info("[EXTERNAL-SERVICE] Connection to CryptoCompare.com closed");
-                };
-
-                socket
-                        .on(Socket.EVENT_CONNECT, args -> input.subscribe(
-                                v -> {
-                                    String[] subscription = {v};
-                                    Map<String, Object> subs = new HashMap<>();
-                                    subs.put("subs", subscription);
-                                    socket.emit("SubAdd", subs);
-                                },
-                                sink::error
-                        ))
-                        .on("m", args -> {
-                            String message = args[0].toString();
-                            String messageType = message.substring(0, message.indexOf("~"));
-                            for (MessageUnpacker unpacker : unpackers) {
-                                if (unpacker.supports(messageType)) {
-                                    try {
-                                        sink.next(unpacker.unpack(message));
-                                    } catch (Throwable t) {
-                                        sink.error(t);
-                                        closeSocket.run();
-                                    }
-                                    break;
-                                }
-                            }
-                        })
-                        .on(Socket.EVENT_ERROR, args -> sink.error((Throwable) args[0]))
-                        .on(Socket.EVENT_DISCONNECT, args -> sink.complete());
-
-                sink.onCancel(closeSocket::run);
-                socket.connect();
-            }, FluxSink.OverflowStrategy.ERROR));
-        }
-
-    }
+  encrypted_text: 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
+  learner_created: false
+- name: test/service/external/CryptoServiceTests.java
+  visible: false
+  encrypted_text: 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
   learner_created: false
 status: Unchecked
 record: -1

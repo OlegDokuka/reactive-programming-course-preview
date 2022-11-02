@@ -36,7 +36,7 @@ files:
       offset: 172
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: flux.then();
   text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
     \npublic class Task {\n\n\tpublic static Mono<Void> waitUntilFluxCompletion(Flux<Long>\
@@ -47,5 +47,5 @@ files:
   text: "Проигнорируйте все елементы и дождитесь окончания `Flux` не блокируя пото\
     к\n   \n<div class=\"hint\">\n  Используйте <code>Flux#then</code>\n</div>"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

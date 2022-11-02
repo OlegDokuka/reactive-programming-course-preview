@@ -12,7 +12,7 @@ files:
       offset: 154
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "input.map(i -> i % 3 == 0 ? new IndexedWord(i, \"\
       Fizz\") :\n\t\t\t\tnew IndexedWord(i, \"\"))\n\t\t            .map(iw -> iw.getIndex()\
       \ % 5 == 0 ?\n\t\t\t\t            new IndexedWord(iw.getIndex(), iw.getWord()\
@@ -82,5 +82,5 @@ files:
     \ <code>IndexedWord</code>\n  Используйте последовательность <code>Flux#map</code>\n\
     </div>"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

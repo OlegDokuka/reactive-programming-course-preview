@@ -12,7 +12,7 @@ files:
       offset: 477
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
       \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
       \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
@@ -27,7 +27,7 @@ files:
       offset: 696
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
       \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
       \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
@@ -71,5 +71,5 @@ files:
     \ sure failure case is tested\")\n\t\t          .hasAtLeastOneElementOfType(NumberFormatException.class);\n\
     \t}\n}"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

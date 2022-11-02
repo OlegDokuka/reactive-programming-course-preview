@@ -13,39 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "flux\n\t\t\t\t.timeout(Mono.delay(duration))\n\t\t\
-      \t\t.onErrorReturn(fallback);"
-  text: "import java.time.Duration;\n\nimport org.reactivestreams.Publisher;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\npublic\
-    \ class Task {\n\n\tpublic static Publisher<String> timeoutOnce(Flux<String> flux,\n\
-    \t\t\tDuration duration, String fallback) {\n\t\treturn Mono.error(new ToDoException());\n\
-    \t}\n}"
-  learner_created: false
-- name: test/ResilienceTask9Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
-    \npublic class ResilienceTask9Tests {\n\n\t@Test\n\tpublic void testSolution()\
-    \ {\n\t\tStepVerifier\n\t\t\t.withVirtualTime(() -> Task.timeoutOnce(\n\t\t\t\t\
-    Flux.interval(Duration.ofDays(1))\n\t\t\t\t    .mergeWith(Mono.delay(Duration.ofMillis(900)).thenReturn(-1L))\n\
-    \t\t\t\t    .map(Object::toString),\n\t\t\t\tDuration.ofMillis(1000),\n\t\t\t\t\
-    \"Hello\"\n\t\t\t))\n\t\t\t.expectSubscription()\n\t\t\t.expectNoEvent(Duration.ofMillis(900))\n\
-    \t\t\t.expectNext(\"-1\")\n\t\t\t.expectNoEvent(Duration.ofDays(1).minus(Duration.ofMillis(900)))\n\
-    \t\t\t.expectNext(\"0\")\n\t\t\t.expectNoEvent(Duration.ofDays(1))\n\t\t\t.expectNext(\"\
-    1\")\n\t\t\t.thenCancel()\n\t\t\t.verify(Duration.ofSeconds(1));\n\t}\n\n\t@Test\n\
-    \tpublic void testSolution1() {\n\t\tStepVerifier\n\t\t\t\t.withVirtualTime(()\
-    \ -> Task.timeoutOnce(\n\t\t\t\t\t\tFlux.interval(Duration.ofDays(1))\n\t\t\t\t\
-    \t\t    .map(Object::toString),\n\t\t\t\t\t\tDuration.ofMillis(1000),\n\t\t\t\t\
-    \t\t\"Hello\"\n\t\t\t\t))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\
-    \t\t\t\t.expectNext(\"Hello\")\n\t\t\t\t.expectComplete()\n\t\t\t\t.verify(Duration.ofSeconds(1));\n\
-    \t}\n}"
+    encrypted_possible_answer: ih2WFKS+nUSqK9ovdXvOFnm6TV519E5eGRjUPPdUI2EsNt2S2dA88odsqvcatPzt0DiRL84G7YqDMHhSTpT1eJoXFUuZy9SjBH+ttTcw/3o=
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3knQMmk5sfg9rmtY6k4YxAT5AV/IAHACa6jN3aFQTBJ6OViRc2GvZXHpYLCXULG/LWaabWgEdGMH3Ug02r2PLzN+PwFdU4FnrM2I19e74BJ1s20Ida5JdxY0pyYhTE0RkL88AWCIIGal0NXTZc/5dFOvJE0HW1c+WNIzk06f1vcAGT/UQ36PfE6KC5l0bzhXBcSINKQbK9PGHCzRRFCkGlCtly6Ugr+0XipWDXR2jpR4NGXeyVnW0PRjn6GksdBFcTpOmycJ/ynLql7mUc91HY++nNHHD1lXFh+mklc5R0EZeKgStO46IRxnFCe6qk36xWwqSbpVN61mQDEq6Cf/zgq9YeLBq9MsfjcMmLXlZKf6NyOW33DLIGZTlLb1LEjZdh4=
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/ResilienceTask9Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzJcZC0fu9Qx7lexeFsxFoGSd8/comj+0CzfEoo3Te8lu90H+8mzReBEiRapukJ2VlHhiYOQGeuPIhWLdhpzEgeL1TzcR9SNwSTSEIXuReNRuTQn6RK5JYTYqZz6jnPuI3/BjaaayHKtBFfpdItG8kM/NEw8+O+yGXNArOVEhMEw9L7bKQr7UWLqlFn+qxsLx9ImusPa5puwMvmWFwqQWPxq3We9ZshgCJ/sSGbba2bNG6a0U41lyS7Y3XLBs/bVakVFsNZdyfSRn+JkQBu2VMLNp57COXWPLE03AgoQh6xCPBRIZiSlWVyykThs8pPdCSJm5HHC5HYqoftizlVeKVCq8WtYwlCHO3VMYwJEW9FC4W8NV81Iqmn3JUKIGi4z6nPOQG6J3SFYENoBpyhzrLkouKuSSkVyEzbylZq/fRs6gV44NLkuFkTODv/ct1IQEvT85rjMcj5P6d98mG4ICZflrOuUbp9su1g8WTzaPH8JCC0ZtrL+lI1v8sAuXUGL0X7AZmF4OkQ4tBk1d+hVN9SSDFul/1m+v491bGJb5nIfv27HkisFRZLKqHaSePisXEAmm4/dkwQ/wYiLxdHOA8HkrGIRC8PPAdYXS51wsBdt/u1wQkjI5oz55g+BCRIKRyTOcHhBsO5qSRJse3O8oKGdXspdV6YkZWZPLqf28HFzcJ84dJyYemwjQwx6de5gd9IXUhViNp4D+aeD3ZggsAwqjlH2OTI5DXnBMHX2mbcBdsO62IOGqRlkD3i9ACDStU14pK9g+HbN1DiXO3wqjjI97JTG4j+1I8NeIa7CiAJh5Tg7vMLz9K2MrEzItkCBCugTAc5kFDXg/qWoyVYHTlQ25vCtw6KCmy8c2/KczP80AgiMDJN+n0jpdeIL00+jaWq7JUerPPhhMYUxoogq5+Baze300nkvYMUSt+P1Bnkw7ZDSE9t1AuLlalBaQjmaeDd1vkjdeXk71t3bxVyt8kxRImGoP7PkQzSb+uP3jS9fWypdhzvzXcIipjUpiZW05FKe3o1kPmHEGM/WF3rzZW8UPrxzO4Fs6lqFni/mI0PqdCrusvBIWBtXE00+m5VRj/gSx9NaSfyUNuid96ElBDa5qBERtkv1UdhcRypBE6c8fhDP5FzG7NLoTW+Pj1RwmTrPOIj+zMgoazOoevDXQ7DvId6hbOiEtlMxpq5TFtqlqPGYIqKC5AlGocuaJoZGwPR2lS8X4cUVS71URXn6FnwBV2KHXDoqfB661aN5rHofHu5eGndpjH7fcXsalnVhUuVBUbwmWbePpEMBKhtudJQejsZnQJJyUz7OTrnjNJo0xNE+Hbhx05DiJUW6L3o9eCjpzUZ5Qolq9fUHDjq1+XqnjZUl9GUL5gfH+6KrLfYLk8s1wLIPnlMrOq/WVNg/6aA==
   learner_created: false
 status: Unchecked
 record: -1

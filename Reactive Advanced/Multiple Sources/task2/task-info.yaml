@@ -12,7 +12,7 @@ files:
       offset: 200
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: Flux.mergeSequential(sources);
   text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
     \npublic class Task {\n\n\tpublic static Publisher<String> mergeSeveralSourcesSequential(Publisher<String>...\
@@ -59,5 +59,5 @@ files:
     </div>
     </html>
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

@@ -3,40 +3,15 @@ custom_name: Task 3
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: true
-  text: "Сгенерируйте `Flux` из масива елементов\n   \n<div class=\"hint\">\n  Исп\
-    ользуйте Flux.fromArray\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2xfiP6FHDhsDXkVpRF7/JOCw6uYE+WE6bHa5/fpqGY+m+yreuWsitYF0eZOy+5VFX2nORq+HUczmx6odRvXhSaR1+Uro6tkWVaFiTqo1SD1m0h/tk+oIAikWEBhXdz4X9vkhJkE2u6xUpcPtzrNSKYy
   learner_created: false
 - name: src/AsyncRestTemplate.java
   visible: true
-  text: |
-    import java.util.concurrent.CompletableFuture;
-
-    public interface AsyncRestTemplate {
-
-        <T> CompletableFuture<T> getForObject(String uri, Class<T> clazz);
-    }
-  learner_created: false
-- name: test/AsyncHttpGetRequestTaskTests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
-    import reactor.test.StepVerifier;\n\npublic class AsyncHttpGetRequestTaskTests\
-    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tAsyncRestTemplate mock = Mockito.mock(AsyncRestTemplate.class);\n\
-    \t\tMockito.when(mock.getForObject(Mockito.anyString(), Mockito.any())).thenReturn(CompletableFuture.supplyAsync(()\
-    \ -> \"Lorem ipsum dolor\"));\n\t\tFutureHttpGetRequestTask.asyncRestTemplate\
-    \ = mock;\n\t\tObject sequence = FutureHttpGetRequestTask.getLorem();\n\n\t\t\
-    if (sequence instanceof Mono) {\n\n\t\t\tStepVerifier.create(((Mono<String>) sequence))\n\
-    \t\t\t\t\t.expectNext(\"Lorem ipsum dolor\")\n\t\t\t\t\t.expectComplete()\n\t\t\
-    \t\t\t.verify();\n\t\t} else {\n\t\t\tAssertions.fail(\"Refactor given code using\
-    \ Mono api\");\n\t\t}\n\t}\n}"
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH8XRHTCW2pDFsm2zrCiJtYcwJ+Un1w4i/kFDfY/k6/RZ+jAooT5GtKip2E7QXzaDYvDuXlY8HiHxbTKH9+9ZJWFB8mWp80nPOYDMD5HRIwbaBqGXm974xVBpOq8lt/M+wDGLV3TbXm8gvQJ8dL8rYxYCIqQIqupYJ9zOraeYsaDfKJnJokD+UTQzbHkNAK7OPA==
   learner_created: false
 - name: src/FutureHttpGetRequestTask.java
   visible: true
@@ -50,7 +25,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Mono<String>
+    encrypted_possible_answer: xxpS6Gsv8ndE4KU31Xz8NQ==
   - offset: 234
     length: 97
     placeholder_text: asyncRestTemplate.getForObject("https://baconipsum.com/api/?type=meat-and-filler",
@@ -61,12 +36,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Mono.fromFuture(asyncRestTemplate.getForObject("https://baconipsum.com/api/?type=meat-and-filler",
-      String.class));
-  text: "import reactor.core.publisher.Mono;\nimport java.util.concurrent.CompletableFuture;\n\
-    \npublic class FutureHttpGetRequestTask {\n\n\tstatic AsyncRestTemplate asyncRestTemplate;\n\
-    \n\tpublic static CompletableFuture<String> getLorem() {\n\t\treturn asyncRestTemplate.getForObject(\"\
-    https://baconipsum.com/api/?type=meat-and-filler\", String.class);\n\t}\n}"
+    encrypted_possible_answer: kJJlPXyih/FCIELaGUc0VYoSw3JQuLIkiHkIhVu6FdnpgYhQBlheyJyoKMWR8AH3fLh0S8HmabrvPu8+HO9Fp/IWfMLdHBT5FzCjmjmoGzNVn+T14Oa7lApkky8110NiXO1Y3JnEgygZRHjTb0G8HkMGPNW95+iXGlvuKRu6+q4=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zx2J/3Vj4RKJab6y+fqHz3OnI9a8c+WWZ+9uzGZlj2FsNzSwSlU3z7Ss3v//jsxaDIsiM52InhxknA1Zs5dVjy8AWe2uZEFZSSb3zwiu4hEcMMivBDZ7NDBYG7St0AimsU2pDyXix+tvmaSMkm6M8SQRvSe4KQ9m1Af0fpCnrCR3HzynioEWK+5p62MRlTVHLqwF1aJRY5Zr2lbSyyFimn/cr5KZ9bfmwadIAMf4C4EbTNFpWKN42Dc67lfU4xzrQILKU1ysLd6NJAhxaCLYCysI9+VO2NGtqpuHfNCm8m1e53qYe64LkuSfMz6HveTgIWmGEPx3Iz04+FyqADhJ8iVcWWnMq7dPJE+mNA4IpwJkk97Hoj4KdF9F/d/8BzJg4xKhsuICwzWbjm8c4VwDjqdesfTzc3t7H4QiV7JR2XKZg==
+  learner_created: false
+- name: test/AsyncHttpGetRequestTaskTests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPdhYvIZuLx+4zjBO4Fy2V89JrzHfu3P7BPHmVJQ9o1BvLdLAaV28wrgEq57aHnoHM/wQ0hidUpIrHKpIafAu6UZjmysbOy4phf3qbRq882nCOm7symV1KwyxbxUbvKjZnl9YtpDkgSozJetEsbYlN43wAM23py4/D7yhxseEWAIK8FthRqiQm3vWGLiQC5tJoZKrYOSB4oLiPffYJgx08hOyNAF5kgF6vR5+OwQo89bpVEoCKi8s19bj5cAXng3Gywu8u0A/0rYZEkRrmnNT5AxFLPQ04zPg6uWfH2YMUGcjSBJ7NWdD7uPwzzv+MF9MwVbUHwPqYEGoMHqpBPUY1h5IEocnFmIugUR97+VdC9SFXANxVlJMXXRgOaXRdTCaOq/9j72LBCCdszb2Aozd52QJ+LOyPqLNuy8oXlIB1fZF+p1R1J7edy4kZaCoAZK95+gmSxgxdPhz2zK96cJ+2H8iRVKIefWlk9Q3nJw/jSO1sclER+iT5/yc7JyFcCMciTVE1UmgIs/ONT0fQVciwGf+yZthMkx3wuQTesNQznaC34OQ0mOjcXA1YkucTRQXQCBTH61BZWxuvy/UVO8Z9w3kT1sWPzoFhPpCkl/OkWBVGg3nZZ/QskaadWso40WcyP99/UyXs+AuKy/CTHN0j7Hp+7F/IdO34Bj4iOrm9xtdwEiYpKBfJTfYesMXGzKSKeZNoLFAewG2fE56brR47fxPhLlWbOT/7Rx8llJAsCGibkT98Humk+J+sCY4BNBUL1LyuPE9l6JUoKZfu4WnldGq9vjdQA+Di3mBlxk2ehXBDM2HPmmYS0C9HIag5cMMkvB+lDGlisAwXnOCc+nwmmo3+3NVPP1IAF/TxJhVCIXCz9TbTosgOQekSJIFUcGnF5BU/umYrc13LSnKfLh61YHbLd1Rek3we1v0BsGboCyBOr3l0w4bqOLqHTu6s6sOD4CZ/sQQkRvSzEKm0QEGfLF4D6/AXbIaPD4HOzpxD/WKHD6eE2MDuMvCKEcZiR1s2ydwtuNQQ83LK6fh4i35UloOXGBz9RMzc1X06o1ndcW8T+2hGbDZm6yUaqIAsoIArNpy5daA2L7QufD5bIVso+ZR7FZHBRriIqg5TWV30nWK13YQakSMrLMc2zW2ZxaCUCDxsJquwuNk71d+ZPKKvwCw==
   learner_created: false
 status: Unchecked
 record: -1

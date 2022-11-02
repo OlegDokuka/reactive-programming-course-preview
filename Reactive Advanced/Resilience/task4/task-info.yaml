@@ -3,23 +3,7 @@ custom_name: Task 4
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
-  learner_created: false
-- name: test/ResilienceTask4Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
-    \nimport org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class ResilienceTask4Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
-    StepVerifier.withVirtualTime(() -> Task.timeoutLongOperation(CompletableFuture.supplyAsync(\n\
-    \t\t\t\t() -> {\n\t\t\t\t\ttry {\n\t\t\t\t\t\tThread.sleep(1000000);\n\t\t\t\t\
-    \t}\n\t\t\t\t\tcatch (InterruptedException e) {\n\t\t\t\t\t\treturn null;\n\t\t\
-    \t\t\t}\n\n\t\t\t\t\treturn \"Toooooo long\";\n\t\t\t\t}), Duration.ofMillis(1000),\
-    \ \"Hello\"))\n\t\t            .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofSeconds(1))\n\
-    \t\t            .expectNext(\"Hello\")\n\t\t            .expectComplete()\n\t\t\
-    \            .verify(Duration.ofSeconds(1));\n\t}\n}"
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -33,13 +17,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "Mono.fromFuture(longRunningCall)\n\t\t           .timeout(duration,\
-      \ Mono.just(fallback));"
-  text: "import java.time.Duration;\nimport java.util.concurrent.CompletableFuture;\n\
-    \nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Mono;\n\
-    \npublic class Task {\n\n\tpublic static Publisher<String> timeoutLongOperation(CompletableFuture<String>\
-    \ longRunningCall,\n\t\t\tDuration duration, String fallback) {\n\t\treturn Mono.error(new\
-    \ ToDoException());\n\t}\n}"
+    encrypted_possible_answer: kJJlPXyih/FCIELaGUc0VczPXtxDljuZa0vojTR6j7hjUNuRpe3mrhT9DNWF81z8NO1jSgu1sKvQIpRtckbWK/XFcUWGyK54aRPZQgUtWJbGnGcIvOtwklEPTjwi3C0P
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPdhYvIZuLx+4zjBO4Fy2V89JrzHfu3P7BPHmVJQ9o1BvIbw9Y5nV9UmacFWA0CJVPdVgChxR+zxOwGiKTI1XUDuh4jxmtvZ9YV7eG6aH01AhbEkFUr9wV/z4QvCQHoAFYIpo/W0cldNxFqxYmHyL4nSkZFmER+/iCxJ5jiuY7zP8S+l261GSLGV6AKpnkhd7UxX1Ig0Y/0FPkYKRn/bXA2Do+7dnrKUEaIZhmOu/2kFlkXJUktxAFN8CF61iYA8W47RfCL6Mi2Ci33lxIq0SQC04k1xUrzuG5M8nmLxXiu2zSfWfaVmvT+4mXYLulkdDHM3J+dwK9ITikaXEPP7yaK83ubywQGw6XvOdWQCwHvYXkpvGx1ZaocrNjiD0IcN9XNuFrgkYinFXXMoRkLiNj3BQlsNBLJk3EmIYQwfIpGpJI=
+  learner_created: false
+- name: test/ResilienceTask4Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPdhYvIZuLx+4zjBO4Fy2V89JrzHfu3P7BPHmVJQ9o1BvKhNiZr9htYz55lerMPre8/QK9rl6M1/wwrJjy92Cwtm+TosCLKjdFnF5r4N1AtNBjyHrlSCUUzJbr6/4kHRqThodC6kwHmyXOsIMlRhUERPl6EtPC9t9Vkag2hxnKKS9fmYY4FWdXPv5G3L3oXd2yhosImcXGV5BTAjGYdgTZRH/AWBkzCr6eRLKNcJX5LcLamB538o0yvn+ohdB0o5QrhukSfKFvY522kK09YhonrNvXug/M77LVmjwyAcQn0AcPWEYNhhQqBzfyd83pUdV7VkRu8/hzbEfAFW+94g31Y01WX6G4ONEQvnlgnU8pSsPmqwAeIJ6psWOFiBGTHy6o4MaTq8D2bFtDkAjiUJ4v7YuA23XxZKuWpBjd5KBtJmfwBW+XSTG7mPnSopGUEzM49eooRyaZ1Us+cG3AJLa8eAbNPSZUlEmhn8uk2rNo/W1M4MM9fMzhpJkndLbluMKTpDzBH0acMKclnAJxsjjl20RQqW9skDc1T8C3HWzIv6zi4E+xkZ+Ej1AvGFZ7YNZ1oyhJjwfsW0H3F32bkJsiR8UqmCOhQCGsaZlXoXZUuzoy5Qsn0W3veTMDzOtKYi5QDXfZRqGNXcb0Q5T6iU0FaONb76yQxxkcR7k1809KpLwO9ne6v0ZA6LpdZjdWFpEcrBjA8Fu1Y6DSX4v1KCCbuiDnzeTE6TzXrEQIMbDSzQt6iXkAMpVAKZCwSS0b7V02JPxRAogf3NKW3p5i+Thn45fD5LO4OBNMSU2tcQSa/lCgWHPEmB3fDkpHX03jFTM6lCd/1H2WYnOrBT9TEJGIebeIz071JnCrCRNzNf7LnkrOoEG50/iZWDdwvQ5OUIM8X
   learner_created: false
 status: Unchecked
 record: -1

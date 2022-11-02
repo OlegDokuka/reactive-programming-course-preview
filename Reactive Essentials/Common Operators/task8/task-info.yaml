@@ -39,11 +39,11 @@ files:
       offset: 198
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: flux.collectList();
   text: "import java.util.List;\n\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
     \npublic class Task {\n\n\tpublic static Mono<List<String>> transformToList(Flux<String>\
     \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

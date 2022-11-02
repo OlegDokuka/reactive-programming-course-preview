@@ -12,7 +12,7 @@ files:
       offset: 303
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "Flux.zip(prefixPublisher, wordPublisher, suffixPublisher)\n\
       \t\t           .map(TupleUtils.function((prefix, word, suffix) -> prefix + word\
       \ + suffix));"
@@ -46,5 +46,5 @@ files:
       implementation 'io.projectreactor.addons:reactor-extra'
     }
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

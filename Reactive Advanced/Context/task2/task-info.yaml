@@ -13,28 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: source.contextWrite(Context.of(key, value));
-  text: "import reactor.core.publisher.Mono;\nimport reactor.util.context.Context;\n\
-    \npublic class Task {\n\n\tpublic static Mono<String> provideCorrectContext(Mono<String>\
-    \ source,\n\t\t\tObject key,\n\t\t\tObject value) {\n\t\treturn Mono.error(new\
-    \ ToDoException());\n\t}\n}"
-  learner_created: false
-- name: test/ContextTask2Tests.java
-  visible: false
-  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Mono;\n\
-    import reactor.test.StepVerifier;\n\npublic class ContextTask2Tests {\n\n\t@Test\n\
-    \tpublic void testSolution() {\n\t\tStepVerifier.create(Task.provideCorrectContext(Mono.just(\"\
-    Test\"), \"Key\", \"Value\"))\n\t\t            .expectSubscription()\n\t\t   \
-    \         .expectAccessibleContext()\n\t\t            .contains(\"Key\", \"Value\"\
-    )\n\t\t            .then()\n\t\t            .expectNext(\"Test\")\n\t\t      \
-    \      .verifyComplete();\n\t}\n}"
+    encrypted_possible_answer: phaI3XprrRLlu+Q15dn6QLi/PcvH1ET1LiiKaCgX2MCVXo0r3YENfQfsZMnjmGPx
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zxCghoVeMAdlLdBx2I5HMxDBT5+ItrMTahrmctlh1pUx0QjryXdZac7npEjXxQLBMk8xeVTDZ9kGl07jLyzQWvvvqKNE4g2q/25eA47tUMdc0bPK3a/svGl3krhm/JDFGMUtvCppu1lijRZtH+ViRop8Ly8FQEYQftErhHKrg5tpPzH7suOTmeeR4Y+F/BTkuvpg/koRdopeG98WKhq66mGtOxXxKeRoKjztWv2z1XMNdhDSBmG8vO4lB9DB9u2xKfF9vTGxxL7T1Cd79u3f2V+PSh7jD8TXNVOdOqXIZO1mQ==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/ContextTask2Tests.java
+  visible: false
+  encrypted_text: ITs8Nv8EH6QWJG5nufD7nJbQJMkIq6jNfe9FYz1aEl0gzoXUE/n+Nrs7oURaMo+izTdxMl4rIbyY4m6gOdQClDSVSPFwYx1CZI7ipsgGjwi4eA0r0w8PK7nuYI8+0yQw4JVg0vCpuLdpyALg+1FFKOZzhKPcn1ryyPmL04XajQXkSZh+GgCl4Cko/ZkGcB+dMmJOS/3Ym5q9g+Ppw9QVpKh8/TnCeD1XBjRVySO+rn+EeEl4x0VvZpZ7KmMt0NCwE71O6psfg8VggKyXs9c19gK1m7RsbJDDICLizbIlUvqLTo6uFk/IW/HsSj3HhClVzf3SoyLXB8fZZhvZA62dKlTy7gbSPe4Gcqh6lJqNkshbhvXgmYclHoJ8/+2VV04Fo9PmW9CxxdGhBLb5k/wvy83nQyUGIHsDK0p4m6l5vmrKpwS/gZZ77aTnowlcvoSBbNrtHuzOnRtLzkNBRM5A4ftaP7cUyUwnnF65VCHWpL67pIe7khS30OuvKvKyUV+QAcabFAuaHYQSoQc2n3X5MYR/0ELYxbimhfprpMZrki0PphkxbDojnrdhYeltJxCUj/ELfuU76q/kbrpRFgWPiYPfeih0/4tv5VsVgaXyCeapy8op1h88da9WRyDTETsY
   learner_created: false
 status: Unchecked
 record: -1

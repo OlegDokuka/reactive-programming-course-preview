@@ -13,37 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "values\n\t\t\t\t.handle(new BiConsumer<Integer, SynchronousSink<Integer>>()\
-      \ {\n\t\t\t\t\t@Override\n\t\t\t\t\tpublic void accept(Integer integer, SynchronousSink<Integer>\
-      \ integerSynchronousSink) {\n\t\t\t\t\t\ttry {\n\t\t\t\t\t\t\tfinal Integer\
-      \ mappingResult = mapping.apply(integer);\n\t\t\t\t\t\t\tintegerSynchronousSink.next(mappingResult);\n\
-      \t\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\t\t// ignore\n\t\t\t\t\t\t}\n\
-      \t\t\t\t\t}\n\t\t\t\t});"
-  text: "import java.util.function.BiConsumer;\nimport java.util.function.Function;\n\
-    \nimport org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.SynchronousSink;\n\npublic class Task {\n\n\tpublic\
-    \ static Publisher<Integer> provideHandmadeContinuation(Flux<Integer> values,\n\
-    \t\t\tFunction<Integer,\n\t\t\tInteger> mapping) {\n\n\t\treturn Flux.error(new\
-    \ ToDoException());\n\t}\n}"
-  learner_created: false
-- name: test/ResilienceTask7Tests.java
-  visible: false
-  text: "import java.util.function.Function;\n\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class ResilienceTask7Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
-    Function<Integer, Integer> mapping = i -> 10 / i;\n\t\tFlux<Integer> range = Flux.range(0,\
-    \ 6);\n\n\t\tStepVerifier.create(Task.provideHandmadeContinuation(range, mapping))\n\
-    \t\t            .expectSubscription()\n\t\t            .expectNextCount(5)\n\t\
-    \t            .expectAccessibleContext()\n\t\t            .hasSize(0)\n\t\t  \
-    \          .then()\n\t\t            .expectComplete()\n\t\t            .verify();\n\
-    \t}\n}"
+    encrypted_possible_answer: tS9xqYanmXqrwggOi+AFeJfqBwxB+/XxB0bVLkjK5FdAMtCI6+/1UDVP3FbGxbiUGL7bQeuOQcrUAD8lYSHQYlCx14GpgJpUSdWwLK5sP/Hswg8z3mS8fCgbBUfkUbzUKVc8t3jrr/gkxA5pTTcrLp0LwObzzep3WvjeH2J4ZriPg8te59zGalzXaw6ZuxRE6b3HlRy1ycidKQjMIoCf9pAC6jZYHkwXWlyIZx+cwlPIhz/mhzprUWeoYwXcvGrDEV4OMkVfKl/NsYXZQfloWsnzfmxSgEWV/0/7BRit9I90D95zoG9/O0wO1EauKipVGfmXcG3yETixXcMxbYwnBuOvIsndWAzSM7ar9txKfs5BstZAJRSARgdm/B9mGGyPSai7NRmVjREDqCBKJIhFT8+zm4g9OmzDNRaqEvRuJp2e0cnlVRgKAbF/J+EMYIaLBJPVpS+K1Ac+lxZVt/QZNIPf3V7z237smC0zstUUJy9/oXwMkrpEd7f6focUtbs8
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH61LHwc08cVghWgAdteYemeQy6oUi4xBV6HhnMydwE+JQW+NG6N4vKvEfa7jtGTeVQe1cBzZGas1ZcFhTZ9ghkuNU+fHSuxqA5nUiTYWzjBPiLjY1U8ewWiaDt2hfHuIqY6U+D2Wz3pcx9GsdcpDhZwHRkaPGkTqQFZKMkRpz+sQSR8ZavHeCbBCUyRbrse5xGMqh60n65QszFEQ+p//d7oWTt19OF+pUIdevXJjmsYSc7rvtK9Z631z4dtIWRtSY6ke+OYb/Y3kk7wwLb8eTPhxEKQ272zzcDQskCBRUIrlFBRpT4fNFOK6MG0pifrR1GkuY0SASppqWdv00trOHPBUZodjpyZIkGJk0/ub2T9G2DZJSte3AlU1pEZuGGXTBgh94+xAaaDydX1VZuDDMsV+QGNKqvoyqxdXdd9a6oNG1AvfolhqR2wJR6o3q5I2WcgTLfA0epeZyGsJVgtvM2e1PF7Ui/FiYI2M33LCVCdkeVMsVLJnamQ91KsQnikdaQ==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/ResilienceTask7Tests.java
+  visible: false
+  encrypted_text: NYgHoNruO3t7vIi6YFhoHx1xTjV3AsZBA129BAJmTNG6NiXgMU89aA+pWj6IeBqCSYMt5spKTTl9xE5rkAr64R9biIu3d4Bva1qXJETFh7OwUN/IEbm75Qi+sdUkCXoVNEZJitNLdGUX3N6SCa0TBF5KRvnNsH/xWZkrzvSEnzmTCHXvKQlK/kk9JlpkMUvTtTbNR6+INHM+D5xj+7p54YStz/hQdpwaXHLws6ScfR06Oyioc+q6Bo6eSJQBFV6lHwbLrP0A7HURDFFkAS8iUFcnocnbmzmrUvc/p0p8AePkY39P0wafQbYujd3bRp64KMAOGBdQPDdGbIL9OiuGkp6X9F0Zl+zMlThqXs1oLuzwm3px4wFR4RLDCh6zIw1HiJ5a6CcS+aFYzWA4/trZWXHtiApCofe/eNEJmT8moZTzBScy/+1Bt41RO55W9XAhxJj5mKXQUodnn6yF1Sb5oYEGtNk1UQIf2iRJG7SM7a81nb7RUWoxaDQonRfGFk9XO2crCpkBdIc7ovxgJvX0SR83rPK47tGGlcw1akYdbUQFciI63AEjBH80CeXlrftlSz5DU3zt52BWPKUru5W+bLRXFujOfWkPNISE+19Y2O84ityhIoQ0lg8mZgBwJqCjA56YV9k40sAKEmjC3dZJQRYpX5jXYUB9GJ5oDRwP5g4sSO2EZ0B/qg8TUY/NTxL6LMsM34z0JEu0iEid6a47C6B82ShcbViTJmvOhoH7LrVQxkJEhrK1S5Z2vzGa8WfpqWSnfKjIVHSn/7l2VVhS4pq784Y7gy0lTUrsVXuiiWk=
   learner_created: false
 status: Unchecked
 record: -1

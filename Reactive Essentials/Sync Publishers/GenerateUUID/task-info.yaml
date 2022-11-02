@@ -1,39 +1,17 @@
 type: edu
 custom_name: Task 2
 files:
-- name: test/CommonPublishersTask2Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.UUID;\n\nimport org.junit.jupiter.api.Assertions;\n\
-    import org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport org.reactivestreams.Publisher;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
-    \ reactor.test.StepVerifier;\n\npublic class CommonPublishersTask2Tests {\n\n\t\
-    @Test\n\tpublic void testSolution() {\n\t\tGenerateUUIDTask.uuidGenerator = Mockito.mock(UUIDGenerator.class);\n\
-    \t\tMockito.when(GenerateUUIDTask.uuidGenerator.secureUUID()).thenReturn(\"test-uuid\"\
-    );\n\n\t\tObject sequence = GenerateUUIDTask.generateRandomUUID();\n\n\t\tMockito.verify(GenerateUUIDTask.uuidGenerator,\
-    \ Mockito.times(0)).secureUUID();\n\n\t\tif (!(sequence instanceof Mono)) {\n\t\
-    \t\tAssertions.fail(\"You need to refactor API so it uses Reactive API properly\"\
-    );\n\t\t}\n\n\t\tStepVerifier.create(((Mono<String>) sequence))\n\t\t\t\t\t.expectNext(\"\
-    test-uuid\")\n\t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\
-    \t}\n}"
-  learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Flux` из одного елемента\n   \n<div class=\"hint\">\n  Испо\
-    льзуйте Flux.just\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2zaV3ung4Wo5wCuykDXQ4Hfz98VRAYPbRDzma0lqvEjk6gpSs9Y5ozRxrEz7++DR6N4f4gRIN/CPi7rZ2KOJQSdpXk56cNJqx3g5EmFsWGPVj8JZ2IKnibGUf0DeZEq7iTGiz3ayKXRvN07Y5sw2QC0
   learner_created: false
 - name: src/UUIDGenerator.java
   visible: true
-  text: |
-    public interface UUIDGenerator {
-        String secureUUID();
-    }
+  encrypted_text: +IszU2sLU405ZWI8OEONm4cnOKEFFY7WxFhN8ZWmzHE+mN1/mK4Zhr85Vb4PJy0AhVLxkBfqwzjbjD1Jq/uOsQ==
   learner_created: false
 - name: src/GenerateUUIDTask.java
   visible: true
@@ -46,8 +24,8 @@ files:
       offset: 123
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Mono<String>
+    status: Unchecked
+    encrypted_possible_answer: xxpS6Gsv8ndE4KU31Xz8NQ==
   - offset: 162
     length: 27
     placeholder_text: uuidGenerator.secureUUID();
@@ -56,11 +34,13 @@ files:
       offset: 162
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Mono.defer(() -> Mono.just(uuidGenerator.secureUUID()));
-  text: "import reactor.core.publisher.Mono;\n\npublic class GenerateUUIDTask {\n\n\
-    \tstatic UUIDGenerator uuidGenerator;\n\n\tpublic static String generateRandomUUID()\
-    \ {\n\t\treturn uuidGenerator.secureUUID();\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: ldpE7tObbg9dmsbaKzqnLIoIDldeSweVMBQi4L7UZSYOgR4lDeWfK1F2Io5orchM0AONanWXMI9quD4gTIl6zw==
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zyWXeEeSyb66fl86WvKjVoj/8hXcp2DtxIOr+6PKBipkjyiExtlFVzO2mAdqvmXeAmVTBA3Z3P45/6dt5bo6juiKOZyC8/fmPcPqv4KkdH9XpSkg/EXb+bFmF6mGPAcPGqQmUjucaJ2M94tAd4CCfPE0A4ybnsWbtIZouZshKmnhd4WN0h9lx+IL0TIoS1sxI0fM3aw/mDHOY/MAGl/4caRWr1L7spEvd2hEZw5SdeTOg==
   learner_created: false
-status: Failed
+- name: test/CommonPublishersTask2Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6tgO3AV0g8mNOCWIQLbDW/vloYKPAh2lv/dGSHZYqLLPIwRBpPIzWQTgAorDWrRcmwERwf53qvz9BQZINbKbjUa5ikYIQJrRWh46lZbjmtu7ezM6wSRn7D3SGyfN9+8w0UfVvFiNUyCbg7u0tF0OPgi0r2ZSss0NDAK6LyBGDPVooS+qyaILusCpsQxWHsgvauOSV8ytQtapCVg3XyGp5FjtKRCFBRf4Q8J8NkL086Lhxp8eqEU+0scVC781qiOTBFslqy/vuiQso7K4J8H1eU2pgQUOS3QixiivaDK/BrNJX5RsAxo9I1WQBXf2u1ueJzJlkc7wWrdC8YbDI61j9L8TAwgyN+dygoUc7xR7fTIruUt0WyGbfQm4yl5Y7VMzwuTIXHroUfYuNdhcIj1Jt7DjVbP3LkY0cTX+OqgerGUtK2E4/q9xSENL2EEGwR1v4nhdr8W9QpaRrBbwa4ROkyxI15rRd6kte3vJ3QBYxRnPHsTVOEOSDpJRqCB5jx52OPgi5w59EzkcjJzlpAthPaiXykLHkUtFAMTk8NVcHkevvEnC3Wa8j8cYVO1W/hmBHQvHyua5St8bQ/ZfNqDay0iSyG0dI9wXYELXUm2Vt/ub0UyTDeBxYzOMm+qO4x3itW6PoZ++9/CGbnjJ5RVDucXWhRgsPtItHOL5YIh0sgjsiaj1QSuNVJ4WKTRMOfpuCoT4ZaOmx4DzeNJXg33JmK65KLj30SLthA+qmqh/wSiRBoOXWfLT9beYRTL4vVxNYIJ0D6vFNVOnu4ZycWqrDDmv2kx0lQ7g1S6A1gzDu93aai7ZC5i3uJ53wMy1IjnNFpir9KdjzvWEyr0JpY/ua4TowSS6fw/f/8v7e7psiO37494267VzOl1HNf+3TUEEDchCUnwiBABn+EoXVzo71KCvkAISFcFlC6CW+5MT+VwjQNlEL0JwZEbURlxFu6J4uec3RYpxUbD2jvkS52Fhkq8qTBeqP18ABxUSxMn4oVf2Ru1ynGmOOHFw1ool5LlzphieTcTaFG4CUxbEqluoAbHB2lCLD7uPhUWS4C7SrsoiF0Br0QmTBxBqywFQMFnva3kAOHukLbJ3Ts8socCr5jmw7Iydng8yyzD3VXS9uqNEe4rxkVcCfABpuOBg0eQOo3qAJ2OdHHl4IBlPnWN4z1x9XWE4z4fWCwEvvS4+4b8j29g1wxgabER/dwkQppgGl6N1bvwkD3ChBQJu7ZVEPp17+g2M4Xzu9yGKYjovsQDQ==
+  learner_created: false
+status: Unchecked
 record: -1

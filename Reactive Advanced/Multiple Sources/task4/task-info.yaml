@@ -12,7 +12,7 @@ files:
       offset: 187
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: Flux.firstWithSignal(sources);
   text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
     \npublic class Task {\n\n\tpublic static Publisher<String> fromFirstEmitted(Publisher<String>...\
@@ -49,5 +49,5 @@ files:
     </div>
     </html>
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

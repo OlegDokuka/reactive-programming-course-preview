@@ -3,42 +3,11 @@ custom_name: Task 1
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Создайте `Flux` от `[0..20)`\n   \n<div class=\"hint\">\n  Используйте Flux.range\n\
-    </div>"
-  learner_created: false
-- name: test/CommonPublishersTask1Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\nimport\
-    \ reactor.core.publisher.Hooks;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ CommonPublishersTask1Tests {\n\n\t@Test\n\tpublic void testCorrectFluxTypeUsed()\
-    \ {\n\t\tArrayList<Publisher<?>> publishers = new ArrayList<>();\n\t\tHooks.onEachOperator(p\
-    \ -> {\n\t\t\tpublishers.add(p);\n\t\t\treturn p;\n\t\t});\n\n\t\ttry {\n\t\t\t\
-    Object sequence = CreateSequenceTask.createSequence();\n\n\t\t\tif (sequence instanceof\
-    \ Flux) {\n\t\t\t\t((Flux<?>) sequence).subscribe();\n\t\t\t} else {\n\t\t\t\t\
-    Assertions.fail(\"Unexpected implementation\");\n\t\t\t}\n\t\t}\n\t\tfinally {\n\
-    \t\t\tHooks.resetOnEachOperator();\n\t\t}\n\n\t\tAssertions.assertThat(publishers)\n\
-    \t\t          .first()\n\t\t          .as(\"Used incorrect Flux type\")\n\t\t\
-    \          .hasSameClassAs(Flux.range(0, 20));\n\t}\n\n\t@Test\n\tpublic void\
-    \ testResultIsCorrect() {\n\t\tObject sequence = CreateSequenceTask.createSequence();\n\
-    \n\t\tif (sequence instanceof Flux) {\n\t\t\tStepVerifier.create(((Flux<Integer>)\
-    \ sequence))\n\t\t\t\t\t.recordWith(ArrayList::new)\n\t\t\t\t\t.expectNextCount(20)\n\
-    \t\t\t\t\t.consumeRecordedWith(r -> {\n\t\t\t\t\t\tAssertions.assertThat(r)\n\t\
-    \t\t\t\t\t\t\t.hasSize(20);\n\t\t\t\t\t\tIterator<Integer> iterator = r.iterator();\n\
-    \t\t\t\t\t\tfor (int i = 0; i < 20; i++) {\n\t\t\t\t\t\t\tInteger next = iterator.next();\n\
-    \t\t\t\t\t\t\tAssertions.assertThat(next)\n\t\t\t\t\t\t\t\t\t.as(\"Expected sequence\
-    \ of elements from 0 to 20 but got element [%d] out of order\",\n\t\t\t\t\t\t\t\
-    \t\t\t\tnext)\n\t\t\t\t\t\t\t\t\t.isEqualTo(i);\n\t\t\t\t\t\t}\n\t\t\t\t\t})\n\
-    \t\t\t\t\t.expectComplete()\n\t\t\t\t\t.verify(Duration.ofMillis(100));\n\t\t\
-    } else {\n\t\t\tAssertions.fail(\"Unexpected implementation\");\n\t\t}\n\t}\n}"
+  encrypted_text: 0k27E+btKUSxHbe26pz7dSyjHcW3UAboG3w/C8xvRZlUrlIcupOIPq5ZMK2WTFQR2Csu2+CUR8FJWL/5MEjss2KpV8VmPkuacLX2nfsv+/Lu+PZbyQOHfygJWxo+0zL6FvF0sqdIhyt8mM11xoZ3Iw==
   learner_created: false
 - name: src/CreateSequenceTask.java
   visible: true
@@ -51,8 +20,8 @@ files:
       offset: 138
     initialized_from_dependency: false
     selected: false
-    status: Solved
-    encrypted_possible_answer: Flux<Integer>
+    status: Unchecked
+    encrypted_possible_answer: 51J8lhKIDBWE4DSKJiIyvA==
   - offset: 177
     length: 119
     placeholder_text: "List<Integer> sequence = new ArrayList<>();\n\t\tfor (int i\
@@ -62,13 +31,13 @@ files:
       offset: 177
     initialized_from_dependency: false
     selected: false
-    status: Solved
-    encrypted_possible_answer: return Flux.range(0, 20);
-  text: "import reactor.core.publisher.Flux;\nimport java.util.ArrayList;\nimport\
-    \ java.util.List;\n\npublic class CreateSequenceTask {\n\n\tpublic static Iterable<Integer>\
-    \ createSequence() {\n\t\tList<Integer> sequence = new ArrayList<>();\n\t\tfor\
-    \ (int i = 0; i < 20; i++) {\n\t\t\tsequence.add(i);\n\t\t}\n\t\treturn sequence;\n\
-    \t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: h1Td16xrZFjF+CfJsLYZHNitDNa/hWThX7/4y25+iwo=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrSa4aMClkwyWs9YER62O+3n5YAdhiDeCjVTbA11Nwr5sTjfXa2A/p0Px9Kk0X83Vs6nxbbGnkmPmt91y7qZsCNycPtiYjJhJaqSCeB36+066wBjkY3qP3yCJDNZejmY9uzszvAPZbd29R/KiaVx4dymadvy0dd6E2slDNDCaZv8nQ6OpfidlJkCYWfqmxM2RcBvXli+KvbGKYXHHgSc3ULO7kQKSxZhFTY4ft5scYY22Rb2nDWW2ALBy8ZUbQNIMY+yHH1g63y0kpWsTt0aDa2IQSa+/J+kpR52487MjbmjnvESkijgS16IGTibN+grZznrJr9ICvOjP9orctup5pLXf6VgYtfTEof7k4VPzlnZ2g==
   learner_created: false
-status: Solved
+- name: test/CommonPublishersTask1Tests.java
+  visible: false
+  encrypted_text: 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
+  learner_created: false
+status: Unchecked
 record: -1

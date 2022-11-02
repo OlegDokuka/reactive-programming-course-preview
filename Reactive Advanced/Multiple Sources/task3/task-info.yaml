@@ -12,7 +12,7 @@ files:
       offset: 198
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: Flux.concat(sources);
   text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
     \npublic class Task {\n\n\tpublic static Publisher<String> concatSeveralSourcesOrdered(Publisher<String>...\
@@ -64,5 +64,5 @@ files:
     </div>
     </html>
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

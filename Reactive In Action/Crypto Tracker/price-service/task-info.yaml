@@ -3,12 +3,7 @@ custom_name: Price Service
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation project(":Reactive_In_Action-Crypto_Tracker-price-service-idl")
-      implementation project(":Reactive_In_Action-Crypto_Tracker-crypto-service-idl")
-      implementation project(":Reactive_In_Action-Crypto_Tracker-common")
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPDCzUQPKO7Js/DKm87dPMQVPnW34M05LjIAiAlk43p+MeOB8fLATeLLz/3cDKzdY4WP8OJ8sD3yeqTwmU1LL0YnYV/pIdUaqBCs5+5C7ExUQNgmFy3xId91ftlj+clkdR81dF2FiPPjZSmFpShwRl5HOQxx4YB0b7kEMlEsGVQONLUVVp0grVmw12azGXU+coPhW4ZRLQNxhWJGUfyxx0eWRApKVOg+pU5Ns1G6io1aedy2/KtBeaCPKbEzGXSMdbrR+bqKSpgw2h8cDpZ4sXSqe66p/7jB4K2UHGxyYb6mkw==
   learner_created: false
 - name: src/service/impl/DefaultPriceService.java
   visible: true
@@ -22,8 +17,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: input.filter(m -> MessageMapper.isPriceMessageType(m)
-      && MessageMapper.isValidPriceMessage(m));
+    encrypted_possible_answer: cKSBVcQu7CsTbkQNicwBDt4S9My+cSZFo+9TUe6IY94T93MKx+VUuKjxtSlKiBo/vp5DPeSnI9PBA/+5peD7EvsG3cq3uWqa9s8a9EyaEkcVH8TkVcUaFoan5SQlNrjo
   - offset: 2036
     length: 13
     placeholder_text: Flux.never();
@@ -33,7 +27,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: input.map(MessageMapper::mapToPriceMessage);
+    encrypted_possible_answer: bFKMyTBQBj9+je1Jj4YZOkko1Fhc+1MHHpmRgFPwriHVzFBM1EIN/0JR8faMVi9W
   - offset: 2760
     length: 13
     placeholder_text: Flux.never();
@@ -43,136 +37,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "requestedInterval\n\t\t\t\t.startWith(DEFAULT_AVG_PRICE_INTERVAL)\n\
-      \t\t\t\t.switchMap(timeFrame ->\n\t\t\t\t\tpriceData.window(Duration.ofSeconds(timeFrame))\n\
-      \t\t\t\t\t         .flatMap(this::currencyGroupingLogic)\n\t\t\t\t);\n\n\n\t\
-      }\n\n\tprivate Flux<MessageDTO<Float>> currencyGroupingLogic(Flux<MessageDTO<Float>>\
-      \ flux) {\n        return flux.groupBy(MessageDTO::getCurrency)\n          \
-      \  .flatMap(gf -> averageProcessingLogic(gf, gf.key()));\n    }\n\n\tprivate\
-      \ Mono<MessageDTO<Float>> averageProcessingLogic(Flux<MessageDTO<Float>> flux,\n\
-      \            String currency) {\n\t\treturn flux.map(MessageDTO::getData)\n\t\
-      \t\t\t   .reduce(Sum.empty(), Sum::add)\n\t\t\t\t   .map(Sum::avg)\n\t\t\t\t\
-      \   .map(avg -> MessageDTO.avg(avg, currency, \"LocalMarketAvg\"));"
-  text: "package service.impl;\n\nimport java.time.Duration;\nimport java.util.Map;\n\
-    import java.util.logging.Level;\n\nimport dto.MessageDTO;\nimport org.slf4j.Logger;\n\
-    import org.slf4j.LoggerFactory;\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
-    import service.CryptoService;\nimport service.PriceService;\nimport service.utils.MessageMapper;\n\
-    import service.utils.Sum;\n\npublic class DefaultPriceService implements PriceService\
-    \ {\n\n\tprivate static final Logger logger = LoggerFactory.getLogger(\"price-service\"\
-    );\n\n\tprivate static final long DEFAULT_AVG_PRICE_INTERVAL = 30L;\n\n\tprivate\
-    \ final Flux<MessageDTO<Float>> sharedStream;\n\n\tpublic DefaultPriceService(CryptoService\
-    \ cryptoService) {\n\t\tsharedStream = cryptoService.eventsStream()\n\t\t    \
-    \                        .log(\"Incoming event: {}\", Level.INFO)\n\t\t      \
-    \                      .transform(this::selectOnlyPriceUpdateEvents)\n\t\t   \
-    \                         .transform(this::tranformToPriceMessageDTO)\n\t\t  \
-    \                          .log(\"Price event: {}\", Level.INFO);\n\t}\n\n\tpublic\
-    \ Flux<MessageDTO<Float>> pricesStream(Flux<Long> intervalPreferencesStream) {\n\
-    \t\treturn sharedStream.publish(mainFlow -> Flux.merge(\n\t\t\tmainFlow,\n\t\t\
-    \taveragePrice(intervalPreferencesStream, mainFlow)\n\t\t));\n\t}\n\n\t// FIXME:\n\
-    \t// 1) JUST FOR WARM UP: .map() incoming Map<String, Object> to MessageDTO. For\
-    \ that purpose use MessageDTO.price()\n\t//    NOTE: Incoming Map<String, Object>\
-    \ contains keys PRICE_KEY and CURRENCY_KEY\n\t//    NOTE: Use MessageMapper utility\
-    \ class for message validation and transformation\n\t// Visible for testing\n\t\
-    Flux<Map<String, Object>> selectOnlyPriceUpdateEvents(Flux<Map<String, Object>>\
-    \ input) {\n\t\t// TODO: filter only Price messages\n\t\t// TODO: verify that\
-    \ price message are valid\n\t\t// HINT: Use MessageMapper methods to perform filtering\
-    \ and validation\n\n\t\treturn Flux.never();\n\t}\n\n\t// Visible for testing\n\
-    \tFlux<MessageDTO<Float>> tranformToPriceMessageDTO(Flux<Map<String, Object>>\
-    \ input) {\n\t\t// TODO map to Statistic message using MessageMapper.mapToPriceMessage\n\
-    \n\t\treturn Flux.never();\n\t}\n\n\t// 1.1)   TODO Collect crypto currency price\
-    \ during the interval of seconds\n\t//        HINT consider corner case when a\
-    \ client did not send any info about interval (add initial interval (mergeWith(...)))\n\
-    \t//        HINT use window + switchMap\n\t// 1.2)   TODO group collected MessageDTO\
-    \ results by currency\n\t//        HINT for reduce consider to reuse Sum.empty\
-    \ and Sum#add\n\t// 1.3.2) TODO calculate average for reduced Sum object using\
-    \ Sun#avg\n\t// 1.3.3) TODO map to Statistic message using MessageDTO#avg()\n\n\
-    \t// Visible for testing\n\t// TODO: Remove as should be implemented by trainees\n\
-    \tFlux<MessageDTO<Float>> averagePrice(Flux<Long> requestedInterval,\n\t\t\tFlux<MessageDTO<Float>>\
-    \ priceData) {\n\n\t\treturn Flux.never();\n\t}\n}\n"
+    encrypted_possible_answer: RmXbK8l47Db0MGznUEZop8X72bVLMre0WIrh2HLR3Kt3OBJNQGaA6hMF8Wvhs1Nm368sXbTHJw7YyzdWfrkICnGaZn9JI4M0myvNwW2giR5T8ojq3PYYbk0ybYxoCSh5hQ+8BQhpoh/g1I66gmEofo+zD9uA4OUqoeqyFU5TOR9ikpAnOZVFDLyzNiiWbphGUoi3pZQpPL/Tjby0KJS+pQnT30DUJHrXTZ6dkqnT1bqhqQeuMg+Dxk1I9uYxU+fdjSKeKtVBeK5+EW1oumnIaPI4a4hJlTQX6VMTinqZfqriQVyoMHNgsg7KE08NlcBZl9+f6mLJPFVJVTvwQ8o1To3CXae2PkESqzIDwMYoK6uh6HJxf+H8GPYGiLgm+YLkepl7q0xYSYECO291gew06xU+pKgDfKu08mIuZ/u0pLcITQDk4tvg/qSrxphs+bGKhh9C6XWSbXGVY9R5rCGV+Fk6NNrIwMc1sWyKp6E5GAkpOF+aVc1GfAvf9BRHm0zuuFfuFzmz0QoWpDKAo0ak+jxX4Q1bOuEl/kKzfK3VquBoWfWluMO6RQFy6psZSREznFwnsKUPBTq9500/bz0/ciGZl6zpihWYP9exwT5baN6VV3NeE8abqtu2z4ktsepSuY4DH2VDpPxjBCE2Y5TVPWyB+SjdSNQ8UmwmVCEj4jTQlcAZUhZMIR6oVr92HmHPxF7McfyV/1XJVyWdQa/icPmacAYrrpgtVftRph8lsInBi6dLX+8j8gZPiDvckgTAqm2zeaMYMpD/7faT3MbI0GmUShw4WRKoX0jz8P4jv20qmbVEkoeDnwJVAiFF7nEr6bkjbVWcOFPFPD1xOzGMU3PjLRNCVrtdpz0tiGXudHWVRORiNzVNwseguIosxuzELo4gn2cNocovFPS4DlNE9D6Ye1/tTfnYT85D6iu7+7UJKL//oeWP1neufOr2YYj9
+  encrypted_text: aExR/497raopHjjAT7uyIinKmH2QDZyWX2T3Ml6c2hdLaPpFQaJM55GTRDxjMwlv+mrTS7sGiaXMVnP4tDg2qdHop/f7/o/dTikmQKeRNa7hm9ZJM0SgyaskapWon5kkQN8chW/gVPZniG3JUk7yHKeLC+7PDoKLxs0irl6eL2bLIXgrR5bHdxXFiOQ1QdoUL800LqoYG/aDIKsElJTn4dGmxVnE+zkm8rkz13Gvy4pubXatTUFPiIAm41rOudnicq7Rr/fzUFyTL1GtTb46mEqAsDfiA/zpZGxpemCT1PcGC6mpeo+UYpWoXi078Rp48cZdDcdfOg5+kPcQJF4EZ/Hro508tLDJeuIo5vNeqYnT8IqGWN0cj+bSN7EFhxhcI9oqsl48/aSqvfY+sqWVmBMKujvbo0QplMtQ8rJYDynE9T8CpyT9FaPIa3dWWvD9cn9qY7usUPEkRCg5B4WN4gveVYLNRfkBKAdUwN3Cdfq51UwWUwx9oHO9hQs3G5q1H/QvjxzxRXSZFEdcfHLk526nZwsHo4u6qkog4OIg40aMc3od7t/p/UdUYDiAfAnn0F64gvr/1n60D044R+SKFQFribk7IvJyj/RbCdVXIWOOBqgtMxcXZLECe909hoK+IXLuJWL6l0UVRf4/6frndzoT4t/6d7pLcZryvaj3OjpixXRJbBv9R3d/+Ed8YrCGs16VJT3uaFK4Cxr4UD/AIPtLMXeglnIsaxOR6Z8HXSAFC5TwzAWqMS06DVPnTUhq86EBZPogTbN7MaukPe1MkbhO0k7iPTbpBO8WbFDMUqNQSQzUw8BIPlJwUA5tft712x4/pBEI0oZhQFwI+hWKU75ig814ysklBg0q6+q3VdyyknM06zD89XBoxtesJa+6yZ0Xtz2UnBuO8N1pXC7IHi9ai6WaJ8FBZYVGKYUHIKpOaej65RmqwvRiOrvcjnqNSBEo9bSxeUR/jV3U3z5HU+AT/ZEn4LgD5tZ6+6hN8F/dPH2pua+ilfl/4tbhMVLvOft9D/BEw4xEJ3mCx4AHHbbylUMMoVw8RESzAv6+TInnZ7RGoiYTCJJf7T0Wb5BaCbApvR9TtKsGUaHPKeXco+71C4pFuDa37HobFGA2Mb6eOSTNZwRuJ7rG7cnpE5LUdj8/Pca7jI3BxoDX487bg6SKagoqMtniAct23/9Rz7b1933+MhB4jYpM5dUPfXeFui+SwF4vRq2wEKdBjc7luQ33/ttbYRQwOC9Fh9KWcLIKjBFjfh8QYtRf76ORkfwgLsBvNULzK4OYNjosrYkXSpWxoQzO0CmFCBQKp56gVgX8o0WMTULK4FprjP99gz9OsEyhIqmduSE/rM7IxRdHsWhCbI4t6PFhEKWcmE0PGbtx3gHnFfoSVmsSouVZxu+SC4UvIkDgjjOiw9bVN66wirURwDf/VyZbo9B4sQ8FaQZ8+4hPXGGcoyjfvqJ8yPcFhu+gvXOHrzh0jfsx1P23+4cKFMrUUsSakHWD34Sz6G+hZLmYLwvppcNHyxcGXDPpky+cOiCrcQ+mxwSc5YXyiBDJVN2SdO4ws1hqgBPReEKU1IskoBspFT1g7u3sFDHD/rfAyQyU3TNYIjfq/KVo87xfTF6i9XM03N7JYlYSGgwUQKTtlIi+YXi/n6nhlTckt8w28WGGDsCg7fUOxx71JtJazDqFzstw6rOvvvXRr+YVZyrTLrz1XaHAZWeVA/u3/w2LngjPUY6svHhErvFu0cKlLIkFW/HfOfZC9yLSN5DFTslWVGWW3CM0ymwEwSAQ+n5w2aod8eOtRe7vRmFuy955FVisGLViLIRMtC4S9UAS+V50GM3/WHBdJ0/s69b8i0vr2WQEh97GYkBMiyzNf62MpA+0i4fDE+D6OynK0LI8jYsLX+ErDRL0t9oWJBFHeB77bUKazDIirRuyjKRKP5X1ESFRGLrlkI61UWc6h2DUYk+oviZzZDbw5aXBeQQMNVKKvDEGfF0Np0PtXoi8adfI+a4Q0ifT8Rler+dDEU7gfIqOuYNT5UrLVB0S9vnfvYCNVZ/mGM516/tkAd/tmPdP2KmLBX+RmGhcrzsdsLF0ZHIJqx7qwOuFuRpG33iMVF6qYIz/Q2CgM4kz8EdJ1kBpnMSb0IWuwXIHWzR9+ggonGaMoIahasDi605O3iArSzQZiaWppqQbwWiP5X02Zlokva/k9XmqLk1aI2bqOkEAvpY/Mc/QCfrxUtwTVuEtphuw3UncpmnOF9UjiahW1LuVrc036p5pemv8s96Gm0f5hQyPJFOD9pxq4ltztPjqrJ4sBGOSlT1mG6EPkixLQAC0WFlxbCqq7h2LIYqgIMn9LZpfUwfQ/JctJT5tfcYnuIaHc8baC59i+W80IYatFa9ntikhDP56N5uW1s+DeuPG8qjBCHz6RvR670ki5PAdVQi9hzURhzIJmxNcAGJWYvH7Tw+w40MdE1BfrwoR2pFaZheDHgVZ2IgXecO+uquT4sPhPhzvJezf6nKWQ9QSG25CbPZBJHZrdkcZvpH+0wHog7tSEv7mOWDPA45vuGkdeqwqP6yj9QLrwY1AR7Gl5TtsOtEJ4HBlN34WI4jWPjmxK0JHsIyNK0wX7A6JDGoXU4p1NNQGyxgnjFRRlXAtmvfSTeZ/6PtRgsQJqcXOlK8rLwZ1Megrg1dcW9Vq4GxCFNHImU+uLypGPjf54Ei61iPRrY/gwMJhVhCoEjhHcaUE7K97pGQ0LgXkSN5btB0AORxqGFb7cRIrbfNnx0Afrn5YdJhWfXfpETOssi4QvaRKwXo7ff11yvq164IA8SFcwi9V8xwc5wwMPRtqc60ul9KzX57b0UY/Zz5OvZLStSjwxe2eoVamqTbJcK08/b96g+mU3czvI1GlgHJE0tRltefLrMwbGL33eFWvA9xjsl/rto+GiGETj40TkXYTlbW61HUPOCSMj37tVwVqwYAyrQNIT/0f0jc4E1Ryi8yitwSLiaHIw02z2XynQglxqD2ByVNIzGOt4P8IgjcySM5xqYBowhaoGLWQqEEUdOO7XYrsUOhYj6w3gwHkhmztHhoYrStmZlwzrE5UcnuwBXoFJ8fAQ0pnMxi05CFOjAwT7C5BBeJjuYAZyXCdF9UxmjxjTBWivdAiF1k+pUjHvriqia8DVP+uGg1UJdgYvL5UprwFKHT+tfvEluWxk9zMwlSCTWFPLorKs0AqYZVVT/21qsRBL3iajalYMPZsdKM0DdQlrk297ELmdxbcxS5r+7xO//zcKpbcPeW61ktdhA47ti+a7/Pd8xcLPDJVueKiqM6ewEirSJjL6crq7z8STBjrS2Hy1T6VTRpn99bL70DQqTtBviRaHhCDTR0j2ZZ+3HroflTp9wUnccPLDv9o7+n07okyyUmabr6fymRBrdeJ1S+gyid4g2GYpMq5YrrsLr9SauXfLlLwL2MODrX2qd3RwGzpACfjZXbUL3xlar1g/Ehr01aJw4yRAmTQsHDha1vnUz5Tu1r+cZ26Xx8nedz7qs5O+urY8Z3Es4U+gcFNFJdDvZetX/HbHn7JpX1AwTtZdw6n3rQqybkY1+qhsTYniQw6UEnwtaV1+m1Qxggd+ydvGiFx+JZZhF32ESoquIFfXtvnYkyBICbAOuUATbcBj4E6p3X6ALsvQLehuZWye8svhMMy9u0qhhnubYe/NTEPN4Z2guWiZxPG48Gj1bR9
   learner_created: false
 - name: test/service/impl/PriceServiceTests.java
   visible: false
-  text: "package service.impl;\n\nimport java.time.Duration;\nimport java.util.HashMap;\n\
-    import java.util.function.Predicate;\n\nimport dto.MessageDTO;\nimport org.junit.jupiter.api.BeforeEach;\n\
-    import org.junit.jupiter.api.Test;\nimport org.mockito.Mockito;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.test.StepVerifier;\nimport service.CryptoService;\n\nimport static\
-    \ service.utils.MessageMapper.*;\n\npublic class PriceServiceTests {\n    private\
-    \ final CryptoService\n\t\t    cryptoService = Mockito.mock(CryptoService.class);\n\
-    \n    @BeforeEach\n    public void setUp() {\n        Mockito.when(cryptoService.eventsStream()).thenReturn(Flux.empty());\n\
-    \    }\n\n    @Test\n    public void verifyBuildingCurrentPriceEvents() {\n  \
-    \      StepVerifier.create(\n                new DefaultPriceService(cryptoService).selectOnlyPriceUpdateEvents(\n\
-    \                        Flux.just(\n                                new HashMap<String,\
-    \ Object>() {{ put(\"Invalid\", \"A\"); }},\n                                new\
-    \ HashMap<String, Object>() {{ put(TYPE_KEY, \"1\"); }},\n                   \
-    \             new HashMap<String, Object>() {{ put(TYPE_KEY, \"5\"); }},\n   \
-    \                             new HashMap<String, Object>() {\n              \
-    \                      {\n                                        put(TYPE_KEY,\
-    \ \"5\");\n                                        put(PRICE_KEY, 0.1F);\n   \
-    \                                     put(CURRENCY_KEY, \"USD\");\n          \
-    \                              put(MARKET_KEY, \"External\");\n              \
-    \                      }\n                                }\n                \
-    \        )\n                )\n        )\n                .expectNext(\n     \
-    \                   new HashMap<String, Object>() {\n                        \
-    \    {\n                                put(TYPE_KEY, \"5\");\n\n            \
-    \                    put(PRICE_KEY, 0.1F);\n                                put(CURRENCY_KEY,\
-    \ \"USD\");\n                                put(MARKET_KEY, \"External\");\n\
-    \                            }\n                        }\n                )\n\
-    \                .expectComplete()\n                .verify(Duration.ofSeconds(2));\n\
-    \    }\n\n    // HINT: This is for reference implementation, your implementation\
-    \ may produce different average values\n    @Test\n    public void verifyBuildingAveragePriceEvents()\
-    \ {\n        try {\n            System.out.println(\"Checking case when flatMap\
-    \ is out of switch\");\n            StepVerifier.withVirtualTime(() ->\n     \
-    \               new DefaultPriceService(cryptoService).averagePrice(\n       \
-    \                     Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(5))\n\
-    \                                    .map(i -> i + 1)\n                      \
-    \              .doOnNext(i -> System.out.println(\"Interval: \" + i)),\n     \
-    \                       Flux.interval(Duration.ofMillis(500), Duration.ofSeconds(1))\n\
-    \                                    .map(p -> p + 100)\n                    \
-    \                .map(tick -> MessageDTO.price((float) tick, \"U\", \"M\"))\n\
-    \                                    .take(20)\n                             \
-    \       .doOnNext(p -> System.out.println(\"Price: \" + p.getData()))\n      \
-    \                              .replay(1000)\n                               \
-    \     .autoConnect()\n                            )\n                        \
-    \                           .take(10)\n                                      \
-    \             .take(Duration.ofHours(1))\n                                   \
-    \                .map(MessageDTO::getData)\n                                 \
-    \                  .doOnNext(a -> System.out.println(\"AVG: \" + a))\n       \
-    \     )\n                    .expectSubscription()\n                    .thenAwait(Duration.ofDays(1))\n\
-    \                    .expectNextMatches(expectedPrice(100.0F))\n             \
-    \       .expectNextMatches(expectedPrice(101.0F))\n                    .expectNextMatches(expectedPrice(102.0F))\n\
-    \                    .expectNextMatches(expectedPrice(103.0F))\n             \
-    \       .expectNextMatches(expectedPrice(104.0F))\n                    .expectNextMatches(expectedPrice(103.0F))\n\
-    \                    .expectNextMatches(expectedPrice(107.5F))\n             \
-    \       .expectNextMatches(expectedPrice(109.5F))\n                    .expectNextMatches(expectedPrice(106.0F))\n\
-    \                    .expectNextMatches(expectedPrice(114.0F))\n             \
-    \       .verifyComplete();\n        } catch (Throwable e) {\n            System.out.println(\"\
-    Checking case when flatMap is inside the switch\");\n            StepVerifier.withVirtualTime(()\
-    \ ->\n                    new DefaultPriceService(cryptoService).averagePrice(\n\
-    \                            Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(5))\n\
-    \                                .map(i -> i + 1)\n                          \
-    \      .doOnNext(i -> System.out.println(\"Interval: \" + i)),\n             \
-    \               Flux.interval(Duration.ofMillis(500), Duration.ofSeconds(1))\n\
-    \                                .map(p -> p + 100)\n                        \
-    \        .map(tick -> MessageDTO.price((float) tick, \"U\", \"M\"))\n        \
-    \                        .take(20)\n                                .doOnNext(p\
-    \ -> System.out.println(\"Price: \" + p.getData()))\n                        \
-    \        .replay(1000)\n                                .autoConnect()\n     \
-    \               )\n                                                          .take(10)\n\
-    \                                                          .take(Duration.ofHours(1))\n\
-    \                                                          .map(MessageDTO::getData)\n\
-    \                                                          .doOnNext(a -> System.out.println(\"\
-    AVG: \" + a))\n            )\n                        .expectSubscription()\n\
-    \                        .thenAwait(Duration.ofDays(1))\n                    \
-    \    .expectNextMatches(expectedPrice(100.0F))\n                        .expectNextMatches(expectedPrice(101.0F))\n\
-    \                        .expectNextMatches(expectedPrice(102.0F))\n         \
-    \               .expectNextMatches(expectedPrice(103.0F))\n                  \
-    \      .expectNextMatches(expectedPrice(103.0F))\n                        .expectNextMatches(expectedPrice(107.5F))\n\
-    \                        .expectNextMatches(expectedPrice(106.0F))\n         \
-    \               .expectNextMatches(expectedPrice(109.0F))\n                  \
-    \      .expectNextMatches(expectedPrice(119.0F))\n                        .expectNextMatches(expectedPrice(109.5F))\n\
-    \                        .verifyComplete();\n        }\n    }\n\n    private Predicate<Float>\
-    \ expectedPrice(float v) {\n        return m -> (Math.abs(m - v) < 0.0001);\n\
-    \    }\n}"
+  encrypted_text: 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
   learner_created: false
 status: Unchecked
 record: -1

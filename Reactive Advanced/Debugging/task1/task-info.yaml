@@ -13,7 +13,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: new MyBlockHoundIntegration()
+    encrypted_possible_answer: gI2mWDebFscBsiATBLj8Ox7OgKpXpLhKolwh6OaqUrY=
   - offset: 456
     length: 31
     placeholder_text: // 1) Add Better error printing
@@ -23,7 +23,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Hooks.onOperatorDebug();
+    encrypted_possible_answer: oDTDUPguAWnGRx/DATJbW5oYyRs7wYoqTe+viATlbbM=
   - offset: 506
     length: 8
     placeholder_text: // FIXME
@@ -33,7 +33,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: .filter(a -> a != 0)
+    encrypted_possible_answer: c2MYoPuI3hLqbS9jAqJlBJBlX0oJwcQ7N+MbXKAzHgE=
   - offset: 591
     length: 8
     placeholder_text: // FIXME
@@ -43,7 +43,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: .filter(a -> a != 0)
+    encrypted_possible_answer: c2MYoPuI3hLqbS9jAqJlBJBlX0oJwcQ7N+MbXKAzHgE=
   - offset: 831
     length: 29
     placeholder_text: // Add BlockHound Integration
@@ -53,46 +53,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "public static class MyBlockHoundIntegration implements\
-      \ BlockHoundIntegration {\n\n\t\t@Override\n\t\tpublic void applyTo(BlockHound.Builder\
-      \ builder) {\n\t\t\tbuilder.allowBlockingCallsInside(MyCallable.class.getName(),\
-      \ \"call\");\n\t\t}\n\t}"
-  text: "import java.util.concurrent.Callable;\n\nimport reactor.blockhound.BlockHound;\n\
-    import reactor.blockhound.integration.BlockHoundIntegration;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.Hooks;\nimport reactor.core.publisher.Mono;\n\n\
-    @SuppressWarnings({\"ConstantConditions\", \"BlockingMethodInNonBlockingContext\"\
-    })\npublic class Task {\n\n\tpublic static Flux<Long> checkAndDebug(Flux<Long>\
-    \ flux) {\n\t\tBlockHound.install(/*Add BlockHound fix*/);\n\t\t// 1) Add Better\
-    \ error printing\n\t\treturn flux\n\t\t\t\t// FIXME\n\t\t\t\t.scan(0L, (aLong,\
-    \ aLong2) -> (aLong + aLong2 + 2 * aLong) / aLong2)\n\t\t\t\t// FIXME\n\t\t\t\t\
-    .flatMap(Task::doWork)\n\t\t\t\t.log()\n\t\t\t\t.retry(5);\n\t}\n\n\tprivate static\
-    \ Mono<Long> doWork(Long e) {\n\t\treturn Mono.fromCallable(new MyCallable())\n\
-    \t\t           .zipWith(Mono.just(e))\n\t\t\t\t   .map(t2 -> t2.getT1() / t2.getT2());\n\
-    \t}\n\n\t// Add BlockHound Integration\n\n\tpublic static class MyCallable implements\
-    \ Callable<Long> {\n\n\t\t@Override\n\t\tpublic Long call() throws Exception {\n\
-    \t\t\tThread.sleep(100);\n\t\t\treturn 1L;\n\t\t}\n\t}\n}"
-  learner_created: false
-- name: test/DLMTask1Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Schedulers;\nimport\
-    \ reactor.test.StepVerifier;\n\npublic class DLMTask1Tests {\n\n\t@Test\n\tpublic\
-    \ void testSolution() {\n\t\tStepVerifier.create(Flux.interval(Duration.ofMillis(10))\n\
-    \t\t                        .publishOn(Schedulers.single())\n\t\t            \
-    \            .transform(Task::checkAndDebug)\n\t\t                        .take(10)\n\
-    \t\t                        .subscribeOn(Schedulers.single()))\n\t\t         \
-    \   .expectSubscription()\n\t\t            .expectNextCount(10)\n\t\t        \
-    \    .verifyComplete();\n\t}\n}"
+    encrypted_possible_answer: FQepBhUL1DZAAxScWVfKwHI1d0DiuNItwyGeN+0b802W7hVyJVbPBVSSI6W6aTkNv5QG3H4nvWbRlnQGY9ItMHP7hHUCcnoDqlShzI4YJ+/6+NarjfqkPwhBCP5ENXUx/3uzIenJMiCYFzJUxqduiG/pq3G+3itRIiX+SidBAsf4dQzTv3fmipqs2ISwrtTUCq5CP+IGzGT3Pv+R5bawXFm9m+PsI5f2UXkhm4PJ9DNsmOzTZWSGdcjw/Png9m60mfZGAUuenWM3BtIurGFcT0OBqtVCHOQAw3rcq/f0RNY=
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH3Npp5YHf45B9rcAluAbWfYM6bgoten9mU5+UDdAXSQ/BaHXm2KAo/bvqHR+Wjwtjx23p86mdeOwMjXXrMKhjG7g/vy2En5G/A30/3Q2t8quSiFDR2v+0UouDqotoa0/drI3dCTnxjZrGBkt1l40afrQi1fjk4w5mksKVSN4D1fNpwcn8I7oH7nOaSPSUB9xhY5CC5EmrYJLYewL4NLSDuz2rXcK9LqyrQghi49v10ZlsjHBghKLPRFEgMkhBcFCkXCgAGsNhek+/3OFCZ0ItQm9KDg75F71TJMwmlmG2o/NvbXS2XYPardXjJMLnXwB1KqAhyqUQL9wWqJ59aJgVK8oOIzcWOUP0ZTHS3gB43bZ4Wpe7cxNUF5dQgiTRcEN1lm1oVjHp9pJ+lehOmC7tZJiWRlwZ0b6Zresk+o1kiHV3gW1xwQfxSVkaEYqhl0mg2Ss4GRGPM5QSLiYFVzdTgjYZVaTghI0tqUX6Wzjxua1QBuL7+W5CcQcbPqOpvv163106tckOyA6klaSprxSlaAYZNbl6imN4eILencHBnl4tWKbZTy5iqZc5TLITh1Ir3lu+ndLvptjz+atZFp/HPmsz7sPKyPswqN2iHc3t57Zr7Uypl8KujWrMfYlsxU1ZV1eA4WHe2fIVYL7HgmRY7YU1ZFOQb1p9f+7e16eijRP4M2fdvnxgMqgXg5vBNS/kIs4hUTgivRzMesGhhMRvhZ5+3kHCeQjgj2mlt3znUF9f7CvoPrjFki2ePBPFidekBbhBrzQtc4XhlXEZXOVdO3r5D4O20lpRcxjL+gNZYYA5NTunhSZ3CrmMb0c0JrmZ/N5a0lGYy6vfEDoC8ZhBt7vdda2RvIALLxZIY5oTPIrg24uusYREN35Y+gVmpEvdy4l8JoTvdXVQj9JxG7j3yXJDjtJmkmkh3QAKrN9cpHqfAmnUYoPODfTslxAcmhXVhWI8gNExT6wQNHVG4D7ENpCFIuLasR7Tgatoj+fGi63nFla6Ebke5YBVmtIpjIxaLcYzitpMa0XnIArzx0Cvru1EUriHtBm/8A+C9p28iMn+VVCWSWio1WTJQdoPm2PPT0rnODUH69TFti3WPlxgqDyLocoUFX9T254KbjHYePwWA+iEHcoizzkqTpcGjB8rHP2pq0Z3Yxj5OEGpXxKtM83nmRzLNcqGTIl5UJi4ws/t/oFX2/WEQrfNvtCR3Anadz8j7nYJ0fabObuNTIGyb/JBGUk5K5NS8cW/6o7wMQogbihxfZM5D+jJQAmp6+Hm3z7YMQZjN9KCjcLSACtv/8xz4wIq1Z34sKccPV7qgwfPtrz1ex+bwCX+aILiIT7UA==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor.tools:blockhound'
-      implementation 'io.projectreactor:reactor-tools'
-      implementation 'io.projectreactor:reactor-core'
-      implementation 'io.projectreactor:reactor-test'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfwtOfuIvc8sEV5F+I+rvPPeOWuMUjXirmd0xJupSbGDdFRPYH/LVsbc1abnHsDQ0v4T+bOy5BnO1abEwiuCxgV4tMi1oZ+ArBjieM8G0R7rMwEXnTx2wJI8Rs3U6XwyA20BEtd8mHS3BIDSjkwSs32hr1Y9Yq6IC7fn/4gphKOEUWnjD7AUvDItvxVJDPW8mk+8bMdcH0D169Vxg4oig7J9ko71H8aAWp0xjizprSjOs=
+  learner_created: false
+- name: test/DLMTask1Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzImURGF+VgSnrzlWawmcLYNHGyUKEQxFspHrowRb6vieS3vEn0xEUX1xMKsmQjkkfugFT0rQQfw8nlBRmDNAdDyV059Le9X1WIeJ0ZZo5Yv3HMbBc6EfFwoYa3RKRlzEA0fJtVM23unNtcpQ5f7Z2F22G036Yj4z1m/gWa2oJq/Y+WqTL38LIK+h/KxGppR/jbYhg8zeltZBkNLZmM70qOv1fWzqM70sBYy2AqhjNZAkJXi4ncSLMN1o0owvX+W4RbK6vQV/Xjw3BMLtAFYkA5QB37liRRRU5t9eIq5N8utfjST/XBf3U2JsnnZvm5aQu+f/ECSSB0wscfppPnerm4nxu7qu56xkhUk4/5MYKBsveA9FThq9yUMPOQoAjS4xPgzuZSUpd/6VojJESpilKW9Ozqj5BIsdZueRYShiS3hh4KyXjr4kxcNMNYlUK+TssEfs91P7Xvsq0jo/j2KuQQTa3kviR2kAhrP1mWAHozVX6/++pxcgYpgXIKrSmogZpAYE+O2RKLG2vBFRvz4K6W1dVvvHTLwRkUK6o7QVP7KSFiXQt3b0p4C39KL35kGGdbXOwbcLQaUcuVnd6SuLSFrCAQtk5yUySjypWmrCOvHJQkzSGyqNPQb/EInP3j6ed7LkY6emUldh5CosZdY1WgsadhCyt4vqf8i/k7R3iM9V
   learner_created: false
 status: Unchecked
 record: -1

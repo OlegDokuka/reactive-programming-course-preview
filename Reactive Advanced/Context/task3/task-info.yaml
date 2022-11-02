@@ -13,36 +13,16 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: "Flux.from(sourceA)\n\t\t           .contextWrite(contextA)\n\
-      \t\t           .mergeWith(Flux.from(sourceB)\n\t\t                         \
-      \ .contextWrite(contextB));"
-  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.util.context.Context;\n\npublic class Task {\n\n\tpublic static\
-    \ Flux<String> provideCorrectContext(Publisher<String> sourceA,\n\t\t\tContext\
-    \ contextA,\n\t\t\tPublisher<String> sourceB,\n\t\t\tContext contextB) {\n\t\t\
-    return Flux.from(sourceA).mergeWith(sourceB);\n\t}\n}"
-  learner_created: false
-- name: test/ContextTask3Tests.java
-  visible: false
-  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport\
-    \ reactor.util.context.Context;\n\npublic class ContextTask3Tests {\n\n\t@Test\n\
-    \tpublic void testSolution() {\n\t\tMono<String> a = Mono.subscriberContext()\n\
-    \t\t                     .filter(context -> context.hasKey(\"a\") && !context.hasKey(\"\
-    b\"))\n\t\t                     .map(context -> context.get(\"a\"));\n\t\tMono<String>\
-    \ b = Mono.subscriberContext()\n\t\t                     .filter(context -> context.hasKey(\"\
-    b\") && !context.hasKey(\"a\"))\n\t\t                     .map(context -> context.get(\"\
-    b\"));\n\t\tFlux<String> flux = Task.provideCorrectContext(a,\n\t\t\t\tContext.of(\"\
-    a\", \"a\"),\n\t\t\t\tb,\n\t\t\t\tContext.of(\"b\", \"b\"));\n\n\t\tStepVerifier.create(flux)\n\
-    \t\t            .expectSubscription()\n\t\t            .expectNext(\"a\")\n\t\t\
-    \            .expectNext(\"b\")\n\t\t            .verifyComplete();\n\t}\n}"
+    encrypted_possible_answer: 9ob9Dw+/6eXu/RgHQntfSRgfx9vEVz3Mtv8gutc9yPXcIR8WlYvaBFvBMNq0WrGTaLMdYIzTpEoaEJuYZZFmnJGiPUdIfdjHMq5VphANqrLs0UwyOBXDDgciu3RT554LxTexQYmLYE7Qlv4lLy4iNLrZU8Hm3i83Ddp9FK9oyPUO/907sLyZu1JGZJ982tFVuf8dB23yzlH7LIxx4Wb8Ig==
+  encrypted_text: 3h3NXCypBcxD/VAjZiA9ZjRXeUuWSD3Te6+g+iJPUjiTItSYmyZeU7OPGtfkViVKWdQNWJU6plv39PMvnQofBLMyxy+tCb3ZrU0H15e4jcKQWP1aiUBhiM3niHqMxUVr4SkRdJ+nIn3/MBA8aa/YV4TG1yL7hsImrbn9vppJ9JT3NGH2Zhd36BUE+Zci9FpZLD3ZDGccBdAsz5ztmzUpI23iKcPhvBHkwBvWLIVfu+sjJgmwlIJTwc7216xIMagoIG++U1gO8tQGEN7618xKqz9bEeaS/a32U1InOQ2v8QOelmHAe48TyrQQwSYhAaMyhIhTir7xA6gxu8/9N1QBqFbCrYu+I3oEFm6NDEJte83U1yiDqvjF2cWqaZz3CSHXtxq88RlGzSN1uDSO5XE84+S4VlR8YSR4Xju/uER6HQrdS+xI2km4qa/np5gnxQKaM/xkg1FQ9MKOYz8QLkSklw==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: test/ContextTask3Tests.java
+  visible: false
+  encrypted_text: ITs8Nv8EH6QWJG5nufD7nJbQJMkIq6jNfe9FYz1aEl0gzoXUE/n+Nrs7oURaMo+izTdxMl4rIbyY4m6gOdQClMF1uG9jHNLfe96Qru7gNaPL5ZLDPqchWtfhCqZGE58HLZvVKB9d/Lx4XLmDbae+7U9IG5PMWajsREHSrT5Bb2tlphfjAk0GC5m5cb+Hf2l6SktZQuqIH45BCLRzlJcOYAWMwlsPOg9wwEqLZKI5VNu7wJ7zHHxLr9mHXPYKZq04ZKLLOsjXGF/3ymuWscgqn9Bbg8so/cvmnscZ9YbQGGwVqdrVt9x2hp2XvsCFzglE5aztHKudIeR35uCtDCwplzwdfkOFgtxDFZ0MiQgZyWtP7NeQOYWgdhnoEJxPfcLlhNpeh7FS40spTnJUAL9f0RzyC8LbfXL40aVO+j9yYG3XgsJpEeTarQVia53sxn4scbbOG3Ft//eL+c8H5ZK0fwzF95WHzPDB+pQkX5Ajvy/qDBeEUk/XP2MOtb6m9OJZH+Di6N097u/m/h/L/Ha1nir5vBGTpmXXRxvnZ2ii6xRI9/iekiO3jnpxuyroGzmm4O5NoiOfyNjXUjoFckWNgCbe3l+Zfmo6X0pCwueryxR0EIJccxGJo3q3NvjGm2i5cdJR4Pb00R+gnEKc8E4ZbV9mwbmBbXvbtMbOokF2v1+8zI2xN5MxZB1sTTegAbMvWUBuD0sxYxa5s8nnzgjhSrq2L/Gh5k8Ysk3dIiQpnc2uxusmQ7tqentrz9B6pK80WpddGHXBU8cWAuyeOd+mztNe9H4u0zs0iTWAk36EBgLLIRUVDUBxDYx4efv+3tAeOBhtEgY8vAmCSKQd5ggszqKslpyu3B3Tt6Dedd3y/2oFpdgaBFFhPXAgWIz9QX0Mj1VgImdxflDy5TwT5CpEMscMlG516Du02HP6C9jl5QUS1kT3CRuD/PP1fyPH7dLMYG39JNhaVmNqzb+KVz7MWq2b9g0S3CX2O6YjEWlXMH7Sg9q8x81Jo7+HywJhrgWY+lHj37yOHkvlNQrtHgj8Cm+3FDys7x3MczIoEhEKsV513loluNb/XAy5cSJJrGeyXa2eACKvBkdV4lNH5g2z3AvUNS9yY4VKOU12uR0exaAglqzTAeVSbw59q+RiU0ru1w82pKC+GVhrB1QgInOvLDKpYMCcdtMXuy7HfbZB5xnlqsGKBrP4KEpH0HfoA4IK
   learner_created: false
 status: Unchecked
 record: -1

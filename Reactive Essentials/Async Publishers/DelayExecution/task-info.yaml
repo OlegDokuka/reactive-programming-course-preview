@@ -3,15 +3,11 @@ custom_name: Task 1
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Создайте `Flux` от `[0..20)`\n   \n<div class=\"hint\">\n  Используйте Flux.range\n\
-    </div>"
+  encrypted_text: 0k27E+btKUSxHbe26pz7dSyjHcW3UAboG3w/C8xvRZlUrlIcupOIPq5ZMK2WTFQR2Csu2+CUR8FJWL/5MEjss2KpV8VmPkuacLX2nfsv+/Lu+PZbyQOHfygJWxo+0zL6FvF0sqdIhyt8mM11xoZ3Iw==
   learner_created: false
 - name: src/DelayExecutionTask.java
   visible: true
@@ -25,7 +21,7 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: Mono<Long>
+    encrypted_possible_answer: 13Xi0SujTzI/3+9AlQ8wZA==
   - offset: 253
     length: 135
     placeholder_text: "try {\n\t\t\tThread.sleep(pauseDurationInMillis);\n\t\t} catch\
@@ -37,28 +33,12 @@ files:
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: return Mono.delay(Duration.ofMillis(pauseDurationInMillis));
-  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.List;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\npublic\
-    \ class DelayExecutionTask {\n\n\tpublic static Void pauseExecution(long pauseDurationInMillis)\
-    \ {\n\t\ttry {\n\t\t\tThread.sleep(pauseDurationInMillis);\n\t\t} catch (InterruptedException\
-    \ e) {\n\t\t\tthrow new RuntimeException(e);\n\t\t}\n\t\treturn null;\n\t}\n}"
+    encrypted_possible_answer: sbqPb3jUyZP6U/r4klY+fJow0AtFQRYzrozhoFDaRKDHvVOs/f6w1qMrF8zsAJqaQM381b5EkTl5lsWNwwt6EQ==
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6n1etmvcCFj/2E1xTw0LauBtx27DyxzUaE4IRPQ2VGBEqywxMPx6A3nKa1gBq/TSvcV2yf9/eNhrJGixYUzFhF+1FP6IO7vIK6cVcxHiw9WagXpQra0z9P14+9cR3+ZzHRT7TndgJOmyN8z4QSooxIsXiJB9U2S5bMfBQDpWk0QnJ4JCJRIwCmDXFpE1igM91XIaOgUn7SlAu8jedcS4gTGRIQYNJiLTAWKd9Iyz7FKIsUnbillxFm5cstNy7RZb0Cbt7qQ2++GsyaDLsOffhWgz6YQNxmw4w4KUzwMO5aZFJ/BCXbcvqDQUjK+G67ZuS/FsmSJe3CVN8dKfDdlddVOr4H3aeyWYvFrrc+AuFxxEBxTJ+5GQjBMKDr9eATQgtxdwfL5v8Ld0cJrbhcLEYD9sYYd0oKB6/BZ/W/1ddOX4FZMVMvBIuPio44kwi/qzhiFYeHzxpN7Bgc/WOmdEkBSsbDMxhQ0UQecE1TzF1HrA==
   learner_created: false
 - name: test/DelayExecutionTaskTests.java
   visible: false
-  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\nimport\
-    \ reactor.core.publisher.Hooks;\nimport reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\
-    import reactor.test.scheduler.VirtualTimeScheduler;\n\npublic class DelayExecutionTaskTests\
-    \ {\n\n\t@Test\n\tpublic void testResultIsCorrect() {\n\t\tVirtualTimeScheduler\
-    \ virtualTimeScheduler = VirtualTimeScheduler.getOrSet();\n\t\ttry {\n\n\t\t\t\
-    Object sequence = DelayExecutionTask.pauseExecution(1000);\n\n\t\t\tif (sequence\
-    \ instanceof Mono) {\n\t\t\t\tStepVerifier.withVirtualTime(() -> ((Mono<Long>)\
-    \ sequence))\n\t\t\t\t\t\t.expectSubscription()\n\t\t\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\
-    \t\t\t\t\t\t.expectNextCount(1)\n\t\t\t\t\t\t.expectComplete()\n\t\t\t\t\t\t.verify(Duration.ofMillis(100));\n\
-    \t\t\t} else {\n\t\t\t\tAssertions.fail(\"Unexpected implementation\");\n\t\t\t\
-    }\n\t\t} finally {\n\t\t\tVirtualTimeScheduler.reset();\n\t\t}\n\t}\n}"
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6n1etmvcCFj/2E1xTw0LauBtx27DyxzUaE4IRPQ2VGBHif+6ECQNeoIZ9fGP/njY0Hj45NNcbMM7YvOFyVdD7ZLLBevEqEbeWgWSsHMzVh6dHjH4NreDfCk9Lc6dFdQdtEGIjrhcHXtYS5OfMfpSYcDPVi5/q1NfkRgUvD16LRHVaRcCWgpE1gS2snPy58s2s/Qs5yXeqT8jk5jsmvool61gvTYOFgOGiJPACkqxrbfChYcvgvoLUk05c9MbZkfnV91kbf5eq1TKT3iQdVQiYq1mxLRj1lBcgOM9JhkNQMaXO8r1i76wnKtyrkbcjUl+QV+XS2t1+wp7NgdtPocQJDAQT7CbmVHuKKXA27JO3nElzWwe+xe0GJxBgI0pdYUslwB8HsA7yFsyAMGV6mpWlI0tVO5w8mpX4yY2N/dGdU/NUDniH5/349qwkJmcX4Zy3ZSEJRFCUCy7xpIP4zisRjKXv+pmoztn6MmEYc8bATBNqOIR5BXXLenlVcnogGJimEQzn1txK+uqdQQ2r81z1P37SOK0/lBeKHeoYd4aZEHGSwCqnEz7rGVNZ+JYTXl98eUCQrrHrSHliw/Mwi9GL2OVnqzCNx9Ljk0h95ZYnEOnKZStz79as2MS0FRYikHWf6DJ527fUKKDCtHxjmpfBDmizeaJO1yDo/agyaP3Ghx1cG2wTbgBXgUnmHl0wi53DCyvVFSVzFvI7BPZzNR8rn3Ip0NR7JgHGyXPpWrLzikCmn4wkwwnrlHhhOdBaBoLw5AtLC2Cg3s7eiHjNa0FMx7CBNOYhLyRHHvEds2nx6vLYGvj+bBmhg5oZaDPfvHlKWkyWihMECOaNxVUylaBMIcqoV3STnXXU+xeZHwW8Fm9nC5ClHK09WG2+73IuoNGMAn5d2rc28F1uBHfhQVAYRcQOwcLl3vdzgaXjkHxshEBceW6gwfTqA1s9j362buN8UIMj3SRpkhcL97nDPBvGzQYO0KEHFcVZ0+WcK5dqiUh964Cv0rmHRsI+zRMoIPR5DhfUkLCzKg35T2niqCqdgovt2P/a6I3WYrChuNmNNX0Isix5ycs3MDHkVQr3pdqmEMVTu2lkZsOkHM4CtD/muz+e356TzGK6UrPt9AwxY/ibizswkFe2F71TeHeS82Amd6fsmyi2zkRoWoIy84DNnv2YR9vqFb1eXy31pqakRlao/7WWXYLHUDAY/Xd4gdXMCpi7/1iEXT0ENpX1Vd48ZCqbJaj2sK6FLvOIzZHoLc6clkB3U3U0JjYGKTbCpf5c1kMxo86iRoE/lNjDGmwuh3yv7Uo6h22yxA4lkuwl1mA==
   learner_created: false
 status: Unchecked
 record: -1

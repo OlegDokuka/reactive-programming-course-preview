@@ -63,7 +63,7 @@ files:
       offset: 119
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: Flux<Property<?>>
   - offset: 169
     length: 18
@@ -73,11 +73,11 @@ files:
       offset: 169
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: Flux.defer(() -> Flux.fromIterable(settings.asList()));
   text: "import reactor.core.publisher.Flux;\n\npublic class PropertiesSourceTask\
     \ {\n\n\tstatic Properties settings;\n\n\tpublic static Iterable<Property<?>>\
     \ createSequence() {\n\t\treturn settings.asList();\n\t}\n}"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

@@ -12,33 +12,21 @@ files:
       offset: 134
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: flux.filter(s -> s.length() > 3);
-  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
-    \ Flux<String> transformSequence(Flux<String> flux) {\n\t\treturn Flux.error(new\
-    \ ToDoException());\n\t}\n}"
-  learner_created: false
-- name: test/CommonOperatorsTask2Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ CommonOperatorsTask2Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
-    Flux<String> sequence =\n\t\t\t\tTask.transformSequence(Flux.just(\"1\", \"10\"\
-    , \"100\", \"1000\", \"10000\"));\n\n\t\tStepVerifier.create(sequence)\n\t\t \
-    \           .expectNext(\"1000\", \"10000\")\n\t\t            .expectComplete()\n\
-    \t\t            .verify(Duration.ofMillis(100));\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: f/rhTE18kNJxap0pQcPz+yLe9C9H4fSRPLveX9z2Vgddg48VomrDGJNLLvhiWUDl
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrS2OFoQGbm8WgQY8UTFKDbD3kaDsCK+4qBXx2DyK7u/74pY6ATQu1WhV5euEzzwDrUUkyduH1ZMTCNU2ryZ0gJpxi7rgzTA0apdpBFU9k//udoU96NkLE92O1PbR36hosklb3ro8GPscJCeH/FkrDmdSxDSeNPXI5VHurPBIFOihsKtH6T9gK2V+SEPGMDNCyQ=
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Отфильтруйте даный `Flux<String>` по условию длина слова больше 3ех \n  \
-    \ \n<div class=\"hint\">\n  Используйте оператор <code>Flux#filter</code>\n</div>"
+  encrypted_text: YyMGCtnlZrICU8rEbNctMHEBNEXr+EEu6XM5YeINmLKDJvZIOtxB0yIiSldXkKrr1X6TYF4Z82ftsetYBYZl+VwpgAToDDEKXA67OLzOzfq7z3K4ppEADufX1v6FYiPrdfZr5cwR6W1/G1kJRNw2e+HIg9zaA12WYoT99TviIIqlmEbOTXf6OIbV+SZeNz/IX5U4bTxc62lwjJmsDuBbc15VzBmYk/NwNC5g++w0pfMXcS3jzEKNg2q6wboMgNVI/jg1zR+2oTaFbMZSrbp0Zo1VTJY0yjtIQtGMlt2Qx+E=
   learner_created: false
-status: Failed
+- name: test/CommonOperatorsTask2Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzKcXd/K4teF8wsz2ES7phXKLQO01WZiMMCvz7qd0LvCzCnWE80AULZnGGNqX1O8FtrKw/kz4bRC0c36kAjZUNwSzzYr4qQuQcqnSJlWlyc2xQDz5k/8GeadKBUBePbBAyI8Sf2BX2aOdRwfK2C5sqHIigjrWtYZzUe1pjsLnQofquC2ujlUhOBDFocXNk8uWZnvJthC701FKsTY/NWC9zOolr/RZTNp/S6f4HGU1Th2CdIfMYshz3YnQ/IB5nkrKfAuuYKaQGGrgMhCtH4AiHccvbdf5Ex1hXuDgE8b7W2JCFMnoLsxQjxCERuh2aBlU0L1CaacRTNNg8y+gPNH+BnaFcRsYGJo01bImA32sgOyQh9t37/7TAn58GpFeojJaomHi/e/NPrZvLARXHzZc/4wwel+vQrNnkFnrSvT3dKcLaVz0ByP8/okZls0/EEMSX1alRj1rK254RXgMkLtclbhJqRdO48xl5Y0wjtypnuCF
+  learner_created: false
+status: Unchecked
 record: -1

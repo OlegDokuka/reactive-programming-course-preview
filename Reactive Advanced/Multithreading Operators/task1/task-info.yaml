@@ -12,7 +12,7 @@ files:
       offset: 236
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: source.publishOn(Schedulers.parallel());
   text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
     import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\tpublic static\
@@ -39,5 +39,5 @@ files:
       implementation 'io.projectreactor:reactor-core'
     }
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

@@ -41,7 +41,7 @@ files:
       offset: 358
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "words\n\t\t\t\t.transform(Task::groupByFirstLetter)\n\
       \t\t\t\t.transform(Task::countLettersInWordsInGroup);"
   - offset: 497
@@ -52,7 +52,7 @@ files:
       offset: 497
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: words.groupBy(s -> s.charAt(0));
   - offset: 674
     length: 32
@@ -62,7 +62,7 @@ files:
       offset: 674
     initialized_from_dependency: false
     selected: false
-    status: Unchecked
+    status: Failed
     encrypted_possible_answer: "groupedWords\n\t\t\t\t.flatMap(wordsFlux-> wordsFlux\n\
       \t\t\t\t\t\t.map(s -> {\n\t\t\t\t\t\t\tint cnt = 0;\n\n\t\t\t\t\t\t\tfor (char\
       \ c: s.toCharArray()) {\n\t\t\t\t\t\t\t\tif (c == wordsFlux.key()) {\n\t\t\t\
@@ -79,5 +79,5 @@ files:
     \ Integer>> countLettersInWordsInGroup(Flux<GroupedFlux<Character,\n\t\t\tString>>\
     \ groupedWords) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1
