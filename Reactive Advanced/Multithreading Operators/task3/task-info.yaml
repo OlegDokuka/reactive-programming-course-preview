@@ -12,38 +12,17 @@ files:
       offset: 248
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "source.parallel()\n\t\t             .runOn(Schedulers.parallel());"
-  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.ParallelFlux;\n\
-    import reactor.core.scheduler.Schedulers;\n\npublic class Task {\n\n\tpublic static\
-    \ ParallelFlux<Integer> paralellizeWorkOnDifferentThreads(Flux<Integer> source)\
-    \ {\n\t\treturn ParallelFlux.from(Flux.error(new ToDoException()));\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: Xq+ywqfrE5QZ0BCZpPSg6g8eNz//yKYmWvN+MUGLW5bXUBB6nCeFpaLpkXVgDeSHEMXWI6zUr6scOTgMlD50+w==
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrQ1C3x0dyp7sq00JiSUWl/t29iIoALq4DzdoifCkRDxin5Saq/OHFkuDBjnmXv1gdilLIAFf+DVH4HItuX9ZWMl9kkoAlD7o+1yrL7l/8OiauzQRyYOJYkxFejf777XVaKKeQOyrjvKMZs2afUvLOOZ1xjidsBxdL2egeLKWwo/gdCO3ec0boJrDFhUhG9ALnk/SOjK/HxgwVP8dpbCfaPDtC93hqfAl9xliX5j/P2X8u1PadloFWKKHklUm+ZstmEg26irLr3svzYCjU5M77LF5/ipBaTxGOVZxD66D9kRgH2fLzFuf5RUKYnvG2H2s7WBHB5wZd3gimqKz8w+0I9E9540O94Rwxw9fhP0rusYLhOgtSsx8CANtEMKzgxWots=
   learner_created: false
 - name: test/MultithreadingOperatorsTask3Tests.java
   visible: false
-  text: "import java.time.Duration;\nimport java.util.concurrent.ConcurrentHashMap;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class MultithreadingOperatorsTask3Tests {\n\n\t@Test\n\tpublic void testSolution()\
-    \ {\n\t\tint availableProcessors = Runtime.getRuntime()\n\t\t                \
-    \                 .availableProcessors();\n\t\tConcurrentHashMap<Thread, Integer>\
-    \ concurrentHashMap = new ConcurrentHashMap<>();\n\t\tStepVerifier.create(Task.paralellizeWorkOnDifferentThreads(Flux.range(0,\n\
-    \t\t\t\tavailableProcessors))\n\t\t                        .doOnNext(s -> {\n\t\
-    \t                        \tconcurrentHashMap.put(Thread.currentThread(), s);\n\
-    \t\t\t                        try {\n\t\t\t\t                        Thread.sleep(500);\n\
-    \t\t\t                        }\n\t\t\t                        catch (InterruptedException\
-    \ e) {\n\t\t\t\t                        e.printStackTrace();\n\t\t\t         \
-    \               }\n\t\t                        }))\n\t\t            .expectSubscription()\n\
-    \t\t            .expectNextCount(availableProcessors)\n\t\t            .expectComplete()\n\
-    \t\t            .verify(Duration.ofMillis(2000));\n\n\t\tAssertions.assertThat(concurrentHashMap)\n\
-    \t\t          .hasSize(availableProcessors);\n\t}\n}"
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPdyRwuId+8YIv8C1xO6yenxl7xZtzCjrOF05dT9VuRgZsnG9whgIJKhhAvLjHs4ajmRSffVXAN8npEldBmM91AsYBbahVE0NVYMQWSaMTsjEyo/nqxGEMNH57wYFrKo7bFFOf2YA9Sy4qyNfWhDSKdD1MhvBiPD3Zo7xFYIiO45YjJZ2roY3619/0pOfNHiJQfFLRhU/cfrSrs+v+Glc2RdxE0KBKqcV5F93aDxwh9CFFWIHErgE5wcQqhTD8DYu5roeE37SwvKGUdWw+MKg3R2GLyBqTGXNJbWmFWfEHZbL+sJtZqifJXJZMGSbQ7d+lh3Pzeg+f67jxe0YVRZRqvqWxB5jPoTcupdqklQQgyH92x5+jy7H2o639iaCH8rNp7S1mbO8txvJGIaolPozP2rahf1bcrLQWkmDkx2h1mbhgye7dbilxgdxWoO9V3SkzqamZxfLPGJT2mlYRpsCOL88nNT9YNBvgR9zvyoCK33vryCMI/hJnXUhDtlSaYCs5bapv1+rA4bXFzg9E5Ctvn83EkcD0XyNKmEFsKC/gBEjVxrOQtpKXcE4DeU7gg8gm1YhD/nRJeYTJPneHN4ys9Fn6lJCgJ6U0DHIMIVaa3uVyOyxGuiujoB3apIkJH2q4zx85bEkcbRqSZaLgU6bs9GM4wupjPMqrNmTWNSPKiygmYM9pVnnhfvanh0i89Hv6gB/IcVSc9UJ+RIVi6ZNfgvZ6gIBeSOoK9kbwfuUbP3q9vgf6ory409o3YS1Q6o7PJIj/D2D4nHQzgDFZmt7IHAucIz0Q860/ShIbTEUEnRqG+l4s5fRKVvqNGi3Y/i5+HoEYzjUkaGSDkN8X+XhUS2HXqmiLzskzc0o3VPgq/RZGPwTFhvt0guHAzl0ppSgYqXqNrKjGX80ArK9BMzlqU73e8c43kgFZf9CRUBKHdbgRGLwNzPau8KAP29oheR2DDuYxhNDrEw8nchcOKnvMSh5+CSXCQhVCECGYlQCGbrzTSy1aLz8ISNjNWtjrSlkE1cM48O7cokdolsviFnMeNUmaeWY66DpW1amNWc+vH0p8i2SMJTi0MtTzAb2tVlecFMHQb1dJpLI0EJ6ty9K+esoQqu+ASDzlt758SH2iXQwjtfOVd56/bjM3vdgdpGC1TNaq0onpB96SSTe87AoJy2B5MVf7MwF/ede6486Ke+Y8Xub9I3e6ShayJJbK5uX1xy3iFJiwYTEWz7UEa8gGirb9DCvXFroGo1n+9R04VlTHdQlQuUXtcUb54QmjvfiuIR6ZCZflxISePqNeKpGvW4HiKee0Sm3m2UYY46RN6RLK8OcZkj6CruXG1gPuRdN13n4EW65AigcHGIGtnM0g1MdqypacUiGdIVmagwDjB6VTPypOWk0Ne1C9TPvnb8+VWk5r2pvSDSTm3qTlP/Xd0+qDJrBNPiUxahIVf8IiHqwVj8Km/Kvq3zv0HYeUVs323xgOydwSAlFQm2ShbyIkIYUPFtvbSEsZiaYCWLU60Fhwh1J+45JdqQ4oXw4qO2+MGvBO5KU+tuQMCFhndFVIzmKVpIuDRvjXWFaLJUJLidEFx7AkeZ6KZmIQGZ1wDl4ok3K0PPvuObmgjGg8Q44bMXg==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
-status: Failed
+status: Unchecked
 record: -1

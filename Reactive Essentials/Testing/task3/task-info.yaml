@@ -5,71 +5,34 @@ files:
   visible: true
   placeholders:
   - offset: 477
-    length: 55
-    placeholder_text: throw new ToDoException()); // TODO Check Success Case;
+    length: 54
+    placeholder_text: throw new ToDoException(); // TODO Check Success Case;
     initial_state:
-      length: 55
+      length: 54
       offset: 477
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
-      \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
-      \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
-      \t\t            .then(() -> testPublisher.next(\"1\", \"2\", \"100\"))\n\t\t\
-      \            .expectNext(1L, 2L, 100L)\n\t\t            .then(testPublisher::complete)\n\
-      \t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(1000));"
-  - offset: 696
-    length: 55
-    placeholder_text: throw new ToDoException()); // TODO Check Failure Case;
+    status: Unchecked
+    encrypted_possible_answer: GXhrQXY7X1uGqHgBQdAffW0Bf6Q5385ST7236xIgjhMDeVOOAeQSCmrydrp8mYYbl1AQxZPlYxS0n71/1p1Z8UYJyhBEQ3uJ2FqbuXrWeoOhLxYy4YBZju3o9Y0KiCZbEswPgh4ttS9A5hxhkKIXqa5ZTuVK7u4zyTpBwyUBmckYeWTMIcPjDGtvGzpGcNPV4G3CMPfkIq8F64nQBXoaE3VxYmrkbf7C4W+iGj46jNgDuKjoeiBi9XetiAKfEVSjPfB6gasuzePRLctI7GVADmhhfEu+08P6Q0KOCkUplPEXahqs+z6WQJ+20m1O1OLJTxiXVD2NSIxgxHJSljqLmIU4Cgca86wezZehwqgU9fzwOiB/d/RzsWsqrP4logeE6qmietqp1o4E8DzGMfJGRK9CQsad5+Tj/EGtygAvEyizDZKRQ5Sqgw6laBuA4M2UQhSzl0IIBIYNXT9CaPfdPpkbQuTSzByTwoy98/dtTgMG/G6LB4f0vL3QN7vyQtmQc0XDMoIbrH8Kz4GqYT8QPifLlFTFG5Dv6SIsXblczgQHjT7BadfDuBq3idqsv3f/xQYfhf0GXOLeN6MAobD5uA==
+  - offset: 695
+    length: 54
+    placeholder_text: throw new ToDoException(); // TODO Check Failure Case;
     initial_state:
-      length: 55
-      offset: 696
+      length: 54
+      offset: 695
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "TestPublisher<String> testPublisher = TestPublisher.<String>create();\n\
-      \t\tFlux<Long> resultToTest = functionToTest.apply(testPublisher.flux());\n\t\
-      \tStepVerifier.create(resultToTest)\n\t\t            .expectSubscription()\n\
-      \t\t            .then(() -> testPublisher.next(\"asdas\"))\n\t\t           \
-      \ .expectError(NumberFormatException.class)\n\t\t            .verify(Duration.ofMillis(1000));"
-  text: "import java.time.Duration;\nimport java.util.function.Function;\n\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\nimport reactor.test.publisher.TestPublisher;\n\
-    \npublic class Task {\n\n\tpublic static void unitTestAFunction(Function<Flux<String>,\
-    \ Flux<Long>> functionToTest) {\n\t\ttestSuccessCase(functionToTest);\n\t\ttestFailureCase(functionToTest);\n\
-    \t}\n\n\tstatic void testSuccessCase(Function<Flux<String>, Flux<Long>> functionToTest)\
-    \ {\n\t\t// produce \"1\" \"2\" \"100\"\n\t\tthrow new ToDoException()); // TODO\
-    \ Check Success Case;\n\t}\n\n\tstatic void testFailureCase(Function<Flux<String>,\
-    \ Flux<Long>> functionToTest) {\n\t\t// produce non number string and check NumberFormatException\
-    \ is produced\n\t\tthrow new ToDoException()); // TODO Check Failure Case;\n\t\
-    }\n}"
+    status: Unchecked
+    encrypted_possible_answer: GXhrQXY7X1uGqHgBQdAffW0Bf6Q5385ST7236xIgjhMDeVOOAeQSCmrydrp8mYYbl1AQxZPlYxS0n71/1p1Z8UYJyhBEQ3uJ2FqbuXrWeoOhLxYy4YBZju3o9Y0KiCZbEswPgh4ttS9A5hxhkKIXqa5ZTuVK7u4zyTpBwyUBmckYeWTMIcPjDGtvGzpGcNPV4G3CMPfkIq8F64nQBXoaE3VxYmrkbf7C4W+iGj46jNgDuKjoeiBi9XetiAKfEVSjPfB6gasuzePRLctI7GVADmhhfEu+08P6Q0KOCkUplPEXahqs+z6WQJ+20m1O1OLJTxiXVD2NSIxgxHJSljqLmI/03X0F1qd+Lf5EEF2GN0TyKjz00/w2s+ZFWiTrd0K1AXmyFILzZySDHZjrKJDmhlnwXSu6e7e+t99bYb7LqWaz5oalswuGosXCehfCrP3Z79ltPV6iVPGq1/9VU+R6c/HOLV/hGYdTDT9Tf8+f7fSc5JRieIRbtPoO5sk62n6+
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6HnEu3bdCSGebta5QKjsj4dTlyB2hsoUMprxsn5dErc+4k9b2Hg2jT/7T8BMaprsaySwFiPTWQ0sgTazymlF5o2e3xIN9ObJEdHVeULuURwYwRgHSQi+PBfCpUPazYEqVDvOdrQlFTuAeWA1CuAKN9F49dW308fL1AEePrMSd30p+gTBD+Ou2mDt1Zj0sTXWo9Ahzn3OpP0xRM+Pu1wFmY9ApkJZwe13g+4/B9FibombVcLCe8LHnAR5ys+d4NwOMWD47kb5ruR/RkxFQ1W3PJvWGb81y9Z7JB228P76OnsJDAAxeTYW1Iw3ga6zEKZhX0R7c4P85luXccYIfyYmxjfazMNRyxwgeZzC8H8crBfeSHGsY/uFEjTo7JfPVLaLpj938b/gakmjyEAwGLpDTqMgprX2fO9LvPJPV81JcIx6QgY4wGUsJ+hGjOPYx/CdKZC/oJbNsPqS0bdLyIqtMghEvf9JJNZgXnuPCOd0Ux9geNGVUcjqpbjE/49/ghEpiodDGigX1Y0lMeSOmdU+ofebazAitY2Or9Mk6N+X0sPkGpaTTQoRUkcWPI/IGx5r02rVcLM2z/SebeRJMReZso3KSlL0slD9wrpAwldNdDVEDHu5JwDBObe6fjcqmQlnDz+mffQYgdd95YOifupcMJhjkZrWuRxhZZShO1fQGChDlKR37FpS7x+u1z3PPPqwBv2Ze25ITWzvyWALXuyQRorCug3GNChFbkDVbfHUFtHwf4mHhy5XFn0vDob5byRCGHKn6D0TUlHSCdGYEyMwYif0C2lUsGrg4NpF42iMNzkBsFIxSGGxFGN9EIuucYQmB7U7OamTWtD+0Ny9wiiDEpsN6lvBnihbjDnG65M2KTo+OzBndVvwJLN/8Z+EvptUCF5iybbzEOZeiqTRJ4JhzoBobZ56HWelNGlCuhhS6Q0A+Q1UTcusSopie/pATASoaL/SBXlJyz4HftqfLkL7g7
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-      implementation 'io.projectreactor:reactor-test'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w8lFS3qDOPzMq4kjWcZ46J0SzndBZQzNjekyvjFSQ+/Z6ehdOK7L7UTHxFStCER6TJHy+QfAVOI1xmOaP0D7VSU=
   learner_created: false
 - name: test/TestingTask3Tests.java
   visible: false
-  text: "import java.util.concurrent.ArrayBlockingQueue;\nimport java.util.concurrent.BlockingQueue;\n\
-    import java.util.concurrent.atomic.AtomicLong;\nimport java.util.function.Function;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Flux;\n\npublic class TestingTask3Tests {\n\n\t\
-    @Test\n\tpublic void testSolution() throws InterruptedException {\n\t\tAtomicLong\
-    \ calls = new AtomicLong();\n\t\tBlockingQueue<Exception> exceptionBlockingQueue\
-    \ = new ArrayBlockingQueue<>(100);\n\t\tFunction<Flux<String>, Flux<Long>> testFunction\
-    \ = f -> {\n\t\t\tcalls.incrementAndGet();\n\t\t\treturn f.map(s -> {\n\t\t\t\t\
-    try {\n\t\t\t\t\treturn Long.parseLong(s);\n\t\t\t\t} catch (NumberFormatException\
-    \ e) {\n\t\t\t\t\texceptionBlockingQueue.add(e);\n\t\t\t\t\tthrow e;\n\t\t\t\t\
-    }\n\t\t\t});\n\t\t};\n\t\tTask.unitTestAFunction(testFunction);\n\n\t\tAssertions.assertThat(calls.get())\n\
-    \t\t          .as(\"Make sure all cases are covered. At least should be a successful\"\
-    \ +\n\t\t\t\t          \" case and a failure case\")\n\t\t          .isGreaterThanOrEqualTo(2);\n\
-    \n\t\tAssertions.assertThat(exceptionBlockingQueue)\n\t\t          .as(\"Make\
-    \ sure failure case is tested\")\n\t\t          .hasAtLeastOneElementOfType(NumberFormatException.class);\n\
-    \t}\n}"
+  encrypted_text: NYgHoNruO3t7vIi6YFhoHyZZIDjkOCcibT0AJJ5nfKCSFtbFpaNqKZy72lFGqVVzsoypu0TT46N0DhAyWMLteaDBSyP3ZOqD+sECHYCs0UsyYryjDJ5nINX4hY5xPjwnK7fk8Oq/u3SsAF/6oKMY8c4rxPnYMbHJz0UlpEEty9rpFOPFabg9rCo1FfD3FrZL6C8xrVbqX0WpoV3uToFRZWSbKjyDZGeTN17JgJnd9bMxP3gogY6An135hWr4q+0iXNzA/su8k8dlwT4KnM/NcHJHKhRQQlKncXg8mcNdW4bR/cXrkX+aYuehFv18CiECkq0blz8kFe+uD01P7TkSruNejf/FP1AwfTriNiIfi32i8hFaSceCXhRM87NzNhhvCe60o3DsDpSTHQwxT4ly64qJ+YO+ivN5dPq2Yw4D9W+esaRVQxzH0IFkknMnET0jbtqE+hyWulSqcCMyrTN76aFEbE+n4BZefMUAjaudzNU+Tor2cF1m4Em1PFE023yexvbBMGadqqokKTJP/952HDP9oJZeLIzibXMDkDUZCy5DRJ0unzn4mM7fugKwfU6WF30KzhieT4QluhBq3wiQiOSEMXmsz+6sKPxRf3zyTMw1U5lFqV+Zvt39TmwGay6aVhpEDRLD15udRLsCYrlCMelRC5k+WZ0k7NL+s09veBZYYSErPedMuaLaSpsKcXJrCcmYywhdGVKMzkpO70wGluMuy37YQxBPC3/jPy4wroFG65pqIG0Y43P91/LPONiMqNIfUiTQG7hI7m0kSrJob5DyZuB/Rrwh9jS/FFdx4pEiyvWFApoq9BZFlbwJCXKo+qbXmfZzHFelhJKeZs1T2GI43SHu7Krm+/ToD8Z72qBi2qG3FEuU7c1SWdDv56JE+EqFatfU+/0ao0JQhz2VIiDpUvn4gRHn+YfCa55lPXpQ9KRuRXHI175pf0S91EaCj1j4t4FkEA8n6Br+GUkdW7pYChGkS3mZ5oOgGOhS0Ci8mCom80EXXMExGcN9C8qhae9Sz/lACJm04SUaNAqbGQq2kQe86QI0iVh79hVLSB2hpy5GfAH0gxnYApfAl7uL3fjDYSz7VxcVYyfcz1/jHE23dN/L7emdPUvLeYQ3oj1Bg+V1qKqgRgPtw76JO+njbS0GrANssV+CsdqKiPCj4LQVLBz6Nn1Xupijq45G/d8DWnic8CHuZTpYPK/L9KXtshoq41HEMZwi8i9iXH4I9wYcs5GKdGVDKCjogCFhFmS7LwwUr/B9xyrceTxe1+xIbxmb09qg9FXPi5LjhvTZDizppQrspLNJM/tNnfqV1ZsvBm7YcNWryUU0gJJf3uzIQmsqbn/10NfGAKS893QntFxytmMJF5Dirk59A9EVqusq4AandbONUnL1FXd35+H5epgObtphPxx3K4O/P3AgPUs+QlaCNFgA2R9zGln3pr1DvYhzZHuWzQsTEg7snsmtXeTAnoHWLRwSFoDTmxJBla9RhmOQlEjpGjR7NEYAnzr3238rCNvd9QFZslHhhvzeqJYFGwBjiXJ6KYH5ct5tUF7Hg2DXX5IrosvPnEcbhrqTJjNfJk7fc5TrjgcfvuWN
   learner_created: false
-status: Failed
+status: Unchecked
 record: -1

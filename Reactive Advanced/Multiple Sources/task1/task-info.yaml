@@ -3,33 +3,11 @@ custom_name: Task 1
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.html
   visible: false
-  text: |-
-    <html>
-    Объедените несколько источников елементов (<code>Publisher</code>) в один общий
-    <code>Flux</code>
-    <div class="hint">
-        Используйте <code>Flux.merge</code>. Обратите внимание, <code>Flux.merge</code>
-        работает идентично с <code>Flux#flatMap</code>
-    </div>
-    </html>
-  learner_created: false
-- name: test/MultipleSourcesTask1Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ MultipleSourcesTask1Tests {\n\n\t@Test\n\tpublic void mergeSeveralSourcesTest()\
-    \ {\n\t\tStepVerifier\n\t\t\t\t.withVirtualTime(() -> Task.mergeSeveralSources(\n\
-    \t\t\t\t\t\tFlux.just(\"A\").delaySubscription(Duration.ofSeconds(1)),\n\t\t\t\
-    \t\t\tFlux.just(\"B\")\n\t\t\t\t))\n\t\t\t\t.expectSubscription()\n\t\t\t\t.expectNext(\"\
-    B\")\n\t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"A\"\
-    )\n\t\t\t\t.verifyComplete();\n\t}\n}"
+  encrypted_text: UOO2+pGp5DyUri/wg2BF6O29RnfhtLVMU9LyU/BbfOW7E+p8bEfKiTaWWUuKUVBnb9XQeEQTn+uwX9+ea/06eU39Cn/Z0EmMalIv+iIL8hoHPLzKB0jFkLIHRzenq181bsS4NMROyiG3VXIbo8Igflvdzf4VJnlX9JCHPcQ0Kchnr2o4Q0ahQoJaoBL8QM1F8U9pdpfFaioheRGJBECBTK+cC9iTcWlcZuP6PqlKK8ms9bGYj9dLyjtrw8dQWwTCUy8FLkZoPVHf2gO1+h3QZHnc0wsAcirLmXNmVqcwQzNU3rrVz+fyGwfwzp0LKfYPFWwb3D2YmsI2T8YtUTRbSE3JfUJuBht1pv8wiF2RZLzZXwvMpr5V8Ta9R2/tZ5enh4MlB/pzBJZdGLpRFVz56pAHZq2PT0+JFR1D+LreIu5KlikLyvxpLSdMaH2kK60tsQC7yK6JL5Px+zm3vF/n+P7794KU1sbjN2FLvRVbZpU=
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -42,11 +20,13 @@ files:
       offset: 190
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Flux.merge(sources);
-  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    \npublic class Task {\n\n\tpublic static Publisher<String> mergeSeveralSources(Publisher<String>...\
-    \ sources) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: 3DD3Jtgk1au1lzLQ9kPTznv1Nfs7UE3oqK8lFDTNho4=
+  encrypted_text: 3h3NXCypBcxD/VAjZiA9ZjRXeUuWSD3Te6+g+iJPUjiTItSYmyZeU7OPGtfkViVKWdQNWJU6plv39PMvnQofBMl3RrqzY252gvQbzNwvkPHuEouK9SW92YPkTpZUyO5fFZZGUMsR6Nt1OMi30gocqkbYAu9VWNK4r5besQO5v2Z8afBJDSXxutnw8rR67fPndgxBTsd3qG0v+xYq2RQHJYchba8rIS+Rdl4b8UgfFMD81udhyMRvRDRmoiRdnBq7WXaHXJ/0fyVQfqpKRkx98X6IArEm5jawbJ2RTrDxWn+HlVpvBRY5NBTfjK7GV4s2
   learner_created: false
-status: Failed
+- name: test/MultipleSourcesTask1Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzKcXd/K4teF8wsz2ES7phXKLQO01WZiMMCvz7qd0LvCztbncc5q3PvrzYCUA3vK82SDjF3JQOpE2P+iKm1Oj2UaX/FjiHd2fJofDFmzZHtxru4rrgl90ZSopzLIA7FMekg640PGXUUSVO5fBxSHf1T6MInIHHt4ARHnFlxzMDE+VBo8lFX4TKg+8wRRg8dW5wP+U3G4zWiWEJpYX/7/jMhgkKtoRF96AoRbo5aa9SHrm6h+adZtj7TXY3I+I/we4R1IaDqDGDBdpLeiAEZx16PH2iF5G7YGmppFAem5OYfYYx9obBixD/lDwpWIFL6F8PQqQdt28BGXLCv5CMfVpvM6H34dTBXSV3BT6pFHc7ej5UnaZHPSiHHRpjSqo2/hAvgEaTpXQ3qHwRXRHN6aPlZo0ZoMOzuc02r8dVC5rKErM6oq5jXxEUhcMFALinhY0Fs9KdPEpdKFvNiHSbLxLzcZnsxgElbOn+0PhzpPlhIcSZ0nOfkfpVT4E+B+O1jeprcYuAGAcmqyttWmb0fMYnCBhQFkqJlVqO24NKFnf0WZG
+  learner_created: false
+status: Unchecked
 record: -1

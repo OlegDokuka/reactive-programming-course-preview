@@ -12,52 +12,21 @@ files:
       offset: 200
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Flux.mergeSequential(sources);
-  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    \npublic class Task {\n\n\tpublic static Publisher<String> mergeSeveralSourcesSequential(Publisher<String>...\
-    \ sources) {\n\t\treturn Flux.merge(sources);\n\t}\n}"
-  learner_created: false
-- name: test/MultipleSourcesTask2Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\nimport reactor.test.publisher.PublisherProbe;\n\
-    \npublic class MultipleSourcesTask2Tests {\n\n\t@Test\n\tpublic void testSolution()\
-    \ {\n\t\tPublisherProbe[] probes = new PublisherProbe[2];\n\n\t\tStepVerifier\n\
-    \t\t\t\t.withVirtualTime(() -> {\n\t\t\t\t\tPublisherProbe<String> probeA = PublisherProbe.of(Mono.fromCallable(()\
-    \ -> \"VANILLA\").delaySubscription(\n\t\t\t\t\t\t\tDuration.ofSeconds(1)));\n\
-    \t\t\t\t\tPublisherProbe<String> probeB = PublisherProbe.of(Mono.fromCallable(()\
-    \ -> \"CHOCOLATE\"));\n\n\t\t\t\t\tprobes[0] = probeA;\n\t\t\t\t\tprobes[1] =\
-    \ probeB;\n\n\t\t\t\t\treturn Task.mergeSeveralSourcesSequential(\n\t\t\t\t\t\t\
-    \tprobeA.mono(),\n\t\t\t\t\t\t\tprobeB.mono()\n\t\t\t\t\t);\n\t\t\t\t}, 0)\n\t\
-    \t\t\t.expectSubscription()\n\t\t\t\t.then(() -> probes[0].assertWasSubscribed())\n\
-    \t\t\t\t.then(() -> probes[1].assertWasSubscribed())\n\t\t\t\t.thenRequest(2)\n\
-    \t\t\t\t.expectNoEvent(Duration.ofSeconds(1))\n\t\t\t\t.expectNext(\"VANILLA\"\
-    )\n\t\t\t\t.expectNext(\"CHOCOLATE\")\n\t\t\t\t.verifyComplete();\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: QOPU+iECzu+wfADv9t7dw+OWD7cIGDKFCtSbvrZgY+k=
+  encrypted_text: 3h3NXCypBcxD/VAjZiA9ZjRXeUuWSD3Te6+g+iJPUjiTItSYmyZeU7OPGtfkViVKWdQNWJU6plv39PMvnQofBMl3RrqzY252gvQbzNwvkPHuEouK9SW92YPkTpZUyO5fFZZGUMsR6Nt1OMi30gocqkbYAu9VWNK4r5besQO5v2Z8afBJDSXxutnw8rR67fPnskFa+fLMSk2RtcopwSWwPY+tnCzJT/ylb9C1vxfD0cAJpVOX+4ogJ0396/THNj0vMMWPQUsjBqx3rTnb6rNxlHxVSV3N9DIQ/p3dDWxYUi45SfkcTn6vhJRyqeUuVD4w
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.html
   visible: false
-  text: |-
-    <html>
-    Объедените несколько источников елементов (<code>Publisher</code>) в один общий
-    <code>Flux</code> таким образом что бы все элементы из под-<code>Flux</code> пришли в том
-    же порядке что и при генерации под-<code>Flux</code>:
-    К примеру:
-
-    <!--TODO: вставить marble диаграму-->
-
-    <div class="hint">
-        Используйте <code>Flux.mergeSequential</code>. Обратите внимание, <code>Flux.mergeSequential</code>
-        работает идентично с <code>Flux#flatMapSequential</code>
-    </div>
-    </html>
+  encrypted_text: UOO2+pGp5DyUri/wg2BF6O29RnfhtLVMU9LyU/BbfOW7E+p8bEfKiTaWWUuKUVBnb9XQeEQTn+uwX9+ea/06eU39Cn/Z0EmMalIv+iIL8hoHPLzKB0jFkLIHRzenq181bsS4NMROyiG3VXIbo8Igflvdzf4VJnlX9JCHPcQ0Kchnr2o4Q0ahQoJaoBL8QM1Fi9222ttGqQ9O/DGLgqhp12Vnb7bRjm8PVpqf0MK0vPIHzDimV/QqyuL8bbV0MHYa1P8GQ55mXdHV8EQ3VhKQjbmU300UNJhN+QS5AUziUU102LzNtv6juHuryqHCfa0Bjkd+dfpM6obdaSnOkUZZJriKUV/J3DAvwgnFdHbWa51T0vUGnI0oAmHeexMYCS5b7Va3FtIbsakpyNcYt8xFb5M/6NXZncRDJWs4HRim4wZmpUqWv83yRIA++L6efeE9iu2RpDnPLrYosuVUmWQNkd0UxOBaaF1L02dbHVqz/VLDxUCQP2bGTlRWvOZLJMdqHi88Gm7c06yxIerP1ENEERLbdsk8N1CRdo3Zk0t33KSSTZQMgZlKaqF7Pmg3GDIZjXAIjTD9AD9/nk6lFbDZDh9J0T0WtkaZtOW9n/rml8NArmfE9fn4SADYSnn+xCoWmJK9R+V4avzDqbNNDFecXbQVmvwB0RYsTOhSwRKiP8fpYbLOs2vojTYKolcH1YRx7WPQIQh0iTEabLFFcFEvyhzbiwatnX69V5bvUYjSDo9sWK59+E7Be43pJhalhmwtG+mt/zbHeQ//PoVFLnoTdtB22qHL4lLbeiC6qOj2LFVghnt4ySXFEOHZjUKyspUPpO15yRfjMQHpTC0LLV5tud0+BGitbr1LW3CiDnNEQxQrdd1ZRhDfVlKcsOPdOzTH
   learner_created: false
-status: Failed
+- name: test/MultipleSourcesTask2Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wZMlhN/a4u9oZDX+IOo/CXqui5JVh2toDva8LkbornIM4Xq4cusJ+zOduI8lVUeTdQyqLhPBKsWxmX3Qq/RpqTj4+fFToXIObmFlcbwEyS7MM+PVhuCD1yfnG0DT16vQ8S26gMpuP7JyBHRGmLQmP1aByJYX1MprevLwy7NxSCxN9HLpOXLHqnreswOQyR5AbzbQ2EKlPO+Hc++JPWhVePpaBMzTsgAsHk4Z3/n8C1Xh7hVgGnG4PcRezD9J2bsN/3Y/LHZyX9YrEjOpEV53PZnXGokm5iduoZUDWseW90VuF+YNWErsKN7pNyycbFILnz/iF2LDNPPUlonNX+60/J0/58/+XqTePEX3eF1N9ZDtf0n4UFw4YxiON1lGqH5MrHHsjzNcXUEAdUKFKrYQWPyQ8QMgnZrA0J47lFy+YUptyFlyjxOuqDlSG/A35O11eLcLJy/rp7byrcuHRZk6fvJo6mQPvkEf/V1Wmfqfc8a0tJ5YRPklnY5TfeX3uiJpqkmaEMlZwDzZkCHUVg8DdEiVbQ9deVLfDWUkfSOA+lSD08PLMR3Jtzi7pj4cWTgtzKyNn99ibWFJ4dkXR+1QBAFRzn6Bk0dtgCW9mVU6/Bgdt5FSnmX1kjlNkWcRJV4MZVlegQUDMRid/QMFtRT+jFxlnCciydBt53r5VB1NdUT84I6LLdg2rT45O9gEieXZmjuHj6N6pmlWk0jIqOPHALWXm4mJ3jjwSAZpGlScFB9oPD+o986xJ5lx+dYhCdYkyusDIIQ8qr0+Z/ltT+lUH6XknKmBoPK+PJDWJ8oN/kQf9ZlXq9V8kvebf4mMjKExsZM7uHPhHMuEHlu+93gDstLIUc76OuQwS/JGm0cb549I274iIMJXnUFZT14slA07mo1/zuXqqTixqVyKe067PgpdrcaU3rwaKXnSiiRH/Hn5lx1DD+htwGq0iKPprIs9U71riqAkjOtRSYnn80Cd9A6gEQOY6JqeyETBF+FdUyiA8lj1VsusiuInbB1vWokEonocjeL3O+1MiAz9aOQUiLdCIRFbbo+mVcOLcXoH2nLadAP+VaXfgi213qUvaznBG3Lg29yF2YSDEvOjH3qDrHSHOGVNWJsWgX0gJ3xfw+5uLnalauwvoSa1rW7uNWNXWHQU1oYJ9Ajml5Fww5lf+Q6QNwrqifkRyLqzaT5P3sRLuklf8tEk2MIqxfQ2mooA6ehmP0XdLWaITW2hUCeh/SpEYOWSogvU/OCg+pKcXwtg==
+  learner_created: false
+status: Unchecked
 record: -1

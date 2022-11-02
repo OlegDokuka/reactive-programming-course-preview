@@ -1,44 +1,28 @@
 type: edu
 custom_name: Task 1
 files:
-- name: test/TestingTask1Tests.java
-  visible: false
-  text: "import java.util.Random;\n\nimport org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.test.publisher.TestPublisher;\n\npublic class TestingTask1Tests\
-    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tTestPublisher<Integer> cold\
-    \ = TestPublisher.createCold();\n\n\t\tFlux.fromStream(new Random().ints()\n\t\
-    \t                            .boxed())\n\t\t    .take(15)\n\t\t    .skip(5)\n\
-    \t\t    .subscribe(cold::next, cold::error, cold::complete);\n\n\t\tTask.verifyThat10ElementsEmitted(cold.flux());\n\
-    \n\t\tcold.assertWasSubscribed();\n\t\tcold.assertWasRequested();\n\t\tcold.assertWasNotCancelled();\n\
-    \t}\n}"
-  learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-      implementation 'io.projectreactor:reactor-test'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w8lFS3qDOPzMq4kjWcZ46J0SzndBZQzNjekyvjFSQ+/Z6ehdOK7L7UTHxFStCER6TJHy+QfAVOI1xmOaP0D7VSU=
   learner_created: false
 - name: src/Task.java
   visible: true
   placeholders:
   - offset: 192
-    length: 66
-    placeholder_text: throw new ToDoException()); // use StepVerifier to perform testing
+    length: 65
+    placeholder_text: throw new ToDoException(); // use StepVerifier to perform testing
     initial_state:
-      length: 66
+      length: 65
       offset: 192
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "StepVerifier.create(flux)\n\t\t            .expectSubscription()\n\
-      \t\t            .expectNextCount(10)\n\t\t            .expectComplete()\n\t\t\
-      \            .verify(Duration.ofMillis(100));"
-  text: "import java.time.Duration;\n\nimport reactor.core.publisher.Flux;\nimport\
-    \ reactor.test.StepVerifier;\n\npublic class Task {\n\n\tpublic static void verifyThat10ElementsEmitted(Flux<Integer>\
-    \ flux) {\n\t\tthrow new ToDoException()); // use StepVerifier to perform testing\n\
-    \t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: r/nIPCXrpZAmHstCoAJv84uXyn6mOJA6YMXna9DR2bMz7wkKxaTXGGsIsiWyWGREG2JL8AyYRR/u2tkqVTjVqhAKA1vzeoGfGgjb3EJb/FtZjRgkQKelUUgSy7dAoI0cddAwlalsoySN+JmSHsP8GsbmkfIE879EivCIY44elcGVPujig0LJ+rNeBgV37ZEmMM8DPb0XsLIjHdoypzOtXe4BG3cpHOPyke1sbzriZe8=
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3knR9okvFLEh/N3xw/yugTqMabR69q5y08ZYW8GcOjSR7bnjBWjSZXIRux+AbJ2UfRm1xqgbfyfoTsxJpKnCGJOXlnau203tHu5mfyWxYr0OQNiPN7vYX+FQUKUYP3Vcxr0GoqvdiQI6pikL/clZcRxLFCOiiePvjiHvzzv5b5IFkB8O5btiQ9Zum+Aov4ei/+mRhET2ooRdQ5I02hX4NaCK00LOjxDxD7tV9nZcTVTPlzpIw/FEqayR+ZIFKD/ifItLJjE+TSuWP2aQ9z1fu/3+pTwz7uClm3BiU1A44UF1f+i74AThI3sila2MoNDCxR8=
   learner_created: false
-status: Failed
+- name: test/TestingTask1Tests.java
+  visible: false
+  encrypted_text: NYgHoNruO3t7vIi6YFhoHy8AHxG0CHvz7KtsaLA7wr2N+hEpy77iXHZBU8J5TuSbjIKNtT3k4cUCx0TITz6bXlZpaughAUvRZlJf4y3yocAf722kCmMhE22ponAztPHMr79UxseuNzgA/zaCDEAeFAoUjoA44OlSaPxs+HuF9WpPm+DKX+9Wchv3P8qnfSmvUjiO1wtSCnHWqjOIZlvG3B0ysk5M9fEggvlj8WnAPp9uDLERWts0sROk0EenStDzCV3MgEB8EXNbB6VR8z87Sj1tF7iPss55s56xPMf34SXbWcxTE5tbv5n7ZF3SmZTyStguCvkHBZ0xXby4qTDi1Cau29wpsaQmZDpeICWG5gS3okla8euRa6Qk1yY+PI3JFsu/YFBspP/oNmNhjXqnuXszsUZ1XSgSXHIcVP984kUL4tNwODqBY/Fv/p+nSdp9Hapmpp5tulyNttr++XzJ5z5HmNELXy1vE6CYZnkllvI0m6cOYBDfrhrdwNJM5ha5/IQFNMmhO0gNUnmV8EnfSqvQg1LlccIVzakAo1YOHiG9ZudRTs9rbcWgiy36PXOPceEsqC5McMduwPYU/pMI5nsP2vSf6XQZX8VLGFTFCcZRBqkUHrqqBxYnP6m2lzTrixJwW/tIrGN+4rMa+I6JZJRJ92XwODODdX7qwqvN0geeUatoG2XampjG71BmNIS2AFIz2xs7bPeq26bHEfb8Vnlxxi/K6FZ3jp23S2enWpFbBzLyXp3EM9bpZNT5rHTkeUSWMJo+cskvp8ZVhfpYDQ==
+  learner_created: false
+status: Unchecked
 record: -1

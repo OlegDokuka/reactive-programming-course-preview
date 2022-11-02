@@ -10,6 +10,6 @@ public class Task {
 		Supplier<Flux<Long>> toVerify = () -> Flux.interval(Duration.ofDays(1))
 		                                          .take(15)
 		                                          .skip(5);
-		throw new ToDoException());
+		throw new ToDoException();
 	}
 }

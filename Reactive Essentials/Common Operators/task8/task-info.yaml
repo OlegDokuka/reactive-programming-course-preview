@@ -1,32 +1,13 @@
 type: edu
 custom_name: Task 8
 files:
-- name: test/CommonOperatorsTask8Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.Arrays;\nimport java.util.List;\n\
-    import java.util.Objects;\n\nimport org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class CommonOperatorsTask8Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\
-    \t\tMono<List<String>> sequence = Task.transformToList(Flux.range(0, 10)\n\t\t\
-    \                                                       .map(Objects::toString));\n\
-    \n\t\tStepVerifier.create(sequence)\n\t\t            .expectNext(Arrays.asList(\"\
-    0\",\n\t\t\t\t            \"1\",\n\t\t\t\t            \"2\",\n\t\t\t\t       \
-    \     \"3\",\n\t\t\t\t            \"4\",\n\t\t\t\t            \"5\",\n\t\t\t\t\
-    \            \"6\",\n\t\t\t\t            \"7\",\n\t\t\t\t            \"8\",\n\t\
-    \t\t\t            \"9\"))\n\t\t            .expectComplete()\n\t\t           \
-    \ .verify(Duration.ofMillis(100));\n\t}\n}"
-  learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Соберите все элементы из `Flux` в коллекцию\n   \n<div class=\"hint\">\n\
-    \  Используйте <code>Flux#collectList</code>\n</div>"
+  encrypted_text: gMyNXOJ4VfFFBoeo5QELU1A6dp1H0pnV822+BcIPsr9Rn1dHzgAsDWM7A3LoHbilSFR+G2pkG7lu0ZTwNun/0gAZRqGouUdNWrqpttn8faHpkQCR7AEMEF/iLLub/7lcuF2NUqww1JDidl1ePk2LEFuc6Te/tsiJUe9qWxs9wh8ZMJU++VMejyYLCQmNCXVkn62g7bLzEVwE/TBG4pKS4w==
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -39,11 +20,13 @@ files:
       offset: 198
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: flux.collectList();
-  text: "import java.util.List;\n\nimport reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
-    \npublic class Task {\n\n\tpublic static Mono<List<String>> transformToList(Flux<String>\
-    \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: NIyyaa/fd7Z+N7M2Ym9m7iTNHH07il8eXsknZU975po=
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH6jwG19YfPcXog7s3q3PU1QmIPpfAjg1wbgOEXC8t7P9AvgMByend5zcQ8xSu48kMQ9IsNIaHMaXYwp7L6yQObjXg/G8h01Q2iixjEhAWNseyFL2lyx6j8J52lu6x4wqZB/YDBpMMiBF0gNbgWXMxREn792ao1/dHV3N0eKDoe/4TLadb2zAVcK1uA/zfZgZ/zu5ocamvybmXX6DwwuBcJVIQa0+pLmVYCOE3HRmjzNQbMVczTjlMPqLEKWbEy6PgV/S53hqZUyDOTErU6th10bdDIujpfNdkscu/kBo7IQs
   learner_created: false
-status: Failed
+- name: test/CommonOperatorsTask8Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6n1etmvcCFj/2E1xTw0Laut99RaN/YwjKruLl8YoXpVUIALTMFhA3H05uNQS6w0ctE+XBwrONOV5Tu+hJ78rmsY5EZHE4xQPYAF183O4JSA284Yb04WuIf+9vKnQcVXagXMdQssbhd6Lyl4DeOOimAS4P64xLj6jFQI2s/lU0oc0STsENXRN/mTZW1xy77mIdgNDOsLpIaOeFLYG4L95u/ieQ3H9WJQd/Daaef0kgCqWxHxI+nOV72GES3yxJcIn5hChxulG14/Fl8Axq2dStdGXdluuG08aFtxqfA3R1GTDE4PuWfQ1nMvkLQ8/OycZ4oq7m6k2aPHscV9CHoCKo1G3KkFXJFOYImVFjBpw/jzR0QoHkc+TX0ftywU3v9nLfODwIIxr525sHaFIm0KfROGVQ9AdjyqT0mA/pv010uKtsR/OkiQfDGpewdI+hd339ZR956yUx+wU+0XUOsZIDxVyFtr5q/D4g789b1Phf2fW5GuOqQUxqKzmhM52ROgo5Okv1v0SmxKTvvs4b5WJL/EyO+ggwnY58pOLjbZMN82MUBN2z8g/NJAL2UiF7TY/Rg+MslnljY5O/TNrWiqCpHb0zfD7gBjO5uu9gUmw8+/CUveaoYFRbazq7EHrPPpSp1W8YKjsc7aN1/bgMxH9mlMr3B5qACQoPNVWrN3rcxbszXPTPrEUtERa/JZfVErwMnVZlZEOLwvbMqlEHsXMv/NgFfYPPyq6fg8PSZQJfbUHQdqy8/ZT462z4GJhoRslzMo0qOqaAcnDJWym4wl/9r9s1FlYrODrC1/R04ZVcEq35LzEB8yA/VEUSH/QR3MH5W2k3GpQ6SKQIWvcIoklDvkRk0q+ucdNFZlZ5G1TW/TLJpH9pDNhv+rBHH2EQ33VJiyAMK2zMci/5vjcr7caMazRG6TapYR8xy10OYtsF6S+PrlUhDGj7RvAwQ2kXWf/GBcekeyCKtgW4TgTyNGOBYIMVu12egr/Y932m4/H2DTBjoldJqY7BwvRtxvujOydaGmYBePfQ/nW4hRpqtWn2yZuDh1Tsq18NAr+0Cng6g6g==
+  learner_created: false
+status: Unchecked
 record: -1

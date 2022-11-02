@@ -3,27 +3,7 @@ custom_name: Task 9
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
-  learner_created: false
-- name: test/CommonOperatorsTask9Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.concurrent.atomic.AtomicBoolean;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\nimport\
-    \ reactor.test.StepVerifier;\n\npublic class CommonOperatorsTask9Tests {\n\n\t\
-    @Test\n\tpublic void testSolution() {\n\t\tAtomicBoolean subscribed = new AtomicBoolean();\n\
-    \t\tMono<Void> sequence =\n\t\t\t\tTask.waitUntilFluxCompletion(Flux.interval(Duration.ofMillis(5))\n\
-    \t\t\t\t                                 .doOnSubscribe(__ -> {\n\t\t\t\t    \
-    \                             \tif(!subscribed.compareAndSet(false,\n\t\t\t\t\t\
-    \t\t                                 true)) {\n\t\t\t\t                      \
-    \           \t\tthrow new RuntimeException(\"doubleSubscription\");\n\t\t\t\t\
-    \                                    }\n\t\t\t\t                             \
-    \    })\n\t\t\t\t                                 .take(100));\n\n\t\tStepVerifier.create(sequence)\n\
-    \t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(10000));\n\
-    \n\t\tAssertions.assertThat(subscribed.get()).isTrue();\n\t}\n}"
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -36,16 +16,17 @@ files:
       offset: 172
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: flux.then();
-  text: "import reactor.core.publisher.Flux;\nimport reactor.core.publisher.Mono;\n\
-    \npublic class Task {\n\n\tpublic static Mono<Void> waitUntilFluxCompletion(Flux<Long>\
-    \ flux) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: Nxn0ZB8hAkZxhwgnhu1xlg==
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrQ1C3x0dyp7sq00JiSUWl/t29iIoALq4DzdoifCkRDximMysZf8roFzIkabEHYtne3D71pYAIBlDz+Skrlq8uKHn1sAx6ErYbbkZ5KSrIV7SgIUESRo2qupwBJhoEkSSGPWnvTtb5LIC4Ti7g9wOMQ4tVnCwXbANQ6wsH5bDpDNk/IGj4AFhqkUnTqSt0UgAYp9TW09IlM7k+h4m8hoaOi35l8Pe1Z6vWlZzWXjsgXQ7nQ+2BXPciGAi2koL1QCgH0=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Проигнорируйте все елементы и дождитесь окончания `Flux` не блокируя пото\
-    к\n   \n<div class=\"hint\">\n  Используйте <code>Flux#then</code>\n</div>"
+  encrypted_text: PbJvDVpyVKraRWqsDHEF7YydteDMkqezlUl5HctrW6mcM71cGieOfWp85beLFTt6h3rq5aVOlvl/QrfpjrKD9k9x9pHxgab7OlexNd3YxmqgGp9HiEsANmB1YbBTNu02O2aU4Wcd3WPjerlaE3sFJj/N1zSh5VcKv/nWv7vBhoNzx9VDSP7RvpWtRJ4F8rwDZ6nkfV34hP6k1HCUPnz4kCRzoWjx7a/PyYld8aN7jUdm2nhU4Z8DUomcPdvUk0qBVq3MB7bFwuBaZ+lcn3XuoI4Gz1Fjs0+q4hWS12cFKig=
   learner_created: false
-status: Failed
+- name: test/CommonOperatorsTask9Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl40gAMvXbhVYqdicZnFUPPdKRlXzyQXfKJ0687C1+VdU226jwv4y/qaDZY7viCzp4jahF6MR2Oa0sC/i12Xjenlo/o8hLVs7yDcd4H6VC2ezQXBvQhYwqF5CWCnqlO88prfOpVO6SkGbm6iAXJifjPTcD2wA3GrfsT3VVG1t4b7Qfq+2M5KRoSxtOQkTmXojxOLL/2BEw3tS89ZMulvYsPqp+3++yjPnh2NntfbUAbJBuEsoaoZURBFNWr2gGadIa+JjF7lPQB+bWDmGHb6vRVpm1947NiPfeTnBxnkq4ASXMhXUJWPSBOaEat+anw04mZYUtvTHlLJJTFNj0dDHufPPhYkLjvaVc36ERPzw9ktIJI78gg2ZG8grJbhUIH2IkzP8/SQfOlgNQXV2bZAZiC7Zu4L6LTFU2TwdeyaoCoT9cHO59YCKZNHcQ4u9QrayFjLZLAV0ggyWtG3tF4kBtHg/SkIOJxCMI1NqV7mWduDAC0NFlnKZTfj4UDlSoSlYg7bEAPO71gVP674rkS6OalXd+2Tf1TXd0tx2Lbi14KocJs31p9mLkj4Rnre6hyT8HjMZMLd3pfXx5FaYp3WjJL7KVC6SVMncu4wi9M3/Btji8D6VpPUdgUJkAsYe0x2EWu1fqHrEHY2AVYGqxM5gUgt/IVYi14iMYi2RWZ0nIxL9XSytInwBt9VzDdKbxy888/wSi/B272xWfOSvXBpODXR08Ixhp9l2ScQ+EqtjOGsbwFbRUUmc8fmFIRja2xCD2SRk8H23d8hPx42NIgZGdZJaOLzDC8bolvmpbkIy1DhIzGZ+H+9PNoZMofv0htr6zaKCyEmv7Su1Qv/O81Pwgsb/NvxoAr12uSQWNR2zG1ysmD86JgqfOVfuK+xRB+zGNmSJCAWatnI2yRTxayijDIM0jdHkzrcs7pxwN6SuTNCvw8TtxVV39nYotrMnMQQ7kjY8LqSNwcfqi+y8DKSNLCjrtSA9e8TKMjsXQqEUQ2abS6oGUawxLCEq072O4wcUcEcJqZ+pldW8/pk9DqdUO/sbbOk9AW85intgkTwixzYZiYOmr/kvJFWXjYltGh9+j7UkjRdrLO1XDLO7NHn/GVe8slxt70kYOua3Rhkq+T/7qw9KD3lTyiJodp2ZBJ5j7zR4V7jm0aiFppK4aXGG0fH9+OD7PpE7XRYMorrYTGM94UjKxZTN3sFavocfT8Z60nZ6qia3yZ7xr8SncDdBEzHXIHq3X6OsVWNYkjjQNOonLKIbo074uFryB2aoOFLgwClsQXnqi95D6+XyQhrpB1hZK7MdLG6/x5oyX+TsJodBzNOP1qgvWIT8Su8M3qo5ePxcu7MWApxf59SUwHE9Gix6x0SRwFU0su41fTRO9PnYg==
+  learner_created: false
+status: Unchecked
 record: -1

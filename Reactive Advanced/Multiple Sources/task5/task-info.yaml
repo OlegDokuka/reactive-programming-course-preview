@@ -3,32 +3,11 @@ custom_name: Task 5
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.html
   visible: false
-  text: |-
-    <html>
-    Сгрупируйте все елементы в <code>Flux</code> по первой букве
-    <div class="hint">
-        Используйте <code>Flux#groupBy</code>
-    </div>
-    </html>
-  learner_created: false
-- name: test/MultipleSourcesTask5Tests.java
-  visible: false
-  text: "import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.test.StepVerifier;\nimport reactor.util.function.Tuples;\n\npublic\
-    \ class MultipleSourcesTask5Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\
-    \t\tStepVerifier\n\t\t\t.create(Flux.from(Task.groupWordsByFirstLatter(Flux.just(\n\
-    \t\t\t\t\"ABCA\",\n\t\t\t\t\"BCDBB\",\n\t\t\t\t\"CDE\",\n\t\t\t\t\"BEF\",\n\t\t\
-    \t\t\"ADE\",\n\t\t\t\t\"CFG\")))\n\t\t\t)\n            .expectSubscription()\n\
-    \            .expectNext(Tuples.of('A', 3))\n            .expectNext(Tuples.of('B',\
-    \ 4))\n            .expectNext(Tuples.of('C', 2))\n            .verifyComplete();\n\
-    \t}\n}"
+  encrypted_text: RU00RkQGWbxSu2nVTCuyqaCqdtv8nVBqz1kQDzO4+v91HhkKvHrD/c+Iw6kZ5UzBbpgFASrqbTfBHZtnJAWq9EbgaMQOCZ8UBpD/Vkv4avB5TTzewSCpVdldQiZmmLF85T8NlCtHQBpey21lpbjb8iLmUsx1O+7/m85htvsud/NPWvmY/Z1U+KyLc6PNh29nhDG9Si6YmOqGQ0GyGygMmahWiZQhlKej8aMFD9BXxipGRDCd7YezQBiF3EkmzIdV
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -41,9 +20,8 @@ files:
       offset: 358
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "words\n\t\t\t\t.transform(Task::groupByFirstLetter)\n\
-      \t\t\t\t.transform(Task::countLettersInWordsInGroup);"
+    status: Unchecked
+    encrypted_possible_answer: cj896ErQkOzH8HXi31lFkaBOnZZgBmBcpzuIHl0F8IDOUoEMyTtnVCWfQFNtr8ganq2SrovtwDvcVxsc72AqU8QcysnEJjbPlrLp8efldBpQJ9PRrsx9VJ/JNIIo4Q6ykyO+Z7iou2/h2W9qipifXA==
   - offset: 497
     length: 32
     placeholder_text: Flux.error(new ToDoException());
@@ -52,8 +30,8 @@ files:
       offset: 497
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: words.groupBy(s -> s.charAt(0));
+    status: Unchecked
+    encrypted_possible_answer: akRPA3JShje9WkrBNSAOenVJSOzQ6HrCz5Viz1AEbw6Du1uR1M9XnMyuQOaId8zi
   - offset: 674
     length: 32
     placeholder_text: Flux.error(new ToDoException());
@@ -62,22 +40,13 @@ files:
       offset: 674
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "groupedWords\n\t\t\t\t.flatMap(wordsFlux-> wordsFlux\n\
-      \t\t\t\t\t\t.map(s -> {\n\t\t\t\t\t\t\tint cnt = 0;\n\n\t\t\t\t\t\t\tfor (char\
-      \ c: s.toCharArray()) {\n\t\t\t\t\t\t\t\tif (c == wordsFlux.key()) {\n\t\t\t\
-      \t\t\t\t\t\tcnt++;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\treturn\
-      \ cnt;\n\t\t\t\t\t\t})\n\t\t\t\t\t\t.collect(Collectors.summingInt(Integer::intValue))\n\
-      \t\t\t\t\t\t.map(cnt -> Tuples.of(wordsFlux.key(), cnt))\n\t\t\t\t);"
-  text: "import java.util.stream.Collectors;\n\nimport org.reactivestreams.Publisher;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.publisher.GroupedFlux;\n\
-    import reactor.util.function.Tuple2;\nimport reactor.util.function.Tuples;\n\n\
-    public class Task {\n\n\tpublic static Publisher<Tuple2<Character, Integer>> groupWordsByFirstLatter(Flux<String>\
-    \ words) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n\n\tpublic static\
-    \ Flux<GroupedFlux<Character, String>> groupByFirstLetter(Flux<String> words)\
-    \ {\n\t\treturn Flux.error(new ToDoException());\n\t}\n\n\tpublic static Flux<Tuple2<Character,\
-    \ Integer>> countLettersInWordsInGroup(Flux<GroupedFlux<Character,\n\t\t\tString>>\
-    \ groupedWords) {\n\t\treturn Flux.error(new ToDoException());\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: N1nXPVyYCRxUNA0fQ6zHfM8cs7l2wZQHEAHY/t1SVL8afBDpeKQ9TwPg1dkNqvjbFiMp6/GB5Sfx5PHZLbWUVXjToTJE8CrJreXMO+9Zgk4fW1uLv0bihFhEzDKwSeVUj4TpwpF2VyExnpvAY77WYmUW1jsS1g6orzKPKFy9O2qqUIdTa2aF3oUhe34GWI8ZBMDT5i9G3NqFe+B0T3Eal8ajG0bfRpWgCcJV1PBIL/+15p9dwMuoGrdRLkL52bUJjtbpjJQ/FXad+lYxVVWHtto2aNQ4rSb8F94d2nkO4GD9XlAkJqo44lUGzOGo+cmXVRSv2EETSrXmJtYKaukukt5IYsowhbtzSHBNjyZU20C7va1ewkefQs/Qg9NQ+2DLfOU3Q/B1W6ZuCVZtzgfcF7EHYLTveGAs1O19uKVuuQEJLx43OmQ2WKg7lK28sjc9i4k2XNCrkDo67FoMhvbA/A==
+  encrypted_text: NYgHoNruO3t7vIi6YFhoHyUp/h+0A0ijaD05zEEynvkohcvFmLkXEVaR9VhgEG23KXiKHJc+ZhBrakdZntIRC8fM8sJNvU6f4V6eDcM4De02ejXKdNwEC5sT3wpsmW/ntpsghKgU/199kcv5mLtDlCYsIesk0a0CSnEKe68cmLg1A1wVXHd6ttVYPRLHpKY39VSCE5b3sZpDq9yJ7W94FCoa3lhqgnrfCGmrGlM2k7DAws8+bCuA3d3OF8eGlmIb/4IcGgAO78YFvMJL7vgOugXBz2Wi6V59mYqoOfQzSoCoWy3nEpLVgItli9yYavrifyoPbbAkVrTNobfKoQtlxvX1SL0hukScaMqB8shKhaxa0GoWRI9g3aQ72m0qVVrM2lZSOpYJeO7yzZule9Y8s61WfC27JtMAa/3W1JqcWoUdcOeEuXXAQZAffv0Arl6Iefp802YRu07by9XbveA4fWuqn1uCTiP/HGg9aL/OWL2aUo6ziP6hrGldfDtDV0rqaYss5zTT2YAAKIRzXKBMzQBl5M3sLRWdpD5IylAZn3zqnm5zF96e/T+2uFdKtz/Gu31skBlf82T+9EsK0mNV+NhIZyUKKbjuubDdGyrFIt6mlxFAShaYYVcneuVZnN6EW0NLy8kU3JlpH1/opGSFs761Ivq7I8hiBL4xfDlog6t3uBK4gBlU0wGAzCInd2eJshfax4PykIRSGCbh4qMO1sy+2ecykoXDu6789PDfCMsI9YcnwImQwsoNtuguisl7RZ9OYpfXwWHg2brxWPq1C9ACrZahdbmXyv+ktUwd0ki1S0EfB2yBRXyqU5y+bMcJU9nTRZbFTFfWbKf2PTyweFmT8D6RSwiGmi1I5F17c24Z4BlJ8a8KKmQearf/MNuM9Hxe4HuSBvhqNS6A4IxQFihSqeM1UnkD/qanT1bfSSMqc+w5XX5VJka9igKr45wo
   learner_created: false
-status: Failed
+- name: test/MultipleSourcesTask5Tests.java
+  visible: false
+  encrypted_text: ITs8Nv8EH6QWJG5nufD7nJbQJMkIq6jNfe9FYz1aEl0gzoXUE/n+Nrs7oURaMo+izTdxMl4rIbyY4m6gOdQClMF1uG9jHNLfe96Qru7gNaO+7fF33K/Q4lYeA95yB/ayGY0xZiXTGbxl5MuFisdbgv7ydwvRU+rNcCWVTU408V/WFD/BNUR2RcM1VBkgOgWtoHfQUEn0KmJ5DOWwQyevxNVQZ7P/Yh+m4MwLN92xGUUf7MqprYgOPhnEsfmkuX3mQ6kMf0Cs6H9k0O+6jxm8IW76oyp5co/dXkXm06Ap37SeleGnaZB3p3CB9njpS9wBVfOtv8GaFjF9JxDUvSYzb/Fup9wueK6YHGggDmTClaYXza8WO63sZuo1MBZK7UkBTZGOqQtGfV9UMMifH8XH5BM/ms76xZathj4xgtGOxF3SE/DHD08QAxrtk+n1yLLIBpg9FDOyqmDLfP0LdLhXBrgSDpvnu3RKa0ppzXkPR/42MU7jZNKn32Wa3uwHd6ZAmdAo19uC5k1G6f6uiiARLcAU3YZZ3DqWEeiyFZ46UJapjXn+Rf5GnEIeVU5kjIHYO+MGGWW+pfuNeDaE6Czs+uUlIrVo2epYDpn21yUGr14vWpz0oKtr8ftXAkdq5iNPbwIFJMxJM3ldch2E28rc2diZPp3jZk946sgAitCp5lrOu1vCoy2XwWsP+UuNLUDPpVG5GSt3e9ykId07iHR0AXVvvVCUqYHdQ/bTgh9zcBHG/Wi7mi22JNmXvib7NQXY
+  learner_created: false
+status: Unchecked
 record: -1

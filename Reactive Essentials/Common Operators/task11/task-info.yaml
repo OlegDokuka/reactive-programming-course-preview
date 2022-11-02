@@ -12,75 +12,21 @@ files:
       offset: 154
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "input.map(i -> i % 3 == 0 ? new IndexedWord(i, \"\
-      Fizz\") :\n\t\t\t\tnew IndexedWord(i, \"\"))\n\t\t            .map(iw -> iw.getIndex()\
-      \ % 5 == 0 ?\n\t\t\t\t            new IndexedWord(iw.getIndex(), iw.getWord()\
-      \ + \"Buzz\") : iw)\n\t\t            .map(iw -> iw.getWord()\n\t\t         \
-      \                .isEmpty() ? iw.getIndex() + \"\" : iw.getWord());"
-  text: "import java.util.Objects;\n\nimport reactor.core.publisher.Flux;\n\npublic\
-    \ class Task {\n\n\tpublic static Flux<String> fizzBuzz(Flux<Integer> input) {\n\
-    \t\treturn Flux.error(new ToDoException());\n\t}\n\n\tstatic class IndexedWord\
-    \ {\n\n\t\tprivate final int    index;\n\t\tprivate final String word;\n\n\t\t\
-    public IndexedWord(int index, String word) {\n\t\t\tthis.index = index;\n\t\t\t\
-    this.word = Objects.requireNonNull(word);\n\t\t}\n\n\t\tpublic boolean equals(Object\
-    \ o) {\n\t\t\tif (o == this) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t\tif (!(o instanceof\
-    \ IndexedWord)) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tfinal IndexedWord other\
-    \ = (IndexedWord) o;\n\t\t\tif (this.getIndex() != other.getIndex()) {\n\t\t\t\
-    \treturn false;\n\t\t\t}\n\t\t\tfinal Object this$word = this.getWord();\n\t\t\
-    \tfinal Object other$word = other.getWord();\n\t\t\tif (this$word == null ? other$word\
-    \ != null : !this$word.equals(other$word)) {\n\t\t\t\treturn false;\n\t\t\t}\n\
-    \t\t\treturn true;\n\t\t}\n\n\t\tpublic int getIndex() {\n\t\t\treturn this.index;\n\
-    \t\t}\n\n\t\tpublic String getWord() {\n\t\t\treturn this.word;\n\t\t}\n\n\t\t\
-    public int hashCode() {\n\t\t\tfinal int PRIME = 59;\n\t\t\tint result = 1;\n\t\
-    \t\tresult = result * PRIME + this.getIndex();\n\t\t\tfinal Object $word = this.getWord();\n\
-    \t\t\tresult = result * PRIME + ($word == null ? 43 : $word.hashCode());\n\t\t\
-    \treturn result;\n\t\t}\n\n\t\tpublic String toString() {\n\t\t\treturn \"IndexedWord(index=\"\
-    \ + this.getIndex() + \", word=\" + this.getWord() + \")\";\n\t\t}\n\t}\n}"
-  learner_created: false
-- name: test/CommonOperatorsTask11Tests.java
-  visible: false
-  text: "import java.util.concurrent.atomic.AtomicInteger;\n\nimport org.assertj.core.api.Assertions;\n\
-    import org.junit.jupiter.api.Test;\nimport reactor.core.publisher.BaseSubscriber;\n\
-    import reactor.core.publisher.Flux;\n\npublic class CommonOperatorsTask11Tests\
-    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tTask.fizzBuzz(Flux.range(1,\
-    \ 100))\n\t\t    .zipWith(Flux.range(1, 100),\n\t\t\t\t    (word, index) -> new\
-    \ Task.IndexedWord(index, word))\n\t\t    .subscribe(new FizzBuzzVerifier());\n\
-    \t}\n\n\tstatic class FizzBuzzVerifier extends BaseSubscriber<Task.IndexedWord>\
-    \ {\n\n\t\tprivate final AtomicInteger counter = new AtomicInteger();\n\n\t\t\
-    @Override\n\t\tpublic void hookOnComplete() {\n\t\t\tif (counter.get() < 100)\
-    \ {\n\t\t\t\tAssertions.fail(\"Unexpected termination, should be 100 elements\
-    \ emitted\");\n\t\t\t}\n\t\t}\n\n\t\t@Override\n\t\tpublic void hookOnError(Throwable\
-    \ e) {\n\t\t\tAssertions.fail(\"Unexpected throwable [\" + e + \"]\");\n\t\t}\n\
-    \n\t\t@Override\n\t\tpublic void hookOnNext(Task.IndexedWord indexedWord) {\n\t\
-    \t\tif (indexedWord.getIndex() % 5 == 0 && indexedWord.getIndex() % 3 == 0) {\n\
-    \t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\t\t\t\t          .as(\"\
-    Should equal to FizzBuzz, but was [\" + indexedWord.getWord() + \"] instead\"\
-    )\n\t\t\t\t          .isEqualTo(\"FizzBuzz\");\n\t\t\t}\n\t\t\telse if (indexedWord.getIndex()\
-    \ % 3 == 0) {\n\t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\t\t\t\t\
-    \          .as(\"Should equal to Fizz, but was [\" + indexedWord.getWord() + \"\
-    ] instead\")\n\t\t\t\t          .isEqualTo(\"Fizz\");\n\t\t\t}\n\t\t\telse if\
-    \ (indexedWord.getIndex() % 5 == 0) {\n\t\t\t\tAssertions.assertThat(indexedWord.getWord())\n\
-    \t\t\t\t          .as(\"Should equal to Buzz, but was [\" + indexedWord.getWord()\
-    \ + \"] instead\")\n\t\t\t\t          .isEqualTo(\"Buzz\");\n\t\t\t}\n\t\t\telse\
-    \ {\n\t\t\t\ttry {\n\t\t\t\t\tInteger.valueOf(indexedWord.getWord())\n\t\t\t\t\
-    \t       .toString();\n\t\t\t\t}\n\t\t\t\tcatch (Exception e) {\n\t\t\t\t\tAssertions.fail(\"\
-    Should be mapped to Number, but was [\" + indexedWord.getWord() + \"] instead\"\
-    );\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tcounter.incrementAndGet();\n\t\t}\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: cN4vNDr2fKhlgNu8KWiQsDEHuOzcSytkBd9VnWwgtaGXyO3dzftI9NjmISw3YDv2Y5bhSLBT3bq2ah1QfsidPtlaS+mVbwAKyHOkKEDWunCfZ4Rab1a9CbXWWQS6cyQfOLXvxoflzH8U9y9mtyPnx4SyYbUdiVfP+ioH8SYAn15ALNKcGUqLXpQTP7BTGyaxvs23aioxNATsGJJTdcXSqbMsum5woKjeXkGEQU+W0bp5sCgi9j0BkgAqG2ka0cvhUIMd5Ar5p6mBqMb1jPsnFmFw8c1GvG1btGpiiBSExu6VOyte5vhxPVPBJitRXR6gPLCvsgu7pK1lJUOxVjEMSta9mYFLO7aSXtz4UaCkpwHq4YZA0sJqYSqe/pTi6hbozb3o+ZJ73Q5PjKGWF1UG4tMlWCxBnALlWZfIz7lRQRp0JaPXnXPZHyQCPwBQP2aa
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH3WnxH72yXcyRoRbYT7JG0iY0QVZL7E9JqlDp/h8B5/O7xqRdUBgyB/Djvy0GFmyq9Z69hOESJbVEia4S8vRQJWoUGe/2AOfb2GAU7/6MFBVADZxCMP7yueRbdsYSQ4iRyhKMDyVr1Dt4UGjWv0JUXDX9V+nwk7II205bBNwi/Uy3YT/QrgUQHToTWCuRNGIC9I8oe3qVMUWLaI8WZThATcinBqErtAmXBFKVnLQVI3kXLU6QPhSntomni0KAYbBJAzHXXMfNtSnl+1uwEK5jn9hC7C4UFfadhlNgog2IKHSCGLK5wkOicbNffX3/Gfg/F7TBXY1sHZVvz4jy0saaUs2VocniWtBF8NSWeIsX6RLdT0AZmHI6j5ar+wI0/BriSuzj/qfQFGWJ60itmlcx6oOYowwkG9Zd1onYenmL9DxG1O1+jJYfIXvBd2gVqAb7stcJJPfJ70a/Vjf2jYkJ8ipTINYRTTZjFByRTvd7HNWp1aDBXXd9eT4j8rq5c72FfK/npiQCWhP/zieFqwHKHsq8h2LHg/jjbAmoewqNJecitwAR6gMl8JK7aiRVrMfvy7O7BGJRDJ5VSEMJ3UhfcefIBaZNBSfhJHHvZ8gl/hfmUF+l+DvB8W6UNbvsYqw6rNRa1oPrWAi3BvBo1o+VdyItPPHzlSYn+mjSYOELFlmfzxeNZOgE+LxuPlWsylvW7JA0eeijtEE2DnbuFMOXHePi1klmAkSgZYnNBvT/TaDM95Ata/yfdmKvOtF9mMDPLFVwHGwojgxzVW3VbscooMQzSd7KmCedgGTVGnXHjHDLd7hhtTDqxNNsAtZhMQmO7W0OovJ1i9JmhRJgaoZCQ7SMt4nz74wl62qLiHK3h17WtLngPdsBCgyjEuyyHxEMai6u2gL+oVCjhkrYt4IvDhPZOBTk1q+ilQKS4pcmZRa3BBnAlsb4FbQb7G8b0+WrhjAqRTLQAeN7pi+Oot4xC0nKKm9kLKI5WkwdOyWx3ImYMYVeZJJFyEf9X5s4338ts05ZO/vVmp4YUzDCVpvexVkno7XB6xKOW1nchUh2ZPtm3UuzDggoooAT1feZqKO20n26GlHs+DRD1lMvMR78DaM3k1y0k2DfRN9tFjUtfke9fXn5rkdJ1TsWjBUphlrAkf+chl0FTVZBBMy44yf/SK8GQA4B4hGJIGz0z4jnGL5YZ+TSZDxb2qWdM0pDSQBPK2jzzVsZzY//63QuHrI5QVkrpcawJzWaxAswzcEervJeSXxQkjV2wrzbqf6MH6xF5pr3a2OxjOd9rRy6/I6mHT0i/q9IEcoMxEta/1hWitAWM4wC8O4eTv0nxSAvU2F3UztjkuLzAKXJsDSpstYv986CbM88mKv+LQhe9j5chU9wF7AMqFPA3Gji/11ZNSS9BYbVx75rIYDzCpM5a7WbeF5ebXFwT3REwEAoSEGMPCm4KBUfpeiFbqpwSf2QdGIzCtYXI0287dxg+SHwUpwxQA9BlGNoaho4zQdViEIInBcS3e6uWLp7DT5oRtZuUDj+31mnm5nFvLzWydaMPbATi/H2roN1LSs1iEASJ4zaLshT0QXlj0f+IszEjQ8T7gaDKbGf3hYPjpT2wS5PM6/DKDh1nyJm6CLmnhxwCvI33lgnR5vKcziJ1/GyLC5+NP8JceEGdoFZmcEpKAzv9rfCyBF+Hz+wZnbcD1X8GpoS9hAwqp2F/DVFb9CxhrVcRe8D9HFzzv5r9gxmmk/zmELYQxds1bUo2RTrIzYLV+c6xDbF5/QIkUU8tucRT01sg343A==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Решите задачу [FizzBuzz](https://ru.wikipedia.org/wiki/Fizz_buzz) использ\
-    уя `Flux` API\n   \n<div class=\"hint\">\n  Используйте вспомогательный класс\
-    \ <code>IndexedWord</code>\n  Используйте последовательность <code>Flux#map</code>\n\
-    </div>"
+  encrypted_text: 1jWk3q9Okft8MS0gH/C4kFFgHBKvNWexCiNkLaXZIYlqg8GToO/QM0YT4P+y+K1TuNpzO3YsR5YJHqCeqjknbbM4zL6B5m4foEf/EiN8dwPYMW6SYag7uzPuGStJNCZQqeO6xQ+oj0Ro7md80gqasUpE4FxwnzFS2qBRobXCQgWTLlW47jbo8xfVRWjP5qec0/Vo3GxT50+ehmycGKgNR6LW4zSpuN2MNxLkmS6bygnryXGApH+pJ+8csGhVVzMIZZPBtU9VyKa7OLyX6RfqN7sZMDA/u7nnYyoAo8Qu3xwPuPdsfo3XVAAgaY25z6P2G5Smi1FJkpQ5s7pG4dLJBaYaXPElcSHfc/XDFmI24hJIE+3e3GYvH1Aq94/PtErw46JiULv4IoW9RqodJtrlSKPim5qW6iEygywkclBpnTE=
   learner_created: false
-status: Failed
+- name: test/CommonOperatorsTask11Tests.java
+  visible: false
+  encrypted_text: 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
+  learner_created: false
+status: Unchecked
 record: -1

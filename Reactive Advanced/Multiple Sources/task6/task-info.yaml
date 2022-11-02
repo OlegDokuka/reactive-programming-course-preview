@@ -12,39 +12,17 @@ files:
       offset: 303
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "Flux.zip(prefixPublisher, wordPublisher, suffixPublisher)\n\
-      \t\t           .map(TupleUtils.function((prefix, word, suffix) -> prefix + word\
-      \ + suffix));"
-  text: "import org.reactivestreams.Publisher;\nimport reactor.core.publisher.Flux;\n\
-    import reactor.function.TupleUtils;\n\npublic class Task {\n\n\tpublic static\
-    \ Publisher<String> zipSeveralSources(Publisher<String> prefixPublisher,\n\t\t\
-    \tPublisher<String> wordPublisher,\n\t\t\tPublisher<String> suffixPublisher) {\n\
-    \t\treturn Flux.error(new ToDoException());\n\t}\n}"
-  learner_created: false
-- name: test/MultipleSourcesTask6Tests.java
-  visible: false
-  text: "import java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\nimport\
-    \ reactor.core.publisher.Flux;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ MultipleSourcesTask6Tests {\n\n\t@Test\n\tpublic void testSolution() {\n\t\t\
-    StepVerifier.withVirtualTime(() -> Flux.from(Task.zipSeveralSources(Flux.interval(\n\
-    \t\t\t\tDuration.ofMillis(10))\n\t\t                                         \
-    \                               .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(5))\n\
-    \t\t\t\t    .map(Object::toString),\n\t\t\t\tFlux.interval(Duration.ofMillis(1))\n\
-    \t\t\t\t    .map(Object::toString)))\n\t\t                                   \
-    \    .take(3))\n\t\t            .expectSubscription()\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
-    \t\t            .expectNext(\"000\")\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
-    \t\t            .expectNext(\"111\")\n\t\t            .expectNoEvent(Duration.ofMillis(10))\n\
-    \t\t            .expectNext(\"222\")\n\t\t            .verifyComplete();\n\t}\n\
-    }"
+    status: Unchecked
+    encrypted_possible_answer: s+BccUJhPkdSUgyiFZtXFJGeWTAYnITyhpn16aIKKCAWBWY7j1QjA4753Pqikbe5zo0eM22RY7vfbcnhWUaTJfvTCWRPd866kw+cpRgOuBzfX3Ly0z5mgTGiXzGLrqaBYkQYXIMBayJiLeqMV0MTs+ZPLnBzqM/YfcD0Orzu0w4OzhgMXQsRP7zUVdJY95i0lIpgDBlAV7tVdVmvemDCaQ==
+  encrypted_text: 3h3NXCypBcxD/VAjZiA9ZjRXeUuWSD3Te6+g+iJPUjiTItSYmyZeU7OPGtfkViVKWdQNWJU6plv39PMvnQofBLMyxy+tCb3ZrU0H15e4jcI4RqKLx6y3H6338Sb2qemdhxE/tw5bMGoYr0VK7rsrZRajYQDWvLhLWpIsz7RhxoSaOu7ORHJG5KNJG9EVOZkH8/oeLecdJO2pJJuZuZW1LfmEfxf0l92pZkmPEyimQXdvI/HhNl4WQBEBDfy4nZMBzD3q89GVAFcV3bx/EztO+yP3R4USMorRrxit4PLbW9fynVIZWV+S8riDE3eiovqUKFPBK2zG2GuXdq06b6b1e62qeoUEhjlIMIdQLZjN+XzolNhzQv2t6CwRsMBTdcp8e46gfUJC3wIV9S9eGZT7XsPVLVogbeW1H06fwO7qPC9ah9zvpIkZATKKNsWu4MfEX34ZdcBQn/AC7dQ356E2kw==
   learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-      implementation 'io.projectreactor.addons:reactor-extra'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w8lFS3qDOPzMq4kjWcZ46J0SzndBZQzNjekyvjFSQ+/ZPf4XbWYMGEGdMCYf6nuBDilBzv6PWN+dhTJSQ5lSLNo=
   learner_created: false
-status: Failed
+- name: test/MultipleSourcesTask6Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhClLOjVAhNdc2eL43XtwO6qXT845rQaPB9PeC3Rlfgw5wE3X6uaH78gPlvfMUWMcRl/QTQ/Ks6mbiZB1R7pjuKzKcXd/K4teF8wsz2ES7phXKLQO01WZiMMCvz7qd0LvCztbncc5q3PvrzYCUA3vK82clF6EBuRAPqdFlg8caz35aUAQBc7QIec7qN2Gvor3s1kHk8X9k6jk4kyY22sUXM++Q35NOclqMgF1u5+plOE6yPP7V1tKV8cVezDB9V3EpHeZNOiD/Jy/VivozHPy+HHgX/5IVCMOVIwotdq7yYoJVgFmEdg90wUVR63Xaa2dkn9z8SX6OBnXEGajZfgUs34/vD+tsQkh/G7oJi+WXLYwb0SsqsJ9BqvjV1kNqZyKAiSvLybaB2mZ83s1g0sXOcbNKCiWlr5wKaAIv+de3vVnOwuMxeN6dqSMqlil7j8dBHAH8VHhTPFyEDJNyP52/C7m7CdicbmUmnmQKYLlFGlbBPsf/shE1a9bFs8CKv4pmNW80o8UcBDrhbmOhmw1QZ0Y9Tfijgz/JmyBhNLn/g+zT580CVVwbGipjtnAPMi4Cg5dkCOVj93GBYQT+zeae0YfSXRW4iRKsG8Qe2HpWd6mffXAGbTLaDSulQ8Sa+MAYAN6Eelu6slmlMNS8kGgpyaUB8zJQyHybESSqL06JOJSP0udeBFwKCLbt5MStlDE1i76QTxPth/ssLmTlr9+bFwg0c3knXmNXyrp4k93nDg9Q/1obRl/urrj/Bf2/Eh9ZxrmrhFPr/HLbNLdPk1Sz1qPmZUq857LzoaCMbzyIIKZIRizjmJ03izVHXu9piU1dqAQyq86yNRbfIWG4ovjI6InnUMhZDVUNHPU49t4IeWIGfETeBEmA+DNaJonVUU1DoEJa+o6e0AsB0QRa1B4FoNAtjCOwEPmsya/gq0X0yAHRn3J2oFL/4BmFlsR6vgc/Q+yy1KGevNrL/dzd17p7W8uZVTMXY+FLkUgpHoWndHW3UTg5N8pJAgiVI/baDmVfwBW3tGULDLN7IXjhNXrWzG9s6S4hYStWTz0aixngGhMap+z0qlTCRXlOh9jWu2/iR8clkvLdn5JELEtypIObrf7QUdnXG0+gf8Dq9cva9rvL2wb1FqBtQN3jUJe5nLJbxsrA8RgfDeZKpI4QCHsxjkPiP/X/ydaaRZCT2bqGlloGOYDhcOYB3ByqNATH31oMO
+  learner_created: false
+status: Unchecked
 record: -1

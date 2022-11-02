@@ -3,27 +3,11 @@ custom_name: Task 4
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Mono` из `Callable`\n   \n<div class=\"hint\">\n  Используй\
-    те Mono.fromCallback\n</div>"
-  learner_created: false
-- name: test/CommonPublishersTask5Tests.java
-  visible: false
-  text: "import java.io.File;\nimport java.time.Duration;\n\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.test.StepVerifier;\n\npublic\
-    \ class CommonPublishersTask5Tests {\n\n\t@Test\n\tpublic void testSolution()\
-    \ {\n\t\tObject file = CreateTempFileTask.createTempFile(\"test\", null);\n\n\t\
-    \tif (!(file instanceof Mono)) {\n\t\t\t((File) file).deleteOnExit();\n\t\t}\n\
-    \n\t\tStepVerifier.create(((Mono<File>) file))\n\t\t            .expectNextMatches(f\
-    \ -> {\n\t\t\t\t\t\tboolean exists = f.exists();\n\t\t\t\t\t\tf.deleteOnExit();\n\
-    \t\t\t\t\t\treturn exists;\n\t\t\t\t\t})\n\t\t            .expectComplete()\n\t\
-    \t            .verify(Duration.ofMillis(100));\n\t}\n}"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ11XmetLYElRAz8jnQlWzGgdttfPC/SNfnY+AP8tqPgYeS4+44+HBLwa8Rv4cVXVETpahFt+q9Hhi/6w6wLAYIdN6P9xk/mUj27LXhwG8xCSpKPbvxPtBUOsW/35EaPa8IiXEK/QS54aLCKoFG2wuzRY=
   learner_created: false
 - name: src/CreateTempFileTask.java
   visible: true
@@ -36,8 +20,8 @@ files:
       offset: 174
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: Mono<File>
+    status: Unchecked
+    encrypted_possible_answer: T5+klonxvpC5LW4t0e7PIA==
   - offset: 228
     length: 131
     placeholder_text: "try { \n \t\t\t return File.createTempFile(prefix, suffix);\n\
@@ -48,14 +32,13 @@ files:
       offset: 228
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: return Mono.fromCallable(() -> File.createTempFile(prefix,
-      suffix));
-  text: "import java.io.File;\nimport java.io.IOException;\nimport java.io.UncheckedIOException;\n\
-    \nimport reactor.core.publisher.Mono;\n\npublic class CreateTempFileTask {\n\n\
-    \tpublic static File createTempFile(String prefix, String suffix) {\n\t\ttry {\
-    \ \n \t\t\t return File.createTempFile(prefix, suffix);\n \t\t} catch(IOException\
-    \ e) { \n \t\t\t throw new UncheckedIOException(e); \n \t\t} \n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: usle8ZmgprwgV8zqduIdMepOfsWDF3ROmgsW1nGhgcszCJkNrDqrk5BHWfPgYOcF9IDCr5nIn3SkYEf4itrH2MDtwf/azOtcf1U8MYOOUmo=
+  encrypted_text: Xtva9nQXHbxXlKEkYazs+MDYVb8JL+UZEVbicgx3NZS2eBvg2KDMjo6zY/gtH2HZhkmgYFuXbCbphrpk1j5asxh0mvFTwV67Ylk+CRZU4hFoICeEqtFv+rCA/2+O+FIAD//HEAIZhsrcXEZKAxOW3u8CWsgWDfsAcxkdSl97Roloyw59yEO2UEJoVSSBb5jF4krAUzza6uZTMygH9D1iYffwFvW7+VHjlGMrT4d/uTzzHwJ8YqvkQv+z/aYNH3BN/nMJpiWmRe+l9PM5uKoAwnKDQPz4/8LUAy9l+yzLpHXdE2O8PNrwP5PoKjUIUA4D94P6c+2qrhrULsK2b5E2GSwzXDkepju/dBqYjtQchmzDz6Qa0x7RY01KVb651bhzVOuRcdBwqW8NH0BHbF0MmO10RBEFSlVo/yr0baIAmv1pDbJmIpRjqMVOu+aSiqIc3vj1aRlCz/KafaCl0YCkBXh0Y/wFYs47LaVgkFpou08=
   learner_created: false
-status: Failed
+- name: test/CommonPublishersTask5Tests.java
+  visible: false
+  encrypted_text: Xtva9nQXHbxXlKEkYazs+MDYVb8JL+UZEVbicgx3NZSnMAYs5raeqnsBSzUGuh9Zn7AcwAIyiV1tiR1jsmVOqWF+U3XjO4IxcRDq8C6AlMLzyO2tYbii/TQfurpiVtxaWDYVolt6mbOUILNHJHc00jSDSp9f8AgTx8V5DA66CCQ1yEjU/jLA8HhSqfCkTT8aDdSkNahUVqOsX9/V6/Ol1hhaO3y1+GXVE42fGCepq+jAzXekT6D01RdKbHAGUX+u2jpkOu05vTNBZzdGrcw9JJgJNoszC+QTqVlj49HrLvq5w/foXFZ9FfB6iNtR61x9y6iY2JvayTJ9EUIPib2pC1YY86rMEtg8AlgLtO6R7+Fdkjru8Pj6+h8zDulvr7O7vtlbUM7NgSzhAmkp/UQCA3R7FaMvIrjlkQND/wFQRE/AlG1SI2Peaa1FAEiphYGmz935hKmYGmBbReYoPe5JqjrAqIa4jfJgulsq5jTPjic8AEyyGZoPBoBom0xe46slof34+jyIC5YwxSRXEVD1taEV1ieuVzo2leXlj/g1LlnYJSeACysqRefKdGynxkz6yFH2rQx6pETuYMDjDMG5IgjqGPcAOjG2Taax/tu/LmtjAuvx3aXKrB+Elx7ZBON3VFxwPwyQUBNqNNfFVck65NvgcPH6IcR4PYTIko2IKF9AtVnT3qtITz0vwX9q0Pkj9Fkf/bftRKZBGE7BmoJgDIk9u3DV1sUd1X4DkeeYeXqX5FPcREZAvx5OiAWq1nMUU/ScksDkirEOU04E02ZT4P6TxTpROaMvmDt3BoRF2z6F70eRzN42yUl8V1tDcKgRcTQ9CE6P6Wd/ofKoiTszqw==
+  learner_created: false
+status: Unchecked
 record: -1

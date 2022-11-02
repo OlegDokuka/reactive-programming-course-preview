@@ -14,11 +14,11 @@ public class Task {
 
 	static void testSuccessCase(Function<Flux<String>, Flux<Long>> functionToTest) {
 		// produce "1" "2" "100"
-		throw new ToDoException()); // TODO Check Success Case;
+		throw new ToDoException(); // TODO Check Success Case;
 	}
 
 	static void testFailureCase(Function<Flux<String>, Flux<Long>> functionToTest) {
 		// produce non number string and check NumberFormatException is produced
-		throw new ToDoException()); // TODO Check Failure Case;
+		throw new ToDoException(); // TODO Check Failure Case;
 	}
 }

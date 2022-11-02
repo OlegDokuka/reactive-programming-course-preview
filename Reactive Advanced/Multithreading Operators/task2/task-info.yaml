@@ -3,10 +3,7 @@ custom_name: Task 2
 files:
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -19,25 +16,13 @@ files:
       offset: 285
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "Mono.fromCallable(blockingCall)\n\t\t           .subscribeOn(Schedulers.boundedElastic());"
-  text: "import java.util.concurrent.Callable;\n\nimport org.reactivestreams.Publisher;\n\
-    import reactor.core.publisher.Mono;\nimport reactor.core.scheduler.Schedulers;\n\
-    \npublic class Task {\n\n\tpublic static Publisher<String> subscribeOnSingleThreadScheduler(Callable<String>\
-    \ blockingCall) {\n\t\treturn Mono.error(new ToDoException());\n\t}\n}"
+    status: Unchecked
+    encrypted_possible_answer: FfaxcsCbO5MDsV75iu+LIPt5ZLoMdrqPLFLfmv3go0R6D9MfoNvwHEIli+i9ZBpAbSBw5MvOs9aiuLsaGwgGj75e/vC8VXDvaeySBtnsjxSRJlFLWhkWO1+MWtk4eJQy
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH3Npp5YHf45B9rcAluAbWfao8rHEj/aqzbjOol12zufCnWDTVQFiWpP53PxzmDOvnsDcUq19k3+dO2/RG/fdaLQIDP1o26jIMsLR7PKSYQWLrZqU6F4E63CWIfPRXqmF9OQxy6VIU5R72rhngbqqMBhhIVA6BZvhZDRrvrsEMIACD2uzhUOE9yZ5zkH9AaNgWbZ5taaJYnlwQY4mH8H8b1VP+rvW0MnH1yWX0wD6aR5PlF6PEK+SGMOTEgTG0r5FB+EWllL9JbvxIdgQ86isXiz7neaYuljaiDWqUqu6efD+QiS6uOrKDeXXDOq2rzQiHSqxAWsMwQJHbB3tfOrjUVPClhnH39D/VmlVDdg4/Ae2SuiraEb4CaLjJbcPHmrtn7/gVORvXdw+El2qRV6a2m/bz8X6jZyfuuRHFamq6MHu
   learner_created: false
 - name: test/MultithreadingOperatorsTask2Tests.java
   visible: false
-  text: "import java.time.Duration;\n\nimport org.assertj.core.api.Assertions;\nimport\
-    \ org.junit.jupiter.api.Test;\nimport reactor.test.StepVerifier;\n\npublic class\
-    \ MultithreadingOperatorsTask2Tests {\n\n\t@Test\n\tpublic void testSolution()\
-    \ {\n\t\tThread[] threads = new Thread[1];\n\t\tStepVerifier.create(Task.subscribeOnSingleThreadScheduler(()\
-    \ -> {\n\t\t\tSystem.out.println(\"Threads:\" + Thread.currentThread()\n\t\t\t\
-    \                                      .getName());\n\t\t\tthreads[0] = Thread.currentThread();\n\
-    \t\t\treturn \"Hello\";\n\t\t}))\n\t\t            .expectSubscription()\n\t\t\
-    \            .expectNext(\"Hello\")\n\t\t            .expectComplete()\n\t\t \
-    \           .verify(Duration.ofMillis(5000));\n\n\t\tAssertions.assertThat(threads[0])\n\
-    \t\t          .isNotEqualTo(Thread.currentThread());\n\t}\n}"
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kkP1NnYGkpLTmmDXlo8Au+OI9PB6FjeBfBrptQLd26Vb6uZ1zvupVFa5MCOctrKEolv2GP/Ryk29HkovzIke9bnbclE64p7zTk6Vyr+1AvF+U5WttuFgnnm7uBdVmYlT/7nF+OwYFrxuas+BTCByL+mQSACEKddlOtN8GtM9g5zh2O8XKtqSMQBaZ0WC7ZnJz83hMcwjA3TNmusZauGtv/mf/WWUFUIv+f45NWPJWPW83dsLr1CVLPerEbZ3+5QnATHR8ON9ky5WJSjdkZkiEoPmzhsm0hwK5sDlBogfnNnIa546Agg+3xbczDDB46HWZttAaPtzsCuZox+t3+Y+LYmX73jQOjcuYAZyQa4hm4xTAaHJ9ellUSUi143XIL+Ca5SA54/37Gq7MPSJZrjIiAIx10YEKzIY0QueYBIejFh+XitHDJilJdY2khSxHxAnLmTQ+GwwtwcT5AkqveWYASZe41bHMR4CibvZXHe4sl8EKXXzXAmjcRJaWQKiMCY5UzMlyyejXg+3LjH25yZ5idMWaqOYt279WFphKB/fS12N3fqO7DYf2wbRFgMdsWpPthhpi82Dqm5qAq6JK0igCl4PA3UsnkKLt3fkqhHaZeZf6ZC/VAT8zb2NWjZoIPihrDWHE0JvTBptIT3QayMa991yTGZBCX2zBU96FvejFR54ixVcAgc2jRDWVTeCL54kmxj1L42b0+NxWKLlJs/mnw7gOpLVRNzCeSEJvVj7pzjXTKWxs689aK6o5n4XEst7k+z2bxBs2o8qvaxtFlqIXm2yLsVDaelS26QAh9EF/FKdaJsGFaC65WZM4MuC1/JuYmYvHsC9aqPVVtSbsNMaKaGBTiIzpVVkYjvfj6ndh3aTCG764arcRUIu4SBUsCUeOgjwoL5373j1pUQ+st96YSbkIiqG2sJQAVQFEzKZbE4HY9AU2OCbgULxtPo8AySLHA=
   learner_created: false
-status: Failed
+status: Unchecked
 record: -1

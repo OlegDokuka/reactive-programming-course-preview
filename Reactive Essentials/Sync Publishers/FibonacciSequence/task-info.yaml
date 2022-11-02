@@ -1,40 +1,9 @@
 type: edu
 custom_name: Task 8
 files:
-- name: test/CommonPublishersTask10Tests.java
-  visible: false
-  text: "import java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.Iterator;\n\
-    \nimport org.assertj.core.api.Assertions;\nimport org.junit.jupiter.api.Test;\n\
-    import reactor.core.publisher.Flux;\nimport reactor.core.scheduler.Schedulers;\n\
-    import reactor.test.StepVerifier;\n\npublic class CommonPublishersTask10Tests\
-    \ {\n\n\t@Test\n\tpublic void testSolution() {\n\t\tFlux<Long> sequence = Task.createSequence();\n\
-    \n\t\tStepVerifier.create(sequence)\n\t\t            .recordWith(ArrayList::new)\n\
-    \t\t            .expectNextCount(20)\n\t\t            .consumeRecordedWith(r ->\
-    \ {\n\t\t\t            Assertions.assertThat(r)\n\t\t\t                      .hasSize(20);\n\
-    \t\t\t            Iterator<Long> iterator = r.iterator();\n\t\t\t            for\
-    \ (int i = 0; i < 20; i++) {\n\t\t\t\t            Assertions.assertThat(iterator.next())\n\
-    \t\t\t\t                      .isEqualTo(SEQUENCE[i]);\n\t\t\t            }\n\t\
-    \t            })\n\t\t            .expectComplete()\n\t\t            .verify(Duration.ofMillis(100));\n\
-    \t}\n\n\t@Test\n\tpublic void testSolution1() {\n\t\tFlux<Long> sequence = Task.createSequence();\n\
-    \n\t\tStepVerifier.create(sequence.publishOn(Schedulers.parallel(), 2), 1)\n\t\
-    \t            .recordWith(ArrayList::new)\n\t\t            .expectNext(0L)\n\t\
-    \t            .thenRequest(4)\n\t\t            .expectNext(1L, 1L, 2L, 3L)\n\t\
-    \t            .thenRequest(15)\n\t\t            .expectNextCount(15)\n\t\t   \
-    \         .consumeRecordedWith(r -> {\n\t\t\t            Assertions.assertThat(r)\n\
-    \t\t\t                      .hasSize(20);\n\t\t\t            Iterator<Long> iterator\
-    \ = r.iterator();\n\t\t\t            for (int i = 0; i < 20; i++) {\n\t\t\t\t\
-    \            Assertions.assertThat(iterator.next())\n\t\t\t\t                \
-    \      .isEqualTo(SEQUENCE[i]);\n\t\t\t            }\n\t\t            })\n\t\t\
-    \            .expectComplete()\n\t\t            .verify(Duration.ofMillis(1000));\n\
-    \t}\n\n\tstatic final long[] SEQUENCE =\n\t\t\t{0, 1, 1, 2, 3, 5, 8, 13, 21, 34,\
-    \ 55, 89, 144, 233, 377, 610, 987, 1597, 2584,\n\t\t\t\t\t4181};\n}"
-  learner_created: false
 - name: build.gradle
   visible: false
-  text: |-
-    dependencies {
-      implementation 'io.projectreactor:reactor-core'
-    }
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: src/Task.java
   visible: true
@@ -47,24 +16,17 @@ files:
       offset: 112
     initialized_from_dependency: false
     selected: false
-    status: Failed
-    encrypted_possible_answer: "Flux.<Long, State>generate(() -> STATE_ONE, ((state,\
-      \ sink) -> {\n\t\t\tsink.next(state.value);\n\n\t\t\tif (state.iteration ==\
-      \ 19) {\n\t\t\t\tsink.complete();\n\t\t\t}\n\n\t\t\treturn new State(state.iteration\
-      \ + 1, state.value + state.previous.value, state);\n\t\t})).startWith(STATE_ZERO.value);"
-  text: "import reactor.core.publisher.Flux;\n\npublic class Task {\n\n\tpublic static\
-    \ Flux<Long> createSequence() {\n\t\treturn Flux.error(new ToDoException());\n\
-    \t}\n\n\tstatic class State {\n\n\t\tfinal State previous;\n\t\tfinal long  value;\n\
-    \t\tfinal long  iteration;\n\n\t\tState(long iteration, long value, State previous)\
-    \ {\n\t\t\tthis.iteration = iteration;\n\t\t\tthis.previous = previous;\n\t\t\t\
-    this.value = value;\n\t\t}\n\t}\n\n\tstatic final State STATE_ZERO  = new State(0,\
-    \ 0, null);\n\tstatic final State STATE_ONE = new State(1, 1, STATE_ZERO);\n}"
+    status: Unchecked
+    encrypted_possible_answer: hccKs3E+3KC+EeeMg1dnIOkXcUsOvGJokHtWUsWQdbuzUN9ySaxs2uk6LVakSN3Vmty9VWM1i9/U+gF0fpf5GfAC9Yq31YrVq5neSgek2ugdW9V+Z97zd3HZ4EP4qDvhFJrIhtJx4opyZW85AJCIrNyhAGBUJddo8nhO8+9vkdp9CO3kl5FpeyFhKzqQXPddXuZ91KtQKsKqbtYkdZ3t9QMwWrKcGkJulxt2o9H+8MBIiAnqS+r/sXx//rIsAtvd/2+QOfbKeSa441qZxEPDhxEgDUg4Medd8ax7vqRkdUA1KO9QWV+b1Bp5vMF8ng4CDBdpjZM46GaRSyaOEu/rfOxmlHVIGQWB7vrkah44DBc=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrS2OFoQGbm8WgQY8UTFKDbD3kaDsCK+4qBXx2DyK7u/79AH/FZOUEZATQv23n2eONpfDVWQ8QhbxQ7ef1SPDFKZ8+ay/nqYoM4Yl2uWyv2+6jRPXiimEoDiliH5Exg6UBqpP5ov7CtT03OvrlUPD8YNfajnrcSzwdCWfGmL0J7LOyid2B55Uy3cVGQz0N9pYPX7ExGBTjBLirRDKW4mPFnf5gsHkMAA0D1428+jhJDJhyfUCBt7sew2SC8ojpqxPnPjM6xBq4xK56DzTprJ3F1g4IxmCf+OFGdPYoG7BSSq7z2izVBUz8TwZFWiP6CkLG493hpPLtfKpuoucKqpueY6BblbtKTCGNA3utAx1EHFcuQlO6wyulB2+N7cjJv8Un3ej9q6EfBJGuVlB76Cbee+3VJJMajK+7g1VovgndmmKPns0Rl2TVCvzxyJwGCtfHhcSb+VsHt/K8APmOvKMBv+Dvu6W9zhBTtw2O4T0A0x3dV/FaVRUwwqWTtrY5iwwJMm0zc9jbz0mCJgE3nw57uEUXynsN27KiY9QRS7wUO/acpUJAEU3+RZ5K6Rx7oZ94qLgcPye86MqS/aODVl91Z1kypGgkEgKcueux+GtB+4IjgNuNSuCxEYHiNasWhVofc=
   learner_created: false
 - name: task.ru.md
   visible: false
-  text: "Сгенерируйте `Flux` последовательности фибоначи глубиной в 20\n   \n<div\
-    \ class=\"hint\">\n  Используйте Flux.generate(stateSupplier, (state, sink) ->\
-    \ state) и .startWith для передачи [0] последовательности\n</div>"
+  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2w6MqDig02n6XKoFK4M+NT96onzfUlZ4TEJHvyCSBjLNPnOJ+Ehpn0c7y/QeWgN+QD39PTalqnwtUbf6HmPneg6TcIyWpN/ocllyqVhTuUTYWeNd5Hh2MFW521NixLjvIuskPQWxOZrhQdQT3nwGzMaqM5opY+O8SWQN7AE4TjraVBuAE5Rthz0/ZgYGm1VQ/p+Afgr8CUm+Ped1CcgfDUdRV4Uqp4AObH+RA1C4tAbOri1OVB73tzEl/JoViVnfbXx+CNaZiYzbgucJibae9y7aY1g/1/pM0JRnyMWXllpmCXmDlDM8/RFNJxFXaQnqy+a7z6/j4zXBAyCwDMse+oyHtcYRxRcRFjlP4R0M6h1Cg==
   learner_created: false
-status: Failed
+- name: test/CommonPublishersTask10Tests.java
+  visible: false
+  encrypted_text: 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
+  learner_created: false
+status: Unchecked
 record: -1
