@@ -1,0 +1,12 @@
+dependencies {
+  implementation 'io.projectreactor.netty:reactor-netty'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+  implementation project(':Reactive_In_Action-Crypto_Tracker-price-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-price-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-trade-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-trade-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-crypto-service')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-crypto-service-idl')
+  implementation project(':Reactive_In_Action-Crypto_Tracker-common')
+}
