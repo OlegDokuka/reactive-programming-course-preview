@@ -1,8 +1,8 @@
+custom_name: Reactive Advanced
 content:
 - Multiple Sources
 - Multithreading Operators
 - Control Backpressure
-- Context
 - Resilience
 - Hot and Sharable
-- Debugging
+- Crypto Tracker

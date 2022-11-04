@@ -5,7 +5,7 @@ buildscript {
 }
 
 plugins {
-    id "io.spring.dependency-management" version "1.0.11.RELEASE" apply false
+    id "io.spring.dependency-management" version "1.0.15.RELEASE" apply false
 }
 
 def printOutput(def output) {
@@ -33,7 +33,7 @@ subprojects {
     ext {
         junitBomVersion='5.7.1'
         reactorBomVersion='2020.0.24'
-        r2dbcBomVersion='Borca-RELEASE'
+        r2dbcBomVersion='Borca-SR2'
         micrometerBomVersion='1.9.5'
 
         logbackVersion='1.2.3'
@@ -66,9 +66,9 @@ subprojects {
 
     dependencies {
         // BOMs defenition
-        implementation platform('io.projectreactor:reactor-bom:' + reactorBomVersion)
         implementation platform('io.r2dbc:r2dbc-bom:' + r2dbcBomVersion)
         implementation platform('io.micrometer:micrometer-bom:' + micrometerBomVersion)
+        implementation platform('io.projectreactor:reactor-bom:' + reactorBomVersion)
 
         implementation 'ch.qos.logback:logback-core:' + logbackVersion
         implementation 'ch.qos.logback:logback-classic:' + logbackVersion

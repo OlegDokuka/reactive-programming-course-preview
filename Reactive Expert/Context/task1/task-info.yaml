@@ -1,0 +1,28 @@
+type: edu
+custom_name: Task 1
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 137
+    length: 32
+    placeholder_text: Mono.error(new ToDoException());
+    initial_state:
+      length: 32
+      offset: 137
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: U/7+2OYPDDVRJN+bgqoALBHMlo9c3bZRXcT4amsB51p1lbrGUWARMGaNNNpFMojiQwp6i+bdcFndsX1X1IVdWaM8kyGpTOvaoDlSJ0G+KoKCQgYJgEaz9UKxHsyIm3bxHOIbRBheMXUm07up7YqyxKjVyXk3A9uAlO3jheBvboc=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zyWXeEeSyb66fl86WvKjVojGN0GOrJ0y/R7ZKRBpugwSS2HgtBXiaoDe7eQw8I79HRok7wtzc6M9ooB9/XwrBY+4bnJHJgUxEGOpB3gH8HmKt3/4wWeRXgg0Dku5vzUI3RoRNzuZjOmmaSqpsBkL0bxSyoaKKq1qPTmcGw+a6nQy4+f5zs8vUYju2clMn1ldO4=
+  learner_created: false
+- name: test/ContextTask1Tests.java
+  visible: true
+  encrypted_text: ITs8Nv8EH6QWJG5nufD7nJbQJMkIq6jNfe9FYz1aEl0gzoXUE/n+Nrs7oURaMo+ioRwcIp9zkatkCvKVNrZKAAp2s1s1NlbzlJi7lYKMUWqSLw8+ANlDxL6JL2uh9XjbbdbE2QuUgsJDrdtT5pTRUb6LkL5uwnfvyu+ZamTghXdqzR3RKnMMDQcmTv9pSHas1rFu/yZb7V1AHJdtyyVokj10D8p2C9hbovCB7pNMdW5uWtUDloofldeGqrL+ww+JnEC1WuA74AJtJw4a8dDiiHCFlS/0H1+D3Of/urxaabBad6Ai0uFfOPPAogbeuikr9M7/xZmrdD9aeOOIHNnyL9wr8J1vxCYWCh0N3aHu+KtbsXjrzoAOhleT+ysKMhrEVRhzWChSkBDu6raMEp0zoRgLwyPGDpog4x6vg0y+KxJsqWku9Y1/G9GDg/uNLlqdUEhOVj4F4eJZhncZ38sd56v6i4m0XTWAdnM5pYBnxutnvy/IIN93xl/4ueqI4pJG1NjV3Y5QHISM3LMC5VYMIJeym02Q/jJleL3CjjqVsIaeTt//TQIQcicZlpNWnGX2
+  learner_created: false
+- name: build.gradle
+  visible: false
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+status: Unchecked
+record: -1

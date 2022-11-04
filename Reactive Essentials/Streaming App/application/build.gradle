@@ -1,0 +1,10 @@
+dependencies {
+  implementation 'io.projectreactor.netty:reactor-netty'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+  implementation project(':Reactive_Essentials-Streaming_App-price-service')
+  implementation project(':Reactive_Essentials-Streaming_App-price-service-idl')
+  implementation project(':Reactive_Essentials-Streaming_App-crypto-service')
+  implementation project(':Reactive_Essentials-Streaming_App-crypto-service-idl')
+  implementation project(':Reactive_Essentials-Streaming_App-common')
+}

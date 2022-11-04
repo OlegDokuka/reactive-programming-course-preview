@@ -1,6 +1,10 @@
 type: edu
 custom_name: Task 10
 files:
+- name: test/CommonOperatorsTask10Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kkP1NnYGkpLTmmDXlo8Au+OI9PB6FjeBfBrptQLd26Vb6uZ1zvupVFa5MCOctrKEolv2GP/Ryk29HkovzIke9bnbclE64p7zTk6Vyr+1AvF+ZkwYrdTib2M/53tDMbD6Iwlu8gA2KiWyzo6/B7ee/d/5RW+SI1m07i5wZdwWxV8N11J0ikJw5smLXznXh8W8DMVz/Ywz/TltVs8fu+8Os3EDog3bjFcaL62vBdrREHra5o12BKZgcbZT16DvW5mYGP5SWR9DTib2GdxYQ7kh04PhE4XvxIO5P/DGpgzSvJDUToA+8so7ew6+nRuT99VJFLmoN0T7ZTeMiPJNpE9x8nYOtxTHU7rV/H6lfOCy59QLnlrcLi8k+CWY61yE5CcGsCpNKek/G/WW5skk4A/6bGjP9TRIxv6zBZgmtu+kbDTpUR5DVTTMkpGjnI4lSE2xdxMw8XnR8kVbuzJDPAxSLkVYXMqMIHaHnWU9dkaVZZFefoCkeCh2xkNycLaZC6a3Qs=
+  learner_created: false
 - name: build.gradle
   visible: false
   encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
@@ -23,10 +27,6 @@ files:
     status: Unchecked
     encrypted_possible_answer: 1w2qWTr/UN3HlCIzBCvXngPx+ysZ4/SSK0nFhQRilh0=
   encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrS2OFoQGbm8WgQY8UTFKDbD3kaDsCK+4qBXx2DyK7u/75F6EEkojyfioihhtjMLeZ2wzNSeemh9ufwrz757yKVyheRtSUJ9WyEW80cOSpE/YD2hYhe0JPCq3BBDVIj5ac9pZlVX8lpXEz/cEQTAU4Rw
-  learner_created: false
-- name: test/CommonOperatorsTask10Tests.java
-  visible: false
-  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kkP1NnYGkpLTmmDXlo8Au+OI9PB6FjeBfBrptQLd26Vb6uZ1zvupVFa5MCOctrKEolv2GP/Ryk29HkovzIke9bnbclE64p7zTk6Vyr+1AvF+ZkwYrdTib2M/53tDMbD6Iwlu8gA2KiWyzo6/B7ee/d/5RW+SI1m07i5wZdwWxV8N11J0ikJw5smLXznXh8W8DMVz/Ywz/TltVs8fu+8Os3EDog3bjFcaL62vBdrREHra5o12BKZgcbZT16DvW5mYGP5SWR9DTib2GdxYQ7kh04PhE4XvxIO5P/DGpgzSvJDUToA+8so7ew6+nRuT99VJFLmoN0T7ZTeMiPJNpE9x8nYOtxTHU7rV/H6lfOCy59QLnlrcLi8k+CWY61yE5CcGsCpNKek/G/WW5skk4A/6bGjP9TRIxv6zBZgmtu+kbDTpUR5DVTTMkpGjnI4lSE2xdxMw8XnR8kVbuzJDPAxSLkVYXMqMIHaHnWU9dkaVZZFefoCkeCh2xkNycLaZC6a3Qs=
   learner_created: false
 status: Unchecked
 record: -1

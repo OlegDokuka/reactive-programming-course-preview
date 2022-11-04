@@ -1,0 +1,17 @@
+dependencies {
+  implementation 'io.projectreactor:reactor-core'
+}
+
+sourceSets {
+  main {
+    java.srcDir 'src'
+    resources.srcDir 'resources'
+  }
+  test {
+    java.srcDir 'test'
+  }
+}
+
+processResources {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

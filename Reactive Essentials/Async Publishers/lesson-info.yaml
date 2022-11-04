@@ -1,5 +1,7 @@
+custom_name: "How To: Generate an async Publisher"
 content:
 - DelayExecution
 - SchedulePeriodic
 - FutureHttpRequest
 - ListenableHttpRequest
+- ProductCatalog

@@ -14,6 +14,6 @@ public class Task {
 	public static Publisher<String> replayLast3ElementsInHotFashion2(Flux<String> coldSource) {
 		final Sinks.Many<String> replaySink = Sinks.many().replay().limit(3);
 
-Flux.error(new ToDoException()); // With Processor
+return Flux.error(new ToDoException()); // With Sinks API
 	}
 }

@@ -1,1 +1,0 @@
-Using the given set of content servers, perform a search on all of them and "download" a result from the fastest 

@@ -1,0 +1,5 @@
+custom_name: Streaming Application
+content:
+- application
+- crypto-service
+- trade-service

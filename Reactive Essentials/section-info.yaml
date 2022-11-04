@@ -1,7 +1,7 @@
+custom_name: Reactive Essentials
 content:
 - Sync Publishers
 - Async Publishers
 - Common Operators
 - Testing
-- Common Problems
-- Crypto Tracker
+- Streaming App

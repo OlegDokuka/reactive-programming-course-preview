@@ -1,5 +1,5 @@
-Generate a `Flux` from array
+Generate a `Flux` from collection
    
 <div class="hint">
-  Use <code>Flux.fromArray</code>
+  Use <code>Flux.fromIterable</code>
 </div>

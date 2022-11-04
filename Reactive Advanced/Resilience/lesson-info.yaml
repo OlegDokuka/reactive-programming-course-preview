@@ -1,3 +1,4 @@
+custom_name: "How To: Add Resiliency and handle Errors"
 content:
 - task1
 - task2
@@ -8,3 +9,5 @@ content:
 - task7
 - task8
 - task9
+- ResilientBackpressure
+- DistributedTransaction

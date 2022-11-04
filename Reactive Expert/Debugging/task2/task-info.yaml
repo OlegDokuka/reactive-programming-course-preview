@@ -1,0 +1,38 @@
+type: edu
+custom_name: Task 2
+files:
+- name: build.gradle
+  visible: false
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfwtOfuIvc8sEV5F+I+rvPPWqwNDnmlnZRcOjcpajRNBzsQp4t5qJvlmTT3fHZhixoa/6RCKtopiW+2sf9WH8MQU37rmhsRMf+1umf1XALJcabVq/0zC/hbDJiLuDRR0/XrLvSdlJqI6jrudvrh9atIZW8vLMK4hvYUurQne0PSBb38rx1xXS+Lkt/P2hutU1U/XmWMNnlFXDcN7cbMlh6JkQHtv5Q5FUFzoJIlL19MiyhErdsfmublBdLGxdO1kWY
+  learner_created: false
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 737
+    length: 39
+    placeholder_text: // TODO add log here. Log only requests
+    initial_state:
+      length: 39
+      offset: 737
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: quXV04Xn/Pd7mumO6xARPDv+BthPV5f9aMKnzlRFHCmgN8JTh8TUpKTtY3YTyW/pSKy2ckbsNlZfpJX4AP8B8w==
+  - offset: 852
+    length: 27
+    placeholder_text: ";\n\t\t\t\t// TODO add log here."
+    initial_state:
+      length: 27
+      offset: 852
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: rycU/kAA31Rl+4k7u+TiY4VC5HVGGOLm/UOLsHQAAeM=
+  encrypted_text: Xtva9nQXHbxXlKEkYazs+MDYVb8JL+UZEVbicgx3NZSnMAYs5raeqnsBSzUGuh9Z2Pi4ouxxiFyDWuesND3g43/KzOM+O33m9qVjYtDbe97BuaFkum6NeJ0NzTAmVHRV+VKlMPvUpWLi6MSWgkMS7a6Ni9QUYnXIwz67N8099AWiEn5BJXOVYxBBNkRULGjjuXS+zUISPYFfDnixbO9aaQAb8KqFVsksPam0p1Yub8JoTHLbWjwI7Q3ZcL9PJSggzcZfNE314hgovRE38XgWL6y3KqxXQrC7J56NxvWgcPDXb8N5Exp6+dTIwYVYpCFzQhIi6enIfNwDy/uOkSH2t3HCBlEyC9++9MkGDCoASOF/ZtbpYD4d8uyS1S2Rh6Y5vgqs1Pxf5B274rdL4SPzD881JJQuLNxt4K+f5VXC5e84CF/0zy0QTDnJkw27kxvfL4q2OZ+I1bN6GB3BqSNLmkS/DIrzSJsLb9mhU+DUUZlTd+dZTwOtmVMzbioSMmiRpOB/dneMr8LHmSjsdrzEDsa5d1fdoJpC3AQw7vX2rhljO4zJR25oNshTYCx148VfZ8tiaFZl0FAv/BcJDiSORQW6SpQlYETAsV5z5zK9hyCLZQwqoZosEYk/iIIZKnIAg39U76+1VbQxYyyFutMxZ6jnluB+JW86mW+yIRlSP+QQKjigBM6j53G5toe6JJ7bR6zU+A7xbgi00gVJkqeXQfKiBHYEcs2WJ/+3zk+sGiC5v/rJo3KRAoEhtjeVweMnj9eQ6cr3J1RPUiZIZKETobORmkcj08/OfpxpGgxOUYvlr/QY4zMO6nD1WA3/9nX97TJnx1VlgAiRLNWn+GEA2zJ/Ac57ffffrh/d97sLjE4tTkVJTeXvicMXh+suhkeNp3gLW9/yGOp97ktVbz2+J/9JdQSs1rqwDTbZ0AZxD45pwYT1HVDLTMeq7M1yPWKGe2Pb8/Q4AdS5iV2j0MxkTIwJYoJOSlsG04//4Tt9o4OrVL55XpZ5tr610DlP7Jdkbidi4cd8LShwVVTQyBjFFomx7SRvt+U6AAdfAIUO1kN1Pdnd8AUuMB/091VCRxoBv2YQJjz2I3u4tFQeVXQz0ZWVe/yGu9UjMqHde89ORNzq+LACs635YTvgkC8Qme3URg2nzBRTGMYebwjB+kxxk/94NcQyV3zdIvsdiaNFBWw=
+  learner_created: false
+- name: test/DLMTask2Tests.java
+  visible: false
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYG8jxzOSlKQQxfdAJoAZYl6n1etmvcCFj/2E1xTw0LaufbQ6zR6tD+AjB+u86yXsXMcIClu5pua2ufOHz2A8gR/mwDEEf6oZarvyXGw21G3+nw5kym68CDuMb+Kg9NoI6KVIxTaYGfaFY4K/Ct3/eWq3mK5jLTg886CajaTxrPhEM12uXRkqey1Y2HxwKaC4/sDAPA4tgvtVXJ4ojZGr4aB9JRBDIshbL2p9wGG731oMck4klpd/H0LrBS3a3zQPWulxn0hpvwLVjxWDaEZeXD/hMz85/eRArV0BNowAlFLxfTJGAtI2j2yHv1aU9/2cQiMViAUJ3YYWQvetN6PMA50xx6PlgAbL5bH+JTooW2vd5q2A0987N4VIZU8PCeFXLpXKkkiemlRzjHmDC7+1Ad4sJqOYl+c6JIzem8KK1QqO1FOnsM1N6aNs5VpIXFpQ/9qUCwVMzfh/my358md16XbF8DKgPKvR5+AHyYlc85sSW0ngvR/e8RvnRWfMb9MEsMP+qPsgcPplSvZjkLhnZHvZJ8DU4e+FftOqbQEtG6GWusCca4vWJaYff73jYUPHoR9lS5RhrQrWKECs5eoRdbX5a1WbwL7eysEqUbtG9lP4/MTlkODHcLdp1PkJNYPE1nubVW4hNaXTH4WnvN1h3qs3M2O7DwI2nwRGRocxprrx9wNK4Rbad/+kY7xnrtvZvsaWfYQoZ6BJhhs97eikeKjgEyxLdspJAS0HZQwqyqAIYbLaDK1VGrj/obm0Ysn/uPYqkYd8nmmFL6v26giNjQSpUC6KJO5T3NEZWcuLPkA36V02kAoui3KbsmRCPmTGSeOT0gs5j92WCWMGAfyWpDPbKs77gHIPN2VmdMhSSVHHzKfg0iKMc4lGRaoy1hJjOjPuEMacBrIbDVhDNSewq+qDKCRlkGoQ2o4kEb9TtANn66EzhSIzct5x1vkBay9FmHkLjZHswU6Lrjt3InwHgh+irtqxyY4v1pLXRw9gH4UAyId4/JGesN7KRrSRIR4kVCLxrq+K2BJT4KctSIm0DsM1VQQ8Ir5Zp2ygGMJoccWXNwYYZ68nQLOQ8MGK4+ZJCFxMfUfJ1N00DTqu9/h9/GEu3O6cIquDWRAgBvBO0ryqlI90XoZ9zrWTJq3t1k5yNfu/9OD8UGLQ1YaDIqiYPxRdsHlNLyEVuDZpLKnTjRASDVV3RqfTJTSbdzPvyGovcpjs+7nbAS+KtylI4JSU4CM=
+  learner_created: false
+status: Unchecked
+record: -1
