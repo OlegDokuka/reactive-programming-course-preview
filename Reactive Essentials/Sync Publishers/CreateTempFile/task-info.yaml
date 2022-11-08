@@ -17,7 +17,7 @@ files:
   visible: true
   placeholders:
   - offset: 174
-    length: 61
+    length: 4
     placeholder_text: File
     initial_state:
       length: 4
@@ -26,7 +26,7 @@ files:
     selected: false
     status: Unchecked
     encrypted_possible_answer: T5+klonxvpC5LW4t0e7PIA==
-  - offset: 285
+  - offset: 228
     length: 131
     placeholder_text: "try { \n \t\t\t return File.createTempFile(prefix, suffix);\n\
       \ \t\t} catch(IOException e) { \n \t\t\t throw new UncheckedIOException(e);\

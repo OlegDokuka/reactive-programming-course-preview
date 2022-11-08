@@ -1,0 +1,11 @@
+<html>
+Retry with exponential backoff strategy with min delay = 100ms, max
+delay = 1600ms when <code>Flux</code> receives errors. Note, retryable errors are the
+one which starts with <code>[Retry]</code> message
+
+<!--TODO: вставить marble диаграму-->
+
+<div class="hint">
+    Use <code>Flux#retryWhen(Retry.backoff(...))</code>
+</div>
+</html>

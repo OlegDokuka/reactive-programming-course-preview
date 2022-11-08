@@ -3,9 +3,9 @@ import reactor.core.scheduler.Schedulers;
 
 public class NonBlockingGenerateUUIDTask {
 
-//	static UUIDGenerator uuidGenerator;
+	static UUIDGenerator uuidGenerator;
 
 	public static Mono<String> generateRandomUUID() {
-		return Mono.defer(() -> Mono.empty());
+		return Mono.defer(() -> Mono.just(uuidGenerator.secureUUID()));
 	}
 }

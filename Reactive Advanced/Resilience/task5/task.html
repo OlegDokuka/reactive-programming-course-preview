@@ -1,0 +1,9 @@
+<html>
+Make sure that <Code>Callback</Code> is executed faster than a 1 second. Otherwise
+cancel execution and return a fallback. Make sure <code>Callback</code> is not going to
+block central pipeline
+<div class="hint">
+    Use <code>Mono#subscribeOn</code> in order to isolate blocking execution so
+    <code>Mono#timeout</code> will work out
+</div>
+</html>

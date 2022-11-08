@@ -1,0 +1,9 @@
+<html>
+Modify code so that stream's subscription happens on the <code>Scheduler.single</code>.
+Modify the pipeline so that only <code>work2</code> happens on the different <code>Thread
+</code> than the one related to subscription phase. For instance, use
+<code>Scheduler.parallel</code>
+<div class="hint">
+    Use <code>Mono.subscribeOn(<i>single()</i>)</code> + <code>Mono#publishOn(<i>parallel()</i>)</code>
+</div>
+</html>

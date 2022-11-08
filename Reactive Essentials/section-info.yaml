@@ -1,7 +1,7 @@
 custom_name: Reactive Essentials
 content:
+- Streaming App
 - Sync Publishers
 - Async Publishers
 - Common Operators
 - Testing
-- Streaming App

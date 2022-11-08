@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 
 public class NonBlockingTextFileStreamTask {
 
-//	static Files files;
+	static Files files;
 
 	public static Flux<String> readFile(String filename) {
-		return Flux.using(() -> Stream.of(""), Flux::fromStream, Stream::close);
+		return Flux.using(() -> files.lines(Paths.get(filename)), Flux::fromStream, Stream::close);
 	}
 }

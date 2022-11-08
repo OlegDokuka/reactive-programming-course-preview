@@ -8,27 +8,27 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 737
+  - offset: 249
     length: 39
     placeholder_text: // TODO add log here. Log only requests
     initial_state:
       length: 39
-      offset: 737
+      offset: 249
     initialized_from_dependency: false
     selected: false
     status: Unchecked
     encrypted_possible_answer: quXV04Xn/Pd7mumO6xARPDv+BthPV5f9aMKnzlRFHCmgN8JTh8TUpKTtY3YTyW/pSKy2ckbsNlZfpJX4AP8B8w==
-  - offset: 852
+  - offset: 364
     length: 27
     placeholder_text: ";\n\t\t\t\t// TODO add log here."
     initial_state:
       length: 27
-      offset: 852
+      offset: 364
     initialized_from_dependency: false
     selected: false
     status: Unchecked
     encrypted_possible_answer: rycU/kAA31Rl+4k7u+TiY4VC5HVGGOLm/UOLsHQAAeM=
-  encrypted_text: Xtva9nQXHbxXlKEkYazs+MDYVb8JL+UZEVbicgx3NZSnMAYs5raeqnsBSzUGuh9Z2Pi4ouxxiFyDWuesND3g43/KzOM+O33m9qVjYtDbe97BuaFkum6NeJ0NzTAmVHRV+VKlMPvUpWLi6MSWgkMS7a6Ni9QUYnXIwz67N8099AWiEn5BJXOVYxBBNkRULGjjuXS+zUISPYFfDnixbO9aaQAb8KqFVsksPam0p1Yub8JoTHLbWjwI7Q3ZcL9PJSggzcZfNE314hgovRE38XgWL6y3KqxXQrC7J56NxvWgcPDXb8N5Exp6+dTIwYVYpCFzQhIi6enIfNwDy/uOkSH2t3HCBlEyC9++9MkGDCoASOF/ZtbpYD4d8uyS1S2Rh6Y5vgqs1Pxf5B274rdL4SPzD881JJQuLNxt4K+f5VXC5e84CF/0zy0QTDnJkw27kxvfL4q2OZ+I1bN6GB3BqSNLmkS/DIrzSJsLb9mhU+DUUZlTd+dZTwOtmVMzbioSMmiRpOB/dneMr8LHmSjsdrzEDsa5d1fdoJpC3AQw7vX2rhljO4zJR25oNshTYCx148VfZ8tiaFZl0FAv/BcJDiSORQW6SpQlYETAsV5z5zK9hyCLZQwqoZosEYk/iIIZKnIAg39U76+1VbQxYyyFutMxZ6jnluB+JW86mW+yIRlSP+QQKjigBM6j53G5toe6JJ7bR6zU+A7xbgi00gVJkqeXQfKiBHYEcs2WJ/+3zk+sGiC5v/rJo3KRAoEhtjeVweMnj9eQ6cr3J1RPUiZIZKETobORmkcj08/OfpxpGgxOUYvlr/QY4zMO6nD1WA3/9nX97TJnx1VlgAiRLNWn+GEA2zJ/Ac57ffffrh/d97sLjE4tTkVJTeXvicMXh+suhkeNp3gLW9/yGOp97ktVbz2+J/9JdQSs1rqwDTbZ0AZxD45pwYT1HVDLTMeq7M1yPWKGe2Pb8/Q4AdS5iV2j0MxkTIwJYoJOSlsG04//4Tt9o4OrVL55XpZ5tr610DlP7Jdkbidi4cd8LShwVVTQyBjFFomx7SRvt+U6AAdfAIUO1kN1Pdnd8AUuMB/091VCRxoBv2YQJjz2I3u4tFQeVXQz0ZWVe/yGu9UjMqHde89ORNzq+LACs635YTvgkC8Qme3URg2nzBRTGMYebwjB+kxxk/94NcQyV3zdIvsdiaNFBWw=
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH7xKNGLTWe6cFHEUobikbaaNSGQdbE2PzV++0JVDHtIQuHBLKYIQpGXfK/RhtMaOjnZFw9bjUi8IRNDv9Ec0Eta+oSVtQC7zY4gU7xfuWi8T1BYDtza2VeF/uzW3Se/om+VffCNaNwb13pOmJ2/0f6QvwFGbrzdDPba1dlRvpuAkwbDQ90C7eqDj/WVMWieuTRj5/RGWXmiCuNAPHQjlqZtv2vOLKf5u+HQxKu4PmwGl5Z3VsS8u6abt5tESi7Th9pVv5S6Ilhhoubl2Q+IX008RCH1ysRJt5TQQGs4n/DeiVC/r0vGJkASIeMOKlr3+kFZnVdIfNMF1JKTAW7a9r+CSEHhWwqbQtCQ9QPJvUo17iElNXmwbhkYUdsdtYf3qvPW+O+RaLWZE0xaVfooZJjLNo9ovVUbP1PplPidT4J/sebQ7+mHq+co7d8gDjmk1K54rUHQxRu3ZrzmjviENSXZ9jzsYhw6DmHTw6aNT+rjO3fRONAqAHHDws2+StSr6og==
   learner_created: false
 - name: test/DLMTask2Tests.java
   visible: false

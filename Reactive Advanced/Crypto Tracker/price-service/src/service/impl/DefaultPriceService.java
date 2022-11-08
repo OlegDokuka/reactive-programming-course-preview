@@ -53,7 +53,7 @@ public class DefaultPriceService implements PriceService {
 				.startWith(DEFAULT_AVG_PRICE_INTERVAL)
 				.switchMap(timeFrame ->
 					priceData.window(Duration.ofSeconds(timeFrame))
-					         .concatMap(this::currencyGroupingLogic)
+					         .flatMap(this::currencyGroupingLogic)
 				);
 
 

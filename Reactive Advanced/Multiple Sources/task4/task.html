@@ -1,0 +1,9 @@
+<html>
+Having several information sources (a.k.a <code>Publisher</code>) you need to
+subscribe to all of them and consume the whole stream only from the one which answered
+earlier than others
+<div class="hint">
+    Use <code>Flux.first</code>. Basically it perform racing between all the sources so
+    the winner becomes the main source.
+</div>
+</html>

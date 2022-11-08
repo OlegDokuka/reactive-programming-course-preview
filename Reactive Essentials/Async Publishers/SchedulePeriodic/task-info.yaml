@@ -5,10 +5,6 @@ files:
   visible: false
   encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
-- name: task.ru.md
-  visible: false
-  encrypted_text: FKIZrxsCTIGOzONr1xGJ1zFo6UHJjMqkO/8uJX6ev2zaV3ung4Wo5wCuykDXQ4Hfz98VRAYPbRDzma0lqvEjk6gpSs9Y5ozRxrEz7++DR6N4f4gRIN/CPi7rZ2KOJQSdpXk56cNJqx3g5EmFsWGPVj8JZ2IKnibGUf0DeZEq7iTGiz3ayKXRvN07Y5sw2QC0
-  learner_created: false
 - name: src/SchedulePeriodicTask.java
   visible: true
   placeholders:

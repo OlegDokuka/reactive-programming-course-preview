@@ -1,7 +1,6 @@
 import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Publisher;
@@ -17,14 +16,9 @@ public class HandleGetRequestTaskTests {
 			int expectedNumber = ThreadLocalRandom.current().nextInt();
 			Mockito.when(reactiveRandom.nextInt()).thenReturn(Mono.just(expectedNumber));
 			HandleGetRequestTask.reactiveRandom = reactiveRandom;
-			Object outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET, null));
+			Mono<Integer> outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET, null));
 
-			if (!(outcome instanceof Mono)) {
-				Assertions.fail("fix impl");
-				return;
-			}
-
-			StepVerifier.create(((Mono) outcome))
+			StepVerifier.create(outcome)
 					.expectNext(expectedNumber)
 					.expectComplete()
 					.verify(Duration.ofMillis(100));
@@ -38,14 +32,9 @@ public class HandleGetRequestTaskTests {
 				continue;
 			}
 
-			Object sequence = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(method, null));
+			Publisher<Integer> sequence = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(method, null));
 
-			if (!(sequence instanceof Mono)) {
-				Assertions.fail("fix impl");
-				return;
-			}
-
-			StepVerifier.create(((Mono) sequence))
+			StepVerifier.create(sequence)
 					.expectError()
 					.verify(Duration.ofMillis(100));
 		}
