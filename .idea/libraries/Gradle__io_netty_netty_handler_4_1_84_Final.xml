@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.netty:netty-handler:4.1.84.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.netty" artifactId="netty-handler" version="4.1.84.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.84.Final/69cd93e2c321f04fc0a18eb5af519565373d0873/netty-handler-4.1.84.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.84.Final/4512cc37de21fbf35fe2f56648a67daf5b15112a/netty-handler-4.1.84.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

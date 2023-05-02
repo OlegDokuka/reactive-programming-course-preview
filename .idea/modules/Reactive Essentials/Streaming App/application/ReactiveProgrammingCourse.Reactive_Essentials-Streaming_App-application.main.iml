@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Reactive_Essentials-Streaming_App-application:main" external.linked.project.path="$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application" external.root.project.path="$MODULE_DIR$/../../../../.." external.system.id="GRADLE" external.system.module.group="ReactiveProgrammingCourse" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application/out/production/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application/resources" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application/src">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/application/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.util.main" />
+    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.projectreactor.netty:reactor-netty:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.projectreactor:reactor-core:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.12.3" level="project" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Essentials-Streaming_App-price-service.main" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Essentials-Streaming_App-price-service-idl.main" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Essentials-Streaming_App-crypto-service.main" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Essentials-Streaming_App-crypto-service-idl.main" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Essentials-Streaming_App-common.main" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: io.projectreactor.netty:reactor-netty-http:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.projectreactor.netty:reactor-netty-core:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.12.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.12.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-resolver-dns-native-macos:osx-x86_64:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-resolver-dns:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec-http2:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec-http:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-handler-proxy:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-handler:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-resolver-dns-classes-macos:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec-dns:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-resolver:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-common:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-classes-epoll:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-unix-common:4.1.84.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec-socks:4.1.84.Final" level="project" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Advanced-Crypto_Tracker-price-service-idl.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Advanced-Crypto_Tracker-crypto-service-idl.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="ReactiveProgrammingCourse.Reactive_Advanced-Crypto_Tracker-common.main" scope="RUNTIME" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.socket:socket.io-client:1.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.projectreactor.netty.incubator:reactor-netty-incubator-quic:0.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.socket:engine.io-client:1.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.json:json:20090211" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.netty.incubator:netty-incubator-codec-native-quic:linux-x86_64:0.0.33.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.squareup.okhttp3:okhttp:3.12.12" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.netty.incubator:netty-incubator-codec-classes-quic:0.0.33.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.squareup.okio:okio:1.15.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-codec:commons-codec:1.15" level="project" />
+  </component>
+</module>

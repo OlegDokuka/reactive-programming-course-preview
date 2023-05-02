@@ -8,10 +8,10 @@ public class ContextTask3Tests {
 
 	@Test
 	public void testSolution() {
-		Mono<String> a = Mono.subscriberContext()
+		Mono<String> a = Mono.deferContextual(Mono::just)
 		                     .filter(context -> context.hasKey("a") && !context.hasKey("b"))
 		                     .map(context -> context.get("a"));
-		Mono<String> b = Mono.subscriberContext()
+		Mono<String> b = Mono.deferContextual(Mono::just)
 		                     .filter(context -> context.hasKey("b") && !context.hasKey("a"))
 		                     .map(context -> context.get("b"));
 		Flux<String> flux = Task.provideCorrectContext(a,

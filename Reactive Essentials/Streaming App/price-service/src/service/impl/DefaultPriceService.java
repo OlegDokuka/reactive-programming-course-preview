@@ -47,8 +47,10 @@ return Flux.never();
 return Flux.never();
 	}
 
-	Flux<MessageDTO<Float>> averagePrice(Flux<Long> requestedInterval,
-			Flux<MessageDTO<Float>> priceData) {
+	Flux<MessageDTO<Float>> averagePrice(
+			Flux<Long> requestedInterval,
+			Flux<MessageDTO<Float>> priceData
+	) {
 
 		return /* TODO: calcualte average price.  Use window(Duration) + groupBy */
 

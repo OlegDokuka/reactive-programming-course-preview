@@ -4,9 +4,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.mongodb.client.result.InsertManyResult;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
-import com.mongodb.reactivestreams.client.Success;
 import domain.Trade;
 import domain.utils.DomainMapper;
 import org.bson.Document;
@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 import repository.TradeRepository;
 
 public class MongoTradeRepository implements TradeRepository {
@@ -39,7 +38,6 @@ public class MongoTradeRepository implements TradeRepository {
 		    .flatMap(i -> this.getTradeStats())
 		    .doOnNext(count -> log.warn("------------- [DB STATS] ------------ Trades " +
 				    "stored in DB: " + count))
-		    .subscribeOn(Schedulers.elastic())
 		    .subscribe();
 	}
 
@@ -59,7 +57,7 @@ public class MongoTradeRepository implements TradeRepository {
 			.then();
 	}
 
-	private Mono<Success> storeInMongo(List<Document> trades) {
+	private Mono<InsertManyResult> storeInMongo(List<Document> trades) {
 		return Mono.from(collection.insertMany(trades));
 	}
 }

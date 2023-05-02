@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Reactive_Essentials-Streaming_App-common" external.linked.project.path="$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/common" external.root.project.path="$MODULE_DIR$/../../../../.." external.system.id="GRADLE" external.system.module.group="ReactiveProgrammingCourse" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/common">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/common/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/common/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/common/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

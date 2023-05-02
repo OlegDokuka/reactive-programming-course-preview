@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.r2dbc:r2dbc-h2:0.9.1.RELEASE" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.r2dbc" artifactId="r2dbc-h2" version="0.9.1.RELEASE" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.r2dbc/r2dbc-h2/0.9.1.RELEASE/a83908d6b41a50265c077c39e834fe4993a4b546/r2dbc-h2-0.9.1.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.r2dbc/r2dbc-h2/0.9.1.RELEASE/4563fa021a5d1211340a88dbd7ecded8e4d403f0/r2dbc-h2-0.9.1.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

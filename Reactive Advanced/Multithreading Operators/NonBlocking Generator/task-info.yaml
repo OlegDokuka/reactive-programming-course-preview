@@ -8,12 +8,12 @@ files:
 - name: src/NonBlockingGenerateUUIDTask.java
   visible: true
   placeholders:
-  - offset: 244
+  - offset: 221
     length: 56
     placeholder_text: Mono.defer(() -> Mono.just(uuidGenerator.secureUUID()));
     initial_state:
       length: 56
-      offset: 244
+      offset: 221
     initialized_from_dependency: false
     selected: false
     status: Unchecked

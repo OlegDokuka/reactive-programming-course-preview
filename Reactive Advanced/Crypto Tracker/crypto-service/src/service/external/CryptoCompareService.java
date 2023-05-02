@@ -10,10 +10,6 @@ import service.CryptoService;
 import service.external.utils.PriceMessageUnpacker;
 import service.external.utils.TradeMessageUnpacker;
 
-//TODO turn to multi-subscriber with processor or another similar operator
-//TODO add small history for each subscriber
-//TODO add resilience
-
 public class CryptoCompareService implements CryptoService {
     public static final int CACHE_SIZE = 3;
 

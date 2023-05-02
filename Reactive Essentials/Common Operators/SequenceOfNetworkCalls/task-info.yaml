@@ -1,0 +1,58 @@
+type: edu
+custom_name: Sequence Of Network Calls
+files:
+- name: build.gradle
+  visible: true
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  encrypted_text: PaQF1Z6IYIDan13cM6wTdeB2bTD/RIjebk/hWZeVpoLBx/7QIeKF+DrtAkOhwbOhmkr2C1X7IPtRcUOtqcwOtTpfl/ceVJAriqAXXTT4UAmh16v9+PBGNuln0f3c3rU8AN0yXqagEgqUg/DtRkSM+F0d++/LZXFnfKBc7eTVPsLE10+mcCvw01tTx14aPajgEYcoIJ6TAnz72DcCethl8JcHWbLdYY2lvKbQQwtwliCyUmW8n7IST7VADmpdWiTcSPYszNtwOEQyo6oyDmg49aX3LUTUyVas6YoMCYgl6bzRCkU5reXoHBx2OZiA+fTDfJG8/LZmJGFQc2NJJoJvio25uhegWMVezNalWUUSNetZivWjeNC1l0kkS3J/pJKDdjUimb67ucQzkrJwMp73IUMJ5kmINqaDh0ogKHErWLPeoWqAhCSwl37HVHVljaMnTyJDM6lE1bCu5u++lzAVhg==
+  learner_created: false
+- name: task.md
+  visible: true
+  encrypted_text: yaOZr5nOXKZIWK9CnYSK5bLneEDrjE5zftPECrm+JaKiurpJbc5zZmKFp0acxlJ5Cwtwh0ZP/J5kQeB6otI0/lqMJluMUGmsZA3a5YS/VahOsk+4Ui+bwFrIEhOsfCa/CHP6oO/7VSYQhzBBd1Ws8s9E1M3NpuUKvwuYFW2glRnMWipZMY/5SL9G/UP8+O7tzi9781PQ4ZLCGGit8sUlKNLu3AxfGAwo/GbYHM8SLyvBESYe9mKffDcTgLaFBFeknluIUBK77ZnMG228MDlYaLUGUWAA/wwPjqNzrkJRvSCiYnAt9XxzU1kjTVnPi4fBuWr9CC1A+fD6zLUqDR6pU9TLxY74Lx1H/rvU9E7yob87q1z/DFRn4/txdpPUYKVRg59fU3BjWIhUfuoYHweHHA==
+  learner_created: false
+- name: test/BroadCastControllerTaskTests.java
+  visible: true
+  encrypted_text: ClA4fXpUa4NPkfy2XESd9KEeKbHK9SYtaJsz/ejbtvdN75Xdh0IDRbKDwY7LP6I9rf06YWIPikigtXNDIMoAWuhli8DPVGFAm2ypNwUee3wNbZ/o/5mWRy1yTdzw4kubyRFthxML80GYYJcStvQllZ8WOkcJk+uflGcv6ty2pzIIkHl6FNropshmdQfomvXLUi65VGgIzAQBjLDJUTvUifC97MPd2fccwgR/fKLOWHP6Vk51yi5HAdyTxrMSGL99sRU3EM4vfUXv9KxCr+hVd72cHK+gvLUt9AZtmNt7O+HYQXQ1V4o5V6X2oHG8hP8rndA+LRxhyqb8m39Z9qRn4+yIucCSdwPM4kXYUwbbUsIt4NTY498xytTq44ButZHiHr/oMzgWjwoWCS8ylIKLoCjlX5/vhQgjTSoxwHujCoRPXRYGT5Yz4kxJt8UujS1xzk1DFNE1ZQ9nYN+nugoSQn6XgxQccxlrwoiZwkAQkuf092HUqLiNFskzkcPIXwqqCDKwsakB4CYaSMg2NsyfqLySJ6+9c5WwYAfesYKfQX4KJG6kfH/5Kuu8GeIAnB7MnPDGiio1K6zd7QZ1joOz9p2LiLC4IfwnLzSW29wrN2r50L1AdX5cBfESaRj9Ar7XwFOZZ5R3eSkOUscAAVDm2IaToo1+2eUXSlJzs3tliFRxBUzv3dkHCv7M0daIN15mNybJUx8tRzpqsg//PG2YO75JRqNqIyzzFicKkJxpEt6QrZhwjhtx7c+eZ6EphtaSzH6HvAR3cG4+0BbtjFqdIeZSpXF9YgIIVKmXzQLU6kW5sQPNE5QBSaVT/dSC3rUj4003H4l2KSWcCtqbfH5lezWtRSam/jJual0WM2h3e75eOjl2C36mt6B3yz/8QNC1s/g1eXMQ6EVDFUbcSlWHOGtfoIDHzd7HAQpEackO4SXanHe+iYxOXzVhjHSCG1j7Rls3vvGPtvfPZsu9em+kvl50hTwOE9gA3kep2lPVln9dBZuvvwYMybtVhKDulr3xnZE6LoMA5zEq0qy7cbH82PIW4Iq+Q7i1BXo+Y6dEo+tyNFGbBJA5mRpPr1PeAGDorHUn1ojzg1egUVn0tpb1cMttPfc41lbzTt8RHU+sgIUcBV8h3Eh21mV70HlhcInmastMTJPRCDr8cKA68aP/EYSLsWg2xnWiMGDWzmnV/m0ozkt5uL6ygF4D8PF5nHAP7jGuWH+0RZB/50xLDkRvKMbEOra10i1CmiMqpZvSzuwyI5jgriS0RD0DlEJPq9tJr9983EK4/Nt4D4m5QPLrVBh4M1fQTvzcMtunLOlMv1Rv2G5K52KSfhIjugP87RTcgOOuLcOBv76gINjVFXaO/QnYdpYyiHThWixaZfKH8XztuEYfwaeQ5dldKYuNZEQwTPCwF+BfKChhhMyOAO1/OGML/vzfN2KBzTo1CFHXP9aAHEzZngYuWzXYHfOGP3lBOG5P2Nb2uWqNAw5+UxI/3Lw8CVyE9s0hWm7/Hp3fG/O8fWgCX16MXEZZfGodlRXkXi0YJIVxQDuy6nzESpyk6gZmgg0D7s03QMnh7y32TWEi51urte2AL/QAa0oyPFwUlAV9TPWu5aVoHrIFbm3dHJ1ZfzNBExcsgvC3DohAFcK6ES1gNUlZk3ri/oB/eYpAkUwVhGB8vqM7J4yia0VaMNtkuQ0AJ3YBPjGb5uwvXUXC/jerfUQmlKNqvQj1FkHU5tqqwcOe+7+kC8Hw4b6DfOWydjtekFrUyaU60WFEMsOrG87sCP7N7JtipKqcWhPg7Pwce2ZUE+lJv4XXMbv5QC3oY5hj1WWK1pwZZH/fglHv+5P32bf1d1wbPqa+/PtDB9Zt27hSOgkbA1T6GjkCe0bzYWUPnpnXiL8yeFtIJlZ7pW5l/yaJCSCEBEcEZ/S3/UiL3lVmWhQooH7h4SL4fQ==
+  learner_created: false
+- name: src/BroadCastControllerTask.java
+  visible: true
+  placeholders:
+  - offset: 255
+    length: 4
+    placeholder_text: void
+    initial_state:
+      length: 4
+      offset: 255
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: QeeUNU0f10Ro/Xtp4YFehQ==
+  - offset: 294
+    length: 184
+    placeholder_text: |
+      List<String> test = discoveryService.discoverAddressesFor("test");
+          for (String endpoint : test) {
+              httpClient.postEntity(endpoint + "/api/push", payload, Void.class);
+          }
+    initial_state:
+      length: 184
+      offset: 294
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: usle8ZmgprwgV8zqduIdMcCcSo4vxHmwN8IqH/sStRIv4Pnvd/d2z4yBfcRv7uwxvIuV9UqNlzsEEOanPpVXGvrXCpZGppDNqMLMbGK2SktDLfmSVuF11rKoRRD1QcTEBOsFAe+OtyzvGXOmfrfaFt9+OzZ1kzvd2Loni+fGdrMkXTf4QHP49TC7llu4JT/V6VKJIfxyKKH1+Uv6e+HwCKqOJainCsSOMtEK/xkdY7NSvojVmRUniQZrJItR+Xzjk8NVa4Mh+DVPfEP/VHGZsO5oOSioQ4HkOHrCb6AivyIUbTwNisYcUk6QjEqLZ71ZQlaWBhgPTmkMWagYZFWcDg==
+  encrypted_text: ClA4fXpUa4NPkfy2XESd9JGRv+VntjBNT5xmZsf1Opxagnhhua5BSmrhWG6K52xyS+PsrxiLm5AmjSYplVuTpb5EN3GOdSw61bRekQ0aoCWXbEuvj8gXXSh/y6XcDNAMdot2ryqnJT7voVzf41eF53UxOnJq5DCSaQ5GWzaZmpXhE6oOetScP5v4soKDiS+tK8lSz3zFNeIQfCMi/kci8qqdazyTP1fhstM/9XGji4GqwIIonx531XnzXvL20XzHHpJZYDkZfJFBSKj0tvPx/yzlK/oUodEDp4l2/EKQ9PhOuW4JKHt2hveVcYP+k/CX0iPA6DwcCvzDs6/1iyZNi85Bt5SxAZNGisag9YYHq0Sxe5rhhfZfdDGr3sEQkjRp7zSPMXNgytlRKnNrBbmp3eC1wPsGjINM04CxCR5/y3s6H56544ouQVbf9I0+njBwrYWNwqsYQGzCgOaJrWPUhMV9qSAxS7zNSe3RfA4137raRcYD1G6cNtgZ0tUoJkYeiiL4dvXF2m5RCx1bHQKs/XkzZPRRkNHof+GiH5JZa/+KNKqsX05vij04IpZr77xYXLfG7oAKBqeSPC4SeEMVTS3EnmtpSg/jBAAtSohbK+XPT63PqmMjqfc1WgCPe9qR/SqRsjwArYEige2SI1HWaQ==
+  learner_created: false
+- name: src/DiscoveryService.java
+  visible: true
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH8GHYkE8xNRe5Cizj/jt93N1HMnyDzL0oDlp6/OErQMgKQoZ/02BYIwpMSc82zbgMqAX5kJdubhax7yVQkIzzGqlTlts3YTKKPdeZE4bl/o0Wh1nlo/pPzidLrQRgMlVGuaesFrDuZwoE5qXf0GtvwlZNM1XOebnx9FafoFh4G8FJoUQk2KsZnyDkiXXhSPh5aWi6JKQS2vXQM29VQBwkydcSY2YF2634mGSPGzN7PsKmmbsU0x6bz8MP03vOmA8PXzitmzKrcM2SIjq/Dt+ax/jhLNivXNsFTHuXh7EcW2laQpvveAL+vZdxkGFNAczXA==
+  learner_created: false
+- name: src/HttpClient.java
+  visible: true
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH8XRHTCW2pDFsm2zrCiJtYcwJ+Un1w4i/kFDfY/k6/RZ+jAooT5GtKip2E7QXzaDYoQNQ/+9CHyiyg+m+9HrmpvfWnRbIQYcE4jA180lxUWXla1mlLxhFpNvVt3LtmTlywLWgQvZXLhQRiyrSrk6K7oS39Umt4RfMwiM7IXWR7WpHNGj0cnb9/QGV+VF7g3vZwN2vI32T5mHItXTB4MNf4v4MY7Ed7fg6YyKOgekpN3MMTqnWCIMeJE997GSrGpb3Nhc8BODdBm+MLYcqIX7Z6RcMxXczccO22Yht1raLNzZ
+  learner_created: false
+status: Unchecked
+record: -1

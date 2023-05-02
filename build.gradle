@@ -25,25 +25,22 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven { url "https://repo.spring.io/release" }
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
 
     ext {
-        junitBomVersion='5.7.1'
-        reactorBomVersion='2020.0.24'
+        junitBomVersion='5.9.1'
+        reactorBomVersion='2022.0.0'
         r2dbcBomVersion='Borca-SR2'
-        micrometerBomVersion='1.9.5'
+        micrometerBomVersion='1.10.0'
 
         logbackVersion='1.2.3'
         assertjVersion='3.19.0'
         mockitoVersion='3.9.0'
         jacksonVersion='2.12.3'
 
-        mongoReactiveDriverVersion='1.13.1'
+        mongoReactiveDriverVersion='4.7.0'
         socketIOVersion='1.0.2'
-        embeddedMongoVersion='3.0.0'
+        embeddedMongoVersion='3.5.2'
 
         dropwizardVersion='4.1.21'
     }
@@ -59,7 +56,6 @@ subprojects {
 
             dependency 'io.dropwizard.metrics:metrics-core:' + dropwizardVersion
 
-            dependency 'io.r2dbc:r2dbc-client:0.8.0.RC2'
             dependency 'io.projectreactor.tools:blockhound:1.0.6.RELEASE'
         }
     }
@@ -120,7 +116,7 @@ subprojects {
 
 project(':util') {
     dependencies {
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
     }
 }
 

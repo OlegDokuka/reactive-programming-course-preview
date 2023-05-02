@@ -1,13 +1,14 @@
-custom_name: "How To: Transform a sequence"
+custom_name: "Part 3: Transformations"
 content:
-- task1
-- task2
-- task3
-- task4
-- task5
-- task6
-- task7
-- task8
+- MongoDocsConverter
+- FindUsers
+- FlattenWords
+- VisitorsByCountryCounter
+- VisitorsByPeriodCounter
+- BetterCodeReadability
+- LettersCounter
 - task9
 - task10
-- task11
+- FizzBuzz
+- ProductCatalog
+- SequenceOfNetworkCalls

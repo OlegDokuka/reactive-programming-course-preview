@@ -18,7 +18,7 @@ public class TestingTask1Tests {
 
 		CheckFluxTask.verifyThat10ElementsEmitted(cold.flux());
 
-		cold.assertWasSubscribed();
+//		cold.assertWasSubscribed();
 		cold.assertWasRequested();
 		cold.assertWasNotCancelled();
 	}

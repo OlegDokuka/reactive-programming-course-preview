@@ -1,6 +1,7 @@
 import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Publisher;
@@ -16,9 +17,14 @@ public class HandleGetRequestTaskTests {
 			int expectedNumber = ThreadLocalRandom.current().nextInt();
 			Mockito.when(reactiveRandom.nextInt()).thenReturn(Mono.just(expectedNumber));
 			HandleGetRequestTask.reactiveRandom = reactiveRandom;
-			Mono<Integer> outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET, null));
+			Object outcome = HandleGetRequestTask.getRandomNumberHandler(new RequestEntity<Void>(HttpMethod.GET, null));
 
-			StepVerifier.create(outcome)
+			if (!(outcome instanceof Mono)) {
+				Assertions.fail("Expected Mono as a return type");
+				return;
+			}
+
+			StepVerifier.create(((Mono<Integer>) outcome))
 					.expectNext(expectedNumber)
 					.expectComplete()
 					.verify(Duration.ofMillis(100));

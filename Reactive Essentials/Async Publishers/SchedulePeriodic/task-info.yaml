@@ -1,9 +1,13 @@
 type: edu
-custom_name: Task 2
+custom_name: "Task 2: Schedule Task Periodically"
 files:
 - name: build.gradle
-  visible: false
+  visible: true
   encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: task.md
+  visible: true
+  encrypted_text: MEV3Q9CZv1tK9QM/YjrYR17mAfzKx8LFSKggDlk2DbRt4okgKwaqlbIL+eNQs6VXDSPzFbK+OEWhc1iL5o4v63+cON2N9jSvGPfkTb/ISHdK15xSiGvZMoDvqD+UZ937XoMxmB1SGW1yux2ZVyhr7qK7LpgTZOvKmZ/0hdiB1Zdimu6ARTd0MlbJ/diHN4SPtJ49EcIhu+w1Jr6vk1HwPQb45JRBcaIM3V3zTppZnRKUrcF0k1RyQnGC99K7Wmj7
   learner_created: false
 - name: src/SchedulePeriodicTask.java
   visible: true

@@ -5,15 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import domain.Trade;
-import io.r2dbc.client.Handle;
-import io.r2dbc.client.R2dbc;
-import io.r2dbc.client.Update;
+import io.r2dbc.spi.Connection;
 import io.r2dbc.spi.ConnectionFactory;
+import io.r2dbc.spi.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 import repository.TradeRepository;
 
 public class H2TradeRepository implements TradeRepository {
@@ -34,32 +32,31 @@ public class H2TradeRepository implements TradeRepository {
         "INSERT INTO trades (id, trade_timestamp, price, amount, currency, market) " +
         "VALUES ($1, $2, $3, $4, $5, $6)";
 
-    private final R2dbc h2Client;
+    private final Mono<? extends Connection> h2Client;
 
     public H2TradeRepository(ConnectionFactory connectionFactory) {
-//        H2ConnectionConfiguration conf = H2ConnectionConfiguration.builder()
-//            .url("mem:db;DB_CLOSE_DELAY=-1;TRACE_LEVEL_SYSTEM_OUT=2")
-//            .build();
-//
-//        H2ConnectionFactory h2ConnectionFactory = new H2ConnectionFactory(conf);
-        // TODO: Add connection pool
-        h2Client = new R2dbc(connectionFactory);
+        h2Client = Mono.fromDirect(connectionFactory.create());
         initDB();
         pingDB();
         reportDbStatistics();
     }
 
     private void initDB() {
-        h2Client.inTransaction(session -> session
-            .execute(INIT_DB)
-            .doOnNext(i -> log.info("DB SCHEMA WAS INITIALIZED"))
-        ).blockLast();
+        Mono.usingWhen(
+                h2Client,
+                t -> Mono.fromDirect(t.createStatement(INIT_DB).execute())
+                        .flatMap(result -> Mono.fromDirect(result.getRowsUpdated()))
+                        .then(Mono.fromRunnable(() -> log.info("DB SCHEMA WAS INITIALIZED"))),
+                Connection::close
+        ).block();
     }
 
     private void pingDB() {
-        h2Client.withHandle(t -> t
-            .createQuery("SELECT 6")
-            .mapResult(result -> result.map((row, metadata) -> row.get(0))))
+        Flux.usingWhen(
+                h2Client,
+                t -> Flux.from(t.createStatement("SELECT 6").execute()).map(result -> result.map((row, metadata) -> row.get(0))),
+                Connection::close
+            )
             .doOnNext(e -> log.warn("RESULT FOR SELECT 6 QUERY: " + e))
             .subscribe();
     }
@@ -69,7 +66,6 @@ public class H2TradeRepository implements TradeRepository {
         Flux.interval(Duration.ofSeconds(5))
             .flatMap(i -> this.getTradeStats())
             .doOnNext(count -> log.info("------------- [DB STATS] ------------ Trades stored in DB: " + count))
-            .subscribeOn(Schedulers.elastic())
             .subscribe();
     }
 
@@ -82,38 +78,35 @@ public class H2TradeRepository implements TradeRepository {
     }
 
     private Mono<Long> getTradeStats() {
-        // TODO: Return the current amount of stored trades
-        return Mono.defer(() ->
-            // TODO: Instead of Mono.empty(), do a query to H2 database using h2Client.withHandle(...)
-            // TODO: Use Handle.createQuery & TRADES_COUNT_QUERY with SQL
-            // TODO: Map result row by row to get the result of query
-            h2Client
-                .withHandle(handle ->
-                    handle.createQuery(TRADES_COUNT_QUERY)
-                          .mapRow(row -> row.get(0, Long.class))
-                )
-                .single()
-        );
+        return
+                Mono.usingWhen(
+                        h2Client,
+                        t -> Mono.fromDirect(t.createStatement(TRADES_COUNT_QUERY).execute())
+                                 .flatMap(result -> Mono.fromDirect(result.map(row -> row.get(0, Long.class)))),
+                        Connection::close
+                );
     }
 
     private Mono<Integer> storeTradesInDb(List<Trade> trades) {
-        // TODO: Instead of Mono.never()
-        // TODO: Use h2Client to create handle, build UPDATE statement, use transactional support!
-        // TODO: Add all trades to update using buildInsertStatement(...) method
-        // TODO: Return the amount of stored rows
-        return Mono.fromDirect(
-                h2Client.inTransaction(handle ->
-                        this.buildInsertStatement(handle, trades)
-                            .execute()
-                )
+        return Mono.usingWhen(
+                h2Client,
+                t -> Mono.usingWhen(
+                        t.beginTransaction(),
+                        __ -> Mono.fromDirect(buildInsertStatement(t, trades).execute())
+                                .flatMap(result -> Mono.fromDirect(result.getRowsUpdated())),
+                        __ -> t.commitTransaction(),
+                        (__, ex) -> t.rollbackTransaction(),
+                        __ -> t.rollbackTransaction()
+                ),
+                Connection::close
         );
     }
 
     // --- Helper methods --------------------------------------------------
 
     // TODO: Use this method in storeTradesInDb(...) method
-    private Update buildInsertStatement(Handle handle, List<Trade> trades) {
-        Update update = handle.createUpdate(INSERT_TRADE_QUERY);
+    private Statement buildInsertStatement(Connection handle, List<Trade> trades) {
+        Statement update = handle.createStatement(INSERT_TRADE_QUERY);
 
         Iterator<Trade> tradeIterator = trades.iterator();
         for (int i = 0; tradeIterator.hasNext(); i++) {

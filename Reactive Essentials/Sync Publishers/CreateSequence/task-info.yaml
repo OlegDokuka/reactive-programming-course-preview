@@ -1,9 +1,13 @@
 type: edu
-custom_name: Task 1
+custom_name: "Task 1: Create Sequence"
 files:
 - name: build.gradle
-  visible: false
+  visible: true
   encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: task.md
+  visible: true
+  encrypted_text: REJ0euqf4CYXqRXy6StoYFffukIb6S8sDf84OTOzFQp+eR+l6lk5G0Obv+Jy80B2XycCZoueDYTC7cEDMWL/dDtreFE1Sz5BXPBkp9Neg8hwGpXQ40dO8FlUCITqrnS0thzuYWLzevrzXVVVH8SKWuEJjbV7SzEr8KbvE+H4tts2lU6GmN26ny/n5c/XX76dWf1GrJMJeSvHdspOQ0xnlQ==
   learner_created: false
 - name: test/CommonPublishersTask1Tests.java
   visible: true
@@ -30,7 +34,7 @@ files:
       length: 119
       offset: 177
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
     encrypted_possible_answer: h1Td16xrZFjF+CfJsLYZHNitDNa/hWThX7/4y25+iwo=
   encrypted_text: OzKQNBcfrRaba4bVrqSTWOoe8RvA0PmaSQOEpx6oFrSa4aMClkwyWs9YER62O+3n5YAdhiDeCjVTbA11Nwr5sTjfXa2A/p0Px9Kk0X83Vs6nxbbGnkmPmt91y7qZsCNycPtiYjJhJaqSCeB36+066wBjkY3qP3yCJDNZejmY9uzszvAPZbd29R/KiaVx4dymadvy0dd6E2slDNDCaZv8nQ6OpfidlJkCYWfqmxM2RcBvXli+KvbGKYXHHgSc3ULO7kQKSxZhFTY4ft5scYY22Rb2nDWW2ALBy8ZUbQNIMY+yHH1g63y0kpWsTt0aDa2IQSa+/J+kpR52487MjbmjnvESkijgS16IGTibN+grZznrJr9ICvOjP9orctup5pLXf6VgYtfTEof7k4VPzlnZ2g==

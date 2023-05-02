@@ -12,14 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.publisher.Sinks;
 import reactor.util.retry.Retry;
 import repository.TradeRepository;
 import service.CryptoService;
 import service.TradeService;
 import service.utils.MessageMapper;
 
-import static reactor.core.publisher.Sinks.EmitFailureHandler.FAIL_FAST;
 
 public class DefaultTradeService implements TradeService {
 
@@ -59,7 +57,7 @@ public class DefaultTradeService implements TradeService {
 			Flux<Trade> input,
 			TradeRepository tradeRepository1,
 			TradeRepository tradeRepository2) {
-return Mono.never();
+		return Mono.never()
 	}
 
 	Mono<Void> saveIntoMongoDatabase(TradeRepository tradeRepository1, List<Trade> trades) {

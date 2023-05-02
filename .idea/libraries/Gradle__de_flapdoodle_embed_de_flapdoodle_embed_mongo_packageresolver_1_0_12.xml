@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: de.flapdoodle.embed:de.flapdoodle.embed.mongo.packageresolver:1.0.12" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="de.flapdoodle.embed" artifactId="de.flapdoodle.embed.mongo.packageresolver" version="1.0.12" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.flapdoodle.embed/de.flapdoodle.embed.mongo.packageresolver/1.0.12/b80fc66219ffb293960081e9113c16da966ae14b/de.flapdoodle.embed.mongo.packageresolver-1.0.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.flapdoodle.embed/de.flapdoodle.embed.mongo.packageresolver/1.0.12/8ea74993a2dd2d9651b34cb2ee77bb64a2ecb2ca/de.flapdoodle.embed.mongo.packageresolver-1.0.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

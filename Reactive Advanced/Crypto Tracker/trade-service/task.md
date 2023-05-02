@@ -9,6 +9,11 @@
       batch is longer more than a second (e.g. collect longer if something happened
        during storing
       )   
+      <div class="hint">
+         Use <code>Flux#.windowTimeout(Integer.MAX_VALUE, Duration.ofSeconds(1), true) + concatMap(fn, 0)</code>.
+      </div>
     * write simultaneously
     * provide a timeout for each operation for a 1 second
     * retry up to 100 of times. Apply backoff
+
+

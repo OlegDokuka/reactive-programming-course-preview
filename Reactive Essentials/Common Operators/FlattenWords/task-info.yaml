@@ -1,0 +1,64 @@
+type: edu
+custom_name: "Task 3: Flatten Words"
+files:
+- name: build.gradle
+  visible: true
+  encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
+  learner_created: false
+- name: task.ru.md
+  visible: false
+  encrypted_text: PaQF1Z6IYIDan13cM6wTdT6ZMB3qTJU6rZPhCmm3mRX3l4Es+FhENa9LpiraK8wy28NvTsbSDXG79vEWPUU7CN7jO6Rwqh2MHhrYNhNkxh5aPLlHGgnR9mz6BM3kopVr6tae+W75eHAZzAxWvYiG1r/aPpbWplKYnr7YbFMlmIAIn2fMebVQMUYpTdHHuPfQeA6nJT0fvr9viBpZO9NfL4S8FlIdUT8oRISgCMxXMmMSChTpqEs3jwoOXJXX4iHKFLKa86NKH4BkMzY9EZe5BGQY3SYZ69Qs/yjWtsQnbA4qgSvUsvZeVtdXsYkM7W5+tCVXcM9KnFR9ar61F/Z0M2Ic5OI2tkJWn+SPGqpyryqEiLxRDtjj7lgh3jtJ900gpyUXsJHatS6NG7C2Y0MUabDhmySvYuhJX4USkvTVQGat567UyVPUWBRc3Vw+jUh/fRo8+K66sod9Y0lN3gGQzJhzbG2uzMJ/VHkA3ApnxZ8XnsQZH9lW8BpmAejF8+Kf73Psu0kD7MliwnoDcqGA0rPQ4a1Eq2yjmvio3eVNgQ9VBaW4opeMEHTsO2VHxQgaaVc7+b0zUq8ZrhZf2vH/hmOd1asEI+qPJrGexyWSE1k=
+  learner_created: false
+- name: task.md
+  visible: true
+  encrypted_text: MEV3Q9CZv1tK9QM/YjrYR3gWBVq94N6Xai9ur3C0+u3kJ+mZO5hFZhc07Sg6GdxX+cB9vDwy0QEp9IQmxqfM1sT1W21ftZvFxZdoLSpg0/mdkbMcSXN966S+QLZDZXy7Bu1Rt1YEpRGj6dtR8M6+5ElYX0ab/dT9SJHYyauYdDcaNai//9fO+myKkivye+7n9IuFtBtXS9YzlxfN3d2M4eKEcjmgB6ioctgPD/GQFNKGM836GGw+1qCHQVzZBXG+V1QmKo8Q0ujjy7Pv/Rr48RaEHLSI2zDsLPV8FDlCF+BKmANHan+Jl2+g0Blmwx7DCHNxsV8ch6VurlNJLbW3HkUaoMDYzpWkB/C5NDVrJbiD/lS4Ixm9yy+/pDxBZ4v3voCRb2/8H48A3U0+/38AhCAk2OHbQqDX5jfMwozoKNA=
+  learner_created: false
+- name: src/FlattenWordsTask.java
+  visible: true
+  placeholders:
+  - offset: 194
+    length: 4
+    placeholder_text: List
+    initial_state:
+      length: 4
+      offset: 194
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: +UTcj25V247NafANnqXRUA==
+  - offset: 234
+    length: 4
+    placeholder_text: List
+    initial_state:
+      length: 4
+      offset: 234
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: +UTcj25V247NafANnqXRUA==
+  - offset: 258
+    length: 226
+    placeholder_text: |
+      List<Character> result = new ArrayList<>();
+          for (String word : words) {
+              char[] letters = word.toCharArray();
+              for (char letter : letters) {
+                  result.add(letter);
+              }
+          }
+          return result;
+    initial_state:
+      length: 226
+      offset: 258
+    initialized_from_dependency: false
+    selected: true
+    status: Unchecked
+    encrypted_possible_answer: bgL5l12/IUgepA66W6dj2gzrExf8bmdaY6L5/KSuFi/h0nFLc1mxGlmB2vxTuvH07eal9n0ARSTFuT8g9cGDw+Rmr5LHSPhme0bkpvqlgOkOT/1vUxUYmTjpeQwq+Njq8Mdp67vhea+RNKzBZDXbZfz2wqfS9bZGoCD2hg8Jfm8=
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH5Y3smFePCPz49Z2FWeSLZKVv1ZtnHTjUqnKa7p+GQpjWrzKNFriKexHU6CHqOibLcxFQucYowlGCRRNCwp5n59ObftgfTQMGsmfUo3ASxKWJ0r4fJddQl/zwvfOCa7OMsvbHkWcPQ/+zI8n/sO4K8HFKxUh8wPNlD/wioK8b8xHXJKvJ0rpERdy5sEXjEs5mWuTxwZwoOINs90k+4gyrlJ1R9PU07P0KmJZTod6EjmuFPJxLl+bLr3QlqTJpwKH8fhFbQsXFXpX1JbV+qqp/AYg97SEUNnGSSihRZiUQ67uD1bohOewUmnB1vUp8riwdWWyDkl7ZR9l7XLQaroqU/odB351xWCPoPRZS5N2b9hRB7PxVxC/tFzkGU0scuEXb580WOZ5hNig0CUjMQ2EgssJZlDwZUic7tPV/JRAqLENW4uaBENKMN9zAKh7BekhovIX1pxB+QsB6wOX/yVs9ifkiwRzmKLShxc3Z+Cr9WJv9qD7R4mw8gGjg+PjqHhihw/z6w5CXiIl/DIgqa9ZCAljlmIyw8KHgLIm6i0b159vn3PO4N1JsMHIEHXDLZK8nRouf/x/EW39Kj1leI4DGRG3gN3G9O/qNTK/qe7yVGbFQOh426Vns+BRSvWCXEJk8Q==
+  learner_created: false
+- name: test/FlattenWordsTests.java
+  visible: true
+  encrypted_text: CjMuWzhQiZUl3oP5GVjBYGRg73bisT6wNbnYKpPd3kluCenE+hq8rh+0vcucdBhCgA3ZRrcYZS1D5ssgLk5bc5U2EaM0zdhO0ZcZIgd9sRVeboEkgwgO3woMIE6o43trghtHMzrtlW9PXkmdLhuI1rxup2PNzfBUbkFKQbb0rWfzhtvgutyskOCocjdanasblXm3Brc8/m6g7SWjvx3slZrL3dtnWh6neDiKFL7UORTqSFj6Bn6nAtCDXpCWWRgFMlaPH3jPhskxOOmzALUd1lwpuXmP0Ag/xNxpdBBnJ9m2xtodWXpxCs6BMUHIfMbS/ivz1kTPWwhxEzQQLEeXfq+jRFv2oyEcX63LbQwse+t3JD0tphKCw2wq6/eD7oEbEi6Jmz669EYLBGu5Y9YmCdkPVmWqmWUDARO7RKi3iVJKeaDypng7N93knwfid5JOh1LuLmesfKKLwTHqJDVD3TY4jJz3b+okH8jztfrm6LndDb3u1BpphUK61rKwUabAEUQ5LZObdlVCiLhebNfOHtQ7cJzKWUfeVDzsdHyQGTfwSjVGevEhJl0byru4SYOp4zCKGpPI4VSqeXPdIzHkjm2FsV58oK/ZFy55lM6XK8rBEGYEDosNGNswdo7x0FJ/nyFIHP/ZGgIUWs7irBNbpiWI4vE8X+kKNTi+KaxxoucW3TTAQJJdEmYVexlabSvsLJcZquN+8AKEAmUq5c9YKKovC3uZO6oHqZjXkN8WdElQGWW/WlkfjUJAaYtmJHYu1ID+OySBmndrzb9uQfSWD8/YlbL92ItgEe/u6Qnu6LvoSQWco6wxXRiEc3ayGwJCfR5mR1XjX4nDI77XoMZkBFXF/0lS5SnJUPTKe5F9epc=
+  learner_created: false
+status: Unchecked
+record: -1

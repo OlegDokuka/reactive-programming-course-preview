@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb:mongodb-driver-reactivestreams:4.7.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.mongodb" artifactId="mongodb-driver-reactivestreams" version="4.7.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-reactivestreams/4.7.0/c5cd6ca0d3dea88d625aad25a7b4542185ac6bf0/mongodb-driver-reactivestreams-4.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-reactivestreams/4.7.0/3e95dc3c3046fe5d4cb43ad60ef16da29c83daca/mongodb-driver-reactivestreams-4.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

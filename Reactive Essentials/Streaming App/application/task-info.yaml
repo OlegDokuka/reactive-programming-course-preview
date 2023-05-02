@@ -29,6 +29,7 @@ files:
   learner_created: false
 - name: resources/ui/main.js
   visible: true
+  encrypted_text: BPrPxsoPO0ddRfXxWyDgbA==
   learner_created: false
 - name: resources/ui/index.html
   visible: true
