@@ -109,7 +109,7 @@ subprojects {
     tasks.run.doLast { printOutput(runOutput) }
 
     task cleanBuildDir(type: Delete) {
-        delete "${projectDir}/out"
+        delete fileTree(dir: rootDir, include: '**/*-remote-info.yaml'), "${projectDir}/out"
     }
     tasks.clean.dependsOn(cleanBuildDir)
 }

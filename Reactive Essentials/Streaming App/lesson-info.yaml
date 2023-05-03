@@ -1,4 +1,4 @@
-custom_name: Streaming Application
+custom_name: "Final: Streaming Application"
 content:
 - crypto-service
 - price-service

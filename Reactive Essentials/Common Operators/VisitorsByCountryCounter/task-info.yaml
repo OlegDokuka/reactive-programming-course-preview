@@ -26,7 +26,7 @@ files:
   placeholders:
   - offset: 246
     length: 32
-    placeholder_text: Flux.error(new ToDoException());
+    placeholder_text: Mono.error(new ToDoException());
     initial_state:
       length: 32
       offset: 246
@@ -34,7 +34,7 @@ files:
     selected: false
     status: Unchecked
     encrypted_possible_answer: 722DIR2J9lqOqlinCvP7EEP29CsTWphcj96yIe6LnEpWIa6jEASoembBYfApAfanF7WDxvlUNULqICHl301q4newA1WokufqXEEhASDbu4qEplpFA0nr6gvocbrVbrymcsooQmrysKzvWNMNxUbzn8WOP6ryMNAcsUNDKBNVEhOKcYyDXfLe6ipKo5FY1efM4FzIeGKNIfibFKaddpjHOhNRDxZPKIHcqT9SXxTG4jqirZZC8ofhYbc7Cg+KFN8d
-  encrypted_text: NYgHoNruO3t7vIi6YFhoH//1sQbq1aPQWfPSHfB6LwkHKDTuikU+vF3F71sUp6ZLnxT1cbRF6yaeBAu7i0l1VtCbri06bVcQ+Snp6QFoksWpVg+Ds3CYK7i0P3w0jwV6iqsog7Fodl80aptZHYGxpL8u8eJdT+UuEAkjKd4zotCF7ezIE4wrTltF5khzHjKG/Pat9xlHx/0MH0XwtiFnXj3QcSlIPV320VapmgZXydT7MugoONoQV8WEldPBv+sXZR6Dc5/ykmcIhSRtuluj/Q8ojV7yiFlKY8UBgXBLdpgT5y8nFWxSChk4swRPZLMgLRc/ppwaMKgIBq/j/t0VjHY4YDSkSH089U/v7WB89+SNf8vFr1MBe6Zg7Th5a0k6
+  encrypted_text: NYgHoNruO3t7vIi6YFhoH//1sQbq1aPQWfPSHfB6LwkHKDTuikU+vF3F71sUp6ZLnxT1cbRF6yaeBAu7i0l1VtCbri06bVcQ+Snp6QFoksWpVg+Ds3CYK7i0P3w0jwV6iqsog7Fodl80aptZHYGxpL8u8eJdT+UuEAkjKd4zotCF7ezIE4wrTltF5khzHjKG/Pat9xlHx/0MH0XwtiFnXj3QcSlIPV320VapmgZXydT7MugoONoQV8WEldPBv+sXZR6Dc5/ykmcIhSRtuluj/Q8ojV7yiFlKY8UBgXBLdpgT5y8nFWxSChk4swRPZLMgVeGysI1V0U9qA0+2vT2InMOER8RFgfMw8esgIWGTQYtfzVXJT7lFezBs5ffA0tUj
   learner_created: false
 - name: test/VisitorsByCountryTests.java
   visible: true

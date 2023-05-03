@@ -7,8 +7,8 @@ content:
 - VisitorsByPeriodCounter
 - BetterCodeReadability
 - LettersCounter
-- task9
-- task10
+- ValidQueryExecution
+- DynamicMessageRebalancing
 - FizzBuzz
 - ProductCatalog
 - SequenceOfNetworkCalls

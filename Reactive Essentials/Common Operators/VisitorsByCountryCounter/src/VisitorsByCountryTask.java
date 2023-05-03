@@ -7,6 +7,6 @@ public class VisitorsByCountryTask {
 	static VisitorsRepository visitorsRepository;
 
 	public static Mono<Map<String, Long>> countVisitorsByCountry() {
-		return Flux.error(new ToDoException());
+		return Mono.error(new ToDoException());
 	}
 }
