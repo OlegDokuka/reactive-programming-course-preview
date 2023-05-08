@@ -1,10 +1,9 @@
 custom_name: "How To: Operate with multiple sources"
 content:
-- task1
+- LogsObserver
 - task2
 - task3
 - task4
-- task5
 - task6
 - task7
 - task8

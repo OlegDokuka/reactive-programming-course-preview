@@ -1,5 +1,5 @@
 type: edu
-custom_name: "Task 11: Reactive FizzBuzz"
+custom_name: "Task 10: Reactive FizzBuzz"
 files:
 - name: src/Task.java
   visible: true

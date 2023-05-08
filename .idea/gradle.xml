@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Reactive Advanced/Control Backpressure/BackpressureProblem" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Control Backpressure/task1" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Control Backpressure/task2" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Control Backpressure/task3" />
@@ -28,11 +29,10 @@
             <option value="$PROJECT_DIR$/Reactive Advanced/Hot and Sharable/task3" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Hot and Sharable/task4" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/Fast Media Server" />
-            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task1" />
+            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/LogsObserver" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task2" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task3" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task4" />
-            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task5" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task6" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task7" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task8" />
@@ -61,6 +61,7 @@
             <option value="$PROJECT_DIR$/Reactive Essentials/Async Publishers/ListenableHttpRequest" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Async Publishers/SchedulePeriodic" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/BetterCodeReadability" />
+            <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/DynamicMessageRebalancing" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FindUsers" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FizzBuzz" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FlattenWords" />
@@ -68,10 +69,9 @@
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/MongoDocsConverter" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/ProductCatalog" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/SequenceOfNetworkCalls" />
+            <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/ValidQueryExecution" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/VisitorsByCountryCounter" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/VisitorsByPeriodCounter" />
-            <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/task10" />
-            <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/task9" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Streaming App/application" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Streaming App/common" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Streaming App/crypto-service" />

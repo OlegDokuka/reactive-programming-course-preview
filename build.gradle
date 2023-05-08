@@ -29,7 +29,7 @@ subprojects {
 
     ext {
         junitBomVersion='5.9.1'
-        reactorBomVersion='2022.0.0'
+        reactorBomVersion='2022.0.6'
         r2dbcBomVersion='Borca-SR2'
         micrometerBomVersion='1.10.0'
 

@@ -1,5 +1,5 @@
 type: edu
-custom_name: Sequence Of Network Calls
+custom_name: "Task 12: Sequence Of Network Calls"
 files:
 - name: build.gradle
   visible: true

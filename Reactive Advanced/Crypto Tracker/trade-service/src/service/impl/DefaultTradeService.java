@@ -57,7 +57,7 @@ public class DefaultTradeService implements TradeService {
 			Flux<Trade> input,
 			TradeRepository tradeRepository1,
 			TradeRepository tradeRepository2) {
-		return Mono.never()
+		return Mono.never();
 	}
 
 	Mono<Void> saveIntoMongoDatabase(TradeRepository tradeRepository1, List<Trade> trades) {

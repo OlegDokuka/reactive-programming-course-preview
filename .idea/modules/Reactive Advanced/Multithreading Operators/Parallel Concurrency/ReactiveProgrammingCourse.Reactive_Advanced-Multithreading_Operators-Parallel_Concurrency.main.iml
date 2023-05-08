@@ -12,7 +12,7 @@
     <orderEntry type="module" module-name="ReactiveProgrammingCourse.util.main" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.2.3" level="project" />
-    <orderEntry type="library" name="Gradle: io.projectreactor:reactor-core:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.projectreactor:reactor-core:3.5.5" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.4" level="project" />
   </component>

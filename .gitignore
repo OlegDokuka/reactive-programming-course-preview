@@ -1,2 +1,17 @@
-# Project exclude paths
-/.gradle/
+**/**/**/build
+**/**/build
+**/build
+build
+**/**/**/out
+**/**/out
+**/out
+out
+**/**/reports
+**/reports
+reports
+.idea
+.gradle
+*.iml
+*.class
+*-remote-info.yaml
+/.coursecreator/

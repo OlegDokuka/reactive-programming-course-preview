@@ -2,7 +2,7 @@ type: edu
 custom_name: Task 4
 files:
 - name: build.gradle
-  visible: false
+  visible: true
   encrypted_text: 0Y93ucV6hkeY8W4oQnMIGodK3+r5wQaFbFtM4DcQdPBy0ALbPoxsizfaSQXW7SkfyKFp7KvVGnTNskV62p76w4dVU88f719YRAu7pKk2Fqg=
   learner_created: false
 - name: task.ru.md
