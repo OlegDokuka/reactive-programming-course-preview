@@ -1,5 +1,5 @@
 type: edu
-custom_name: "Task 9: Distributed Media Service"
+custom_name: "Task 8: Distributed Media Service"
 files:
 - name: build.gradle
   visible: true

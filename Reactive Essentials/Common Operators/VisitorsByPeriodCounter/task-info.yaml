@@ -1,5 +1,5 @@
 type: edu
-custom_name: "Task 4: Count visitors by period of time"
+custom_name: "Task 5: Count visitors by period of time"
 files:
 - name: build.gradle
   visible: true

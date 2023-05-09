@@ -20,7 +20,7 @@ files:
     length: 125
     placeholder_text: "/* TODO: add filtering */ \nreturn Flux.never();"
     initial_state:
-      length: 47
+      length: 125
       offset: 1312
     initialized_from_dependency: false
     selected: true
@@ -31,8 +31,8 @@ files:
     placeholder_text: "/* TODO: add mapping to price message. Use MessageMpper */\
       \ \nreturn Flux.never();"
     initial_state:
-      length: 80
-      offset: 1452
+      length: 111
+      offset: 1530
     initialized_from_dependency: false
     selected: false
     status: Unchecked
@@ -43,7 +43,7 @@ files:
       \ */\n\n\tFlux.never();\n}"
     initial_state:
       length: 86
-      offset: 1661
+      offset: 1770
     initialized_from_dependency: false
     selected: true
     status: Unchecked
