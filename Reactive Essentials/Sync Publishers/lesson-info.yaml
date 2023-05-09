@@ -1,9 +1,9 @@
 custom_name: "Part 1: Sync Publishers"
 content:
+- CreateTempFile
 - CreateSequence
 - GenerateUUID
 - PropertiesSource
-- CreateTempFile
 - TextFileStream
 - ValidateDuration
 - HandleGetRequest

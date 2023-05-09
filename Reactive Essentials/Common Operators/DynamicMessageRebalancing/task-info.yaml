@@ -1,5 +1,5 @@
 type: edu
-custom_name: "Task 9: Dynamic kafka messages re-balancing"
+custom_name: "Task 9.2: Dynamic kafka messages re-balancing"
 files:
 - name: build.gradle
   visible: true

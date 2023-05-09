@@ -1,5 +1,5 @@
 type: edu
-custom_name: Task 4
+custom_name: "Task 5: Non-blocking temp file creation"
 files:
 - name: build.gradle
   visible: true
@@ -8,6 +8,10 @@ files:
 - name: task.ru.md
   visible: false
   encrypted_text: FKIZrxsCTIGOzONr1xGJ11XmetLYElRAz8jnQlWzGgdttfPC/SNfnY+AP8tqPgYeS4+44+HBLwa8Rv4cVXVETpahFt+q9Hhi/6w6wLAYIdN6P9xk/mUj27LXhwG8xCSpKPbvxPtBUOsW/35EaPa8IiXEK/QS54aLCKoFG2wuzRY=
+  learner_created: false
+- name: task.md
+  visible: true
+  encrypted_text: eaun6UyAtPZMsNA3izrxrZbOnuhbSz8Fa6pbhONHp4lukTVDUjuBWTORurE0XKdfX0mu9JD+g8W+h4dqFk11BnqzjTAWPZh7Ly6JIRX2va1HfftB1GvraaPtKGb0PzpLWnA4nMSQKFYpEGNRaWhOODtSNRtc4ffXsw6DkCo0nAA=
   learner_created: false
 - name: src/Files.java
   visible: true

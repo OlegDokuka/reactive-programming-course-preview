@@ -1,5 +1,5 @@
 custom_name: "Final: Streaming Application"
 content:
+- application
 - crypto-service
 - price-service
-- application

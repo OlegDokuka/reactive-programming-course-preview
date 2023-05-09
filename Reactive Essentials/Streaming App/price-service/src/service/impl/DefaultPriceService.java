@@ -39,12 +39,12 @@ public class DefaultPriceService implements PriceService {
 
 	Flux<Map<String, Object>> selectOnlyPriceUpdateEvents(Flux<Map<String, Object>> input) {
 		/* TODO: add filtering */ 
-return Flux.never();
+return input.filter(MessageMapper::isPriceMessageType).filter(MessageMapper::isValidPriceMessage);
 	}
 
 	Flux<MessageDTO<Float>> tranformToPriceMessageDTO(Flux<Map<String, Object>> input) {
 		/* TODO: add mapping to price message. Use MessageMpper */ 
-return Flux.never();
+return input.map(MessageMapper::mapToPriceMessage);
 	}
 
 	Flux<MessageDTO<Float>> averagePrice(

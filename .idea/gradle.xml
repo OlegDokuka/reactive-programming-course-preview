@@ -30,13 +30,12 @@
             <option value="$PROJECT_DIR$/Reactive Advanced/Hot and Sharable/task4" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/Fast Media Server" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/LogsObserver" />
+            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/SpeedupExecution" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task2" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task3" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task4" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task6" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task7" />
-            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task8" />
-            <option value="$PROJECT_DIR$/Reactive Advanced/Multiple Sources/task9" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multithreading Operators/Change Thread Up and Down" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multithreading Operators/Data Parallelization" />
             <option value="$PROJECT_DIR$/Reactive Advanced/Multithreading Operators/Handling Blocking DB Access" />
@@ -62,6 +61,7 @@
             <option value="$PROJECT_DIR$/Reactive Essentials/Async Publishers/SchedulePeriodic" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/BetterCodeReadability" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/DynamicMessageRebalancing" />
+            <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FillYourIceCream" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FindUsers" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FizzBuzz" />
             <option value="$PROJECT_DIR$/Reactive Essentials/Common Operators/FlattenWords" />

@@ -3,7 +3,9 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/out/production/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/resources" />
+    <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/resources" type="java-resource" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/src">
       <sourceFolder url="file://$MODULE_DIR$/../../../../../Reactive Essentials/Streaming App/crypto-service/src" isTestSource="false" />
     </content>

@@ -20,28 +20,28 @@ files:
 - name: src/FutureHttpGetRequestTask.java
   visible: true
   placeholders:
-  - offset: 186
+  - offset: 139
     length: 25
     placeholder_text: CompletableFuture<String>
     initial_state:
       length: 25
-      offset: 186
+      offset: 139
     initialized_from_dependency: false
     selected: false
     status: Unchecked
     encrypted_possible_answer: xxpS6Gsv8ndE4KU31Xz8NQ==
-  - offset: 234
+  - offset: 187
     length: 97
     placeholder_text: "asyncRestTemplate.getForObject(\"https://baconipsum.com/api/?type=meat-and-filler\"\
       , String.class);"
     initial_state:
       length: 97
-      offset: 234
+      offset: 187
     initialized_from_dependency: false
     selected: false
     status: Unchecked
-    encrypted_possible_answer: kJJlPXyih/FCIELaGUc0VYoSw3JQuLIkiHkIhVu6FdnpgYhQBlheyJyoKMWR8AH3fLh0S8HmabrvPu8+HO9Fp/IWfMLdHBT5FzCjmjmoGzNVn+T14Oa7lApkky8110NiXO1Y3JnEgygZRHjTb0G8HkMGPNW95+iXGlvuKRu6+q4=
-  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zx2J/3Vj4RKJab6y+fqHz3OnI9a8c+WWZ+9uzGZlj2FsNzSwSlU3z7Ss3v//jsxaDIsiM52InhxknA1Zs5dVjy8AWe2uZEFZSSb3zwiu4hEcMMivBDZ7NDBYG7St0AimsU2pDyXix+tvmaSMkm6M8SQRvSe4KQ9m1Af0fpCnrCR3HzynioEWK+5p62MRlTVHLqwF1aJRY5Zr2lbSyyFimn/cr5KZ9bfmwadIAMf4C4EbTNFpWKN42Dc67lfU4xzrQILKU1ysLd6NJAhxaCLYCysI9+VO2NGtqpuHfNCm8m1e53qYe64LkuSfMz6HveTgIWmGEPx3Iz04+FyqADhJ8iVcWWnMq7dPJE+mNA4IpwJkk97Hoj4KdF9F/d/8BzJg4xKhsuICwzWbjm8c4VwDjqdesfTzc3t7H4QiV7JR2XKZg==
+    encrypted_possible_answer: kJJlPXyih/FCIELaGUc0VStYEDbAAdc7st/01QpxQI+EcVk6y1+h48Yq0UCEkaOGa64t7t7Y+uZk1o60WDUutDohDowc6w/IeJFnNOO+uIGopTex0h6mLoRLPCm+F8cZ6cLJUhsJH3rtXiC7OHkm0X/YeBBaSmiqg6UMXbwJ6NM=
+  encrypted_text: OzKQNBcfrRaba4bVrqSTWI3Bm/JkbRQ1fYPmLJWd9zyWXeEeSyb66fl86WvKjVojYtNhTNXuMMgX3yzU7rKsZHCIcMVb56wVFznconzMYnwNMI799Qbr71LukjNGMXpGiR3JCPoCetZTiC6VoYY2TDzKGtOG2+HGcu7u5OOGka8yMrlbLaVSch/Y5qMfLcVefUXNQbhV+HkXI/2qJhnBWW3CLInaihyqtZ9t5EWoE86BpTbwd92Rvleg/qWM/JxDsmGCjJX18/Ns5wd3MX3P0in4RF1M7CCHjhsAdvM2k1QHwRZ/mNfYzpjB8g+WMPGYy67C9koi7dnyB/cr1bHiiPX2NmcqDbs5q0epaJHNvGGHXybSv/NB1SJWoM1Hzsg9wfVwWZ3LdUs8/lIrdtpxLg==
   learner_created: false
 status: Unchecked
 record: -1

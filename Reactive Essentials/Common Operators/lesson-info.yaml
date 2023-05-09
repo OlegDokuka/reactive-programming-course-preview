@@ -1,13 +1,14 @@
 custom_name: "Part 3: Transformations"
 content:
+- LettersCounter
 - MongoDocsConverter
 - FindUsers
 - FlattenWords
 - VisitorsByCountryCounter
 - VisitorsByPeriodCounter
 - BetterCodeReadability
-- LettersCounter
 - ValidQueryExecution
+- FillYourIceCream
 - DynamicMessageRebalancing
 - FizzBuzz
 - ProductCatalog
