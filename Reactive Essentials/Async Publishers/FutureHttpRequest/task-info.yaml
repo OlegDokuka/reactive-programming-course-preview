@@ -20,17 +20,17 @@ files:
 - name: src/FutureHttpGetRequestTask.java
   visible: true
   placeholders:
-  - offset: 139
+  - offset: 187
     length: 25
     placeholder_text: CompletableFuture<String>
     initial_state:
       length: 25
       offset: 139
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
     encrypted_possible_answer: xxpS6Gsv8ndE4KU31Xz8NQ==
-  - offset: 187
+  - offset: 235
     length: 97
     placeholder_text: "asyncRestTemplate.getForObject(\"https://baconipsum.com/api/?type=meat-and-filler\"\
       , String.class);"
