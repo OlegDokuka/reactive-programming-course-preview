@@ -29,6 +29,6 @@ public class PaymentService {
 
 	public Flux<Payment> findPayments(Flux<String> userIds) {
 		return userIds
-				.flatMap(repository::findAllByUserId, ConnectionsPool.instance().size());
+				.flatMap(repository::findAllByUserId);
 	}
 }

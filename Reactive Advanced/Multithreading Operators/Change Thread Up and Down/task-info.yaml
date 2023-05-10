@@ -14,17 +14,17 @@ files:
     selected: false
     status: Unchecked
     encrypted_possible_answer: QFKdfPoJpNx62OUdrKcQfo8zm+sBJAVcuCktrJj41Pbi5Mgv/i24SYFeUct0lLHM
-  - offset: 337
-    length: 8
+  - offset: 333
+    length: 13
     placeholder_text: // fixme
     initial_state:
       length: 8
-      offset: 337
+      offset: 333
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
-    encrypted_possible_answer: 8MK1ZPZwqZzSKAYp9OG3CObRWTVmrAzx0l28C0zsfcjsJp5LDGY7NtyI0ARazAMT
-  encrypted_text: NYgHoNruO3t7vIi6YFhoHx1xTjV3AsZBA129BAJmTNHbEcSZidFNw9B2w8Khysh8sCjGa8AUMkP/HHZ6PVp8Q4ATxboC315nrJuHDH7M8cuMJJ1+uno7SFIP4GgxAIx+6amdcZYW+dfvDc/gI8vm4DAzGMRV8QUb3PJ73r0AWiZJL6Ws8R5Aw2nRSs9SBIEQLQ4CZRYBUcYr68Q9c8j8+l3QyEtH5rvEG3kqtw/Lgmzhjhn0SSwyLX67wvSRRr/SBUa9IytH1EFYoGx8TGE/MX6V+ra8UblLiYBf4GxnclqV7tLXDwejwJ6pBwpJr6SXpLaLKqsEBLfLePzrsgKLsZsZaJJi++q6w5L/Eet8CFrNoz8fUBZRG0OYpbaebWwrPSe4z1Q6OZjdmS6X3c4ukCovO0wQ0YSOSENzxGbqxBYFyZPIWSnfkY6N3/oLzVYONqkBLoLm9QvX1gOnuf7iL9GwGdrewmoY0c+YnQyxLYQ=
+    encrypted_possible_answer: w5trIkSjIlXN+3iV1aDGhI3e19DkXoWkBtxdnX6/bSJ/6z6xkPIPgforIsSR9cZb
+  encrypted_text: NYgHoNruO3t7vIi6YFhoHx1xTjV3AsZBA129BAJmTNHbEcSZidFNw9B2w8Khysh8sCjGa8AUMkP/HHZ6PVp8Q4ATxboC315nrJuHDH7M8cuMJJ1+uno7SFIP4GgxAIx+6amdcZYW+dfvDc/gI8vm4DAzGMRV8QUb3PJ73r0AWiZJL6Ws8R5Aw2nRSs9SBIEQLQ4CZRYBUcYr68Q9c8j8+l3QyEtH5rvEG3kqtw/Lgmzhjhn0SSwyLX67wvSRRr/SBUa9IytH1EFYoGx8TGE/MX6V+ra8UblLiYBf4GxnclqV7tLXDwejwJ6pBwpJr6SXpLaLKqsEBLfLePzrsgKLsZsZaJJi++q6w5L/Eet8CFrNoz8fUBZRG0OYpbaebWwrPSe4z1Q6OZjdmS6X3c4ukCovO0wQ0YSOSENzxGbqxBaC343aL+VqeC/PkfRxXNsNhkth/StNINGmNNPs5mnIlLKqxHAjpauvwf3SVDqFkN4=
   learner_created: false
 - name: test/MultithreadingOperatorsTask4Tests.java
   visible: true

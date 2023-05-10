@@ -9,13 +9,12 @@ public class FlattenWordsTask {
 
 	public static List<Character> flattenWordsIntoLetters(List<String> words) {
 		List<Character> result = new ArrayList<>();
-    for (String word : words) {
-        char[] letters = word.toCharArray();
-        for (char letter : letters) {
-            result.add(letter);
+        for (String word : words) {
+            char[] letters = word.toCharArray();
+            for (char letter : letters) {
+                result.add(letter);
+            }
         }
-    }
-    return result;
-
+        return result;
 	}
 }

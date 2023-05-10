@@ -31,7 +31,7 @@ files:
     status: Unchecked
     encrypted_possible_answer: QeeUNU0f10Ro/Xtp4YFehQ==
   - offset: 294
-    length: 184
+    length: 174
     placeholder_text: |
       List<String> test = discoveryService.discoverAddressesFor("test");
           for (String endpoint : test) {
@@ -41,7 +41,7 @@ files:
       length: 184
       offset: 294
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
     encrypted_possible_answer: usle8ZmgprwgV8zqduIdMcCcSo4vxHmwN8IqH/sStRIv4Pnvd/d2z4yBfcRv7uwxvIuV9UqNlzsEEOanPpVXGvrXCpZGppDNqMLMbGK2SktDLfmSVuF11rKoRRD1QcTEBOsFAe+OtyzvGXOmfrfaFt9+OzZ1kzvd2Loni+fGdrMkXTf4QHP49TC7llu4JT/V6VKJIfxyKKH1+Uv6e+HwCKqOJainCsSOMtEK/xkdY7NSvojVmRUniQZrJItR+Xzjk8NVa4Mh+DVPfEP/VHGZsO5oOSioQ4HkOHrCb6AivyIUbTwNisYcUk6QjEqLZ71ZQlaWBhgPTmkMWagYZFWcDg==
   encrypted_text: ClA4fXpUa4NPkfy2XESd9JGRv+VntjBNT5xmZsf1Opxagnhhua5BSmrhWG6K52xyS+PsrxiLm5AmjSYplVuTpb5EN3GOdSw61bRekQ0aoCWXbEuvj8gXXSh/y6XcDNAMdot2ryqnJT7voVzf41eF53UxOnJq5DCSaQ5GWzaZmpXhE6oOetScP5v4soKDiS+tK8lSz3zFNeIQfCMi/kci8qqdazyTP1fhstM/9XGji4GqwIIonx531XnzXvL20XzHHpJZYDkZfJFBSKj0tvPx/yzlK/oUodEDp4l2/EKQ9PhOuW4JKHt2hveVcYP+k/CX0iPA6DwcCvzDs6/1iyZNi85Bt5SxAZNGisag9YYHq0Sxe5rhhfZfdDGr3sEQkjRp7zSPMXNgytlRKnNrBbmp3eC1wPsGjINM04CxCR5/y3s6H56544ouQVbf9I0+njBwrYWNwqsYQGzCgOaJrWPUhMV9qSAxS7zNSe3RfA4137raRcYD1G6cNtgZ0tUoJkYeiiL4dvXF2m5RCx1bHQKs/XkzZPRRkNHof+GiH5JZa/+KNKqsX05vij04IpZr77xYXLfG7oAKBqeSPC4SeEMVTS3EnmtpSg/jBAAtSohbK+XPT63PqmMjqfc1WgCPe9qR/SqRsjwArYEige2SI1HWaQ==

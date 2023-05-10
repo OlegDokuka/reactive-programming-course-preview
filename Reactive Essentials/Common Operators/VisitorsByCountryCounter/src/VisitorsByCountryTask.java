@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import reactor.core.publisher.Mono;
 
 public class VisitorsByCountryTask {

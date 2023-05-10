@@ -11,9 +11,8 @@ public class BroadCastControllerTask {
 
 	public static void broadcast(ByteBuffer payload) {
 		List<String> test = discoveryService.discoverAddressesFor("test");
-    for (String endpoint : test) {
-        httpClient.postEntity(endpoint + "/api/push", payload, Void.class);
-    }
-
+		for (String endpoint : test) {
+			httpClient.postEntity(endpoint + "/api/push", payload, Void.class);
+		}
 	}
 }

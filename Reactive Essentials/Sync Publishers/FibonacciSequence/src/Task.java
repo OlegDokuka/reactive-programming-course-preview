@@ -19,6 +19,5 @@ public class Task {
 		}
 	}
 
-	static final State STATE_ZERO  = new State(0, 0, null);
-	static final State STATE_ONE = new State(1, 1, STATE_ZERO);
+	static final State STATE_INITIAL  = new State(1, 1, new State(0, 0, null));
 }
