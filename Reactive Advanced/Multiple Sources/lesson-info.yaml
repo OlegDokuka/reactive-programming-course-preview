@@ -1,10 +1,8 @@
 custom_name: "How To: Operate with multiple sources"
 content:
-- LogsObserver
-- task2
-- task3
-- task4
-- SpeedupExecution
-- task6
-- task7
-- Fast Media Server
+  - LogsObserver
+  - MoviePagination
+  - SpeedupExecution
+  - EfficientPagination
+  - OrdersProcessing
+  - Fast Media Server

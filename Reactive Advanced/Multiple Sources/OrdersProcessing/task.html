@@ -1,0 +1,11 @@
+<html>
+In this task you need to compose multiple streams. Orders Streams which comes with
+products in different currencies and currencies updates. Note, Currencies streams API
+offers you an option to get actual currencies set as well as listen to the changes.
+Note, if you listen to just currencies changes, the update from that stream may come
+later in time so the orders processing progress may be "blocked" by that
+<div class="hint">
+    Use <code>Flux.combineLatest</code> , <code>Flux.mergeSequential</code>, <code>Flux
+    .distinct</code>
+</div>
+</html>
