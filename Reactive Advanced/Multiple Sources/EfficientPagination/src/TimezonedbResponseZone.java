@@ -61,6 +61,25 @@ public class TimezonedbResponseZone {
 	}
 
 	@Override
+	public String toString() {
+		return "TimezonedbResponseZone{" +
+				"countryCode='" + countryCode + '\'' +
+				", countryName='" + countryName + '\'' +
+				", regionName='" + regionName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", zoneName='" + zoneName + '\'' +
+				", abbreviation='" + abbreviation + '\'' +
+				", gmtOffset=" + gmtOffset +
+				", dst='" + dst + '\'' +
+				", zoneStart=" + zoneStart +
+				", timestamp=" + timestamp +
+				", formatted='" + formatted + '\'' +
+				", zoneEnd=" + zoneEnd +
+				", nextAbbreviation='" + nextAbbreviation + '\'' +
+				'}';
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;

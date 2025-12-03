@@ -1,7 +1,9 @@
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.assertj.core.api.Assertions;
@@ -57,7 +59,7 @@ public class TimezonesDbClientTests {
 		TimezonesDbClient client = new TimezonesDbClient("test", asyncRestTemplate);
 
 		AtomicInteger cnt = new AtomicInteger();
-		TimezonedbResponseZone timezone = new TimezonedbResponseZone("US",
+		List<TimezonedbResponseZone> responses = Arrays.asList(new TimezonedbResponseZone("US",
 				"United States",
 				"Alabama",
 				"Athens",
@@ -69,18 +71,57 @@ public class TimezonesDbClientTests {
 				1706881503,
 				"2024-02-02 13:45:03",
 				1710057600,
-				"CDT");
+				"CDT"),
+		new TimezonedbResponseZone("US",
+				"United States",
+				"Alabama",
+				"Athens",
+				"America/Chicago",
+				"CST",
+				-21600,
+				"1",
+				1699167600,
+				1706881503,
+				"2024-02-02 13:45:03",
+				1710057600,
+				"CDT"),
+		new TimezonedbResponseZone("US",
+				"United States",
+				"Alabama",
+				"Athens",
+				"America/Chicago",
+				"CST",
+				-21600,
+				"2",
+				1699167600,
+				1706881503,
+				"2024-02-02 13:45:03",
+				1710057600,
+				"CDT"),
+		new TimezonedbResponseZone("US",
+				"United States",
+				"Alabama",
+				"Athens",
+				"America/Chicago",
+				"CST",
+				-21600,
+				"3",
+				1699167600,
+				1706881503,
+				"2024-02-02 13:45:03",
+				1710057600,
+				"CDT"));
 		Mockito.when(asyncRestTemplate.getForObjectAsync(Mockito.anyString(),
 				       Mockito.any(),
 				       Mockito.any()))
 		       .then(args -> {
 			       int page = cnt.incrementAndGet();
-			       return Mono.delay(Duration.ofSeconds(page))
+			       return Mono.delay(Duration.ofSeconds(ThreadLocalRandom.current().nextInt(0, page)))
 			                  .thenReturn(new TimezonedbResponse("OK",
 					                  "",
 					                  4,
 					                  page,
-					                  Collections.singletonList(timezone)))
+					                  Collections.singletonList(responses.get(page - 1))))
 			                  .toFuture();
 		       });
 
@@ -88,7 +129,7 @@ public class TimezonesDbClientTests {
 		            .expectSubscription()
 					.thenAwait(Duration.ofSeconds(1 + 4)) // 1 sec to resolve first and
 					// then no more than 4 secs to resolve the others
-		            .expectNext(Arrays.asList(timezone, timezone, timezone, timezone))
+		            .expectNext(responses)
 		            .verifyComplete();
 
 		Assertions.assertThat(cnt)
