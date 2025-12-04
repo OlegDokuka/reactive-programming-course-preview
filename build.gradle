@@ -56,7 +56,7 @@ subprojects {
 
             dependency 'io.dropwizard.metrics:metrics-core:' + dropwizardVersion
 
-            dependency 'io.projectreactor.tools:blockhound:1.0.6.RELEASE'
+            dependency 'io.projectreactor.tools:blockhound:1.0.11.RELEASE'
         }
     }
 
