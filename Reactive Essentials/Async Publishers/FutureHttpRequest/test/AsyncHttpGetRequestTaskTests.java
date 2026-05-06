@@ -27,4 +27,21 @@ public class AsyncHttpGetRequestTaskTests {
 			Assertions.fail("Refactor given code using Mono api");
 		}
 	}
+
+	@Test
+	public void checkErrorCase() {
+		AsyncRestTemplate mock = Mockito.mock(AsyncRestTemplate.class);
+		Mockito.when(mock.getForObject(Mockito.anyString(), Mockito.any())).thenReturn(CompletableFuture.supplyAsync(() -> {throw new RuntimeException("Boom");}));
+		FutureHttpGetRequestTask.asyncRestTemplate = mock;
+		Object sequence = FutureHttpGetRequestTask.getLorem();
+
+		if (sequence instanceof Mono) {
+
+			StepVerifier.create(((Mono<String>) sequence))
+					.expectErrorMessage("Boom")
+					.verify();
+		} else {
+			Assertions.fail("Refactor given code using Mono api");
+		}
+	}
 }
